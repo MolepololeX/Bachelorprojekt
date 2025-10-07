@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://de87oytpsksqy"
+path="res://.godot/imported/Iron_Bar.obj-87f6f31f20ce37fd85ada71a4c3d40af.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Iron_Bar.obj-87f6f31f20ce37fd85ada71a4c3d40af.mesh"]
+
+source_file="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/obj/Iron_Bar.obj"
+dest_files=["res://.godot/imported/Iron_Bar.obj-87f6f31f20ce37fd85ada71a4c3d40af.mesh", "res://.godot/imported/Iron_Bar.obj-87f6f31f20ce37fd85ada71a4c3d40af.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

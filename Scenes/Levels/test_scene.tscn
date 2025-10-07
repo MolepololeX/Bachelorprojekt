@@ -1,0 +1,244 @@
+[gd_scene load_steps=33 format=3 uid="uid://ba60303q6ii63"]
+
+[ext_resource type="PackedScene" uid="uid://bg6uur18cv4hs" path="res://Scenes/Environment/cauldron.tscn" id="1_sgftv"]
+[ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/player.tscn" id="2_2u58p"]
+[ext_resource type="PackedScene" uid="uid://dr644t6qc85l4" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_C_Color1.fbx" id="3_tgibm"]
+[ext_resource type="PackedScene" uid="uid://bs1bf0xy3e2u7" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_B_Color1.fbx" id="4_nlmfl"]
+[ext_resource type="PackedScene" uid="uid://bksllprtwcuc6" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_A_Color1.fbx" id="5_utwxg"]
+[ext_resource type="PackedScene" uid="uid://boj36yt4xc2wm" path="res://Scenes/Environment/grass_bushel.tscn" id="6_56hgn"]
+[ext_resource type="PackedScene" uid="uid://duroqtdgoa7ek" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/barrel_small.fbx" id="7_2vt4g"]
+[ext_resource type="PackedScene" uid="uid://cc05cc6ofb8p" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/barrier.fbx" id="8_pfxnm"]
+[ext_resource type="PackedScene" uid="uid://ct6y0jcfexlt4" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/barrier_column.fbx" id="9_28aqb"]
+[ext_resource type="PackedScene" uid="uid://cvjo1n18n6xqj" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/bottle_A_brown.fbx" id="10_eh82s"]
+[ext_resource type="PackedScene" uid="uid://dcy80o6gboqat" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/bottle_A_green.fbx" id="11_vnv7r"]
+[ext_resource type="PackedScene" uid="uid://biwt5pi18puq" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/bottle_A_labeled_brown.fbx" id="12_a4d0e"]
+[ext_resource type="PackedScene" uid="uid://bjcspyo7bnay8" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/box_small_decorated.fbx" id="13_r60an"]
+[ext_resource type="PackedScene" uid="uid://do88el14qdyms" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/candle.fbx" id="14_5yayu"]
+[ext_resource type="PackedScene" uid="uid://bco1eovl3j5b8" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/candle_lit.fbx" id="15_alwko"]
+[ext_resource type="PackedScene" uid="uid://cpuek1hbba8nd" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/chest.fbx" id="16_bevfg"]
+[ext_resource type="PackedScene" uid="uid://dlbh8oa2d7pq6" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/coin_stack_large.fbx" id="17_mbnq1"]
+[ext_resource type="PackedScene" uid="uid://b2pr66244bumi" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/coin_stack_medium.fbx" id="18_qhxvw"]
+[ext_resource type="PackedScene" uid="uid://bxakp6kbehs7r" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_foundation_front.fbx" id="19_mu1jd"]
+[ext_resource type="PackedScene" uid="uid://cvcp5qht1vxh4" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_wood_small.fbx" id="20_va1if"]
+[ext_resource type="PackedScene" uid="uid://4u12qc77ed3n" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_corner.fbx" id="21_hpgqd"]
+[ext_resource type="PackedScene" uid="uid://c6v5uxj86bbnx" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_decorated.fbx" id="22_hb2rl"]
+[ext_resource type="PackedScene" uid="uid://dy0f422c5ai70" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_weeds_A.fbx" id="23_2m5lv"]
+[ext_resource type="PackedScene" uid="uid://dt0lsljh6x4ss" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_weeds_B.fbx" id="24_877y0"]
+[ext_resource type="PackedScene" uid="uid://boqx32aoye7wj" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_broken_A.fbx" id="25_jxkj0"]
+[ext_resource type="Environment" uid="uid://cakiifetyt7tf" path="res://new_environment.tres" id="26_28aqb"]
+[ext_resource type="CameraAttributesPhysical" uid="uid://6mgtw443v8s8" path="res://new_camera_attributes_physical.tres" id="27_eh82s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4kqls"]
+albedo_color = Color(0.4399004, 0.70125407, 0.24965337, 1)
+stencil_flags = 2
+stencil_color = Color(0.15294118, 0.3882353, 0.14901961, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r5l72"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50ct6"]
+albedo_color = Color(2.7675182e-07, 0.16994828, 0.13774416, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2u58p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28aqb"]
+size = Vector3(19, 2, 1)
+
+[node name="TestScene" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.011338234, -0.0065050125, 0.0016329288)
+material_override = SubResource("StandardMaterial3D_4kqls")
+mesh = SubResource("PlaneMesh_r5l72")
+surface_material_override/0 = SubResource("StandardMaterial3D_50ct6")
+
+[node name="Floor2" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor/Floor2"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_2u58p")
+
+[node name="Cauldron" parent="." instance=ExtResource("1_sgftv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16913056, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5133217, -0.3874042, -0.7657799, 0.8543013, 0.31558678, 0.41300607, 0.08166975, -0.86621195, 0.49295753, 0, 4.4927306, 0)
+visible = false
+light_color = Color(1, 1, 0.41568628, 1)
+light_energy = 2.0
+light_volumetric_fog_energy = 2.0
+shadow_enabled = true
+shadow_reverse_cull_face = true
+shadow_opacity = 0.7
+shadow_blur = 0.0
+
+[node name="Env" type="Node3D" parent="."]
+
+[node name="Tree_4_C_Color1" parent="Env" instance=ExtResource("3_tgibm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2394185, 0.15652229, -3.800313)
+
+[node name="Tree_4_B_Color1" parent="Env" instance=ExtResource("4_nlmfl")]
+transform = Transform3D(0.8046037, 0, 0.59381217, 0, 1, 0, -0.59381217, 0, 0.8046037, -8.035971, 0.1763889, -0.9877536)
+
+[node name="Tree_4_A_Color1" parent="Env" instance=ExtResource("5_utwxg")]
+transform = Transform3D(0.9373489, 0, 0.34839207, 0, 1, 0, -0.34839207, 0, 0.9373489, -8.134005, 0.14212503, -4.9520593)
+
+[node name="GrassBushel" parent="Env" instance=ExtResource("6_56hgn")]
+transform = Transform3D(0.78248864, 0, -0.62266487, 0, 1, 0, 0.62266487, 0, 0.78248864, -7.7231135, 0, -2.4954607)
+
+[node name="GrassBushel2" parent="Env" instance=ExtResource("6_56hgn")]
+transform = Transform3D(-0.63529676, 0, -0.7722681, 0, 1, 0, 0.7722681, 0, -0.63529676, -6.7919464, 0.15226535, -4.934588)
+
+[node name="GrassBushel3" parent="Env" instance=ExtResource("6_56hgn")]
+transform = Transform3D(0.8847763, 0, 0.4660161, 0, 1, 0, -0.4660161, 0, 0.8847763, -5.137975, 0.15226428, -2.7833948)
+
+[node name="GrassBushel4" parent="Env" instance=ExtResource("6_56hgn")]
+transform = Transform3D(0.97378576, 0, -0.22746718, 0, 1, 0, 0.22746718, 0, 0.97378576, -4.2681084, 0.15226428, -5.156918)
+
+[node name="barrel_small" parent="Env" instance=ExtResource("7_2vt4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.395769, -0.04765071, -0.9100446)
+
+[node name="barrier" parent="Env" instance=ExtResource("8_pfxnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+
+[node name="barrier3" parent="Env" instance=ExtResource("8_pfxnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="barrier5" parent="Env" instance=ExtResource("8_pfxnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -10)
+
+[node name="barrier_column" parent="Env" instance=ExtResource("9_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+
+[node name="barrier_column2" parent="Env" instance=ExtResource("9_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+
+[node name="bottle_A_brown" parent="Env" instance=ExtResource("10_eh82s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8915296, -0.04782577, -1.3189709)
+
+[node name="bottle_A_green" parent="Env" instance=ExtResource("11_vnv7r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7876733, -0.04782577, 0.58569384)
+
+[node name="bottle_A_brown2" parent="Env" instance=ExtResource("10_eh82s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37976027, -0.04782577, 0.73935616)
+
+[node name="bottle_A_labeled_brown" parent="Env" instance=ExtResource("12_a4d0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70049137, -0.014057353, 0.8812246)
+
+[node name="box_small_decorated" parent="Env" instance=ExtResource("13_r60an")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.441133, -0.05128336, -0.08182794)
+
+[node name="candle" parent="Env" instance=ExtResource("14_5yayu")]
+transform = Transform3D(1, 0, 0, 0, 0.7130175, 0, 0, 0, 1, -1.7690718, -0.063526586, -1.0055405)
+
+[node name="candle_lit" parent="Env" instance=ExtResource("15_alwko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4862874, -0.008596718, -1.1959381)
+
+[node name="chest" parent="Env" instance=ExtResource("16_bevfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01090014, -0.00010859966, -8.832834)
+
+[node name="coin_stack_large" parent="Env" instance=ExtResource("17_mbnq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3659419, -0.0891169, -9.014304)
+
+[node name="coin_stack_medium" parent="Env" instance=ExtResource("18_qhxvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.531349, -0.03635241, -9.066097)
+
+[node name="floor_foundation_front" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -2.0192466, 9)
+
+[node name="floor_foundation_front2" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -2.0192466, 9)
+
+[node name="floor_foundation_front3" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -2.0192466, 9)
+
+[node name="floor_foundation_front4" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -2.0192466, 9)
+
+[node name="floor_foundation_front5" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2.0192466, 9)
+
+[node name="floor_foundation_front6" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2.0192466, 9)
+
+[node name="floor_foundation_front7" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2.0192466, 9)
+
+[node name="floor_foundation_front8" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -2.0192466, 9)
+
+[node name="floor_foundation_front9" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.0192466, 9)
+
+[node name="floor_foundation_front10" parent="Env" instance=ExtResource("19_mu1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -2.0192466, 9)
+
+[node name="floor_wood_small13" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, -0.04096484, -1.7484555e-07)
+
+[node name="floor_wood_small16" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.3, -0.04096484, 1.8795899e-07)
+
+[node name="floor_wood_small14" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6.78673, -0.04096484, -2.9665736e-07)
+
+[node name="floor_wood_small15" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9, -0.04096484, -3.934025e-07)
+
+[node name="floor_wood_small9" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04096484, -4.2502985)
+
+[node name="floor_wood_small10" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04096484, -7)
+
+[node name="floor_wood_small11" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04096484, -9)
+
+[node name="floor_wood_small4" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04096484, 4.04316)
+
+[node name="floor_wood_small5" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04096484, 6.1886997)
+
+[node name="floor_wood_small6" parent="Env" instance=ExtResource("20_va1if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.019614697, 9)
+
+[node name="floor_tile_small_corner" parent="Env" instance=ExtResource("21_hpgqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="floor_tile_small_corner2" parent="Env" instance=ExtResource("21_hpgqd")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 0, 2)
+
+[node name="floor_tile_small_corner3" parent="Env" instance=ExtResource("21_hpgqd")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.9999999, 0, -2)
+
+[node name="floor_tile_small_corner4" parent="Env" instance=ExtResource("21_hpgqd")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -2, 0, -1.9999996)
+
+[node name="floor_tile_small_decorated" parent="Env" instance=ExtResource("22_hb2rl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="floor_tile_small_decorated2" parent="Env" instance=ExtResource("22_hb2rl")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2, 0, 0)
+
+[node name="floor_tile_small_weeds_A" parent="Env" instance=ExtResource("23_2m5lv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="floor_tile_small_weeds_B" parent="Env" instance=ExtResource("24_877y0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, 0)
+
+[node name="floor_tile_small_broken_A" parent="Env" instance=ExtResource("25_jxkj0")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_28aqb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("26_28aqb")
+camera_attributes = ExtResource("27_eh82s")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_2u58p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.193416, -0.006478554, 3.6920319)

@@ -1,0 +1,30 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://cakiifetyt7tf"]
+
+[ext_resource type="Texture2D" uid="uid://dmvoye68v8jmu" path="res://Assets/Packs/Stylized Nature MegaKit[Standard]/Preview_1.jpg" id="1_40vc6"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_iqfyk"]
+panorama = ExtResource("1_40vc6")
+
+[sub_resource type="Sky" id="Sky_23g3m"]
+sky_material = SubResource("PanoramaSkyMaterial_iqfyk")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_23g3m")
+ssao_enabled = true
+ssao_radius = 1.53
+ssao_intensity = 0.53
+ssao_power = 11.196381
+ssil_radius = 7.06
+glow_enabled = true
+glow_intensity = 1.4
+glow_bloom = 0.05
+fog_enabled = true
+fog_light_color = Color(0.520868, 0.5561465, 0.6110244, 1)
+fog_light_energy = 0.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+adjustment_enabled = true
+adjustment_brightness = 1.08
+adjustment_contrast = 1.08
+adjustment_saturation = 0.75

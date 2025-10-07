@@ -1,0 +1,159 @@
+[gd_scene load_steps=20 format=3 uid="uid://biris8lihnwq3"]
+
+[ext_resource type="Script" uid="uid://4jx0synlgv4m" path="res://Scripts/Player/Player.cs" id="1_uvnfx"]
+[ext_resource type="Texture2D" uid="uid://b06n3y7xa2a2u" path="res://Assets/Textures/silver_armor.png" id="2_a3d8c"]
+[ext_resource type="PackedScene" uid="uid://ce5xj5770gvmj" path="res://Scenes/Player/skeleton_mage.tscn" id="3_xpcdj"]
+[ext_resource type="CameraAttributesPractical" uid="uid://cgca0r01v6rjb" path="res://new_camera_attributes_practical.tres" id="4_mtuoh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sgftv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpcdj"]
+shading_mode = 0
+diffuse_mode = 3
+albedo_texture = ExtResource("2_a3d8c")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uvnfx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtuoh"]
+shading_mode = 0
+stencil_flags = 2
+stencil_color = Color(1, 1, 1, 1)
+stencil_outline_thickness = 0.137
+
+[sub_resource type="SphereMesh" id="SphereMesh_a3d8c"]
+
+[sub_resource type="Curve" id="Curve_xpcdj"]
+_data = [Vector2(0, 1), 0.0, 1.1287661, 0, 0, Vector2(0.72674423, 0.5393259), -2.5989923, -2.5989923, 0, 0, Vector2(1, 0), -0.14494382, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gw545"]
+animation = &"Running_A"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ve0w"]
+animation = &"Running_B"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xpcdj"]
+animation = &"Jump_Full_Short"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2ql0"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_mtuoh"]
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_8c8yn"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mtuoh"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xpcdj"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xpcdj"]
+graph_offset = Vector2(-959.44885, 105.58685)
+nodes/output/position = Vector2(520, 260)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_a2ql0")
+nodes/Animation/position = Vector2(-280, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_gw545")
+"nodes/Animation 2/position" = Vector2(-280, 480)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_5ve0w")
+"nodes/Animation 3/position" = Vector2(-280, 300)
+nodes/RunningBlend/node = SubResource("AnimationNodeBlend3_8c8yn")
+nodes/RunningBlend/position = Vector2(20, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_xpcdj")
+nodes/TimeScale/position = Vector2(-120, 440)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_xpcdj")
+"nodes/Animation 4/position" = Vector2(-320, 760)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_mtuoh")
+nodes/OneShot/position = Vector2(260, 300)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_mtuoh")
+"nodes/TimeScale 2/position" = Vector2(-96.13312, 677.10016)
+node_connections = [&"output", 0, &"OneShot", &"RunningBlend", 0, &"Animation", &"RunningBlend", 1, &"Animation 3", &"RunningBlend", 2, &"TimeScale", &"TimeScale", 0, &"Animation 2", &"OneShot", 0, &"RunningBlend", &"OneShot", 1, &"TimeScale 2", &"TimeScale 2", 0, &"Animation 4"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("AnimTree")]
+script = ExtResource("1_uvnfx")
+AnimTree = NodePath("AnimationTree")
+Speed = 3.0
+FallAcceleration = 25
+JumpForce = 3.0
+DragMult = 7.0
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_sgftv")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_xpcdj")
+
+[node name="Skeleton_Mage" parent="Pivot" instance=ExtResource("3_xpcdj")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Pivot/Skeleton_Mage/Rig" index="0"]
+bones/1/position = Vector3(0, 0.36863297, 0)
+bones/4/rotation = Quaternion(-0.5504092, -0.05737697, -0.6420746, 0.5305639)
+bones/5/rotation = Quaternion(2.7668534e-08, -4.544863e-08, -0.5089408, 0.8608015)
+bones/7/rotation = Quaternion(-0.3200411, -0.33827642, 0.14648648, 0.87274545)
+bones/8/rotation = Quaternion(0.0012976781, 0.0012976737, -0.7023266, 0.7118526)
+bones/9/rotation = Quaternion(-0.60928637, 0.077883065, 0.6171609, 0.4917488)
+bones/10/rotation = Quaternion(3.8026577e-08, 3.5945813e-08, 0.53159016, 0.84700173)
+bones/12/rotation = Quaternion(-0.31914464, 0.3140532, -0.22863291, 0.864433)
+bones/13/rotation = Quaternion(0.0039934227, 0.0047036638, 0.70294225, 0.71122015)
+bones/15/rotation = Quaternion(0.98938257, 0.083805785, 0.078869835, 0.0887599)
+bones/16/rotation = Quaternion(0.39953727, 5.676666e-08, -2.6945563e-07, 0.91671705)
+bones/17/rotation = Quaternion(-0.623885, -0.20054258, 0.07758534, 0.7513526)
+bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
+bones/19/rotation = Quaternion(0.99120104, -0.03349343, 0.029754296, 0.1245532)
+bones/20/rotation = Quaternion(0.44320256, -5.8341634e-08, 3.1133123e-07, 0.89642155)
+bones/21/rotation = Quaternion(-0.64971226, 0.11238808, -0.023763565, 0.75145084)
+bones/38/position = Vector3(0.52084064, 0.7706484, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7706483, 0.059736915)
+
+[node name="head" parent="Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2043949, 1.5739471e-15)
+
+[node name="AnimationPlayer" parent="Pivot/Skeleton_Mage" index="1"]
+autoplay = ""
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8303528, 0.55723804, 0, -0.55723804, 0.8303528, 0, 15.180841, 20.30391)
+attributes = ExtResource("4_mtuoh")
+fov = 30.9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_uvnfx")
+
+[node name="RunParticles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046646476, 0, 0)
+material_override = SubResource("StandardMaterial3D_mtuoh")
+emitting = false
+amount = 16
+lifetime = 0.75
+mesh = SubResource("SphereMesh_a3d8c")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.3
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 31.02
+gravity = Vector3(0, 1.5, 0)
+initial_velocity_max = 1.5
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_xpcdj")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Pivot/Skeleton_Mage")
+tree_root = SubResource("AnimationNodeBlendTree_xpcdj")
+anim_player = NodePath("../Pivot/Skeleton_Mage/AnimationPlayer")
+parameters/RunningBlend/blend_amount = -1.0
+parameters/TimeScale/scale = 2.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+"parameters/TimeScale 2/scale" = 1.5
+
+[editable path="Pivot/Skeleton_Mage"]
