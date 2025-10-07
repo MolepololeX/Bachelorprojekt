@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dap3lhtvaqmm0"]
+
+[ext_resource type="Script" uid="uid://b1mbkal63yt36" path="res://Scripts/Interactables/NuggetPickup.cs" id="1_qd48u"]
+[ext_resource type="PackedScene" uid="uid://cfqir48strvr5" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Copper_Nugget_Large.gltf" id="2_2581i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_28aqb"]
+
+[node name="NuggetPickup" type="Node3D"]
+script = ExtResource("1_qd48u")
+
+[node name="Copper_Nugget_Large2" parent="." instance=ExtResource("2_2581i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0008430481, 0.22334844, 0.020776272)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15104526, 0)
+shape = SubResource("SphereShape3D_28aqb")

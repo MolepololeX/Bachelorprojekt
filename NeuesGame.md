@@ -15,11 +15,11 @@
 
 TODO als Basis:
 
-- 2.5D Environment Ausprobieren
+x 2.5D Environment Ausprobieren
 - Kessel zum Kombinieren von N Materialien, immer das was drinne liegt mit dem Was reingehauen wird
 x Simples Movement mit Jump
 - Simple Attack mit einem Dagger mit Trail
 - Slime Mob mit Slime Drop
 - Kann dann Kombiniert werden im Kessel zu Quecksilber II, welches den Spieler bei Use killt
 - Item kann geused werden
-- Simple Inventarleiste oder 3x3 Grid
+x Simple Inventarleiste oder 3x3 Grid

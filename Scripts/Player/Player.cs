@@ -1,32 +1,48 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class Player : CharacterBody3D
 {
+	public enum ItemType
+	{
+		Empty,
+		Copper,
+		Slime
+	}
+
 	[Export]
 	public AnimationTree AnimTree;
+	[Export]
+	public Label InvDebugLabel;
 
-	// How fast the player moves in meters per second.
 	[Export]
 	public float Speed { get; set; } = 14;
-	// The downward acceleration when in the air, in meters per second squared.
 	[Export]
 	public int FallAcceleration { get; set; } = 75;
-
 	[Export]
 	public float JumpForce { get; set; } = 500;
-
 	[Export]
 	public float DragMult { get; set; } = .8f;
-
 	[Export]
 	public float LookAtInterpolation { get; set; } = .8f;
 
-	private Vector3 lastDir = Vector3.Forward;
-
+	private Vector3 _lastDir = Vector3.Forward;
 	private Vector3 _targetVelocity = Vector3.Zero;
+	private bool _canJump = false;
 
-	private bool canJump = false;
+	public ItemType[] Inventory = {
+		ItemType.Empty, ItemType.Empty, ItemType.Empty,
+		ItemType.Empty, ItemType.Empty, ItemType.Empty,
+		ItemType.Empty, ItemType.Empty, ItemType.Empty
+	};
+	public int InventorySelectedIndex = 0;
+
+	public override void _Ready()
+	{
+		GD.Print(Inventory.Length);
+	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -41,10 +57,8 @@ public partial class Player : CharacterBody3D
 		// 	canJump = true;
 		// }
 
-		// We create a local variable to store the input direction.
 		var direction = Vector3.Zero;
 
-		// We check for each move input and update the direction accordingly.
 		if (Input.IsActionPressed("move_right"))
 		{
 			direction.X += Speed * (float)delta;
@@ -55,8 +69,6 @@ public partial class Player : CharacterBody3D
 		}
 		if (Input.IsActionPressed("move_down"))
 		{
-			// Notice how we are working with the vector's X and Z axes.
-			// In 3D, the XZ plane is the ground plane.
 			direction.Z += Speed * (float)delta;
 		}
 		if (Input.IsActionPressed("move_up"))
@@ -67,10 +79,9 @@ public partial class Player : CharacterBody3D
 		if (direction != Vector3.Zero)
 		{
 			direction = direction.Normalized();
-			// Setting the basis property will affect the rotation of the node.
-			Vector3 newDir = direction.Lerp(lastDir, LookAtInterpolation);
+			Vector3 newDir = direction.Lerp(_lastDir, LookAtInterpolation);
 			GetNode<Node3D>("Pivot").Basis = Basis.LookingAt(newDir);
-			lastDir = newDir;
+			_lastDir = newDir;
 			GetNode<CpuParticles3D>("RunParticles").Emitting = true;
 		}
 		else
@@ -78,24 +89,21 @@ public partial class Player : CharacterBody3D
 			GetNode<CpuParticles3D>("RunParticles").Emitting = false;
 		}
 
-		// Ground velocity
 		_targetVelocity.X = direction.X * Speed;
 		_targetVelocity.Z = direction.Z * Speed;
 
-		// Vertical velocity
-		if (!IsOnFloor()) // If in the air, fall towards the floor. Literally gravity
+		if (!IsOnFloor())
 		{
 			_targetVelocity.Y -= FallAcceleration * (float)delta;
 		}
 
-		if (IsOnFloor() && canJump)
+		if (IsOnFloor() && _canJump)
 		{
 			AnimTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.FadeOut);
 		}
 
-		// Moving the character
 		Velocity += _targetVelocity;
-		Velocity += ((-Velocity) * DragMult * ((float)delta));
+		Velocity += (-Velocity) * DragMult * ((float)delta);
 		Vector2 velXZ = new Vector2(Velocity.X, Velocity.Z);
 		if (velXZ.Length() > Speed * 3.0f)
 		{
@@ -109,5 +117,44 @@ public partial class Player : CharacterBody3D
 		MoveAndSlide();
 
 		AnimTree.Set("parameters/RunningBlend/blend_amount", Math.Clamp((velXZ.Length() / Speed) - 1.0, -1.0, 1.0));
+	}
+
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionJustPressed("selection_left"))
+		{
+			InventorySelectedIndex = InventorySelectedIndex > 0 ? InventorySelectedIndex - 1 : Inventory.Length - 1;
+		}
+		if (Input.IsActionJustPressed("selection_right"))
+		{
+			InventorySelectedIndex = InventorySelectedIndex < Inventory.Length - 1 ? InventorySelectedIndex + 1 : 0;
+		}
+
+		String test = "";
+		for (int i = 0; i < Inventory.Length; i++)
+		{
+			if (i == InventorySelectedIndex)
+			{
+				test += "> " + Inventory[i].ToString() + "\n";
+			}
+			else
+			{
+				test += Inventory[i].ToString() + "\n";
+			}
+		}
+		InvDebugLabel.Text = test;
+	}
+
+	public bool TryAddToInventory(ItemType item)
+	{
+		for (int i = 0; i < Inventory.Length; i++)
+		{
+			if (Inventory[i] == ItemType.Empty)
+			{
+				Inventory[i] = item;
+				return true;
+			}
+		}
+		return false;
 	}
 }

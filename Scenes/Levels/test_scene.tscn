@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=34 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://bg6uur18cv4hs" path="res://Scenes/Environment/cauldron.tscn" id="1_sgftv"]
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/player.tscn" id="2_2u58p"]
@@ -24,9 +24,10 @@
 [ext_resource type="PackedScene" uid="uid://c6v5uxj86bbnx" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_decorated.fbx" id="22_hb2rl"]
 [ext_resource type="PackedScene" uid="uid://dy0f422c5ai70" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_weeds_A.fbx" id="23_2m5lv"]
 [ext_resource type="PackedScene" uid="uid://dt0lsljh6x4ss" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_weeds_B.fbx" id="24_877y0"]
+[ext_resource type="PackedScene" uid="uid://cpyft8tvvt7r1" path="res://world_environment.tscn" id="25_28aqb"]
 [ext_resource type="PackedScene" uid="uid://boqx32aoye7wj" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_broken_A.fbx" id="25_jxkj0"]
-[ext_resource type="Environment" uid="uid://cakiifetyt7tf" path="res://new_environment.tres" id="26_28aqb"]
-[ext_resource type="CameraAttributesPhysical" uid="uid://6mgtw443v8s8" path="res://new_camera_attributes_physical.tres" id="27_eh82s"]
+[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/Environment/nugget_pickup.tscn" id="27_28aqb"]
+[ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/DebugInv.tscn" id="28_eh82s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4kqls"]
 albedo_color = Color(0.4399004, 0.70125407, 0.24965337, 1)
@@ -84,6 +85,9 @@ transform = Transform3D(0.8046037, 0, 0.59381217, 0, 1, 0, -0.59381217, 0, 0.804
 transform = Transform3D(0.9373489, 0, 0.34839207, 0, 1, 0, -0.34839207, 0, 0.9373489, -8.134005, 0.14212503, -4.9520593)
 
 [node name="GrassBushel" parent="Env" instance=ExtResource("6_56hgn")]
+transform = Transform3D(0.78248864, 0, -0.62266487, 0, 1, 0, 0.62266487, 0, 0.78248864, -7.7231135, 0, -2.4954607)
+
+[node name="GrassBushel5" parent="Env" instance=ExtResource("6_56hgn")]
 transform = Transform3D(0.78248864, 0, -0.62266487, 0, 1, 0, 0.62266487, 0, 0.78248864, -7.7231135, 0, -2.4954607)
 
 [node name="GrassBushel2" parent="Env" instance=ExtResource("6_56hgn")]
@@ -236,9 +240,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_28aqb")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("26_28aqb")
-camera_attributes = ExtResource("27_eh82s")
+[node name="NuggetPickup" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_2u58p")]
+[node name="NuggetPickup2" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.606232, 0, 6.2068815)
+
+[node name="NuggetPickup3" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8452177, 0, 8.784074)
+
+[node name="NuggetPickup4" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.10506, 0, 8.282395)
+
+[node name="NuggetPickup5" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6282952, 0, 8.448775)
+
+[node name="NuggetPickup6" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.904699, 0, 1.8333678)
+
+[node name="NuggetPickup7" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.515898, 0, 1.2651834)
+
+[node name="NuggetPickup8" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.210169, -4.7683716e-07, 2.022953)
+
+[node name="NuggetPickup9" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6792727, -1.4305115e-06, 7.973267)
+
+[node name="NuggetPickup10" parent="Env" instance=ExtResource("27_28aqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.675056, -1.4305115e-06, 8.496693)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("25_28aqb")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("InvDebugLabel") instance=ExtResource("2_2u58p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.193416, -0.006478554, 3.6920319)
+InvDebugLabel = NodePath("../Control/Label")
+
+[node name="Control" parent="." instance=ExtResource("28_eh82s")]
+
+[editable path="Control"]
