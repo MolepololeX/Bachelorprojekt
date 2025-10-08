@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://xbcvc21olx53"]
+
+[ext_resource type="ArrayMesh" uid="uid://5fw0hrngf0cg" path="res://Assets/Meshes/grass_mesh_2.res" id="1_akvbc"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a4d0e"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_akvbc"]
+transform_format = 1
+instance_count = 6
+mesh = ExtResource("1_akvbc")
+buffer = PackedFloat32Array(0.82257366, 1.3358122, -1.2421671, -0.039062858, -1.0997856, 1.4502919, 0.83133984, 0, 1.4552817, 0.34096915, 1.3303742, -0.077519536, 1.6340176, -0.9999183, 0.57805765, -0.21115041, 1.131224, 1.1834476, -1.1505584, 0, 0.2330651, 1.2663395, 1.5316871, 0.31562757, -0.92317975, 1.3298309, -1.1761334, 0.31545925, 0.35846126, 1.4379733, 1.3445219, 0, 1.7387482, 0.4096138, -0.9016495, 0.10453558, 1.5087411, -0.74692833, 1.0815724, 0.16293812, 0.17832065, 1.7476153, 0.95814544, 0, -1.3022683, -0.6260504, 1.384254, -0.4843055, 1.6283873, 0.44412595, 1.0747594, 0.7786951, 0.36147976, 1.5644002, -1.1941463, 0, -1.1052998, 1.1659352, 1.192857, 0.508446, -1.1641377, 0.5140494, -1.5441948, 0.29988825, 1.1597849, 1.5939757, -0.34371766, 0, 1.1417896, -1.0949867, -1.2252842, 0.16331959)
+
+[node name="GrassBushel" type="Node3D"]
+
+[node name="Area" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.076167166, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_a4d0e")
+
+[node name="Grass" type="MultiMeshInstance3D" parent="."]
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_akvbc")
