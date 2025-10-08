@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://biris8lihnwq3"]
+[gd_scene load_steps=19 format=3 uid="uid://biris8lihnwq3"]
 
 [ext_resource type="Script" uid="uid://4jx0synlgv4m" path="res://Scripts/Player/Player.cs" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://b06n3y7xa2a2u" path="res://Assets/Textures/silver_armor.png" id="2_a3d8c"]
 [ext_resource type="PackedScene" uid="uid://ce5xj5770gvmj" path="res://Scenes/Player/skeleton_mage.tscn" id="3_xpcdj"]
-[ext_resource type="CameraAttributesPractical" uid="uid://cgca0r01v6rjb" path="res://new_camera_attributes_practical.tres" id="4_mtuoh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sgftv"]
 
@@ -91,42 +90,37 @@ surface_material_override/0 = SubResource("StandardMaterial3D_xpcdj")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37052393, 0)
-bones/4/rotation = Quaternion(-0.55216944, -0.05655635, -0.63741463, 0.53442764)
-bones/5/rotation = Quaternion(3.7193363e-08, -6.1865116e-08, -0.5161802, 0.85648006)
-bones/7/rotation = Quaternion(-0.32162145, -0.33807197, 0.15033156, 0.871589)
-bones/8/rotation = Quaternion(0.00088121236, 0.00088120793, -0.7038645, 0.71033317)
-bones/9/rotation = Quaternion(-0.61069596, 0.07705352, 0.61300457, 0.49531674)
-bones/10/rotation = Quaternion(2.3981153e-08, 4.557757e-08, 0.53852135, 0.84261197)
-bones/12/rotation = Quaternion(-0.32065406, 0.31429705, -0.23251343, 0.86274904)
-bones/13/rotation = Quaternion(0.002785802, 0.0032812627, 0.70420706, 0.7099817)
-bones/15/rotation = Quaternion(0.98986024, 0.083629385, 0.07853953, 0.083753616)
-bones/16/rotation = Quaternion(0.38627613, 5.7688514e-08, -2.6416714e-07, 0.9223832)
-bones/17/rotation = Quaternion(-0.61691254, -0.20136203, 0.07513908, 0.75711715)
-bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
-bones/19/rotation = Quaternion(0.9917728, -0.033164952, 0.029885907, 0.1199737)
-bones/20/rotation = Quaternion(0.431302, -5.938352e-08, 3.0022383e-07, 0.9022076)
-bones/21/rotation = Quaternion(-0.6432504, 0.112621635, -0.022608738, 0.75699025)
-bones/38/position = Vector3(0.52084064, 0.77601767, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.77601755, 0.059736915)
+bones/1/position = Vector3(0, 0.38900724, 0)
+bones/4/rotation = Quaternion(-0.55891097, -0.060090534, -0.64253443, 0.5207277)
+bones/5/rotation = Quaternion(2.9053842e-08, -5.1574364e-08, -0.49882686, 0.8667017)
+bones/7/rotation = Quaternion(-0.32128996, -0.32725912, 0.14687903, 0.8764136)
+bones/8/rotation = Quaternion(0.00014566409, 0.00014565593, -0.706572, 0.7076412)
+bones/9/rotation = Quaternion(-0.6172476, 0.08004527, 0.6168672, 0.48173976)
+bones/10/rotation = Quaternion(2.8909922e-08, 5.1194966e-08, 0.52184725, 0.853039)
+bones/12/rotation = Quaternion(-0.31963965, 0.30264974, -0.22857884, 0.8683233)
+bones/13/rotation = Quaternion(0.0004091008, 0.00048185766, 0.7066827, 0.7075305)
+bones/15/rotation = Quaternion(0.9934024, 0.08337397, 0.074548, 0.025358144)
+bones/16/rotation = Quaternion(0.23312739, 6.501922e-08, -1.6132117e-07, 0.97244626)
+bones/17/rotation = Quaternion(-0.5370681, -0.2083417, 0.049387023, 0.815912)
+bones/18/rotation = Quaternion(7.1957205e-05, 0.92022204, -0.3913967, -1.6232978e-05)
+bones/19/rotation = Quaternion(0.99660987, -0.030044364, 0.031247612, 0.06992654)
+bones/20/rotation = Quaternion(0.30199206, -6.395124e-08, 2.107358e-07, 0.95331043)
+bones/21/rotation = Quaternion(-0.5739192, 0.114315666, -0.010965637, 0.8108197)
+bones/38/position = Vector3(0.52084064, 0.7868167, -0.05763735)
+bones/40/position = Vector3(-0.5108437, 0.78681666, 0.059736922)
 
 [node name="head" parent="Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.206286, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2247692, 1.5739471e-15)
 
 [node name="AnimationPlayer" parent="Pivot/Skeleton_Mage" index="1"]
 autoplay = ""
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8303528, 0.55723804, 0, -0.55723804, 0.8303528, 0, 15.180841, 20.30391)
-attributes = ExtResource("4_mtuoh")
-fov = 30.9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_uvnfx")
 
 [node name="RunParticles" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046646476, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046646476, 0.17746398, 0)
 material_override = SubResource("StandardMaterial3D_mtuoh")
 emitting = false
 amount = 16

@@ -10,5 +10,5 @@ shader_parameter/color = Color(0.80607563, 0.9420342, 0.71064293, 1)
 shader_parameter/color2 = Color(0.22637177, 0.55280256, 0, 1)
 shader_parameter/noise = ExtResource("2_1kdj3")
 shader_parameter/noiseScale = 50.0
-shader_parameter/timeScale = 1.5
+shader_parameter/timeScale = 3.0
 shader_parameter/maxAngle = 0.5
