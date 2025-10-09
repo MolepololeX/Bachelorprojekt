@@ -8,7 +8,7 @@ public partial class Axe : Node3D
 	[Export]
 	public CpuParticles3D emitter;
 	[Export]
-	public RigidBody3D rb;
+	public Area3D area3D;
 	[Export]
 	public Camera3D cam;
 
@@ -17,9 +17,9 @@ public partial class Axe : Node3D
 
 	public override void _Ready()
 	{
-		animPlayer.AnimationStarted += StartEmitter;
-		animPlayer.AnimationFinished += StopEmitter;
-		rb.BodyEntered += OnHit;
+		animPlayer.AnimationStarted += OnAnimStarted;
+		animPlayer.AnimationFinished += OnAnimFinish;
+		area3D.BodyEntered += OnHit;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -55,23 +55,26 @@ public partial class Axe : Node3D
 		}
 	}
 
-	private void OnHit(Node body)
+	private void OnHit(Node node)
 	{
-		ChoppableTree tree = body as ChoppableTree;
+		ChoppableTree tree = node as ChoppableTree;
 		if (tree != null)
 		{
+			GD.Print("Got here");
 			tree.OnHit();
 		}
 	}
 
-	private void StopEmitter(StringName animName)
+	private void OnAnimFinish(StringName animName)
 	{
 		emitter.Emitting = false;
+		area3D.Monitoring = false;
 	}
 
 
-	private void StartEmitter(StringName animName)
+	private void OnAnimStarted(StringName animName)
 	{
 		emitter.Emitting = true;
+		area3D.Monitoring = true;
 	}
 }

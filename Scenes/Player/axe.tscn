@@ -15,8 +15,8 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13445377, 0.7857144), 0.0, 0.0
 point_count = 3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_au7m6"]
-radius = 1.3344727
-height = 3.489039
+radius = 2.0493164
+height = 4.135742
 
 [sub_resource type="Animation" id="Animation_va1if"]
 length = 0.001
@@ -162,11 +162,11 @@ _data = {
 &"Swing": SubResource("Animation_mu1jd")
 }
 
-[node name="Axe" type="Node3D" node_paths=PackedStringArray("animPlayer", "emitter", "rb")]
+[node name="Axe" type="Node3D" node_paths=PackedStringArray("animPlayer", "emitter", "area3D")]
 script = ExtResource("1_au7m6")
 animPlayer = NodePath("Pivot/AnimationPlayer")
 emitter = NodePath("Pivot/Model/CPUParticles3D")
-rb = NodePath("Pivot/Model/RigidBody3D")
+area3D = NodePath("Pivot/Model/Area3D")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.99270904, 0, 0.120535344, 0, 1, 0, -0.120535344, 0, 0.99270904, 0.9849682, 1.0064785, -0.19175196)
@@ -187,12 +187,12 @@ scale_amount_min = 0.1
 scale_amount_max = 0.1
 scale_amount_curve = SubResource("Curve_au7m6")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Pivot/Model"]
+[node name="Area3D" type="Area3D" parent="Pivot/Model"]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Model/RigidBody3D"]
-transform = Transform3D(9.685755e-08, 0.3173944, 0, -0.3173944, 9.685755e-08, 5.3290705e-15, 5.3290705e-15, -1.4432899e-13, 0.31739435, -0.014176309, 0.6394258, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Model/Area3D"]
+transform = Transform3D(9.685755e-08, 0.3173945, -1.3056223e-13, -0.3173945, 9.685755e-08, 5.77316e-14, -4.2099657e-13, -2.5224267e-13, 0.31739435, -0.014176256, 0.48177594, -2.085452e-13)
 shape = SubResource("CapsuleShape3D_au7m6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot"]
