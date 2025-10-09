@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Axe : Node3D
 {
@@ -13,16 +14,31 @@ public partial class Axe : Node3D
 	public Camera3D cam;
 
 	private const int RayLength = 1000;
+	private bool isMouseTracking = true;
 	private bool swingForward = true;
+	private bool canAttack = true;
+	private double currentAnimPos = 0.0;
 
 	public override void _Ready()
 	{
 		animPlayer.AnimationStarted += OnAnimStarted;
 		animPlayer.AnimationFinished += OnAnimFinish;
 		area3D.BodyEntered += OnHit;
+
+		emitter.Emitting = false;
+		area3D.Monitoring = false;
+		canAttack = true;
 	}
 
 	public override void _PhysicsProcess(double delta)
+	{
+		if (isMouseTracking)
+		{
+			TrackMouse();
+		}
+	}
+
+	private void TrackMouse()
 	{
 		var spaceState = GetWorld3D().DirectSpaceState;
 		var mousePos = GetViewport().GetMousePosition();
@@ -41,7 +57,7 @@ public partial class Axe : Node3D
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("Attack"))
+		if (canAttack && Input.IsActionJustPressed("Attack"))
 		{
 			if (swingForward)
 			{
@@ -51,7 +67,12 @@ public partial class Axe : Node3D
 			{
 				animPlayer.PlayBackwards("Swing");
 			}
+
+			emitter.Emitting = true;
+			area3D.Monitoring = true;
 			swingForward = !swingForward;
+			canAttack = false;
+			isMouseTracking = false;
 		}
 	}
 
@@ -60,8 +81,24 @@ public partial class Axe : Node3D
 		ChoppableTree tree = node as ChoppableTree;
 		if (tree != null)
 		{
-			GD.Print("Got here");
+			animPlayer.Pause();
+			currentAnimPos = animPlayer.CurrentAnimationPosition;
 			tree.OnHit();
+			HitStop();
+		}
+	}
+
+	private async void HitStop()
+	{
+		await Task.Delay(TimeSpan.FromMilliseconds(500));
+		GD.Print(currentAnimPos);
+		if (!swingForward)
+		{
+			animPlayer.PlaySectionBackwards("Swing", 0.0, currentAnimPos);
+		}
+		else
+		{
+			animPlayer.PlaySection("Swing", currentAnimPos, 1.0);
 		}
 	}
 
@@ -69,12 +106,13 @@ public partial class Axe : Node3D
 	{
 		emitter.Emitting = false;
 		area3D.Monitoring = false;
+		canAttack = true;
+		isMouseTracking = true;
 	}
 
 
 	private void OnAnimStarted(StringName animName)
 	{
-		emitter.Emitting = true;
-		area3D.Monitoring = true;
+
 	}
 }
