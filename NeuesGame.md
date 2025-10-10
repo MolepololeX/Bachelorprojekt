@@ -29,8 +29,10 @@ TODO vorher:
 	
 	
 	x gameManager mit paar globals
-	- camera based movenent
-	- axe raycast fixen
+	x camera based movenent
+	x axe raycast fixen
 	- lighting fixen bzw aendern
 	- fishing minigame
 	- wasser shader mit cell noise simpel aber mit reflections
+	
+	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht

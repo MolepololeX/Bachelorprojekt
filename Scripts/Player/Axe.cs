@@ -8,12 +8,10 @@ namespace Game.PlayerStuff
 {
 	public partial class Axe : Node3D
 	{
-		[Export]
-		public AnimationPlayer animPlayer;
-		[Export]
-		public CpuParticles3D emitter;
-		[Export]
-		public Area3D area3D;
+		[Export] private AnimationPlayer animPlayer;
+		[Export] private CpuParticles3D emitter;
+		[Export] private Area3D area3D;
+		[Export] private Node3D model;
 
 		private Camera3D cam;
 
@@ -33,6 +31,8 @@ namespace Game.PlayerStuff
 			emitter.Emitting = false;
 			area3D.Monitoring = false;
 			canAttack = true;
+
+			model.Visible = false;
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -45,27 +45,32 @@ namespace Game.PlayerStuff
 
 		private void TrackMouse()
 		{
-			var spaceState = GetWorld3D().DirectSpaceState;
 			var mousePos = GetViewport().GetMousePosition();
+			float x = mousePos.X / GetViewport().GetWindow().Size.X;
+			float y = mousePos.Y / GetViewport().GetWindow().Size.Y;
+			Vector2 mpn = new Vector2(x * 2.0f - 1.0f, y * 2.0f - 1.0f);
+			var lookAtPos = GameManager.Instance.Player.Position + new Vector3(mpn.X, GameManager.Instance.Player.Position.Y, mpn.Y);
+			LookAt(lookAtPos);
+			GD.Print(mpn);
 
-			var origin = cam.ProjectRayOrigin(mousePos);
-			var end = origin + cam.ProjectRayNormal(mousePos) * RayLength;
-			var query = PhysicsRayQueryParameters3D.Create(origin, end);
-			query.CollideWithAreas = true;
+			// var origin = cam.ProjectRayOrigin(mousePos);
+			// var end = origin + cam.ProjectRayNormal(mousePos) * RayLength;
+			// var query = PhysicsRayQueryParameters3D.Create(origin, end);
+			// query.CollideWithAreas = true;
 
-			var result = spaceState.IntersectRay(query);
+			// var result = spaceState.IntersectRay(query);
 
-			if (result.ContainsKey("position"))
-			{
-				var resultPos = (Vector3)result["position"];
-				var lookAtPos = new Vector3(resultPos.X, Position.Y, resultPos.Z);
-				LookAt(lookAtPos);
-			}
+			// if (result.ContainsKey("position"))
+			// {
+			// 	var resultPos = (Vector3)result["position"];
+			// 	var lookAtPos = new Vector3(resultPos.X, Position.Y, resultPos.Z);
+			// 	LookAt(lookAtPos);
+			// }
 		}
 
 		public override void _Process(double delta)
 		{
-			if (canAttack && Input.IsActionJustPressed("Attack"))
+			if (canAttack && Input.IsActionPressed("Attack"))
 			{
 				if (swingForward)
 				{
@@ -81,6 +86,7 @@ namespace Game.PlayerStuff
 				swingForward = !swingForward;
 				canAttack = false;
 				isMouseTracking = false;
+				model.Visible = true;
 			}
 		}
 
@@ -90,6 +96,7 @@ namespace Game.PlayerStuff
 			if (tree != null)
 			{
 				animPlayer.Pause();
+				area3D.SetDeferred("monitoring", false);
 				currentAnimPos = animPlayer.CurrentAnimationPosition;
 				tree.OnHit();
 				HitStop();
@@ -98,7 +105,7 @@ namespace Game.PlayerStuff
 
 		private async void HitStop()
 		{
-			await Task.Delay(TimeSpan.FromMilliseconds(500));
+			await Task.Delay(TimeSpan.FromMilliseconds(350));
 			if (!swingForward)
 			{
 				animPlayer.PlaySectionBackwards("Swing", 0.0, currentAnimPos);
@@ -115,6 +122,7 @@ namespace Game.PlayerStuff
 			area3D.Monitoring = false;
 			canAttack = true;
 			isMouseTracking = true;
+			model.Visible = false;
 		}
 
 

@@ -162,11 +162,12 @@ _data = {
 &"Swing": SubResource("Animation_mu1jd")
 }
 
-[node name="Axe" type="Node3D" node_paths=PackedStringArray("animPlayer", "emitter", "area3D")]
+[node name="Axe" type="Node3D" node_paths=PackedStringArray("animPlayer", "emitter", "area3D", "model")]
 script = ExtResource("1_au7m6")
 animPlayer = NodePath("Pivot/AnimationPlayer")
 emitter = NodePath("Pivot/Model/CPUParticles3D")
 area3D = NodePath("Pivot/Model/Area3D")
+model = NodePath("Pivot/Model")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.99270904, 0, 0.120535344, 0, 1, 0, -0.120535344, 0, 0.99270904, 0.9849682, 1.0064785, -0.19175196)

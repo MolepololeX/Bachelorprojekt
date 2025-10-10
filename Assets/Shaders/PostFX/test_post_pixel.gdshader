@@ -15,7 +15,7 @@ void fragment() {
 	float oX = offsetX * SCREEN_PIXEL_SIZE.x;
 	float oY = offsetY * SCREEN_PIXEL_SIZE.y;
 	float viewportZoomWeirdness = 1.0;
-	vec2 uvO = vec2(oX, oY) * viewportZoomWeirdness - 0.5;
+	vec2 uvO = vec2(oX, oY) * viewportZoomWeirdness - 0.5; //TODO: FIX DIGGA WARUM - 0.5 und nich 1.0 bidde mal fixen dange
 	
 	vec2 uvS;
 	vec2 uv;
