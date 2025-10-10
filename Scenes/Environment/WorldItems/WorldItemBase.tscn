@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dap3lhtvaqmm0"]
+
+[ext_resource type="Script" uid="uid://b1mbkal63yt36" path="res://Scripts/Items/WorldItem.cs" id="1_qd48u"]
+[ext_resource type="PackedScene" uid="uid://6whst0kphmpv" path="res://Scenes/VFX/poof_effect_small.tscn" id="2_o4v1a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tchc3"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_28aqb"]
+
+[node name="WorldItem" type="Node3D" node_paths=PackedStringArray("area")]
+script = ExtResource("1_qd48u")
+area = NodePath("RigidBody3D/Area3D")
+pickupEffect = ExtResource("2_o4v1a")
+spawnEffect = ExtResource("2_o4v1a")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_tchc3")
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_28aqb")

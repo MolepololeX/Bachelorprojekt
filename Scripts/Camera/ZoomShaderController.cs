@@ -13,12 +13,17 @@ namespace Game.Camera
 		[Export] private float minZoom = 0.1f;
 		[Export] private bool staticZoom = true;
 
+		[Export] private bool useSmoothCam = false;
+		[Export] private float smoothing = 1.0f;
+
 
 		private Node3D playerNode;
 		private ColorRect rect;
 		private ShaderMaterial mat;
 		private float delay;
 		private float zoomTarget;
+
+		private Vector2 oldPos;
 
 
 		public override void _Ready()
@@ -27,15 +32,26 @@ namespace Game.Camera
 			rect = GameManager.Instance.ZoomShaderColorRect;
 			mat = rect.Material as ShaderMaterial;
 			zoomTarget = zoom;
+
+			oldPos = UnprojectPosition(playerNode.Position);
 		}
 
 		public override void _Process(double delta)
 		{
 			SmoothZoom(delta);
 
-			Vector2 pos = UnprojectPosition(playerNode.Position);
-			mat.SetShaderParameter("offsetX", pos.X);
-			mat.SetShaderParameter("offsetY", pos.Y);
+			Vector2 currentPos = UnprojectPosition(playerNode.Position);
+			if (useSmoothCam)
+			{
+				currentPos.X = Mathf.Lerp(oldPos.X, currentPos.X, smoothing * (float)delta);
+				currentPos.Y = Mathf.Lerp(oldPos.Y, currentPos.Y, smoothing * (float)delta);
+				oldPos.X = currentPos.X;
+				oldPos.Y = currentPos.Y;
+			}
+
+			mat.SetShaderParameter("offsetX", currentPos.X);
+			mat.SetShaderParameter("offsetY", currentPos.Y);
+
 			mat.SetShaderParameter("zoom", zoom);
 			mat.SetShaderParameter("staticZoom", staticZoom);
 

@@ -4,19 +4,16 @@ namespace Game.Managers
 {
 	public partial class GameManager : Node
 	{
-		[Export]
-		public Node3D Player;
-		[Export]
-		public Node3D Camera;
-		[Export]
-		public Node3D CameraRig;
+		//Scene Root for Placing Temporary Stuff like VFX Nodes
+		[Export] public Node TempSceneRoot;
+		[Export] public Node3D Player;
+		[Export] public Node3D Camera;
+		[Export] public Node3D CameraRig;
 
-		[Export]
-		public ColorRect ZoomShaderColorRect;
+		[Export] public ColorRect ZoomShaderColorRect;
 
 		[ExportCategory("Debug Stuff")]
-		[Export]
-		public Label InventoryDebugLabel;
+		[Export] public Label InventoryDebugLabel;
 
 		public static GameManager Instance;
 

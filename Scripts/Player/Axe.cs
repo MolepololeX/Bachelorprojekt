@@ -49,9 +49,9 @@ namespace Game.PlayerStuff
 			float x = mousePos.X / GetViewport().GetWindow().Size.X;
 			float y = mousePos.Y / GetViewport().GetWindow().Size.Y;
 			Vector2 mpn = new Vector2(x * 2.0f - 1.0f, y * 2.0f - 1.0f);
+			mpn = mpn.Rotated(-GameManager.Instance.CameraRig.Rotation.Y);
 			var lookAtPos = GameManager.Instance.Player.Position + new Vector3(mpn.X, GameManager.Instance.Player.Position.Y, mpn.Y);
 			LookAt(lookAtPos);
-			GD.Print(mpn);
 
 			// var origin = cam.ProjectRayOrigin(mousePos);
 			// var end = origin + cam.ProjectRayNormal(mousePos) * RayLength;
@@ -120,11 +120,16 @@ namespace Game.PlayerStuff
 		{
 			emitter.Emitting = false;
 			area3D.Monitoring = false;
-			canAttack = true;
 			isMouseTracking = true;
-			model.Visible = false;
+			SwingDelay();
 		}
 
+		private async void SwingDelay()
+		{
+			await Task.Delay(TimeSpan.FromMilliseconds(50));
+			canAttack = true;
+			model.Visible = false;
+		}
 
 		private void OnAnimStarted(StringName animName)
 		{

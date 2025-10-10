@@ -1,203 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://d3ptw2yih8blu"]
+[gd_scene load_steps=16 format=3 uid="uid://d3ptw2yih8blu"]
 
 [ext_resource type="Script" uid="uid://ccb77ev2d130w" path="res://Scripts/Interactables/ChoppableTree.cs" id="1_4f7er"]
 [ext_resource type="PackedScene" uid="uid://bs1bf0xy3e2u7" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_B_Color1.fbx" id="1_gbise"]
+[ext_resource type="PackedScene" uid="uid://bac8m4n6d68kg" path="res://Scenes/VFX/poof_effect_big.tscn" id="3_fxtf1"]
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/choppable_tree_Particle_process_normal.tres" id="3_o7f1v"]
 [ext_resource type="ArrayMesh" uid="uid://cu8mndxv8iykw" path="res://Assets/Meshes/grass_mesh_3.res" id="3_s1qbb"]
+[ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/Environment/WorldItems/WoodLog.tscn" id="4_11a77"]
 [ext_resource type="Material" uid="uid://dmbx082uxouf6" path="res://Assets/Materials/Particles/choppable_tree_Particle_process_explosive.tres" id="5_mrg8r"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qhxvw"]
 height = 3.4432983
 radius = 0.19970703
-
-[sub_resource type="Animation" id="Animation_4f7er"]
-resource_name = "Shake"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.05235988, -0.05027038, 0.008726646, 0, 0, 0.034906585, -0.06536573, -0.01454441, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.26666668, 0.73333335, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.05027038, 0, 0, 0, 0, -0.06536573, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.26666668, 0.73333335, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.05235988, -0.05027038, -0.008726646, 0, 0, -0.017453292, -0.06536573, 0.011635528, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.26666668, 0.73333335, 1)
-}
-
-[sub_resource type="Animation" id="Animation_s1qbb"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pivot:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Pivot:position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Pivot:position:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Pivot/leaveExplosion:emitting")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_o7f1v"]
-resource_name = "Shake2"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.04363323, -0.04471643, -0.0072722053, 0, 0, -0.017453292, -0.07519196, 0.010181087, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.26829857, 0.7194503, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.04471643, 0, 0, 0, 0, -0.07519196, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.26829857, 0.7194503, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.04363323, -0.04471643, -0.0072722053, 0, 0, -0.034906585, -0.07519196, 0.013089971, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.26829857, 0.7194503, 1)
-}
-
-[sub_resource type="Animation" id="Animation_mrg8r"]
-resource_name = "Shake3"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.017453292, -0.05027038, -0.002908882, 0, 0, -0.008726646, -0.06921078, 0.004363323, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.30162227, 0.71688694, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:rotation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.05027038, 0, 0, 0, 0, -0.06921078, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.30162227, 0.71688694, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot:rotation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2, 2, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.034906585, -0.05027038, 0.005817764, 0, 0, 0.017453292, -0.06921078, -0.008726646, 0, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.30162227, 0.71688694, 1)
-}
 
 [sub_resource type="Animation" id="Animation_fxtf1"]
 resource_name = "Chop"
@@ -283,7 +96,6 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_11a77"]
 resource_name = "Delay"
-length = 10.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -318,6 +130,195 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 
+[sub_resource type="Animation" id="Animation_s1qbb"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot:position:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Pivot/leaveExplosion:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4f7er"]
+resource_name = "Shake"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.05235988, -0.05027038, 0.008726646, 0, 0, 0.034906585, -0.06536573, -0.01454441, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.26666668, 0.73333335, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.05027038, 0, 0, 0, 0, -0.06536573, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.26666668, 0.73333335, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.05235988, -0.05027038, -0.008726646, 0, 0, -0.017453292, -0.06536573, 0.011635528, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.26666668, 0.73333335, 1)
+}
+
+[sub_resource type="Animation" id="Animation_o7f1v"]
+resource_name = "Shake2"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.04363323, -0.04471643, -0.0072722053, 0, 0, -0.017453292, -0.07519196, 0.010181087, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.26829857, 0.7194503, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.04471643, 0, 0, 0, 0, -0.07519196, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.26829857, 0.7194503, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.04363323, -0.04471643, -0.0072722053, 0, 0, -0.034906585, -0.07519196, 0.013089971, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.26829857, 0.7194503, 1)
+}
+
+[sub_resource type="Animation" id="Animation_mrg8r"]
+resource_name = "Shake3"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.017453292, -0.05027038, -0.002908882, 0, 0, -0.008726646, -0.06921078, 0.004363323, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.30162227, 0.71688694, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.05027038, 0, 0, 0, 0, -0.06921078, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.30162227, 0.71688694, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.034906585, -0.05027038, 0.005817764, 0, 0, 0.017453292, -0.06921078, -0.008726646, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.30162227, 0.71688694, 1)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o7f1v"]
 _data = {
 &"Chop": SubResource("Animation_fxtf1"),
@@ -335,14 +336,19 @@ _data = {
 [node name="Model" parent="Pivot" instance=ExtResource("1_gbise")]
 transform = Transform3D(0.98276156, 0, -0.18487766, 0, 1, 0, 0.18487766, 0, 0.98276156, 0.009828452, 0.17638914, 0.08395092)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "Parent", "AnimRoot", "emitter")]
+[node name="StaticBody3D" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_4f7er")
 animPlayer = NodePath("../../AnimationPlayer")
-Parent = NodePath("../..")
-AnimRoot = NodePath("..")
+parent = NodePath("../..")
+animRoot = NodePath("..")
+poofEffectSockets = [NodePath("../PoofEffectSocket"), NodePath("../PoofEffectSocket2"), NodePath("../PoofEffectSocket3")]
 emitter = NodePath("../GPUParticles3D")
+poofEffectScene = ExtResource("3_fxtf1")
+delayScale = 0.5
+spawnedItem = ExtResource("4_11a77")
+spawnOffset = Vector3(0, 2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/StaticBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.343689, 0)
@@ -377,6 +383,15 @@ fixed_fps = 60
 trail_lifetime = 4.1499999999999995
 process_material = ExtResource("5_mrg8r")
 draw_pass_1 = ExtResource("3_s1qbb")
+
+[node name="PoofEffectSocket" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 5.241711, 0)
+
+[node name="PoofEffectSocket2" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 2.99011, 0.1272937)
+
+[node name="PoofEffectSocket3" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 0.14659023, 0.011627227)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1qdxfmogmenf"]
+
+[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/Environment/WorldItems/WorldItemBase.tscn" id="1_pep2k"]
+[ext_resource type="PackedScene" uid="uid://dxvfkk0ujo78v" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Wood_Log_A.gltf" id="2_iyu6f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
+size = Vector3(0.5, 0.5, 1.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iyu6f"]
+radius = 0.3
+height = 1.0
+
+[node name="WorldItem" instance=ExtResource("1_pep2k")]
+itemType = 3
+
+[node name="CollisionShape3D" parent="RigidBody3D" index="0"]
+shape = SubResource("BoxShape3D_iyu6f")
+
+[node name="CollisionShape3D" parent="RigidBody3D/Area3D" index="0"]
+transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_iyu6f")
+
+[node name="Wood_Log_A2" parent="RigidBody3D" index="2" instance=ExtResource("2_iyu6f")]

@@ -1,4 +1,5 @@
 using Game.Camera;
+using Game.Item;
 using Game.Managers;
 using Godot;
 using System;
@@ -8,13 +9,7 @@ namespace Game.PlayerStuff
 {
 	public partial class Player : CharacterBody3D
 	{
-		public enum ItemType
-		{
-			Empty,
-			Copper,
-			Slime
-		}
-
+	
 		[Export]
 		public AnimationTree AnimTree;
 
@@ -37,9 +32,9 @@ namespace Game.PlayerStuff
 		private bool _canJump = false;
 
 		public ItemType[] Inventory = {
-		ItemType.Empty, ItemType.Empty, ItemType.Empty,
-		ItemType.Empty, ItemType.Empty, ItemType.Empty,
-		ItemType.Empty, ItemType.Empty, ItemType.Empty
+		ItemType.None, ItemType.None, ItemType.None,
+		ItemType.None, ItemType.None, ItemType.None,
+		ItemType.None, ItemType.None, ItemType.None
 	};
 		public int InventorySelectedIndex = 0;
 
@@ -157,7 +152,7 @@ namespace Game.PlayerStuff
 		{
 			for (int i = 0; i < Inventory.Length; i++)
 			{
-				if (Inventory[i] == ItemType.Empty)
+				if (Inventory[i] == ItemType.None)
 				{
 					Inventory[i] = item;
 					return true;

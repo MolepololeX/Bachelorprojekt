@@ -1,20 +1,23 @@
-using Godot;
 using System;
+using Game.Managers;
+using Godot;
 
 namespace Game.Interactables
 {
 	public partial class ChoppableTree : Node3D
 	{
-		[Export]
-		public AnimationPlayer animPlayer;
-		[Export]
-		public Node3D Parent;
-		[Export]
-		public Node3D AnimRoot;
-		[Export]
-		public GpuParticles3D emitter;
+		[Export] private AnimationPlayer animPlayer;
+		[Export] private Node3D parent;
+		[Export] private Node3D animRoot;
+		[Export] private Node3D[] poofEffectSockets;
+		[Export] private GpuParticles3D emitter;
+		[Export] private PackedScene poofEffectScene;
+		[Export] private float delayScale = 25.0f;
+		[Export] private PackedScene spawnedItem;
+		[Export] private Vector3 spawnOffset = new Vector3(0.0f, 10.0f, 0.0f);
 
 		private int health = 5;
+		private bool dead = false;
 
 		public override void _Ready()
 		{
@@ -27,13 +30,9 @@ namespace Game.Interactables
 
 		public void OnHit()
 		{
-			health--;
-			if (health <= 0)
+			if (!dead)
 			{
-				Die();
-			}
-			else
-			{
+				health--;
 				HitEffect();
 			}
 		}
@@ -62,6 +61,7 @@ namespace Game.Interactables
 			emitter.Emitting = true;
 			animPlayer.SpeedScale = 1.0f;
 			animPlayer.Play("Chop");
+			dead = true;
 		}
 
 		private void OnAnimationFinished(StringName animName)
@@ -70,14 +70,37 @@ namespace Game.Interactables
 
 			if (animName == "Chop")
 			{
+				animPlayer.SpeedScale = delayScale;
 				animPlayer.Play("Delay");
 			}
-
-			if (animName == "Delay")
+			else if (animName == "Delay")
 			{
-				Parent.QueueFree();
+				foreach (Node3D socket in poofEffectSockets)
+				{
+					SpawnPoof(socket);
+				}
+				SpawnItem();
+				parent.QueueFree();
+			}
+			else if (health <= 0)
+			{
+				Die();
 			}
 		}
 
+		private void SpawnItem()
+		{
+			Node3D item = spawnedItem.Instantiate() as Node3D;
+			item.Position = parent.GlobalPosition + spawnOffset;
+			item.Rotate(new Vector3(GD.Randf(), GD.Randf(), GD.Randf()).Normalized(), (float)GD.RandRange(0.0f, Mathf.Pi * 2.0));
+			GameManager.Instance.TempSceneRoot.AddChild(item);
+		}
+
+		private void SpawnPoof(Node3D socket)
+		{
+			Node3D poofEffect = poofEffectScene.Instantiate() as Node3D;
+			poofEffect.Position = socket.GlobalPosition;
+			GameManager.Instance.TempSceneRoot.AddChild(poofEffect);
+		}
 	}
 }
