@@ -14,6 +14,10 @@ namespace Game.Managers
 		[Export]
 		public ColorRect ZoomShaderColorRect;
 
+		[ExportCategory("Debug Stuff")]
+		[Export]
+		public Label InventoryDebugLabel;
+
 		public static GameManager Instance;
 
 		public override void _Ready()
