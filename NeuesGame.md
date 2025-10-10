@@ -28,7 +28,7 @@ x Simple Inventarleiste oder 3x3 Grid
 TODO vorher:
 	
 	
-	- gameManager mit paar globals
+	x gameManager mit paar globals
 	- camera based movenent
 	- axe raycast fixen
 	- lighting fixen bzw aendern

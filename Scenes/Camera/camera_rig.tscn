@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm7odeqtwcook"]
+
+[ext_resource type="Script" uid="uid://fdgsx0mkjxur" path="res://Scripts/Camera/CameraRig.cs" id="1_a52ag"]
+[ext_resource type="Script" uid="uid://dnfhkmyidj2s8" path="res://Scripts/Camera/ZoomShaderController.cs" id="2_eowoe"]
+[ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/OutlineShaderMaterial.tres" id="3_hjmnx"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_r60an"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="CameraRig" type="Node3D"]
+script = ExtResource("1_a52ag")
+rotationSpeed = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 30, 50)
+projection = 1
+fov = 30.9
+size = 50.0
+script = ExtResource("2_eowoe")
+zoomSpeed = 10.0
+maxZoom = 0.5
+minZoom = 0.3
+
+[node name="POSTFX" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.8303528, -0.55723804, 0, 0.55723804, 0.8303528, -4.193416, 0.7713766, -28.380829)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_r60an")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("3_hjmnx")

@@ -45,15 +45,12 @@ namespace Game.Interactables
 			switch (rand)
 			{
 				case 0:
-					GD.Print("1");
 					animPlayer.Play("Shake");
 					break;
 				case 1:
-					GD.Print("2");
 					animPlayer.Play("Shake2");
 					break;
 				case 2:
-					GD.Print("3");
 					animPlayer.Play("Shake3");
 					break;
 			}

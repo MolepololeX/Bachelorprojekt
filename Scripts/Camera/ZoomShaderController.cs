@@ -26,7 +26,6 @@ namespace Game.Camera
 			playerNode = GameManager.Instance.Player;
 			rect = GameManager.Instance.ZoomShaderColorRect;
 			mat = rect.Material as ShaderMaterial;
-			GD.Print(mat);
 			zoomTarget = zoom;
 		}
 
@@ -40,11 +39,6 @@ namespace Game.Camera
 			mat.SetShaderParameter("zoom", zoom);
 			mat.SetShaderParameter("staticZoom", staticZoom);
 
-			if (delay > 1.0)
-			{
-				delay = 0.0f;
-				GD.Print(pos);
-			}
 			delay += (float)delta;
 		}
 

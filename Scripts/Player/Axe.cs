@@ -99,7 +99,6 @@ namespace Game.PlayerStuff
 		private async void HitStop()
 		{
 			await Task.Delay(TimeSpan.FromMilliseconds(500));
-			GD.Print(currentAnimPos);
 			if (!swingForward)
 			{
 				animPlayer.PlaySectionBackwards("Swing", 0.0, currentAnimPos);

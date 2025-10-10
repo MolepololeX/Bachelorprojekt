@@ -1,3 +1,4 @@
+using Game.Camera;
 using Game.Managers;
 using Godot;
 using System;
@@ -18,6 +19,7 @@ namespace Game.PlayerStuff
 		public AnimationTree AnimTree;
 
 		private Label InvDebugLabel;
+		private Node3D camRig;
 
 		[Export]
 		public float Speed { get; set; } = 14;
@@ -44,7 +46,7 @@ namespace Game.PlayerStuff
 		public override void _Ready()
 		{
 			InvDebugLabel = GameManager.Instance.InventoryDebugLabel;
-			GD.Print(Inventory.Length);
+			camRig = GameManager.Instance.CameraRig;
 		}
 
 
@@ -79,6 +81,8 @@ namespace Game.PlayerStuff
 			{
 				direction.Z -= Speed * (float)delta;
 			}
+
+			direction = direction.Rotated(Vector3.Up, camRig.Rotation.Y);
 
 			if (direction != Vector3.Zero)
 			{
