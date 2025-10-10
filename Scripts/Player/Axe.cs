@@ -50,9 +50,12 @@ public partial class Axe : Node3D
 
 		var result = spaceState.IntersectRay(query);
 
-		var resultPos = (Vector3)result["position"];
-		var lookAtPos = new Vector3(resultPos.X, Position.Y, resultPos.Z);
-		LookAt(lookAtPos);
+		if (result.ContainsKey("position"))
+		{
+			var resultPos = (Vector3)result["position"];
+			var lookAtPos = new Vector3(resultPos.X, Position.Y, resultPos.Z);
+			LookAt(lookAtPos);
+		}
 	}
 
 	public override void _Process(double delta)

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6yo20dt6m8a7"]
+
+[ext_resource type="Shader" uid="uid://dhw8gf6i6x37t" path="res://Assets/Shaders/PostFX/test_post_pixel.gdshader" id="1_qn3tx"]
+
+[resource]
+shader = ExtResource("1_qn3tx")
+shader_parameter/zoom = 1.0000000475
+shader_parameter/offsetX = 4.7499999933364734e-08
+shader_parameter/offsetY = 0.0
