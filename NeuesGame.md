@@ -23,3 +23,14 @@ x Simples Movement mit Jump
 - Kann dann Kombiniert werden im Kessel zu Quecksilber II, welches den Spieler bei Use killt
 - Item kann geused werden
 x Simple Inventarleiste oder 3x3 Grid
+
+
+TODO vorher:
+	
+	
+	- gameManager mit paar globals
+	- camera based movenent
+	- axe raycast fixen
+	- lighting fixen bzw aendern
+	- fishing minigame
+	- wasser shader mit cell noise simpel aber mit reflections

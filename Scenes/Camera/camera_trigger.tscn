@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfa700tq610ig"]
+
+[ext_resource type="Script" uid="uid://danlfeb3pj2km" path="res://Scripts/Camera/CameraZoneTrigger.cs" id="1_s6ft2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hb2rl"]
+size = Vector3(50, 50, 50)
+
+[node name="CameraTrigger" type="Area3D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_s6ft2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hb2rl")
