@@ -1,3 +1,4 @@
+using System.Transactions;
 using Godot;
 
 namespace Game.Managers
@@ -17,12 +18,16 @@ namespace Game.Managers
 
 		public static GameManager Instance;
 
-		public override void _Ready()
+		public GameManager() : base()
 		{
 			if (Instance == null)
 			{
 				Instance = this;
 			}
+		}
+
+		public override void _Ready()
+		{
 		}
 
 		public override void _Process(double delta)
