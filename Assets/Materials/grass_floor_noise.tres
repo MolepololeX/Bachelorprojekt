@@ -1,13 +1,14 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cdu6qq5rjpf61"]
 
-[ext_resource type="Shader" uid="uid://diq3o04rmmk6x" path="res://Assets/Shaders/Grass_Floor.gdshader" id="1_0xkus"]
+[ext_resource type="Shader" uid="uid://dnv5ywlkngrek" path="res://Assets/Shaders/GrassFloor.gdshader" id="1_0xkus"]
 [ext_resource type="Texture2D" uid="uid://dd0qlknpe4lbr" path="res://Assets/Textures/grass_noise.tres" id="2_vcoqn"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_0xkus")
-shader_parameter/color = Color(0.4136268, 0.60952973, 0.3772969, 1)
-shader_parameter/color2 = Color(0.22637177, 0.55280256, 0, 1)
+shader_parameter/color = Color(0.47142166, 0.70141697, 0.32212988, 1)
+shader_parameter/color2 = Color(0.4324174, 0.6817471, 0.24905106, 1)
+shader_parameter/threshold = 0.53999998792992
 shader_parameter/noise = ExtResource("2_vcoqn")
-shader_parameter/noiseScale = 50.0
+shader_parameter/noiseScale = 25.0
 shader_parameter/timeScale = 0.0

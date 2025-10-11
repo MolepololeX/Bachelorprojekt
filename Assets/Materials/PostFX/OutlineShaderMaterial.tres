@@ -3,10 +3,10 @@
 [ext_resource type="Shader" uid="uid://m15iht0oajf3" path="res://Assets/Shaders/PostFX/OutlinePost.gdshader" id="1_vaf8i"]
 
 [resource]
-render_priority = 0
+render_priority = 1
 shader = ExtResource("1_vaf8i")
 shader_parameter/depthThreshold = 0.05
-shader_parameter/normalThreshold = 0.950000045125
+shader_parameter/normalThreshold = 1.10000005225
 shader_parameter/outlineDarkness = 0.75
-shader_parameter/outlineLightness = 1.30000006175
-shader_parameter/thiccness = 1.0
+shader_parameter/outlineLightness = 1.1000005272499997
+shader_parameter/thiccness = 1.0000000475

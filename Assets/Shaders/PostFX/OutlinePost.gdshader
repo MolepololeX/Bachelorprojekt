@@ -1,15 +1,15 @@
 shader_type spatial;
 
-render_mode unshaded, fog_disabled;
+render_mode unshaded, fog_disabled, blend_mix;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 uniform sampler2D normal_texture : source_color, hint_normal_roughness_texture, filter_nearest;
 
-uniform float depthThreshold : hint_range(0, 1) = 0.05;
-uniform float normalThreshold : hint_range(0, 1) = 0.05;
-uniform float outlineDarkness : hint_range(0, 1) = 0.75;
-uniform float outlineLightness : hint_range(0, 10) = 2.0;
+uniform float depthThreshold : hint_range(0, 10) = 0.05;
+uniform float normalThreshold : hint_range(0, 10) = 0.05;
+uniform float outlineDarkness : hint_range(-1, 1) = 0.75;
+uniform float outlineLightness : hint_range(-10, 10) = 2.0;
 uniform float thiccness : hint_range(0, 10) = 1.0;
 
 void vertex() {
@@ -80,9 +80,13 @@ void fragment() {
 
 	if(depthEdge > 0.0){
 		ALBEDO = mix(original, outline, depthEdge);
+		ALPHA = depthEdge;
 	} else{
 		ALBEDO = mix(original, original * outlineLightness, normalEdge);
+		ALPHA = normalEdge;
 	}
+	
+	//ALPHA = 0.9;
 
 	//ALBEDO = texture(normal_texture, SCREEN_UV).rgb * 2.0 - 1.0;
 }

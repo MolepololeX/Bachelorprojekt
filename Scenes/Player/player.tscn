@@ -48,7 +48,6 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xpcdj"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xpcdj"]
-graph_offset = Vector2(-959.44885, 105.58685)
 nodes/output/position = Vector2(520, 260)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_a2ql0")
 nodes/Animation/position = Vector2(-280, 120)
@@ -90,27 +89,27 @@ surface_material_override/0 = SubResource("StandardMaterial3D_xpcdj")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36945292, 0)
-bones/4/rotation = Quaternion(-0.5503923, -0.058125228, -0.6446012, 0.5274268)
-bones/5/rotation = Quaternion(2.2623695e-08, -5.910914e-08, -0.50394416, 0.8637363)
-bones/7/rotation = Quaternion(-0.31936657, -0.3372, 0.14446501, 0.8737454)
-bones/8/rotation = Quaternion(0.0013956105, 0.0013956019, -0.70196444, 0.7122093)
-bones/9/rotation = Quaternion(-0.60939753, 0.07858695, 0.6193442, 0.48874506)
-bones/10/rotation = Quaternion(2.9636347e-08, 5.7067474e-08, 0.5267835, 0.84999955)
-bones/12/rotation = Quaternion(-0.31842607, 0.31269345, -0.2265391, 0.86574113)
-bones/13/rotation = Quaternion(0.0042162244, 0.004966092, 0.70270836, 0.7114482)
-bones/15/rotation = Quaternion(0.98961675, 0.08371717, 0.0787104, 0.08634127)
-bones/16/rotation = Quaternion(0.39312834, 6.1553585e-08, -2.6513106e-07, 0.91948366)
-bones/17/rotation = Quaternion(-0.62051374, -0.20094362, 0.07639838, 0.75415367)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.920156, -0.39155215, 5.9089115e-07)
-bones/19/rotation = Quaternion(0.9914805, -0.033333488, 0.029818153, 0.12233699)
-bones/20/rotation = Quaternion(0.43744227, -5.7953656e-08, 3.044703e-07, 0.8992465)
-bones/21/rotation = Quaternion(-0.6465825, 0.11250295, -0.023202663, 0.75414574)
-bones/38/position = Vector3(0.52084064, 0.7695781, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.76957804, 0.059736915)
+bones/1/position = Vector3(0, 0.38880587, 0)
+bones/4/rotation = Quaternion(-0.55730695, -0.062318034, -0.6506143, 0.51208055)
+bones/5/rotation = Quaternion(1.9015582e-08, -5.3581612e-08, -0.48365086, 0.87526107)
+bones/7/rotation = Quaternion(-0.31899878, -0.32568765, 0.13985491, 0.8789813)
+bones/8/rotation = Quaternion(0.0009127887, 0.0009127638, -0.703748, 0.7104485)
+bones/9/rotation = Quaternion(-0.616148, 0.08220157, 0.623912, 0.47364372)
+bones/10/rotation = Quaternion(1.9930921e-08, 6.012479e-08, 0.5073752, 0.8617253)
+bones/12/rotation = Quaternion(-0.3172955, 0.30021673, -0.22144662, 0.8718686)
+bones/13/rotation = Quaternion(0.0017414214, 0.0020511355, 0.7052971, 0.70890677)
+bones/15/rotation = Quaternion(0.99337643, 0.08335699, 0.07461058, 0.026235137)
+bones/16/rotation = Quaternion(0.23540847, 6.439735e-08, -1.6350607e-07, 0.9718965)
+bones/17/rotation = Quaternion(-0.53825283, -0.20826577, 0.04974108, 0.8151288)
+bones/18/rotation = Quaternion(7.048628e-05, 0.92022073, -0.39139974, -1.590027e-05)
+bones/19/rotation = Quaternion(0.9965611, -0.030082036, 0.03122978, 0.070610136)
+bones/20/rotation = Quaternion(0.30375046, -6.374037e-08, 2.1114143e-07, 0.95275164)
+bones/21/rotation = Quaternion(-0.5748545, 0.114301585, -0.011114265, 0.81015676)
+bones/38/position = Vector3(0.52084064, 0.7806156, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.78061557, 0.059736915)
 
 [node name="head" parent="Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.205215, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2245679, 1.5739471e-15)
 
 [node name="AnimationPlayer" parent="Pivot/Skeleton_Mage" index="1"]
 autoplay = ""

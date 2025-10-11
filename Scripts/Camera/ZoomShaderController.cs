@@ -15,6 +15,10 @@ namespace Game.Camera
 
 		[Export] private bool useSmoothCam = false;
 		[Export] private float smoothing = 1.0f;
+		[Export(PropertyHint.Range, "0,1,")] private float bgCutX0 = 1.0f;
+		[Export(PropertyHint.Range, "0,1,")] private float bgCutX1 = 1.0f;
+		[Export(PropertyHint.Range, "0,1,")] private float bgCutY0 = 1.0f;
+		[Export(PropertyHint.Range, "0,1,")] private float bgCutY1 = 1.0f;
 
 
 		private Node3D playerNode;
@@ -54,6 +58,11 @@ namespace Game.Camera
 
 			mat.SetShaderParameter("zoom", zoom);
 			mat.SetShaderParameter("staticZoom", staticZoom);
+
+			mat.SetShaderParameter("bgCutX0", bgCutX0);
+			mat.SetShaderParameter("bgCutX1", bgCutX1);
+			mat.SetShaderParameter("bgCutY0", bgCutY0);
+			mat.SetShaderParameter("bgCutY1", bgCutY1);
 
 			delay += (float)delta;
 		}

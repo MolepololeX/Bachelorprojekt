@@ -6,8 +6,8 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_ps2wr")
-shader_parameter/color = Color(0.80607563, 0.9420342, 0.71064293, 1)
-shader_parameter/color2 = Color(0.22637177, 0.55280256, 0, 1)
+shader_parameter/color = Color(0.8667674, 0.96571916, 0.8289751, 1)
+shader_parameter/color2 = Color(0.47050357, 0.7102343, 0.25224388, 1)
 shader_parameter/noise = ExtResource("2_1kdj3")
 shader_parameter/noiseScale = 50.0
 shader_parameter/timeScale = 3.0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg6uur18cv4hs"]
+[gd_scene load_steps=10 format=3 uid="uid://bg6uur18cv4hs"]
 
 [ext_resource type="AudioStream" uid="uid://cs0dmypjx4evv" path="res://Assets/Sounds/Bubble heavy 1.wav" id="1_ebkes"]
+[ext_resource type="Script" uid="uid://dksyncfeem3h4" path="res://Scripts/Audio/TestAudio.cs" id="2_kammf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q8qr0"]
 
@@ -111,6 +112,12 @@ shadow_enabled = true
 omni_range = 30.271
 omni_attenuation = 1.546
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="TestAudio" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("audioPlayer")]
 stream = ExtResource("1_ebkes")
-autoplay = true
+volume_db = -35.0
+script = ExtResource("2_kammf")
+audioPlayer = NodePath(".")
+DelayMax = 0.2
+DelayMin = 0.0
+PitchMax = 0.5
+PitchMin = 2.0

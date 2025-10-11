@@ -26,6 +26,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="AlchemyGame"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
 [input]
 
 move_left={
@@ -91,8 +95,9 @@ camera_zoom_in={
 
 [rendering]
 
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+lights_and_shadows/directional_shadow/size=8192
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=4
+textures/default_filters/anisotropic_filtering_level=4
 environment/ssao/quality=3
 environment/ssao/half_size=false
 environment/ssao/blur_passes=5

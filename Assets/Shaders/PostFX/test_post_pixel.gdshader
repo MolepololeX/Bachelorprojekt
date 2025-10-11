@@ -6,6 +6,11 @@ uniform bool staticZoom = true;
 uniform float offsetX : hint_range(-1.0, 1.0) = 0.0;
 uniform float offsetY : hint_range(-1.0, 1.0) = 0.0;
 
+uniform float bgCutX0 : hint_range(0.0, 1.0) = 1.0;
+uniform float bgCutX1 : hint_range(0.0, 1.0) = 1.0;
+uniform float bgCutY0 : hint_range(0.0, 1.0) = 1.0;
+uniform float bgCutY1 : hint_range(0.0, 1.0) = 1.0;
+
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
@@ -33,7 +38,7 @@ void fragment() {
 
 	
 	
-	if(uv.x >= 1.0 || uv.y >= 1.0 || uv.x <=-1.0 || uv.y <=-1.0){
+	if(uv.x >= bgCutX0 || uv.y >= bgCutY0 || uv.x <=-bgCutX1 || uv.y <=-bgCutY1){
 		COLOR = vec4(vec3(0.0), 1.0);
 	}
 	else{
