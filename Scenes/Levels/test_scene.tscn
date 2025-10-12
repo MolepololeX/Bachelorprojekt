@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=74 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/grass_floor_noise.tres" id="1_5yayu"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="1_877y0"]
@@ -34,7 +34,6 @@
 [ext_resource type="Script" uid="uid://bh6ov3jhx5i12" path="res://Scripts/Testing/Testcube.cs" id="29_va1if"]
 [ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/fps_counter.tscn" id="30_5yayu"]
 [ext_resource type="ArrayMesh" uid="uid://uhie6eft7t8e" path="res://Assets/Meshes/grass_mesh_2.res" id="30_r60an"]
-[ext_resource type="Shader" uid="uid://c3m01vlocifwe" path="res://Assets/Materials/new_shader.gdshader" id="32_hb2rl"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/choppable_tree.tscn" id="33_mu1jd"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/Post_Outlines.gd" id="34_mu1jd"]
 [ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="35_hpgqd"]
@@ -174,26 +173,6 @@ size = Vector2(60, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qhxvw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2m5lv"]
-render_priority = 0
-shader = ExtResource("32_hb2rl")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("29_mu1jd")
-shader_parameter/alpha_scissor_threshold = 0.5
-shader_parameter/albedo_texture_size = Vector2i(64, 32)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-
-[sub_resource type="QuadMesh" id="QuadMesh_877y0"]
-material = SubResource("ShaderMaterial_2m5lv")
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va1if"]
 
 [sub_resource type="Sky" id="Sky_hpgqd"]
@@ -237,27 +216,14 @@ resource_name = ""
 enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("34_mu1jd")
-metadata/_custom_type_script = "uid://dj2paefo16n4y"
-
-[sub_resource type="Compositor" id="Compositor_qhxvw"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_va1if")])
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_877y0"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
 needs_normal_roughness = true
 script = ExtResource("34_mu1jd")
 enable_draw = true
 live_reload = true
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Compositor" id="Compositor_jxkj0"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_877y0")])
+[sub_resource type="Compositor" id="Compositor_qhxvw"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_va1if")])
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hb2rl"]
 viewport_path = NodePath("SubViewport")
@@ -283,27 +249,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3910333, 0)
-bones/4/rotation = Quaternion(-0.559028, -0.06139823, -0.6463532, 0.5156989)
-bones/5/rotation = Quaternion(2.01472e-08, -4.0820044e-08, -0.49073875, 0.8713068)
-bones/7/rotation = Quaternion(-0.3203151, -0.32536736, 0.14363834, 0.87801045)
-bones/8/rotation = Quaternion(0.0003355452, 0.00033551344, -0.70587415, 0.7083371)
-bones/9/rotation = Quaternion(-0.61754435, 0.081254974, 0.6201207, 0.4769559)
-bones/10/rotation = Quaternion(2.0632585e-08, 5.5519507e-08, 0.5141375, 0.8577078)
-bones/12/rotation = Quaternion(-0.31856748, 0.3003447, -0.22525238, 0.8703845)
-bones/13/rotation = Quaternion(0.0005992158, 0.00070578547, 0.7064853, 0.7077272)
-bones/15/rotation = Quaternion(0.9936281, 0.083574876, 0.07388304, 0.01611579)
-bones/16/rotation = Quaternion(0.20908937, 6.470087e-08, -1.3656039e-07, 0.97789663)
-bones/17/rotation = Quaternion(-0.52457464, -0.20910294, 0.04569086, 0.8240205)
-bones/18/rotation = Quaternion(8.936927e-05, 0.92023766, -0.3913599, -2.0171487e-05)
-bones/19/rotation = Quaternion(0.9970866, -0.0296593, 0.03143116, 0.062855)
-bones/20/rotation = Quaternion(0.2837936, -6.408765e-08, 1.9624221e-07, 0.9588855)
-bones/21/rotation = Quaternion(-0.5642392, 0.11444993, -0.009438431, 0.8175857)
-bones/38/position = Vector3(0.52084064, 0.7856669, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.78566676, 0.05973692)
+bones/1/position = Vector3(0, 0.38926908, 0)
+bones/4/rotation = Quaternion(-0.5576516, -0.062142394, -0.6497952, 0.5127663)
+bones/5/rotation = Quaternion(1.9349942e-08, -4.8871087e-08, -0.48500922, 0.8745091)
+bones/7/rotation = Quaternion(-0.31924862, -0.32559645, 0.14058363, 0.878808)
+bones/8/rotation = Quaternion(0.0008039092, 0.0008038814, -0.7041496, 0.7100508)
+bones/9/rotation = Quaternion(-0.6164296, 0.08201983, 0.6231818, 0.47426954)
+bones/10/rotation = Quaternion(2.0212054e-08, 5.6301435e-08, 0.50867057, 0.8609613)
+bones/12/rotation = Quaternion(-0.31753838, 0.30022395, -0.22218241, 0.87159055)
+bones/13/rotation = Quaternion(0.001515256, 0.0017847462, 0.7055327, 0.70867354)
+bones/15/rotation = Quaternion(0.9934352, 0.08339595, 0.074466534, 0.024217712)
+bones/16/rotation = Quaternion(0.23015922, 6.5339e-08, -1.5853023e-07, 0.97315305)
+bones/17/rotation = Quaternion(-0.5355259, -0.20843978, 0.04892647, 0.8169278)
+bones/18/rotation = Quaternion(7.387033e-05, 0.9202238, -0.3913926, -1.6665721e-05)
+bones/19/rotation = Quaternion(0.99667263, -0.029995358, 0.031270783, 0.06903756)
+bones/20/rotation = Quaternion(0.29970387, -6.3519764e-08, 2.0828317e-07, 0.95403236)
+bones/21/rotation = Quaternion(-0.5727015, 0.11433376, -0.01077238, 0.81168026)
+bones/38/position = Vector3(0.52084064, 0.7816152, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.78161514, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2267953, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2250311, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -753,10 +719,6 @@ mesh = SubResource("BoxMesh_qhxvw")
 script = ExtResource("29_va1if")
 maxSteps = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TempRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.224345, 4.6887817, 0)
-mesh = SubResource("QuadMesh_877y0")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_va1if")
 compositor = SubResource("Compositor_qhxvw")
@@ -790,7 +752,6 @@ _lerpSpeed = 5.0
 
 [node name="Camera3D" parent="SubViewport/CameraRig" index="0" node_paths=PackedStringArray("rect")]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 8.957957, 14.534874)
-compositor = SubResource("Compositor_jxkj0")
 size = 10.0
 near = 0.001
 script = ExtResource("35_hpgqd")

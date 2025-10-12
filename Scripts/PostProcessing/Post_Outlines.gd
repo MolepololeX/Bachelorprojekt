@@ -22,7 +22,6 @@ var shader_is_valid = false
 var frame_counter : int = 0
 
 func _init():
-	effect_callback_type = EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
 	rd = RenderingServer.get_rendering_device()
 	RenderingServer.call_on_render_thread(_init_shader);
 	
@@ -82,7 +81,8 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	if not enable_draw:
 		return
 	
-	if rd and p_effect_callback_type == EFFECT_CALLBACK_TYPE_POST_TRANSPARENT and shader_is_valid:
+	#if rd and p_effect_callback_type == EFFECT_CALLBACK_TYPE_POST_TRANSPARENT and shader_is_valid:
+	if rd  and shader_is_valid:
 		# Get our render scene buffers object, this gives us access to our render buffers.
 		# Note that implementation differs per renderer hence the need for the cast.
 		var render_scene_buffers: RenderSceneBuffersRD = p_render_data.get_render_scene_buffers()

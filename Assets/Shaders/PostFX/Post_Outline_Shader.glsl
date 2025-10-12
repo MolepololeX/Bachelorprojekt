@@ -42,22 +42,80 @@ float sampleLinearDepth(vec2 uv){
 
 
 void main() {
+	//TODO: uniforms
+	vec2 VIEWPORT_SIZE = vec2(320, 180);
+	float thiccness = 1.0;
+	vec3 normalEdgeBias = vec3(1,1,1);
+	float normalThreshold = 0.9;
+	float depthThreshold = 0.5;
+	float outlineDarkness = 0.5;
+	float outlineLightness = 1.1;
+	//
+
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
-	vec2 size = ivec2(params.raster_size);
+	vec2 size = vec2(params.raster_size);
 	vec2 UV = uv_pixel / size;
 
 	if (uv_pixel.x >= size.x || uv_pixel.y >= size.y) {
 		return;
 	}
 
-	vec4 color = imageLoad(color_image, uv_pixel);
-
 	// float mask = texture(normal_texture, UV).a;
 	// mask = ceil(mask);
 	// vec4 color = texture(normal_texture, uv);
 	// vec4 color = vec4(d);
     //color *= 0.1;
-	color = vec4(getNormal(UV).xyz, 1.0);
+	// color = vec4(getNormal(UV).xyz, 1.0);
 
-	imageStore(color_image, uv_pixel, color);
+	vec2 texelSize = 1.0 / size.xy;
+	vec3 normal = getNormal(UV).xyz * 2.0 - 1.0;
+	float depth = sampleLinearDepth(UV);
+	vec2[4] depth_uv;
+	vec2 offset = vec2(0.001);
+
+	depth_uv[0] = UV + vec2(1.0, 0.0) * texelSize * thiccness  - offset;
+	depth_uv[1] = UV + vec2(-1.0, 0.0) * texelSize * thiccness - offset;
+	depth_uv[2] = UV + vec2(0.0, -1.0) * texelSize * thiccness - offset;
+	depth_uv[3] = UV + vec2(0.0, 1.0) * texelSize * thiccness  - offset;
+
+	float depthDifference = 0.0;
+	vec2 closestDepthUV = UV;
+	float normalSum = 0.0;
+
+	for(int i = 0; i < 4; i++){
+		float testDepth = sampleLinearDepth(depth_uv[i]);
+		depthDifference += depth - testDepth;
+
+		if(sampleLinearDepth(closestDepthUV) > testDepth){
+			closestDepthUV = depth_uv[i];
+		}
+
+		vec3 n = getNormal(depth_uv[i]).xyz * 2.0 - 1.0;
+		vec3 normalDiff = normal - n;
+
+		float normalBiasDiff = dot(normalDiff, normalEdgeBias);
+		float normalIndicator = smoothstep(-0.01, 0.01, normalBiasDiff);
+
+		normalSum += dot(normalDiff, normalDiff) * normalIndicator;
+	}
+
+	float indicator = sqrt(normalSum);
+	float normalEdge = step(normalThreshold, indicator);
+
+	float depthEdge = clamp(step(depthThreshold, depthDifference), 0.0, 1.0);
+
+	vec4 original = imageLoad(color_image, uv_pixel);
+	vec4 outline = vec4(imageLoad(color_image, uv_pixel).rgb * outlineDarkness, 1.0);
+
+	if(depthEdge > 0.0){
+		original = mix(original, outline, depthEdge);
+	} else{
+		original = mix(original, original * outlineLightness, normalEdge);
+	}
+
+	//original *= vec4(getNormal(UV).rgb * 2.0 - 1.0, 1.0);
+	original = imageLoad(color_image, uv_pixel);
+	original = vec4(sampleLinearDepth(UV) / 100.0, 0.0, 0.0, 0.0);
+
+	imageStore(color_image, uv_pixel, original);
 }

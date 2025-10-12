@@ -28,12 +28,12 @@ void vertex() {
 			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
 			vec4(0.0, 0.0, 0.0, 1.0));
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
-	
+
 	vertexWorldPos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	instancePos = MODEL_MATRIX[3].xyz;
-	
+
 	VERTEX = VERTEX + vec3((texture(noise, (instancePos.xz + (TIME * timeScale)) / noiseScale).r - (0.5 - directionBias) ) * maxAngle, 0.0, 0.0) * (1.0 - UV.y);
-	
+
 	////ChatGPT hat gekocht
 	//// Build rotation matrix (Rodrigues' rotation formula)
 	//vec3 axis = normalize(vec3(1.0, 0.0, 0.0));
