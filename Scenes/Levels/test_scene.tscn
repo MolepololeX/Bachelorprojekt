@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=79 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/grass_floor_noise.tres" id="1_5yayu"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="1_877y0"]
@@ -33,10 +33,10 @@
 [ext_resource type="Texture2D" uid="uid://dih5vc4yhh08k" path="res://Assets/Textures/GrassBillboard.png" id="29_mu1jd"]
 [ext_resource type="Script" uid="uid://bh6ov3jhx5i12" path="res://Scripts/Testing/Testcube.cs" id="29_va1if"]
 [ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/fps_counter.tscn" id="30_5yayu"]
-[ext_resource type="ArrayMesh" uid="uid://5fw0hrngf0cg" path="res://Assets/Meshes/grass_mesh_2.res" id="30_r60an"]
+[ext_resource type="ArrayMesh" uid="uid://uhie6eft7t8e" path="res://Assets/Meshes/grass_mesh_2.res" id="30_r60an"]
 [ext_resource type="Shader" uid="uid://c3m01vlocifwe" path="res://Assets/Materials/new_shader.gdshader" id="32_hb2rl"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/choppable_tree.tscn" id="33_mu1jd"]
-[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/PostProcessShader.gd" id="34_mu1jd"]
+[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/Post_Outlines.gd" id="34_mu1jd"]
 [ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="35_hpgqd"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/Water.gdshader" id="35_va1if"]
 [ext_resource type="PackedScene" uid="uid://bfa700tq610ig" path="res://Scenes/Camera/camera_trigger.tscn" id="36_2m5lv"]
@@ -239,10 +239,24 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("34_mu1jd")
+shader_path = null
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Compositor" id="Compositor_qhxvw"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_va1if")])
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_877y0"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("34_mu1jd")
+metadata/_custom_type_script = "uid://dj2paefo16n4y"
+
+[sub_resource type="Compositor" id="Compositor_jxkj0"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_877y0")])
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hb2rl"]
 viewport_path = NodePath("SubViewport")
@@ -268,27 +282,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3708133, 0)
-bones/4/rotation = Quaternion(-0.55051166, -0.05894868, -0.64713955, 0.524092)
-bones/5/rotation = Quaternion(3.524543e-08, -3.853211e-08, -0.49868575, 0.86678296)
-bones/7/rotation = Quaternion(-0.31873155, -0.33593425, 0.1424052, 0.8748024)
-bones/8/rotation = Quaternion(0.0014721685, 0.0014721585, -0.7016812, 0.712488)
-bones/9/rotation = Quaternion(-0.60963356, 0.07936518, 0.6215295, 0.48554012)
-bones/10/rotation = Quaternion(2.255909e-08, 6.5441576e-08, 0.5217125, 0.85312134)
-bones/12/rotation = Quaternion(-0.3177333, 0.31113788, -0.22439477, 0.8671135)
-bones/13/rotation = Quaternion(0.004416911, 0.0052024717, 0.7024976, 0.7116535)
-bones/15/rotation = Quaternion(0.98992586, 0.083607204, 0.07849236, 0.083040036)
-bones/16/rotation = Quaternion(0.38438994, 5.8831283e-08, -2.631344e-07, 0.9231709)
-bones/17/rotation = Quaternion(-0.61592245, -0.20147493, 0.074794985, 0.7579268)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.92015594, -0.39155215, 5.9089115e-07)
-bones/19/rotation = Quaternion(0.99185216, -0.03311923, 0.029904442, 0.119324245)
-bones/20/rotation = Quaternion(0.4296171, -5.964912e-08, 2.9925678e-07, 0.9030112)
-bones/21/rotation = Quaternion(-0.6423375, 0.112653345, -0.02244675, 0.75776505)
-bones/38/position = Vector3(0.52084064, 0.7687303, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7687302, 0.059736915)
+bones/1/position = Vector3(0, 0.37591386, 0)
+bones/4/rotation = Quaternion(-0.5513441, -0.061611995, -0.65428215, 0.5139442)
+bones/5/rotation = Quaternion(3.183222e-08, -6.138374e-08, -0.48276407, 0.8757505)
+bones/7/rotation = Quaternion(-0.3171698, -0.33163425, 0.13641363, 0.87795985)
+bones/8/rotation = Quaternion(0.0016208872, 0.0016208844, -0.7011306, 0.71302927)
+bones/9/rotation = Quaternion(-0.6107576, 0.081818305, 0.627577, 0.47584453)
+bones/10/rotation = Quaternion(1.1791815e-09, 4.277007e-08, 0.5065295, 0.86222273)
+bones/12/rotation = Quaternion(-0.31589076, 0.30606613, -0.2181844, 0.8711672)
+bones/13/rotation = Quaternion(0.0043766974, 0.0051551056, 0.7025399, 0.71161234)
+bones/15/rotation = Quaternion(0.9910455, 0.083284035, 0.077610455, 0.069781095)
+bones/16/rotation = Quaternion(0.34938934, 6.485969e-08, -2.5097262e-07, 0.9369776)
+bones/17/rotation = Quaternion(-0.5975865, -0.20343679, 0.06853566, 0.7725327)
+bones/18/rotation = Quaternion(-5.421856e-07, 0.92015743, -0.3915487, 2.0083208e-07)
+bones/19/rotation = Quaternion(0.9932343, -0.03230281, 0.030241288, 0.10736752)
+bones/20/rotation = Quaternion(0.3986148, -6.0226704e-08, 2.7851607e-07, 0.91711855)
+bones/21/rotation = Quaternion(-0.6255917, 0.11318821, -0.019516772, 0.77164936)
+bones/38/position = Vector3(0.52084064, 0.767826, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7678259, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2065753, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2116759, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -775,6 +789,7 @@ _lerpSpeed = 5.0
 
 [node name="Camera3D" parent="SubViewport/CameraRig" index="0" node_paths=PackedStringArray("rect")]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 8.957957, 14.534874)
+compositor = SubResource("Compositor_jxkj0")
 size = 10.0
 near = 0.001
 script = ExtResource("35_hpgqd")

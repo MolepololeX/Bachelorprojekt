@@ -41,3 +41,5 @@ TODO vorher:
 	- kleine zoom ui die mir den aktuellen zoom anzeigt und dann wegfaded
 	- actually mechanics implementieren
 	- wind sound effekt mit grass wind kombinieeren -> 1 sfx der random spielt -> dann per korve den wind machen und im shader setzten
+    - movement fixen indem alles sich nur in pixeln bewegen kann
+    - nochmal nachschauen wie ich komplett harte schatten bekomm

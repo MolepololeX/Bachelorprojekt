@@ -2,56 +2,22 @@
 extends CompositorEffect
 class_name PostProcessShader
 
-const template_shader: String = """
-#version 450
+@export
+var shader_path : String = "res://Assets/Shaders/PostFX/Post_Outline_Shader.glsl"
 
-// Invocations in the (x, y, z) dimension
-layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
-
-layout(rgba16f, set = 0, binding = 0) uniform image2D color_image;
-
-// Our push constant
-layout(push_constant, std430) uniform Params {
-    vec2 raster_size;
-    vec2 reserved;
-} params;
-
-// The code we want to execute in each invocation
-void main() {
-    ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
-    ivec2 size = ivec2(params.raster_size);
-
-    if (uv.x >= size.x || uv.y >= size.y) {
-        return;
-    }
-
-    vec4 color = imageLoad(color_image, uv);
-
-    #COMPUTE_CODE
-
-    imageStore(color_image, uv, color);
-}
-"""
-
-@export_multiline var shader_code: String = "":
-	set(value):
-		mutex.lock()
-		shader_code = value
-		shader_is_dirty = true
-		mutex.unlock()
+@export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
 
 var rd: RenderingDevice
 var shader: RID
 var pipeline: RID
 
-var mutex: Mutex = Mutex.new()
-var shader_is_dirty: bool = true
+var shader_is_valid = false;
 
-# Called when this resource is constructed.
 func _init():
 	effect_callback_type = EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
 	rd = RenderingServer.get_rendering_device()
-	
+	RenderingServer.call_on_render_thread(_init_shader);
+
 # System notifications, we want to react on the notification that
 # alerts us we are about to be destroyed.
 func _notification(what):
@@ -60,54 +26,45 @@ func _notification(what):
 			# Freeing our shader will also free any dependents such as the pipeline!
 			rd.free_rid(shader)
 
-# Check if our shader has changed and needs to be recompiled.
-func _check_shader() -> bool:
+func _reinit_shader() -> void:
+	RenderingServer.call_on_render_thread(_init_shader);
+
+# load and compile the shader
+func _init_shader() -> void:
+	
 	if not rd:
-		return false
-
-	var new_shader_code: String = ""
-
-	# Check if our shader is dirty.
-	mutex.lock()
-	if shader_is_dirty:
-		new_shader_code = shader_code
-		shader_is_dirty = false
-	mutex.unlock()
-
-	# We don't have a (new) shader?
-	if new_shader_code.is_empty():
-		return pipeline.is_valid()
-
-	# Apply template.
-	new_shader_code = template_shader.replace("#COMPUTE_CODE", new_shader_code);
-
-	# Out with the old.
-	if shader.is_valid():
-		rd.free_rid(shader)
-		shader = RID()
-		pipeline = RID()
-
-	# In with the new.
+		return
+	
+	# TODO: Highly illegal, fix later
+	#var shader_file := ResourceLoader.load(shader_path, "" , ResourceLoader.CACHE_MODE_REPLACE)
+	var file = FileAccess.open(shader_path, FileAccess.READ)
+	if not file:
+		return
+	var c = file.get_as_text();
+	
 	var shader_source: RDShaderSource = RDShaderSource.new()
 	shader_source.language = RenderingDevice.SHADER_LANGUAGE_GLSL
-	shader_source.source_compute = new_shader_code
+	shader_source.source_compute = c
 	var shader_spirv: RDShaderSPIRV = rd.shader_compile_spirv_from_source(shader_source)
+	
+	#var shader_spirv: RDShaderSPIRV = file.get_spirv()
+	file.close()
 
 	if shader_spirv.compile_error_compute != "":
 		push_error(shader_spirv.compile_error_compute)
-		push_error("In: " + new_shader_code)
-		return false
+		return
 
 	shader = rd.shader_create_from_spirv(shader_spirv)
 	if not shader.is_valid():
-		return false
+		return
 
 	pipeline = rd.compute_pipeline_create(shader)
-	return pipeline.is_valid()
+	shader_is_valid = true
+	
 	
 	# Called by the rendering thread every frame.
 func _render_callback(p_effect_callback_type, p_render_data):
-	if rd and p_effect_callback_type == EFFECT_CALLBACK_TYPE_POST_TRANSPARENT and _check_shader():
+	if rd and p_effect_callback_type == EFFECT_CALLBACK_TYPE_POST_TRANSPARENT and shader_is_valid:
 		# Get our render scene buffers object, this gives us access to our render buffers.
 		# Note that implementation differs per renderer hence the need for the cast.
 		var render_scene_buffers: RenderSceneBuffersRD = p_render_data.get_render_scene_buffers()
@@ -150,3 +107,5 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				rd.compute_list_set_push_constant(compute_list, push_constant.to_byte_array(), push_constant.size() * 4)
 				rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 				rd.compute_list_end()
+	
+	_reinit_shader();
