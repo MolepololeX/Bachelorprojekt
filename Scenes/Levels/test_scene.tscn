@@ -239,7 +239,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("34_mu1jd")
-shader_path = null
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Compositor" id="Compositor_qhxvw"]
@@ -251,8 +250,10 @@ resource_name = ""
 enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
-needs_normal_roughness = false
+needs_normal_roughness = true
 script = ExtResource("34_mu1jd")
+enable_draw = true
+live_reload = true
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Compositor" id="Compositor_jxkj0"]
@@ -282,27 +283,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37591386, 0)
-bones/4/rotation = Quaternion(-0.5513441, -0.061611995, -0.65428215, 0.5139442)
-bones/5/rotation = Quaternion(3.183222e-08, -6.138374e-08, -0.48276407, 0.8757505)
-bones/7/rotation = Quaternion(-0.3171698, -0.33163425, 0.13641363, 0.87795985)
-bones/8/rotation = Quaternion(0.0016208872, 0.0016208844, -0.7011306, 0.71302927)
-bones/9/rotation = Quaternion(-0.6107576, 0.081818305, 0.627577, 0.47584453)
-bones/10/rotation = Quaternion(1.1791815e-09, 4.277007e-08, 0.5065295, 0.86222273)
-bones/12/rotation = Quaternion(-0.31589076, 0.30606613, -0.2181844, 0.8711672)
-bones/13/rotation = Quaternion(0.0043766974, 0.0051551056, 0.7025399, 0.71161234)
-bones/15/rotation = Quaternion(0.9910455, 0.083284035, 0.077610455, 0.069781095)
-bones/16/rotation = Quaternion(0.34938934, 6.485969e-08, -2.5097262e-07, 0.9369776)
-bones/17/rotation = Quaternion(-0.5975865, -0.20343679, 0.06853566, 0.7725327)
-bones/18/rotation = Quaternion(-5.421856e-07, 0.92015743, -0.3915487, 2.0083208e-07)
-bones/19/rotation = Quaternion(0.9932343, -0.03230281, 0.030241288, 0.10736752)
-bones/20/rotation = Quaternion(0.3986148, -6.0226704e-08, 2.7851607e-07, 0.91711855)
-bones/21/rotation = Quaternion(-0.6255917, 0.11318821, -0.019516772, 0.77164936)
-bones/38/position = Vector3(0.52084064, 0.767826, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7678259, 0.059736915)
+bones/1/position = Vector3(0, 0.3910333, 0)
+bones/4/rotation = Quaternion(-0.559028, -0.06139823, -0.6463532, 0.5156989)
+bones/5/rotation = Quaternion(2.01472e-08, -4.0820044e-08, -0.49073875, 0.8713068)
+bones/7/rotation = Quaternion(-0.3203151, -0.32536736, 0.14363834, 0.87801045)
+bones/8/rotation = Quaternion(0.0003355452, 0.00033551344, -0.70587415, 0.7083371)
+bones/9/rotation = Quaternion(-0.61754435, 0.081254974, 0.6201207, 0.4769559)
+bones/10/rotation = Quaternion(2.0632585e-08, 5.5519507e-08, 0.5141375, 0.8577078)
+bones/12/rotation = Quaternion(-0.31856748, 0.3003447, -0.22525238, 0.8703845)
+bones/13/rotation = Quaternion(0.0005992158, 0.00070578547, 0.7064853, 0.7077272)
+bones/15/rotation = Quaternion(0.9936281, 0.083574876, 0.07388304, 0.01611579)
+bones/16/rotation = Quaternion(0.20908937, 6.470087e-08, -1.3656039e-07, 0.97789663)
+bones/17/rotation = Quaternion(-0.52457464, -0.20910294, 0.04569086, 0.8240205)
+bones/18/rotation = Quaternion(8.936927e-05, 0.92023766, -0.3913599, -2.0171487e-05)
+bones/19/rotation = Quaternion(0.9970866, -0.0296593, 0.03143116, 0.062855)
+bones/20/rotation = Quaternion(0.2837936, -6.408765e-08, 1.9624221e-07, 0.9588855)
+bones/21/rotation = Quaternion(-0.5642392, 0.11444993, -0.009438431, 0.8175857)
+bones/38/position = Vector3(0.52084064, 0.7856669, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.78566676, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2116759, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2267953, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
