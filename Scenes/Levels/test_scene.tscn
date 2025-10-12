@@ -27,7 +27,7 @@
 [ext_resource type="ArrayMesh" uid="uid://8cxd13bi0qyo" path="res://Assets/Meshes/CustomNormalQuadHalf.res" id="25_2m5lv"]
 [ext_resource type="ArrayMesh" uid="uid://dwejmccmomxfw" path="res://Assets/Meshes/CustomNormalQuad.res" id="25_hpgqd"]
 [ext_resource type="PackedScene" uid="uid://boqx32aoye7wj" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_broken_A.fbx" id="25_jxkj0"]
-[ext_resource type="ArrayMesh" uid="uid://c5ek3mhqym205" path="res://Assets/Meshes/SimpleGrassMesh.res" id="26_877y0"]
+[ext_resource type="ArrayMesh" uid="uid://b4f18hfif3u3n" path="res://Assets/Meshes/SimpleGrassMesh.res" id="26_877y0"]
 [ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/DebugInv.tscn" id="28_eh82s"]
 [ext_resource type="PackedScene" uid="uid://bk2n3p7qb518k" path="res://Scenes/Environment/wind_effect.tscn" id="29_hpgqd"]
 [ext_resource type="Texture2D" uid="uid://dih5vc4yhh08k" path="res://Assets/Textures/GrassBillboard.png" id="29_mu1jd"]
@@ -268,27 +268,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.38799578, 0)
-bones/4/rotation = Quaternion(-0.5567234, -0.062599845, -0.6519489, 0.5109824)
-bones/5/rotation = Quaternion(1.8565759e-08, -5.9555493e-08, -0.4814527, 0.8764722)
-bones/7/rotation = Quaternion(-0.31858736, -0.32583717, 0.13865604, 0.87926483)
-bones/8/rotation = Quaternion(0.0010867955, 0.001086774, -0.70310575, 0.7110837)
-bones/9/rotation = Quaternion(-0.615668, 0.082495086, 0.6251036, 0.47264484)
-bones/10/rotation = Quaternion(1.8320405e-08, 6.132739e-08, 0.5052793, 0.86295587)
-bones/12/rotation = Quaternion(-0.31690088, 0.3002336, -0.22024426, 0.8723108)
-bones/13/rotation = Quaternion(0.0021201228, 0.0024971904, 0.7049023, 0.70929694)
-bones/15/rotation = Quaternion(0.9932668, 0.083297, 0.07485373, 0.029656658)
-bones/16/rotation = Quaternion(0.24431613, 6.3632555e-08, -1.7098945e-07, 0.9696957)
-bones/17/rotation = Quaternion(-0.5428801, -0.20796195, 0.051132355, 0.8120459)
-bones/18/rotation = Quaternion(6.492009e-05, 0.9202157, -0.3914115, -1.4641226e-05)
-bones/19/rotation = Quaternion(0.996364, -0.030232085, 0.031159244, 0.07330705)
-bones/20/rotation = Quaternion(0.31069198, -6.3759956e-08, 2.1607657e-07, 0.9505107)
-bones/21/rotation = Quaternion(-0.578549, 0.114243716, -0.011703564, 0.8075224)
-bones/38/position = Vector3(0.52084064, 0.77894187, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7789418, 0.059736915)
+bones/1/position = Vector3(0, 0.3727922, 0)
+bones/4/rotation = Quaternion(-0.5530963, -0.056767784, -0.63723624, 0.5336589)
+bones/5/rotation = Quaternion(2.8056922e-08, -5.6108377e-08, -0.51557887, 0.8568422)
+bones/7/rotation = Quaternion(-0.32182285, -0.3369861, 0.1505838, 0.8718917)
+bones/8/rotation = Quaternion(0.00074199244, 0.00074198324, -0.70437783, 0.7098245)
+bones/9/rotation = Quaternion(-0.6115554, 0.07720718, 0.6127751, 0.49451566)
+bones/10/rotation = Quaternion(1.1389372e-08, 5.3358214e-08, 0.5379453, 0.8429798)
+bones/12/rotation = Quaternion(-0.32077757, 0.31319237, -0.23272657, 0.86304736)
+bones/13/rotation = Quaternion(0.0023615556, 0.002781562, 0.70465034, 0.70954543)
+bones/15/rotation = Quaternion(0.9903684, 0.08346479, 0.0781629, 0.07806816)
+bones/16/rotation = Quaternion(0.37124917, 6.276535e-08, -2.5688553e-07, 0.9285334)
+bones/17/rotation = Quaternion(-0.609029, -0.2022418, 0.07241544, 0.7635038)
+bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
+bones/19/rotation = Quaternion(0.99239117, -0.03280508, 0.030032575, 0.11481195)
+bones/20/rotation = Quaternion(0.41790894, -6.029131e-08, 2.909787e-07, 0.908489)
+bones/21/rotation = Quaternion(-0.636001, 0.11286641, -0.021328514, 0.76309174)
+bones/38/position = Vector3(0.52084064, 0.7778714, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.77787125, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2237577, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2085543, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -319,49 +319,49 @@ surface_material_override/0 = ExtResource("1_5yayu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.395769, -0.04765071, -0.9100446)
 
 [node name="barrier" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 8, 0, -10)
 
 [node name="barrier3" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="barrier5" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -8, 0, -10)
 
 [node name="barrier_column" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 4, 0, -10)
 
 [node name="barrier2" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 16, 0, -10)
 
 [node name="barrier_column6" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 12, 0, -10)
 
 [node name="barrier4" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 24, 0, -10)
 
 [node name="barrier_column7" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 20, 0, -10)
 
 [node name="barrier_column8" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 28, 0, -10)
 
 [node name="barrier_column2" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -4, 0, -10)
 
 [node name="barrier6" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -16, 0, -10)
 
 [node name="barrier_column3" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -12, 0, -10)
 
 [node name="barrier7" parent="Level/Env" instance=ExtResource("8_pfxnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -24, 0, -10)
 
 [node name="barrier_column4" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -20, 0, -10)
 
 [node name="barrier_column5" parent="Level/Env" instance=ExtResource("9_28aqb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -28, 0, -10)
 
 [node name="bottle_A_brown" parent="Level/Env" instance=ExtResource("10_eh82s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8915296, -0.04782577, -1.3189709)
@@ -646,6 +646,15 @@ multimesh = SubResource("MultiMesh_hb2rl")
 
 [node name="ChoppableTree" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
 transform = Transform3D(0.92, 0, 0, 0, 0.92, 0, 0, 0, 0.92, -20.560268, 0, -1.7625985)
+
+[node name="ChoppableTree18" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.70837444, 0, 0.32650518, 0, 0.78, 0, -0.32650518, 0, 0.70837444, -21.48014, 0, -13.343622)
+
+[node name="ChoppableTree19" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.8147278, 0, -0.021064041, 0, 0.815, 0, 0.021064041, 0, 0.8147278, -15.918547, -9.536743e-07, -15.601194)
+
+[node name="ChoppableTree20" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.7928726, 0, -0.6011473, 0, 0.995, 0, 0.6011473, 0, 0.7928726, -10.429872, -9.536743e-07, -12.784208)
 
 [node name="ChoppableTree2" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
 transform = Transform3D(-0.014468328, 0, 0.99989533, 0, 1, 0, -0.99989533, 0, -0.014468328, -25.63253, 0, -1.5692816)

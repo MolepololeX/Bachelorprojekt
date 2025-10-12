@@ -36,3 +36,7 @@ TODO vorher:
 	- wasser shader mit cell noise simpel aber mit reflections
 	
 	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht
+	
+	- poof particles mit no depth test testen
+	- kleine zoom ui die mir den aktuellen zoom anzeigt und dann wegfaded
+	- actually mechanics implementieren
