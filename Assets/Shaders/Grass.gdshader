@@ -44,7 +44,7 @@ void vertex() {
 
 void fragment() {
 	vec3 noiseLevel = texture(noise, (vertexWorldPos.xz + (TIME * timeScale)) / noiseScale).rgb;
-	ALBEDO = mix(color, color2, UV.y) * mix(color, color2, noiseLevel.r); //TODO: fix and use UV by fixing up the grass meshes UV mapping
+	ALBEDO = mix(color, color2, clamp(UV.y, 0.0, 1.0));// * mix(color, color2, noiseLevel.r); //TODO: fix and use UV by fixing up the grass meshes UV mapping
 	//ALBEDO = texture(noise, (vertexWorldPos.xz + (TIME * 1.0))/ noiseScale).rgb;
 	//if (!FRONT_FACING){
 		//NORMAL = -NORMAL;

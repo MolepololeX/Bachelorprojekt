@@ -7,7 +7,7 @@
 render_priority = 0
 shader = ExtResource("1_0xkus")
 shader_parameter/color = Color(0.47142166, 0.70141697, 0.32212988, 1)
-shader_parameter/color2 = Color(0.37663773, 0.689992, 0.32321692, 1)
+shader_parameter/color2 = Color(0.47058824, 0.7019608, 0.32156864, 1)
 shader_parameter/threshold = 0.53999998792992
 shader_parameter/noise = ExtResource("2_vcoqn")
 shader_parameter/noiseScale = 25.0

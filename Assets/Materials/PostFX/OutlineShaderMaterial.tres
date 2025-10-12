@@ -5,8 +5,8 @@
 [resource]
 render_priority = 1
 shader = ExtResource("1_vaf8i")
-shader_parameter/depthThreshold = 0.05
+shader_parameter/depthThreshold = 6.4190003049025
 shader_parameter/normalThreshold = 1.10000005225
 shader_parameter/outlineDarkness = 0.75
-shader_parameter/outlineLightness = 1.1000005272499997
+shader_parameter/outlineLightness = 1.1000005272499995
 shader_parameter/thiccness = 1.0000000475
