@@ -10,6 +10,7 @@ namespace Game.Item
 		[Export] private Area3D area;
 		[Export] private PackedScene pickupEffect;
 		[Export] private PackedScene spawnEffect;
+		[Export] private AudioStreamPlayer pickupSound;
 
 		public override void _Ready()
 		{
@@ -23,6 +24,7 @@ namespace Game.Item
 			if (player.TryAddToInventory(itemType))
 			{
 				SpawnVFX(pickupEffect);
+				pickupSound.Play();
 				QueueFree();
 			}
 		}

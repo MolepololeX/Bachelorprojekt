@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=65 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/grass_floor_noise.tres" id="1_5yayu"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="1_877y0"]
@@ -6,9 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/player.tscn" id="2_2u58p"]
 [ext_resource type="PackedScene" uid="uid://bm7odeqtwcook" path="res://Scenes/Camera/camera_rig.tscn" id="2_hb2rl"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/axe.tscn" id="3_qhxvw"]
-[ext_resource type="PackedScene" uid="uid://dr644t6qc85l4" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_C_Color1.fbx" id="3_tgibm"]
-[ext_resource type="PackedScene" uid="uid://bs1bf0xy3e2u7" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_B_Color1.fbx" id="4_nlmfl"]
-[ext_resource type="PackedScene" uid="uid://bksllprtwcuc6" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_A_Color1.fbx" id="5_utwxg"]
 [ext_resource type="PackedScene" uid="uid://duroqtdgoa7ek" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/barrel_small.fbx" id="7_2vt4g"]
 [ext_resource type="PackedScene" uid="uid://cc05cc6ofb8p" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/barrier.fbx" id="8_pfxnm"]
 [ext_resource type="PackedScene" uid="uid://ct6y0jcfexlt4" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/barrier_column.fbx" id="9_28aqb"]
@@ -29,7 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://dt0lsljh6x4ss" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_weeds_B.fbx" id="24_877y0"]
 [ext_resource type="PackedScene" uid="uid://boqx32aoye7wj" path="res://Assets/Packs/KayKit_DungeonRemastered_1.1_FREE/Assets/fbx/floor_tile_small_broken_A.fbx" id="25_jxkj0"]
 [ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/DebugInv.tscn" id="28_eh82s"]
+[ext_resource type="PackedScene" uid="uid://bk2n3p7qb518k" path="res://Scenes/Environment/wind_effect.tscn" id="29_hpgqd"]
 [ext_resource type="Texture2D" uid="uid://dih5vc4yhh08k" path="res://Assets/Textures/GrassBillboard.png" id="29_mu1jd"]
+[ext_resource type="Script" uid="uid://bh6ov3jhx5i12" path="res://Scripts/Testing/Testcube.cs" id="29_va1if"]
 [ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/fps_counter.tscn" id="30_5yayu"]
 [ext_resource type="ArrayMesh" uid="uid://5fw0hrngf0cg" path="res://Assets/Meshes/grass_mesh_2.res" id="30_r60an"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/choppable_tree.tscn" id="33_mu1jd"]
@@ -37,7 +36,16 @@
 [ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="35_hpgqd"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/Water.gdshader" id="35_va1if"]
 [ext_resource type="PackedScene" uid="uid://bfa700tq610ig" path="res://Scenes/Camera/camera_trigger.tscn" id="36_2m5lv"]
+[ext_resource type="AudioStream" uid="uid://d0nemtjqmxxeg" path="res://Assets/Sounds/forest-wind-with-birds-singing-364368.mp3" id="36_qhxvw"]
 [ext_resource type="Shader" uid="uid://3c03y4ec08yb" path="res://Assets/Shaders/PostFX/PostPixelDeSnap.gdshader" id="36_va1if"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbnq1"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.26103455, 0.30611074, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qhxvw"]
+material = SubResource("StandardMaterial3D_mbnq1")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bevfg"]
 size = Vector2(20, 20)
@@ -123,6 +131,14 @@ shader_parameter/timeScale2 = 0.3
 material = SubResource("ShaderMaterial_hb2rl")
 size = Vector2(60, 20)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhxvw"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.25103655, 0.49611676, 0.87712336, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qhxvw"]
+material = SubResource("StandardMaterial3D_qhxvw")
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va1if"]
 
 [sub_resource type="Sky" id="Sky_hpgqd"]
@@ -190,31 +206,40 @@ shader_parameter/testMult = 0.0
 
 [node name="Player" parent="." instance=ExtResource("2_2u58p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.806583, -0.006478554, 3.6920319)
+Speed = 2.03
+DragMult = 10.0
+
+[node name="Pivot" parent="Player" index="0"]
+visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37973213, 0)
-bones/4/rotation = Quaternion(-0.55572367, -0.05798307, -0.6388419, 0.52885747)
-bones/5/rotation = Quaternion(2.8525365e-08, -3.8074493e-08, -0.5097236, 0.8603383)
-bones/7/rotation = Quaternion(-0.3217929, -0.33297494, 0.14961964, 0.87360805)
-bones/8/rotation = Quaternion(0.0004285581, 0.00042854436, -0.705532, 0.7086777)
-bones/9/rotation = Quaternion(-0.61409587, 0.07820806, 0.6139403, 0.48974195)
-bones/10/rotation = Quaternion(1.875229e-08, 6.281533e-08, 0.5323391, 0.8465312)
-bones/12/rotation = Quaternion(-0.32048872, 0.30889648, -0.23159596, 0.86500484)
-bones/13/rotation = Quaternion(0.0013740794, 0.0016184602, 0.7056797, 0.70852786)
-bones/15/rotation = Quaternion(0.99183184, 0.08315035, 0.07686525, 0.058715966)
-bones/16/rotation = Quaternion(0.32029733, 6.0955315e-08, -2.1906743e-07, 0.9473171)
-bones/17/rotation = Quaternion(-0.5824021, -0.2048794, 0.06352179, 0.78409004)
-bones/18/rotation = Quaternion(2.0346435e-05, 0.92017573, -0.39150554, -4.558935e-06)
-bones/19/rotation = Quaternion(0.99425226, -0.03167412, 0.030509904, 0.09761397)
-bones/20/rotation = Quaternion(0.37338576, -6.090449e-08, 2.6079582e-07, 0.92767626)
-bones/21/rotation = Quaternion(-0.61203545, 0.11355657, -0.017204298, 0.7824459)
-bones/38/position = Vector3(0.52084064, 0.7822705, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.7822704, 0.05973692)
+bones/1/position = Vector3(0, 0.36861375, 0)
+bones/4/rotation = Quaternion(-0.550411, -0.057354297, -0.6419957, 0.53065974)
+bones/5/rotation = Quaternion(2.8055616e-08, -4.425444e-08, -0.50909406, 0.860711)
+bones/7/rotation = Quaternion(-0.3200625, -0.33830804, 0.14654917, 0.87271476)
+bones/8/rotation = Quaternion(0.0012945133, 0.0012945089, -0.7023383, 0.71184105)
+bones/9/rotation = Quaternion(-0.60928404, 0.077862024, 0.61709297, 0.49184015)
+bones/10/rotation = Quaternion(3.8412942e-08, 3.485208e-08, 0.5317368, 0.84690976)
+bones/12/rotation = Quaternion(-0.31916738, 0.31409347, -0.22869742, 0.8643928)
+bones/13/rotation = Quaternion(0.003986223, 0.004695184, 0.7029498, 0.71121293)
+bones/15/rotation = Quaternion(0.989376, 0.0838083, 0.07887424, 0.08882664)
+bones/16/rotation = Quaternion(0.39971405, 5.6431787e-08, -2.6965455e-07, 0.9166399)
+bones/17/rotation = Quaternion(-0.623978, -0.2005314, 0.077618174, 0.7512749)
+bones/18/rotation = Quaternion(-2.243216e-06, 0.92015594, -0.39155215, 5.9089115e-07)
+bones/19/rotation = Quaternion(0.99119323, -0.03349787, 0.029752526, 0.12461445)
+bones/20/rotation = Quaternion(0.4433617, -5.8386536e-08, 3.1156839e-07, 0.8963428)
+bones/21/rotation = Quaternion(-0.64979875, 0.11238485, -0.0237791, 0.75137603)
+bones/38/position = Vector3(0.52084064, 0.77068305, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.77068293, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2154942, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2043757, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" groups=["Snap"]]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_qhxvw")
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -229,60 +254,6 @@ mesh = SubResource("PlaneMesh_bevfg")
 surface_material_override/0 = ExtResource("1_5yayu")
 
 [node name="Env" type="Node3D" parent="Level"]
-
-[node name="Tree_4_C_Color1" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2394185, 0.15652229, -3.800313)
-
-[node name="Tree_4_C_Color2" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(0.9643268, 0, -0.2647147, 0, 1, 0, 0.2647147, 0, 0.9643268, 27.462109, 0.15652229, -8.158717)
-
-[node name="Tree_4_C_Color5" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(0.9643268, 0, -0.2647147, 0, 1, 0, 0.2647147, 0, 0.9643268, 13.704913, 0.15652324, -13.785161)
-
-[node name="Tree_4_C_Color6" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(0.044107556, 0, -0.99902683, 0, 1, 0, 0.99902683, 0, 0.044107556, 20.475649, 0.15652229, -20.79303)
-
-[node name="Tree_4_C_Color8" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(0.47353506, 0, 0.88077503, 0, 1, 0, -0.88077503, 0, 0.47353506, 3.9002643, 0.15652134, -16.45464)
-
-[node name="Tree_4_C_Color9" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(0.661953, 0, -0.74954545, 0, 1, 0, 0.74954545, 0, 0.661953, -2.347303, 0.15652229, -21.056938)
-
-[node name="Tree_4_C_Color7" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(0.5026428, 0, 0.8644942, 0, 1, 0, -0.8644942, 0, 0.5026428, 17.32229, 0.15652229, -17.789717)
-
-[node name="Tree_4_C_Color4" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(-0.747659, 0, -0.66408277, 0, 1, 0, 0.66408277, 0, -0.747659, 27.403738, 0.15652229, 7.513071)
-
-[node name="Tree_4_C_Color3" parent="Level/Env" instance=ExtResource("3_tgibm")]
-transform = Transform3D(-0.032893553, 0, -0.9994589, 0, 1, 0, 0.9994589, 0, -0.032893553, 24.283667, 0.15652229, -9.565415)
-
-[node name="Tree_4_B_Color1" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(0.8046037, 0, 0.59381217, 0, 1, 0, -0.59381217, 0, 0.8046037, -8.035971, 0.1763889, -0.9877536)
-
-[node name="Tree_4_B_Color2" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(0.8046037, 0, 0.59381217, 0, 1, 0, -0.59381217, 0, 0.8046037, 25.052046, 0.1763889, -7.086048)
-
-[node name="Tree_4_B_Color4" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(0.9896815, 0, -0.14328536, 0, 1, 0, 0.14328536, 0, 0.9896815, 14.388698, 0.1763889, -19.231369)
-
-[node name="Tree_4_B_Color5" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(0.9896815, 0, -0.14328536, 0, 1, 0, 0.14328536, 0, 0.9896815, 20.04037, 0.17639177, -13.14865)
-
-[node name="Tree_4_B_Color6" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(0.6433891, 0, -0.7655394, 0, 1, 0, 0.7655394, 0, 0.6433891, 6.238995, 0.1763889, -20.460423)
-
-[node name="Tree_4_B_Color7" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(-0.33357656, 0, -0.94272316, 0, 1, 0, 0.94272316, 0, -0.33357656, -4.097274, 0.1763889, -21.071167)
-
-[node name="Tree_4_B_Color8" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(-0.16630402, 0, 0.9860747, 0, 1, 0, -0.9860747, 0, -0.16630402, -17.482252, 0.17638986, -17.403585)
-
-[node name="Tree_4_B_Color3" parent="Level/Env" instance=ExtResource("4_nlmfl")]
-transform = Transform3D(-0.17079419, 0, 0.98530674, 0, 1, 0, -0.98530674, 0, -0.17079419, 25.01426, 0.1763889, 8.24477)
-
-[node name="Tree_4_A_Color1" parent="Level/Env" instance=ExtResource("5_utwxg")]
-transform = Transform3D(0.9373489, 0, 0.34839207, 0, 1, 0, -0.34839207, 0, 0.9373489, -8.134005, 0.14212503, -4.9520593)
 
 [node name="barrel_small" parent="Level/Env" instance=ExtResource("7_2vt4g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.395769, -0.04765071, -0.9100446)
@@ -577,22 +548,55 @@ multimesh = SubResource("MultiMesh_qhxvw")
 [node name="ChoppableTrees" type="Node3D" parent="Level"]
 
 [node name="ChoppableTree" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.560268, 0, -1.7625985)
+transform = Transform3D(0.92, 0, 0, 0, 0.92, 0, 0, 0, 0.92, -20.560268, 0, -1.7625985)
 
 [node name="ChoppableTree2" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
 transform = Transform3D(-0.014468328, 0, 0.99989533, 0, 1, 0, -0.99989533, 0, -0.014468328, -25.63253, 0, -1.5692816)
 
 [node name="ChoppableTree3" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
-transform = Transform3D(-0.75536186, 0, 0.6553078, 0, 1, 0, -0.6553078, 0, -0.75536186, -13.877816, 0, -6.3119597)
+transform = Transform3D(-0.7175937, 0, 0.62254256, 0, 0.95, 0, -0.62254256, 0, -0.7175937, -13.877816, 0, -6.3119597)
 
 [node name="ChoppableTree4" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
-transform = Transform3D(0.8354334, 0, 0.54959154, 0, 1, 0, -0.54959154, 0, 0.8354334, -24.772264, 0, 4.2810636)
+transform = Transform3D(0.78530747, 0, 0.5166161, 0, 0.94, 0, -0.5166161, 0, 0.78530747, -24.772264, 0, 4.2810636)
 
 [node name="ChoppableTree5" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
-transform = Transform3D(-0.67449564, 0, 0.73827875, 0, 1, 0, -0.73827875, 0, -0.67449564, -21.421183, 0, 6.1930685)
+transform = Transform3D(-0.62728107, 0, 0.6865992, 0, 0.93, 0, -0.6865992, 0, -0.62728107, -21.421183, 0, 6.1930685)
 
 [node name="ChoppableTree6" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
 transform = Transform3D(-0.25044745, 0, -0.9681301, 0, 1, 0, 0.9681301, 0, -0.25044745, -12.980656, 0, 6.5392485)
+
+[node name="ChoppableTree16" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.8579304, 0, -0.51376575, 0, 1, 0, 0.51376575, 0, 0.8579304, -7.29602, 0, 8.565908)
+
+[node name="ChoppableTree17" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(-0.43524632, 0, -0.6291149, 0, 0.765, 0, 0.6291149, 0, -0.43524632, -8.831798, 0, 6.5776453)
+
+[node name="ChoppableTree7" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(-0.40228316, 0, -0.69149715, 0, 0.8, 0, 0.69149715, 0, -0.40228316, -6.876932, -9.536743e-07, -6.506258)
+
+[node name="ChoppableTree8" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.840472, 0, -0.54185474, 0, 1, 0, 0.54185474, 0, 0.840472, -4.2368073, -9.536743e-07, -6.972748)
+
+[node name="ChoppableTree9" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.5428827, 0, 0.69258815, 0, 0.88, 0, -0.69258815, 0, 0.5428827, -6.357784, -4.7683716e-07, -3.7597308)
+
+[node name="ChoppableTree10" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.9942578, 0, -0.10701007, 0, 1, 0, 0.10701007, 0, 0.9942578, 8.475075, -4.7683716e-07, -7.9751525)
+
+[node name="ChoppableTree11" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.7399546, 0, -0.32949528, 0, 0.81, 0, 0.32949528, 0, 0.7399546, 20.185078, 4.7683716e-07, -6.6005135)
+
+[node name="ChoppableTree12" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.5631945, 0, -0.8263242, 0, 1, 0, 0.8263242, 0, 0.5631945, 23.404882, 1.4305115e-06, -1.3744068)
+
+[node name="ChoppableTree13" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(0.5631945, 0, -0.8263242, 0, 1, 0, 0.8263242, 0, 0.5631945, 27.263533, 1.4305115e-06, 6.8292513)
+
+[node name="ChoppableTree14" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(-0.5874463, 0, -0.7338303, 0, 0.94, 0, 0.7338303, 0, -0.5874463, 20.288054, 1.4305115e-06, 4.954749)
+
+[node name="ChoppableTree15" parent="Level/ChoppableTrees" instance=ExtResource("33_mu1jd")]
+transform = Transform3D(-0.74873793, 0, 0.23583171, 0, 0.785, 0, -0.23583171, 0, -0.74873793, 8.995779, 1.4305115e-06, 7.79315)
 
 [node name="CamTriggers" type="Node3D" parent="Level"]
 
@@ -612,7 +616,20 @@ transform = Transform3D(2.6595688, 0, 0, 0, 1, 0, 0, 0, 12.311973, 10.100565, -1
 mesh = SubResource("PlaneMesh_hpgqd")
 skeleton = NodePath("../../SubViewport")
 
+[node name="WindEffect" parent="Level" instance=ExtResource("29_hpgqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56583023, 5.8686504, 11.87656)
+
+[node name="GPUParticles3D" parent="Level/WindEffect" index="0"]
+transform = Transform3D(7.4906282, 0, 0, 0, -0.08070449, -0.9623299, 0, 7.059271, -0.011001752, 0, 0, -18.47125)
+amount = 32
+
 [node name="TempRoot" type="Node3D" parent="."]
+
+[node name="testcube" type="MeshInstance3D" parent="TempRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 4)
+mesh = SubResource("BoxMesh_qhxvw")
+script = ExtResource("29_va1if")
+maxSteps = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_va1if")
@@ -642,7 +659,7 @@ size = Vector2i(320, 180)
 render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewport" instance=ExtResource("2_hb2rl")]
-_rotationSpeed = 25.0
+_rotationSpeed = 100.0
 _lerpSpeed = 5.0
 
 [node name="Camera3D" parent="SubViewport/CameraRig" index="0" node_paths=PackedStringArray("rect")]
@@ -650,6 +667,9 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 8.957
 size = 10.0
 near = 0.001
 script = ExtResource("35_hpgqd")
+_snapping = true
+_snappingObjects = true
+_objectSnappingTexelSizeMultiplier = 1.0
 rect = NodePath("../../../PostPixelDeSnap")
 _debugInfo = false
 _debugMovement = false
@@ -657,6 +677,7 @@ _camSpeed = 3.0
 _testmult = 1.0
 
 [node name="POSTFX" parent="SubViewport/CameraRig/Camera3D" index="0"]
+visible = false
 cast_shadow = 0
 skeleton = NodePath("")
 
@@ -683,8 +704,13 @@ layout_mode = 1
 [node name="FPSCounter" parent="UI" instance=ExtResource("30_5yayu")]
 layout_mode = 1
 
+[node name="AmbientSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("36_qhxvw")
+autoplay = true
+
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]
 [editable path="Level/Cauldron"]
+[editable path="Level/WindEffect"]
 [editable path="SubViewport/CameraRig"]
 [editable path="UI/Control"]

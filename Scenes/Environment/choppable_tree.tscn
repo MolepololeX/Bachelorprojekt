@@ -1,12 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3ptw2yih8blu"]
+[gd_scene load_steps=21 format=3 uid="uid://d3ptw2yih8blu"]
 
 [ext_resource type="Script" uid="uid://ccb77ev2d130w" path="res://Scripts/Interactables/ChoppableTree.cs" id="1_4f7er"]
 [ext_resource type="PackedScene" uid="uid://bs1bf0xy3e2u7" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_B_Color1.fbx" id="1_gbise"]
+[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="2_abx76"]
+[ext_resource type="SphereMesh" uid="uid://bsdj5n536sv2m" path="res://Assets/Materials/tree_leaves.tres" id="3_bvigf"]
 [ext_resource type="PackedScene" uid="uid://bac8m4n6d68kg" path="res://Scenes/VFX/poof_effect_big.tscn" id="3_fxtf1"]
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/choppable_tree_Particle_process_normal.tres" id="3_o7f1v"]
 [ext_resource type="ArrayMesh" uid="uid://cu8mndxv8iykw" path="res://Assets/Meshes/grass_mesh_3.res" id="3_s1qbb"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/Environment/WorldItems/WoodLog.tscn" id="4_11a77"]
 [ext_resource type="Material" uid="uid://dmbx082uxouf6" path="res://Assets/Materials/Particles/choppable_tree_Particle_process_explosive.tres" id="5_mrg8r"]
+[ext_resource type="AudioStream" uid="uid://bt1ichklq0t60" path="res://Assets/Sounds/thud-impact-sound-sfx-379990.mp3" id="10_yes1i"]
+[ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="11_w63kc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_11a77"]
+material = ExtResource("2_abx76")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qhxvw"]
 height = 3.4432983
@@ -93,6 +100,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [true, true, false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FallingSound:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_11a77"]
 resource_name = "Delay"
@@ -128,6 +147,18 @@ tracks/2/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DespawnSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_s1qbb"]
@@ -205,6 +236,30 @@ tracks/6/path = NodePath("Pivot/leaveExplosion:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FallingSound:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DespawnSound:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -335,6 +390,53 @@ _data = {
 
 [node name="Model" parent="Pivot" instance=ExtResource("1_gbise")]
 transform = Transform3D(0.98276156, 0, -0.18487766, 0, 1, 0, 0.18487766, 0, 0.98276156, 0.009828452, 0.17638914, 0.08395092)
+visible = false
+
+[node name="tempModel" type="Node3D" parent="Pivot"]
+
+[node name="bark" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.472, 0, 0, 0, 0.9599115, 0, 0, 0, 0.472, 0, 0.43906438, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark2" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.315, 0, 0, 0, 1.3372935, 0, 0, 0, 0.315, 0, 1.5297575, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark3" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.20494959, 0, 0, 0, 1.167, 0, 0, 0, 0.20494959, 0, 2.5922182, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark4" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.12850264, 0, 0, 0, 1.6745545, 0, 0, 0, 0.12850264, 0, 3.7592998, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark5" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.695, 0, 0, 0, 0.099565305, 0, 0, 0, 0.099565305, 0.48569512, 1.2118434, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark6" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.1, 0, 0, 0, 0.588, 0, 0, 0, 0.1, 0.7837461, 1.5272546, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark7" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.695, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.33167028, 2.037319, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="bark8" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.1, 0, 0, 0, 0.588, 0, 0, 0, 0.1, -0.6277863, 2.3527303, 0)
+mesh = SubResource("BoxMesh_11a77")
+
+[node name="leaves" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79251146, 1.8864157, 0)
+mesh = ExtResource("3_bvigf")
+
+[node name="leaves2" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, -0.63075733, 2.6621487, 0)
+mesh = ExtResource("3_bvigf")
+
+[node name="leaves5" type="MeshInstance3D" parent="Pivot/tempModel"]
+transform = Transform3D(2.26, 0, 0, 0, 2.26, 0, 0, 0, 2.26, 0.008574009, 5.213014, 0)
+mesh = ExtResource("3_bvigf")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
 collision_layer = 5
@@ -401,3 +503,13 @@ libraries = {
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3336792, -1, -1.4050751)
 size = Vector3(18.24231, 2, 19.977203)
+
+[node name="FallingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_yes1i")
+volume_db = -15.0
+pitch_scale = 0.6
+
+[node name="DespawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_w63kc")
+volume_db = -10.0
+pitch_scale = 1.3

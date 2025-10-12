@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://t5s5fvyf8bjv"]
+[gd_scene load_steps=16 format=3 uid="uid://t5s5fvyf8bjv"]
 
 [ext_resource type="Script" uid="uid://covfmcdeyf2w1" path="res://Scripts/Player/Axe.cs" id="1_au7m6"]
 [ext_resource type="PackedScene" uid="uid://bj8k7r5f54alf" path="res://Assets/Packs/KayKit_Skeletons_1.0_FREE/assets/gltf/Skeleton_Axe.gltf" id="2_e1v0c"]
+[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="3_e1v0c"]
+[ext_resource type="Material" uid="uid://dtv1mrif3awxc" path="res://Assets/Materials/axe_head.tres" id="3_tuntx"]
+[ext_resource type="AudioStream" uid="uid://caphvvtcnbf5a" path="res://Assets/Sounds/swing-whoosh-5-198498.mp3" id="5_uckau"]
+[ext_resource type="AudioStream" uid="uid://bhfivnsggkc1v" path="res://Assets/Sounds/woodChop.wav" id="6_78v2f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_au7m6"]
 shading_mode = 0
@@ -17,6 +21,12 @@ point_count = 3
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_au7m6"]
 radius = 2.0493164
 height = 4.135742
+
+[sub_resource type="BoxMesh" id="BoxMesh_tuntx"]
+material = ExtResource("3_e1v0c")
+
+[sub_resource type="BoxMesh" id="BoxMesh_e1v0c"]
+material = ExtResource("3_tuntx")
 
 [sub_resource type="Animation" id="Animation_va1if"]
 length = 0.001
@@ -162,18 +172,23 @@ _data = {
 &"Swing": SubResource("Animation_mu1jd")
 }
 
-[node name="Axe" type="Node3D" node_paths=PackedStringArray("animPlayer", "emitter", "area3D", "model")]
+[node name="Axe" type="Node3D" node_paths=PackedStringArray("animPlayer", "emitter", "area3D", "model", "swingSound", "hitSound")]
 script = ExtResource("1_au7m6")
 animPlayer = NodePath("Pivot/AnimationPlayer")
 emitter = NodePath("Pivot/Model/CPUParticles3D")
 area3D = NodePath("Pivot/Model/Area3D")
 model = NodePath("Pivot/Model")
+swingSound = NodePath("SwingSound")
+hitSound = NodePath("HitSound")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.99270904, 0, 0.120535344, 0, 1, 0, -0.120535344, 0, 0.99270904, 0.9849682, 1.0064785, -0.19175196)
 
 [node name="Model" parent="Pivot" instance=ExtResource("2_e1v0c")]
 transform = Transform3D(-0.96592575, 0.2588191, 1.1313344e-08, 0, -4.3711385e-08, 1, 0.2588191, 0.96592575, 4.222196e-08, 0, 0, 0)
+
+[node name="Skeleton_Axe" parent="Pivot/Model" index="0"]
+visible = false
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Pivot/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44355e-08, 0.64853656, -0.14638436)
@@ -196,8 +211,55 @@ collision_mask = 4
 transform = Transform3D(9.685755e-08, 0.3173945, -1.3056223e-13, -0.3173945, 9.685755e-08, 5.77316e-14, -4.2099657e-13, -2.5224267e-13, 0.31739435, -0.014176256, 0.48177594, -2.085452e-13)
 shape = SubResource("CapsuleShape3D_au7m6")
 
+[node name="tempModel" type="Node3D" parent="Pivot/Model"]
+transform = Transform3D(1.0000001, 0, -1.7763568e-15, 0, 1.0000001, -3.5527137e-15, -1.7763568e-15, 7.1054274e-15, 1, 0, 0, 0)
+
+[node name="handle" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.10593915, 0, 0, 0, 1, 0, 0, 0, 0.10593915, 6.3144654e-09, 0.27373913, -7.5274293e-16)
+mesh = SubResource("BoxMesh_tuntx")
+
+[node name="head" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.7713564, 0, 0, 0, 0.114321604, 0, 0, 0, 0.102883995, 0, 0.64411414, 1.4620695e-15)
+mesh = SubResource("BoxMesh_e1v0c")
+
+[node name="head2" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.18425874, 0, 0, 0, 0.61914235, 0, 0, 0, 0.102883995, 0.35029992, 0.64411414, 1.4620695e-15)
+mesh = SubResource("BoxMesh_e1v0c")
+
+[node name="head7" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.18425874, 0, 0, 0, 0.61914235, 0, 0, 0, 0.102883995, -0.35, 0.644, 0)
+mesh = SubResource("BoxMesh_e1v0c")
+
+[node name="head3" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.21537037, 0, 0, 0, 0.100214645, 0, 0, 0, 0.102883995, 0.25498927, 0.90543824, 1.0794186e-15)
+mesh = SubResource("BoxMesh_e1v0c")
+
+[node name="head4" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.21537037, 0, 0, 0, 0.100214645, 0, 0, 0, 0.102883995, 0.25498927, 0.3855977, -3.8265095e-16)
+mesh = SubResource("BoxMesh_e1v0c")
+
+[node name="head5" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.21537037, 0, 0, 0, 0.100214645, 0, 0, 0, 0.102883995, -0.255, 0.90543824, 1.0794186e-15)
+mesh = SubResource("BoxMesh_e1v0c")
+
+[node name="head6" type="MeshInstance3D" parent="Pivot/Model/tempModel"]
+transform = Transform3D(0.21537037, 0, 0, 0, 0.100214645, 0, 0, 0, 0.102883995, -0.255, 0.3855977, -3.8265095e-16)
+mesh = SubResource("BoxMesh_e1v0c")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot"]
 libraries = {
 &"": SubResource("AnimationLibrary_hpgqd")
 }
 speed_scale = 5.0
+
+[node name="SwingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_uckau")
+volume_db = -20.0
+pitch_scale = 0.6
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_78v2f")
+volume_db = -15.0
+pitch_scale = 0.8
+
+[editable path="Pivot/Model"]

@@ -12,6 +12,8 @@ namespace Game.PlayerStuff
 		[Export] private CpuParticles3D emitter;
 		[Export] private Area3D area3D;
 		[Export] private Node3D model;
+		[Export] private AudioStreamPlayer swingSound;
+		[Export] private AudioStreamPlayer hitSound;
 
 		private Camera3D cam;
 
@@ -20,6 +22,10 @@ namespace Game.PlayerStuff
 		private bool swingForward = true;
 		private bool canAttack = true;
 		private double currentAnimPos = 0.0;
+
+		//temp save original pitches for testing
+		private float opSwing;
+		private float opHit;
 
 		public override void _Ready()
 		{
@@ -33,6 +39,9 @@ namespace Game.PlayerStuff
 			canAttack = true;
 
 			model.Visible = false;
+
+			opSwing = swingSound.PitchScale;
+			opHit = hitSound.PitchScale;
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -87,6 +96,9 @@ namespace Game.PlayerStuff
 				canAttack = false;
 				isMouseTracking = false;
 				model.Visible = true;
+
+				swingSound.PitchScale = (float)GD.RandRange(opSwing - 0.2f, opSwing + 0.2f);
+				swingSound.Play();
 			}
 		}
 
@@ -99,6 +111,10 @@ namespace Game.PlayerStuff
 				area3D.SetDeferred("monitoring", false);
 				currentAnimPos = animPlayer.CurrentAnimationPosition;
 				tree.OnHit();
+
+				hitSound.Play();
+				hitSound.PitchScale = (float)GD.RandRange(opHit - 0.2f, opHit + 0.2f);
+
 				HitStop();
 			}
 		}

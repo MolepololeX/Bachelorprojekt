@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [display]
 
 window/size/always_on_top=true
-window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -27,6 +26,10 @@ project/assembly_name="AlchemyGame"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
+[global_group]
+
+Snap=""
 
 [input]
 
