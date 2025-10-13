@@ -1,5 +1,7 @@
 using System.Transactions;
+using Game.Item;
 using Godot;
+using Godot.Collections;
 
 namespace Game.Managers
 {
@@ -10,6 +12,8 @@ namespace Game.Managers
 		[Export] public Node3D Player;
 		[Export] public Node3D Camera;
 		[Export] public Node3D CameraRig;
+		[ExportCategory("Important Item Stuff (put in extra thingy)")]
+		[Export] public Dictionary<ItemType, PackedScene> WorldItems;
 
 		[Export] public ColorRect ZoomShaderColorRect;
 

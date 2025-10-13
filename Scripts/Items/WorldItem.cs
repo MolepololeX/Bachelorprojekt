@@ -35,5 +35,10 @@ namespace Game.Item
 			vfx.Position = area.GlobalPosition;
 			GameManager.Instance.TempSceneRoot.AddChild(vfx);
 		}
+
+		public void DisablePickup()
+		{
+			area.Monitoring = false;
+		}
 	}
 }

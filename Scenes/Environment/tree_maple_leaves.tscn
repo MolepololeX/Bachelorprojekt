@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d1685xjha1c0r"]
 
 [ext_resource type="PackedScene" uid="uid://cbldjdjn77dgt" path="res://Assets/Meshes/Tree_Maple_Leaves.glb" id="1_v5mpd"]
-[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="2_hcf7p"]
+[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="2_njofr"]
 [ext_resource type="ArrayMesh" uid="uid://cvebgpjmtcic0" path="res://Assets/Meshes/CustomNormalQuadLeaves.res" id="3_hcf7p"]
 [ext_resource type="Shader" uid="uid://bo5usgi6c3hn4" path="res://Assets/Shaders/LeafShader.gdshader" id="4_njofr"]
 [ext_resource type="Texture2D" uid="uid://ou1vt2tajtwy" path="res://Assets/Textures/leave_alpha.png" id="4_te80k"]
@@ -31,7 +31,7 @@ buffer = PackedFloat32Array(-0.80608785, 0.07862632, -0.5882529, 0.68637884, 0.0
 [node name="Tree_Maple_Leaves" instance=ExtResource("1_v5mpd")]
 
 [node name="tree" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_hcf7p")
+surface_material_override/0 = ExtResource("2_njofr")
 
 [node name="Leaves" type="MultiMeshInstance3D" parent="." index="1"]
 cast_shadow = 0

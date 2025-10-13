@@ -3,4 +3,4 @@
 [resource]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.4214091, 0.2626447, 0.18315607, 1)
+albedo_color = Color(0.3922917, 0.31870717, 0.28715298, 1)

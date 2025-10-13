@@ -9,7 +9,7 @@ namespace Game.PlayerStuff
 {
 	public partial class Player : CharacterBody3D
 	{
-	
+
 		[Export]
 		public AnimationTree AnimTree;
 
@@ -36,7 +36,7 @@ namespace Game.PlayerStuff
 		ItemType.None, ItemType.None, ItemType.None,
 		ItemType.None, ItemType.None, ItemType.None
 	};
-		public int InventorySelectedIndex = 0;
+		public int _currentInventoryIndex = 0;
 
 		public override void _Ready()
 		{
@@ -126,17 +126,17 @@ namespace Game.PlayerStuff
 		{
 			if (Input.IsActionJustPressed("selection_left"))
 			{
-				InventorySelectedIndex = InventorySelectedIndex > 0 ? InventorySelectedIndex - 1 : Inventory.Length - 1;
+				_currentInventoryIndex = _currentInventoryIndex > 0 ? _currentInventoryIndex - 1 : Inventory.Length - 1;
 			}
 			if (Input.IsActionJustPressed("selection_right"))
 			{
-				InventorySelectedIndex = InventorySelectedIndex < Inventory.Length - 1 ? InventorySelectedIndex + 1 : 0;
+				_currentInventoryIndex = _currentInventoryIndex < Inventory.Length - 1 ? _currentInventoryIndex + 1 : 0;
 			}
 
 			String test = "";
 			for (int i = 0; i < Inventory.Length; i++)
 			{
-				if (i == InventorySelectedIndex)
+				if (i == _currentInventoryIndex)
 				{
 					test += "> " + Inventory[i].ToString() + "\n";
 				}
@@ -159,6 +159,11 @@ namespace Game.PlayerStuff
 				}
 			}
 			return false;
+		}
+
+		public ItemType RequestCurrentSelectedItem()
+		{
+			return Inventory[_currentInventoryIndex];
 		}
 	}
 }
