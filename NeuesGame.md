@@ -40,7 +40,7 @@ x Simple Inventarleiste oder 3x3 Grid
 	- movement fixen indem alles sich nur in pixeln bewegen kann
 	- actually mechanics implementieren
 	- fishing minigame
-    - color quantization und palette
+	- color quantization und palette
 	
 	# Fixes
 	- nochmal nachschauen wie ich komplett harte schatten bekomm

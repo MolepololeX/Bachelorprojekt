@@ -249,27 +249,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.38388819, 0)
-bones/4/rotation = Quaternion(-0.55718416, -0.05887378, -0.64035946, 0.52537566)
-bones/5/rotation = Quaternion(5.9967795e-09, -5.347733e-08, -0.50514394, 0.86303514)
-bones/7/rotation = Quaternion(-0.3216034, -0.33045107, 0.14853047, 0.8748212)
-bones/8/rotation = Quaternion(0.00026882486, 0.0002688046, -0.7061195, 0.70809263)
-bones/9/rotation = Quaternion(-0.615531, 0.07896655, 0.61512834, 0.48631585)
-bones/10/rotation = Quaternion(3.5140623e-08, 5.5939502e-08, 0.527975, 0.8492599)
-bones/12/rotation = Quaternion(-0.3201413, 0.3061504, -0.23039861, 0.8664284)
-bones/13/rotation = Quaternion(0.0008781319, 0.0010343065, 0.70619553, 0.7080156)
-bones/15/rotation = Quaternion(0.9926137, 0.08313715, 0.07593812, 0.04516529)
-bones/16/rotation = Quaternion(0.2847805, 6.509725e-08, -1.9978955e-07, 0.95859283)
-bones/17/rotation = Quaternion(-0.56392795, -0.20642626, 0.057632547, 0.79752874)
-bones/18/rotation = Quaternion(4.143154e-05, 0.9201946, -0.39146107, -9.328261e-06)
-bones/19/rotation = Quaternion(0.99533266, -0.03097186, 0.030822065, 0.086045206)
-bones/20/rotation = Quaternion(0.34344342, -6.231682e-08, 2.3817697e-07, 0.9391734)
-bones/21/rotation = Quaternion(-0.59600335, 0.11392228, -0.014536042, 0.7947267)
-bones/38/position = Vector3(0.52084064, 0.7844733, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.7844732, 0.05973692)
+bones/1/position = Vector3(0, 0.3859643, 0)
+bones/4/rotation = Quaternion(-0.55537695, -0.063149236, -0.65470773, 0.50884825)
+bones/5/rotation = Quaternion(1.8141552e-08, -6.288383e-08, -0.47702754, 0.87888837)
+bones/7/rotation = Quaternion(-0.31771782, -0.32623586, 0.13613221, 0.8798259)
+bones/8/rotation = Quaternion(0.0014243199, 0.0014243036, -0.7018582, 0.71231383)
+bones/9/rotation = Quaternion(-0.61454237, 0.08307878, 0.62757987, 0.47072193)
+bones/10/rotation = Quaternion(5.385924e-09, 4.901272e-08, 0.5010634, 0.86541057)
+bones/12/rotation = Quaternion(-0.31608954, 0.3004555, -0.21774343, 0.87315625)
+bones/13/rotation = Quaternion(0.0029684396, 0.0034963822, 0.7040161, 0.7101693)
+bones/15/rotation = Quaternion(0.9929624, 0.083192796, 0.07541557, 0.037643988)
+bones/16/rotation = Quaternion(0.2651419, 6.489728e-08, -1.8507164e-07, 0.9642095)
+bones/17/rotation = Quaternion(-0.55370814, -0.20720343, 0.054442775, 0.8046801)
+bones/18/rotation = Quaternion(5.2712803e-05, 0.92020476, -0.39143726, -1.1880014e-05)
+bones/19/rotation = Quaternion(0.99586093, -0.030601935, 0.030988827, 0.079777785)
+bones/20/rotation = Quaternion(0.32733548, -6.260148e-08, 2.2764652e-07, 0.94490826)
+bones/21/rotation = Quaternion(-0.58741784, 0.11409053, -0.013132602, 0.8010938)
+bones/38/position = Vector3(0.52084064, 0.77519256, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7751925, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2196501, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2217263, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -724,7 +724,7 @@ environment = SubResource("Environment_va1if")
 compositor = SubResource("Compositor_qhxvw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.9067786, 0.052164394, 0.4183677, -0.39023814, 0.47944933, 0.78602964, -0.15958336, -0.8760178, 0.4551109, 7.183481, 26.443663, -9.8853855)
+transform = Transform3D(0.5, 0.7071068, 0.50000006, -0.7071068, -3.090862e-08, 0.7071068, 0.49999997, -0.70710677, 0.49999994, 7.183481, 26.443663, -9.8853855)
 light_color = Color(1.416, 1.001, 0.383, 1)
 light_energy = 0.208
 light_volumetric_fog_energy = 1.5
@@ -745,7 +745,7 @@ InventoryDebugLabel = NodePath("../UI/Control/Label")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewport" instance=ExtResource("2_hb2rl")]

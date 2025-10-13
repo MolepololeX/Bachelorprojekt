@@ -1,14 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://d3ptw2yih8blu"]
+[gd_scene load_steps=24 format=3 uid="uid://d3ptw2yih8blu"]
 
 [ext_resource type="Script" uid="uid://ccb77ev2d130w" path="res://Scripts/Interactables/ChoppableTree.cs" id="1_4f7er"]
 [ext_resource type="PackedScene" uid="uid://bs1bf0xy3e2u7" path="res://Assets/Packs/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/fbx/Tree_4_B_Color1.fbx" id="1_gbise"]
+[ext_resource type="PackedScene" uid="uid://c7ms0n1cc5eml" path="res://Scenes/Environment/tree_pine.tscn" id="2_2ex6g"]
 [ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="2_abx76"]
 [ext_resource type="SphereMesh" uid="uid://bsdj5n536sv2m" path="res://Assets/Materials/tree_leaves.tres" id="3_bvigf"]
 [ext_resource type="PackedScene" uid="uid://bac8m4n6d68kg" path="res://Scenes/VFX/poof_effect_big.tscn" id="3_fxtf1"]
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/choppable_tree_Particle_process_normal.tres" id="3_o7f1v"]
 [ext_resource type="ArrayMesh" uid="uid://cu8mndxv8iykw" path="res://Assets/Meshes/grass_mesh_3.res" id="3_s1qbb"]
+[ext_resource type="PackedScene" uid="uid://dae8nuee46j25" path="res://Assets/Meshes/Tree_Pine_thicc.glb" id="3_ylg8t"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/Environment/WorldItems/WoodLog.tscn" id="4_11a77"]
 [ext_resource type="Material" uid="uid://dmbx082uxouf6" path="res://Assets/Materials/Particles/choppable_tree_Particle_process_explosive.tres" id="5_mrg8r"]
+[ext_resource type="PackedScene" uid="uid://d1685xjha1c0r" path="res://Scenes/Environment/tree_maple_leaves.tscn" id="6_oi0lj"]
 [ext_resource type="AudioStream" uid="uid://bt1ichklq0t60" path="res://Assets/Sounds/thud-impact-sound-sfx-379990.mp3" id="10_yes1i"]
 [ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="11_w63kc"]
 
@@ -91,7 +94,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Pivot/leaveExplosion:emitting")
+tracks/6/path = NodePath("Pivot/vfx_stuff/leaves_explosion:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -232,7 +235,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Pivot/leaveExplosion:emitting")
+tracks/6/path = NodePath("Pivot/vfx_stuff/leaves_explosion:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -388,75 +391,102 @@ _data = {
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="Model" parent="Pivot" instance=ExtResource("1_gbise")]
+[node name="model" type="Node3D" parent="Pivot"]
+
+[node name="model_old" parent="Pivot/model" instance=ExtResource("1_gbise")]
 transform = Transform3D(0.98276156, 0, -0.18487766, 0, 1, 0, 0.18487766, 0, 0.98276156, 0.009828452, 0.17638914, 0.08395092)
 visible = false
 
-[node name="tempModel" type="Node3D" parent="Pivot"]
+[node name="mode_new" parent="Pivot/model" instance=ExtResource("2_2ex6g")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
+visible = false
 
-[node name="bark" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="Tree_Pine_thicc" parent="Pivot/model" instance=ExtResource("3_ylg8t")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+visible = false
+
+[node name="tree" parent="Pivot/model/Tree_Pine_thicc" index="0"]
+surface_material_override/0 = ExtResource("2_abx76")
+
+[node name="model_temp" type="Node3D" parent="Pivot/model"]
+visible = false
+
+[node name="bark" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.472, 0, 0, 0, 0.9599115, 0, 0, 0, 0.472, 0, 0.43906438, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark2" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark2" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.315, 0, 0, 0, 1.3372935, 0, 0, 0, 0.315, 0, 1.5297575, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark3" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark3" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.20494959, 0, 0, 0, 1.167, 0, 0, 0, 0.20494959, 0, 2.5922182, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark4" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark4" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.12850264, 0, 0, 0, 1.6745545, 0, 0, 0, 0.12850264, 0, 3.7592998, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark5" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark5" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.695, 0, 0, 0, 0.099565305, 0, 0, 0, 0.099565305, 0.48569512, 1.2118434, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark6" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark6" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.1, 0, 0, 0, 0.588, 0, 0, 0, 0.1, 0.7837461, 1.5272546, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark7" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark7" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.695, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.33167028, 2.037319, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="bark8" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="bark8" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.1, 0, 0, 0, 0.588, 0, 0, 0, 0.1, -0.6277863, 2.3527303, 0)
 mesh = SubResource("BoxMesh_11a77")
 
-[node name="leaves" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="leaves" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79251146, 1.8864157, 0)
 mesh = ExtResource("3_bvigf")
 
-[node name="leaves2" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="leaves2" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, -0.63075733, 2.6621487, 0)
 mesh = ExtResource("3_bvigf")
 
-[node name="leaves5" type="MeshInstance3D" parent="Pivot/tempModel"]
+[node name="leaves5" type="MeshInstance3D" parent="Pivot/model/model_temp"]
 transform = Transform3D(2.26, 0, 0, 0, 2.26, 0, 0, 0, 2.26, 0.008574009, 5.213014, 0)
 mesh = ExtResource("3_bvigf")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
+[node name="Tree_Maple_Leaves" parent="Pivot/model" instance=ExtResource("6_oi0lj")]
+
+[node name="Tree_Maple_Leaves2" parent="Pivot/model" instance=ExtResource("6_oi0lj")]
+
+[node name="tree" parent="Pivot/model/Tree_Maple_Leaves2" index="0"]
+transform = Transform3D(-1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 0, 0, 1, 1.7433356e-07, 3.0131934, 0)
+visible = false
+
+[node name="Leaves" parent="Pivot/model/Tree_Maple_Leaves2" index="1"]
+visible = false
+
+[node name="Collission" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_4f7er")
 animPlayer = NodePath("../../AnimationPlayer")
 parent = NodePath("../..")
 animRoot = NodePath("..")
-poofEffectSockets = [NodePath("../PoofEffectSocket"), NodePath("../PoofEffectSocket2"), NodePath("../PoofEffectSocket3")]
-emitter = NodePath("../GPUParticles3D")
+poofEffectSockets = [NodePath("../vfx_stuff/PoofEffectSocket"), NodePath("../vfx_stuff/PoofEffectSocket2"), NodePath("../vfx_stuff/PoofEffectSocket3")]
+emitter = NodePath("../vfx_stuff/leaves_burst")
 poofEffectScene = ExtResource("3_fxtf1")
 delayScale = 0.5
 spawnedItem = ExtResource("4_11a77")
 spawnOffset = Vector3(0, 2, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Collission"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3.343689, 0)
 shape = SubResource("CylinderShape3D_qhxvw")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Pivot"]
+[node name="vfx_stuff" type="Node3D" parent="Pivot"]
+
+[node name="leaves_burst" type="GPUParticles3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(0.907043, 0, 0, 0, 1, 0, 0, 0, 0.7306563, -0.01677376, 4.418764, 0.102105334)
 emitting = false
 amount = 32
@@ -466,7 +496,7 @@ trail_lifetime = 4.1499999999999995
 process_material = ExtResource("3_o7f1v")
 draw_pass_1 = ExtResource("3_s1qbb")
 
-[node name="permaLeaves" type="GPUParticles3D" parent="Pivot"]
+[node name="leaves_passive" type="GPUParticles3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(0.907043, 0, 0, 0, 1, 0, 0, 0, 0.7306563, -0.01677376, 4.418764, 0.102105334)
 amount = 1
 lifetime = 3.0
@@ -475,7 +505,7 @@ trail_lifetime = 4.1499999999999995
 process_material = ExtResource("3_o7f1v")
 draw_pass_1 = ExtResource("3_s1qbb")
 
-[node name="leaveExplosion" type="GPUParticles3D" parent="Pivot"]
+[node name="leaves_explosion" type="GPUParticles3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(0.8227268, 0, 0, 0, 0.98741376, 0.08443404, 0, -0.15815803, 0.5271395, 0.14948283, 5.264996, -0.16417074)
 emitting = false
 amount = 64
@@ -486,13 +516,13 @@ trail_lifetime = 4.1499999999999995
 process_material = ExtResource("5_mrg8r")
 draw_pass_1 = ExtResource("3_s1qbb")
 
-[node name="PoofEffectSocket" type="Node3D" parent="Pivot"]
+[node name="PoofEffectSocket" type="Node3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 5.241711, 0)
 
-[node name="PoofEffectSocket2" type="Node3D" parent="Pivot"]
+[node name="PoofEffectSocket2" type="Node3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 2.99011, 0.1272937)
 
-[node name="PoofEffectSocket3" type="Node3D" parent="Pivot"]
+[node name="PoofEffectSocket3" type="Node3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 0.14659023, 0.011627227)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -513,3 +543,6 @@ pitch_scale = 0.6
 stream = ExtResource("11_w63kc")
 volume_db = -10.0
 pitch_scale = 1.3
+
+[editable path="Pivot/model/Tree_Pine_thicc"]
+[editable path="Pivot/model/Tree_Maple_Leaves2"]
