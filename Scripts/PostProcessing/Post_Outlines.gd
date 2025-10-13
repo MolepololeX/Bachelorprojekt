@@ -107,8 +107,8 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				var input_normal : RID = render_scene_buffers.get_texture("forward_clustered", "normal_roughness")
 
 				var texture_sampler = RDSamplerState.new()
+				texture_sampler.mip_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				texture_sampler = rd.sampler_create(texture_sampler)
-
 
 				var parameters := PackedFloat32Array([size.x, size.y, 0.0, 0.0])
 				var inv_proj_mat = p_render_data.get_render_scene_data().get_cam_projection().inverse()

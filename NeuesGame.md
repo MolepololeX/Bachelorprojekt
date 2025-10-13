@@ -18,28 +18,37 @@ TODO als Basis:
 x 2.5D Environment Ausprobieren
 - Kessel zum Kombinieren von N Materialien, immer das was drinne liegt mit dem Was reingehauen wird
 x Simples Movement mit Jump
-- Simple Attack mit einem Dagger mit Trail
+x Simple Attack mit einem Dagger mit Trail
 - Slime Mob mit Slime Drop
 - Kann dann Kombiniert werden im Kessel zu Quecksilber II, welches den Spieler bei Use killt
 - Item kann geused werden
 x Simple Inventarleiste oder 3x3 Grid
 
 
-TODO vorher:
-	
+# TODO vorher:
 	
 	x gameManager mit paar globals
 	x camera based movenent
 	x axe raycast fixen
-	- lighting fixen bzw aendern
-	- fishing minigame
-	- wasser shader mit cell noise simpel aber mit reflections
+	x lighting fixen bzw aendern
+	x wasser shader mit cell noise simpel aber mit reflections
+	x poof particles mit no depth test testen
+	x kleine zoom ui die mir den aktuellen zoom anzeigt und dann wegfaded
 	
+	# Features
+	- wind sound effekt mit grass wind kombinieeren -> 1 sfx der random spielt -> dann per korve den wind machen und im shader setzten
+	- movement fixen indem alles sich nur in pixeln bewegen kann
+	- actually mechanics implementieren
+	- fishing minigame
+	
+	# Fixes
+	- nochmal nachschauen wie ich komplett harte schatten bekomm
 	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht
 	
-	- poof particles mit no depth test testen
-	- kleine zoom ui die mir den aktuellen zoom anzeigt und dann wegfaded
-	- actually mechanics implementieren
-	- wind sound effekt mit grass wind kombinieeren -> 1 sfx der random spielt -> dann per korve den wind machen und im shader setzten
-    - movement fixen indem alles sich nur in pixeln bewegen kann
-    - nochmal nachschauen wie ich komplett harte schatten bekomm
+	
+	- TODO wenn bock auf dogshit: FIX OUTLINE COMPUTE SHADER
+	- fix random memory corruption
+	- play testproject from the video to test if it hast similar problems
+	- aaaaa
+	- fix depth buffer being entirely misaligned and seemingly ignoring my camera snapping which perfectly works in the rendered image
+	- maybe durch uv's quantizen aka steppen

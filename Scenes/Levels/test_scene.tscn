@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=75 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/grass_floor_noise.tres" id="1_5yayu"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="1_877y0"]
@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://bfa700tq610ig" path="res://Scenes/Camera/camera_trigger.tscn" id="36_2m5lv"]
 [ext_resource type="AudioStream" uid="uid://d0nemtjqmxxeg" path="res://Assets/Sounds/forest-wind-with-birds-singing-364368.mp3" id="36_qhxvw"]
 [ext_resource type="Shader" uid="uid://3c03y4ec08yb" path="res://Assets/Shaders/PostFX/PostPixelDeSnap.gdshader" id="36_va1if"]
+[ext_resource type="Script" uid="uid://c1rn8hsf4fqwy" path="res://Scripts/UI/ZoomDisplay.cs" id="41_877y0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbnq1"]
 diffuse_mode = 3
@@ -248,27 +249,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37177294, 0)
-bones/4/rotation = Quaternion(-0.55062693, -0.0594918, -0.6487339, 0.5219341)
-bones/5/rotation = Quaternion(4.509042e-08, -4.5087624e-08, -0.4952935, 0.8687258)
-bones/7/rotation = Quaternion(-0.31834683, -0.33508, 0.14109609, 0.875482)
-bones/8/rotation = Quaternion(0.001505811, 0.0015058026, -0.7015566, 0.7126105)
-bones/9/rotation = Quaternion(-0.6098212, 0.07985944, 0.62288326, 0.48348433)
-bones/10/rotation = Quaternion(1.0532859e-08, 8.8640974e-08, 0.51848775, 0.855085)
-bones/12/rotation = Quaternion(-0.31730002, 0.31010816, -0.22305048, 0.86798733)
-bones/13/rotation = Quaternion(0.004537741, 0.0053447923, 0.70237064, 0.71177685)
-bones/15/rotation = Quaternion(0.9901402, 0.08353341, 0.07833566, 0.080673434)
-bones/16/rotation = Quaternion(0.37812376, 6.2619065e-08, -2.5970184e-07, 0.9257551)
-bones/17/rotation = Quaternion(-0.6126315, -0.20184681, 0.07365297, 0.7606022)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.92015594, -0.39155215, 5.9089115e-07)
-bones/19/rotation = Quaternion(0.99211216, -0.032967515, 0.029965814, 0.11717021)
-bones/20/rotation = Quaternion(0.42401904, -6.0528414e-08, 2.9604237e-07, 0.9056533)
-bones/21/rotation = Quaternion(-0.6393035, 0.11275743, -0.021909358, 0.76032686)
-bones/38/position = Vector3(0.52084064, 0.76834404, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7683439, 0.059736915)
+bones/1/position = Vector3(0, 0.37712544, 0)
+bones/4/rotation = Quaternion(-0.5515934, -0.06219122, -0.65565306, 0.51185554)
+bones/5/rotation = Quaternion(1.8097513e-08, -5.6112327e-08, -0.4794919, 0.87754637)
+bones/7/rotation = Quaternion(-0.31688184, -0.33069572, 0.1351918, 0.87860656)
+bones/8/rotation = Quaternion(0.0016509637, 0.001650962, -0.7010192, 0.71313864)
+bones/9/rotation = Quaternion(-0.6110544, 0.08235365, 0.628728, 0.4738476)
+bones/10/rotation = Quaternion(2.4197913e-08, 4.650892e-08, 0.5034113, 0.864047)
+bones/12/rotation = Quaternion(-0.3155619, 0.3049616, -0.21694162, 0.8719836)
+bones/13/rotation = Quaternion(0.004334426, 0.0051053157, 0.70258427, 0.7115691)
+bones/15/rotation = Quaternion(0.9913017, 0.08323226, 0.077382006, 0.06637404)
+bones/16/rotation = Quaternion(0.34042698, 5.9704554e-08, -2.4215885e-07, 0.940271)
+bones/17/rotation = Quaternion(-0.5929056, -0.20389745, 0.06697553, 0.7761463)
+bones/18/rotation = Quaternion(6.657267e-06, 0.9201636, -0.3915341, -1.4500565e-06)
+bones/19/rotation = Quaternion(0.9935604, -0.032105014, 0.030325094, 0.10434353)
+bones/20/rotation = Quaternion(0.39079228, -6.068423e-08, 2.7331922e-07, 0.920479)
+bones/21/rotation = Quaternion(-0.62138367, 0.113308296, -0.018793762, 0.7750423)
+bones/38/position = Vector3(0.52084064, 0.76787657, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.76787645, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2075349, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2128874, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -730,6 +731,8 @@ light_volumetric_fog_energy = 1.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_blur = 0.0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 50.0
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TempSceneRoot", "Player", "Camera", "CameraRig", "ZoomShaderColorRect", "InventoryDebugLabel")]
 script = ExtResource("1_877y0")
@@ -742,7 +745,7 @@ InventoryDebugLabel = NodePath("../UI/Control/Label")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(320, 180)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewport" instance=ExtResource("2_hb2rl")]
@@ -777,7 +780,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -785,10 +787,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ZoomDisplay" type="Control" parent="UI" node_paths=PackedStringArray("_camRig", "_label")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("41_877y0")
+_camRig = NodePath("../../SubViewport/CameraRig")
+_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="UI/ZoomDisplay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Control" parent="UI" instance=ExtResource("28_eh82s")]
+visible = false
 layout_mode = 1
 
 [node name="FPSCounter" parent="UI" instance=ExtResource("30_5yayu")]
+visible = false
 layout_mode = 1
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
