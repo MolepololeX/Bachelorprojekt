@@ -20,5 +20,10 @@ void fragment() {
 	uv.x -= texelSizeX * snapDeltaX;
 	uv.y += texelSizeY * snapDeltaY;
 	
-	COLOR = texture(viewport_texture, uv);
+	//float n = 8.0;
+	
+	vec4 color = texture(viewport_texture, uv);
+	//color = floor(color * (n - 1.0) + 0.5) / (n - 1.0);
+	
+	COLOR = color;
 }
