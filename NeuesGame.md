@@ -50,6 +50,7 @@ x Simple Inventarleiste oder 3x3 Grid
 	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht
 	
 	
+    - DIGGA MAYBE EINFACH MAL NICH ALS POST PROCESSING EFFECT MACHEN SONDERN ALS MATERIAL / MATERIAL OVERLAY ODER EXTRA MATERIAL PASS
 	- TODO wenn bock auf dogshit: FIX OUTLINE COMPUTE SHADER
 	- fix random memory corruption
 	- play testproject from the video to test if it hast similar problems
