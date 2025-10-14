@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://chmw4cno5r0ub"]
+
+[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/Environment/WorldItems/WorldItemBase.tscn" id="1_aix8c"]
+[ext_resource type="Material" uid="uid://byvjw0kncb6nh" path="res://Assets/Materials/QuicksilverII.tres" id="2_aix8c"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_b1t1t"]
+material = ExtResource("2_aix8c")
+
+[node name="WorldItem" instance=ExtResource("1_aix8c")]
+itemType = 5
+
+[node name="CollisionShape3D" parent="RigidBody3D/Area3D" index="0"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/Model" index="0"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+mesh = SubResource("SphereMesh_b1t1t")

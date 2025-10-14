@@ -6,6 +6,7 @@ namespace Game.Item
 		Copper,
 		Slime,
 		Wood,
+		Plank,
+		QuicksilverII,
 	}
-
 }

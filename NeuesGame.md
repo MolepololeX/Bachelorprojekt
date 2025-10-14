@@ -41,6 +41,9 @@ x Simple Inventarleiste oder 3x3 Grid
 	- actually mechanics implementieren
 	- fishing minigame
 	- color quantization und palettew
+	- falling leafes texturen aendern fuer baeume
+	
+	- aus quecksilber II eine lupe die einem anzeigt was actually im cauldron drinne is
 	
 	# Fixes
 	- nochmal nachschauen wie ich komplett harte schatten bekomm

@@ -32,7 +32,7 @@ namespace Game.PlayerStuff
 		private bool _canJump = false;
 
 		public ItemType[] Inventory = {
-		ItemType.None, ItemType.None, ItemType.None,
+		ItemType.Wood, ItemType.Wood, ItemType.Wood,
 		ItemType.None, ItemType.None, ItemType.None,
 		ItemType.None, ItemType.None, ItemType.None
 	};
@@ -163,7 +163,9 @@ namespace Game.PlayerStuff
 
 		public ItemType RequestCurrentSelectedItem()
 		{
-			return Inventory[_currentInventoryIndex];
+			ItemType temp = Inventory[_currentInventoryIndex];
+			Inventory[_currentInventoryIndex] = ItemType.None;
+			return temp;
 		}
 	}
 }

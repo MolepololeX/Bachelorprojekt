@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1qdxfmogmenf"]
+[gd_scene load_steps=9 format=3 uid="uid://p1b6hvdrgefu"]
 
-[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/Environment/WorldItems/WorldItemBase.tscn" id="1_pep2k"]
-[ext_resource type="PackedScene" uid="uid://dxvfkk0ujo78v" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Wood_Log_A.gltf" id="2_iyu6f"]
-[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="3_ukpke"]
+[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/Environment/WorldItems/WorldItemBase.tscn" id="1_uyxnj"]
+[ext_resource type="PackedScene" uid="uid://dxvfkk0ujo78v" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Wood_Log_A.gltf" id="2_f1ibl"]
+[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="3_8pw6c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
 size = Vector3(0.5, 0.5, 1.5)
@@ -12,7 +12,7 @@ radius = 0.3
 height = 1.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ukpke"]
-material = ExtResource("3_ukpke")
+material = ExtResource("3_8pw6c")
 radial_segments = 6
 rings = 0
 
@@ -26,8 +26,8 @@ material = SubResource("StandardMaterial3D_b6ob8")
 radial_segments = 6
 rings = 0
 
-[node name="WorldItem" instance=ExtResource("1_pep2k")]
-itemType = 3
+[node name="WorldItem" instance=ExtResource("1_uyxnj")]
+itemType = 4
 
 [node name="CollisionShape3D" parent="RigidBody3D" index="0"]
 shape = SubResource("BoxShape3D_iyu6f")
@@ -36,13 +36,14 @@ shape = SubResource("BoxShape3D_iyu6f")
 transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_iyu6f")
 
-[node name="Wood_Log_A2" parent="RigidBody3D/Model" index="0" instance=ExtResource("2_iyu6f")]
+[node name="Wood_Log_A2" parent="RigidBody3D/Model" index="0" instance=ExtResource("2_f1ibl")]
 visible = false
 
 [node name="Node3D" type="Node3D" parent="RigidBody3D/Model" index="1"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="0"]
 transform = Transform3D(0.54999995, 0, 0, 0, -3.1997736e-08, -0.54999995, 0, 0.7320229, -2.4041261e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("CylinderMesh_ukpke")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="1"]

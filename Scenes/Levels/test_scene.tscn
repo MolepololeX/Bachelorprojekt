@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=61 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/grass_floor_noise.tres" id="1_5yayu"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="1_877y0"]
@@ -26,8 +26,10 @@
 [ext_resource type="PackedScene" uid="uid://dqtnikfstlns1" path="res://Scenes/Environment/WorldItems/CopperNugget.tscn" id="32_5yayu"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/Environment/WorldItems/WoodLog.tscn" id="33_alwko"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/choppable_tree.tscn" id="33_mu1jd"]
+[ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/Environment/WorldItems/WoodPlank.tscn" id="34_bevfg"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/Post_Outlines.gd" id="34_mu1jd"]
 [ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="35_hpgqd"]
+[ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/Environment/WorldItems/QuecksilberII.tscn" id="35_mbnq1"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/Water.gdshader" id="35_va1if"]
 [ext_resource type="AudioStream" uid="uid://d0nemtjqmxxeg" path="res://Assets/Sounds/forest-wind-with-birds-singing-364368.mp3" id="36_qhxvw"]
 [ext_resource type="Shader" uid="uid://3c03y4ec08yb" path="res://Assets/Shaders/PostFX/PostPixelDeSnap.gdshader" id="36_va1if"]
@@ -183,7 +185,7 @@ shader_parameter/testMult = 0.0
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_2u58p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.385561, -0.006478554, 3.069016)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1740232, 1.4386984, -0.1605246)
 Speed = 2.03
 DragMult = 10.0
 
@@ -191,27 +193,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36977315, 0)
-bones/4/rotation = Quaternion(-0.55180544, -0.056504294, -0.6375958, 0.534593)
-bones/5/rotation = Quaternion(3.6942108e-08, -6.6427056e-08, -0.51620203, 0.85646695)
-bones/7/rotation = Quaternion(-0.32151058, -0.33845022, 0.15014634, 0.87151504)
-bones/8/rotation = Quaternion(0.00093984767, 0.0009398452, -0.7036482, 0.7105473)
-bones/9/rotation = Quaternion(-0.6103642, 0.07702151, 0.61319035, 0.49550065)
-bones/10/rotation = Quaternion(1.8908436e-08, 4.7771895e-08, 0.53854215, 0.84259856)
-bones/12/rotation = Quaternion(-0.32057187, 0.31467018, -0.23234057, 0.86269015)
-bones/13/rotation = Quaternion(0.0029589494, 0.0034852051, 0.704026, 0.71015954)
-bones/15/rotation = Quaternion(0.98968977, 0.08369032, 0.07865973, 0.08557338)
-bones/16/rotation = Quaternion(0.39109433, 5.952046e-08, -2.651533e-07, 0.9203507)
-bones/17/rotation = Quaternion(-0.6194443, -0.20106894, 0.076023474, 0.75503683)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.920156, -0.39155215, 5.908911e-07)
-bones/19/rotation = Quaternion(0.9915679, -0.03328318, 0.029838327, 0.12163478)
-bones/20/rotation = Quaternion(0.43561748, -5.842972e-08, 3.0312876e-07, 0.90013194)
-bones/21/rotation = Quaternion(-0.64559174, 0.112538636, -0.023025705, 0.75499415)
-bones/38/position = Vector3(0.52084064, 0.7752369, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7752368, 0.059736915)
+bones/1/position = Vector3(0, 0.3786462, 0)
+bones/4/rotation = Quaternion(-0.5553302, -0.057768583, -0.63850117, 0.52970505)
+bones/5/rotation = Quaternion(2.295013e-08, -6.625699e-08, -0.5108075, 0.85969514)
+bones/7/rotation = Quaternion(-0.3218255, -0.33362234, 0.14984861, 0.8733098)
+bones/8/rotation = Quaternion(0.00046978, 0.00046976793, -0.7053804, 0.7088286)
+bones/9/rotation = Quaternion(-0.6137109, 0.078028105, 0.6136798, 0.49057913)
+bones/10/rotation = Quaternion(1.0675103e-08, 6.026778e-08, 0.53337663, 0.845878)
+bones/12/rotation = Quaternion(-0.32056218, 0.30959716, -0.2318525, 0.8646583)
+bones/13/rotation = Quaternion(0.0015101183, 0.0017786942, 0.7055381, 0.7086682)
+bones/15/rotation = Quaternion(0.9916153, 0.08318029, 0.077084295, 0.061954062)
+bones/16/rotation = Quaternion(0.3288093, 5.864134e-08, -2.2928923e-07, 0.94439644)
+bones/17/rotation = Quaternion(-0.586843, -0.20447247, 0.06497498, 0.7807591)
+bones/18/rotation = Quaternion(1.4905054e-05, 0.92017084, -0.39151704, -3.3281285e-06)
+bones/19/rotation = Quaternion(0.9939663, -0.031854436, 0.030432284, 0.1004501)
+bones/20/rotation = Quaternion(0.38072354, -6.092419e-08, 2.662099e-07, 0.92468894)
+bones/21/rotation = Quaternion(-0.6159744, 0.113454916, -0.017871441, 0.7793486)
+bones/38/position = Vector3(0.52084064, 0.7816517, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.78165156, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2055352, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2144082, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -288,11 +290,7 @@ visible = false
 
 [node name="Cauldron" parent="Level/Env/podest" instance=ExtResource("1_sgftv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16913056, 0)
-
-[node name="OmniLight3D" parent="Level/Env/podest/Cauldron" index="3"]
-light_energy = 1.0
-light_size = 1.0
-omni_range = 4.255
+_itemExplosionVelocity = 5.0
 
 [node name="floor_foundation_front5" parent="Level/Env/podest" instance=ExtResource("19_mu1jd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 2)
@@ -501,6 +499,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.614756, -2.0192466, 10.584
 
 [node name="Floor" type="MeshInstance3D" parent="Level/Env"]
 transform = Transform3D(3.1653116, 0, 0, 0, 1, 0, 0, 0, 2.1653116, 0, 0, -10)
+mesh = SubResource("PlaneMesh_bevfg")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_5yayu")
+
+[node name="Floor2" type="MeshInstance3D" parent="Level/Env"]
+transform = Transform3D(3.1653116, 0, 0, 0, 1, 0, 0, 0, 2.1653116, 0, 0, 33.06229)
 mesh = SubResource("PlaneMesh_bevfg")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_5yayu")
@@ -748,14 +752,18 @@ Camera = NodePath("../SubViewport/CameraRig/Camera3D")
 CameraRig = NodePath("../SubViewport/CameraRig")
 WorldItems = Dictionary[int, PackedScene]({
 1: ExtResource("32_5yayu"),
-3: ExtResource("33_alwko")
+3: ExtResource("33_alwko"),
+4: ExtResource("34_bevfg"),
+5: ExtResource("35_mbnq1")
 })
 ZoomShaderColorRect = NodePath("../PostPixelDeSnap")
 InventoryDebugLabel = NodePath("../UI/Control/Label")
 
+[node name="WorldItem" parent="." instance=ExtResource("35_mbnq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8908567, 2.9113905, 15.477964)
+
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]
-[editable path="Level/Env/podest/Cauldron"]
 [editable path="Level/Env/WindEffect"]
 [editable path="SubViewport/CameraRig"]
 [editable path="UI/Control"]

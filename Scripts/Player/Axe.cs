@@ -59,7 +59,7 @@ namespace Game.PlayerStuff
 			float y = mousePos.Y / GetViewport().GetWindow().Size.Y;
 			Vector2 mpn = new Vector2(x * 2.0f - 1.0f, y * 2.0f - 1.0f);
 			mpn = mpn.Rotated(-GameManager.Instance.CameraRig.Rotation.Y);
-			var lookAtPos = GameManager.Instance.Player.Position + new Vector3(mpn.X, GameManager.Instance.Player.Position.Y, mpn.Y);
+			var lookAtPos = GameManager.Instance.Player.Position + new Vector3(mpn.X, 0.0f /*GameManager.Instance.Player.Position.Y*/, mpn.Y);
 			LookAt(lookAtPos);
 
 			// var origin = cam.ProjectRayOrigin(mousePos);
