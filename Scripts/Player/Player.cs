@@ -1,4 +1,5 @@
 using Game.Camera;
+using Game.InventoryStuff;
 using Game.Item;
 using Game.Managers;
 using Godot;
@@ -9,55 +10,28 @@ namespace Game.PlayerStuff
 {
 	public partial class Player : CharacterBody3D
 	{
+		[Export] public AnimationTree AnimTree;
+		[Export] public float Speed { get; set; } = 14;
+		[Export] public int FallAcceleration { get; set; } = 75;
+		[Export] public float JumpForce { get; set; } = 500;
+		[Export] public float DragMult { get; set; } = .8f;
+		[Export] public float LookAtInterpolation { get; set; } = .8f;
 
-		[Export]
-		public AnimationTree AnimTree;
-
-		private Label InvDebugLabel;
-		private Node3D camRig;
-
-		[Export]
-		public float Speed { get; set; } = 14;
-		[Export]
-		public int FallAcceleration { get; set; } = 75;
-		[Export]
-		public float JumpForce { get; set; } = 500;
-		[Export]
-		public float DragMult { get; set; } = .8f;
-		[Export]
-		public float LookAtInterpolation { get; set; } = .8f;
 
 		private Vector3 _lastDir = Vector3.Forward;
 		private Vector3 _targetVelocity = Vector3.Zero;
 		private bool _canJump = false;
+		private Node3D camRig;
 
-		public ItemType[] Inventory = {
-		ItemType.Wood, ItemType.Wood, ItemType.Wood,
-		ItemType.None, ItemType.None, ItemType.None,
-		ItemType.None, ItemType.None, ItemType.None
-	};
-		public int _currentInventoryIndex = 0;
+		public Inventory Inventory = new Inventory();
 
 		public override void _Ready()
 		{
-			InvDebugLabel = GameManager.Instance.InventoryDebugLabel;
 			camRig = GameManager.Instance.CameraRig;
 		}
 
-
 		public override void _PhysicsProcess(double delta)
 		{
-			// if (Input.IsActionPressed("move_jump") && canJump)
-			// {
-			// 	_targetVelocity.Y = JumpForce;
-			// 	canJump = false;
-			// 	AnimTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
-			// }
-			// else if (!Input.IsActionPressed("move_jump") && !canJump)
-			// {
-			// 	canJump = true;
-			// }
-
 			var direction = Vector3.Zero;
 
 			if (Input.IsActionPressed("move_right"))
@@ -124,48 +98,17 @@ namespace Game.PlayerStuff
 
 		public override void _Process(double delta)
 		{
-			if (Input.IsActionJustPressed("selection_left"))
+			if (Inventory.Content.Count != 0)
 			{
-				_currentInventoryIndex = _currentInventoryIndex > 0 ? _currentInventoryIndex - 1 : Inventory.Length - 1;
-			}
-			if (Input.IsActionJustPressed("selection_right"))
-			{
-				_currentInventoryIndex = _currentInventoryIndex < Inventory.Length - 1 ? _currentInventoryIndex + 1 : 0;
-			}
-
-			String test = "";
-			for (int i = 0; i < Inventory.Length; i++)
-			{
-				if (i == _currentInventoryIndex)
+				if (Input.IsActionJustPressed("selection_left"))
 				{
-					test += "> " + Inventory[i].ToString() + "\n";
+					Inventory.SelectionIndex = Inventory.SelectionIndex > 0 ? Inventory.SelectionIndex - 1 : Inventory.Content.Count - 1;
 				}
-				else
+				if (Input.IsActionJustPressed("selection_right"))
 				{
-					test += Inventory[i].ToString() + "\n";
+					Inventory.SelectionIndex = Inventory.SelectionIndex < Inventory.Content.Count - 1 ? Inventory.SelectionIndex + 1 : 0;
 				}
 			}
-			InvDebugLabel.Text = test;
-		}
-
-		public bool TryAddToInventory(ItemType item)
-		{
-			for (int i = 0; i < Inventory.Length; i++)
-			{
-				if (Inventory[i] == ItemType.None)
-				{
-					Inventory[i] = item;
-					return true;
-				}
-			}
-			return false;
-		}
-
-		public ItemType RequestCurrentSelectedItem()
-		{
-			ItemType temp = Inventory[_currentInventoryIndex];
-			Inventory[_currentInventoryIndex] = ItemType.None;
-			return temp;
 		}
 	}
 }

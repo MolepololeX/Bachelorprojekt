@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dap3lhtvaqmm0"]
 
-[ext_resource type="Script" uid="uid://b1mbkal63yt36" path="res://Scripts/Items/WorldItem.cs" id="1_qd48u"]
+[ext_resource type="Script" uid="uid://b1mbkal63yt36" path="res://Scripts/Item/WorldItem.cs" id="1_qd48u"]
 [ext_resource type="PackedScene" uid="uid://6whst0kphmpv" path="res://Scenes/VFX/poof_effect_small.tscn" id="2_o4v1a"]
 [ext_resource type="PackedScene" uid="uid://b5und13f1wc7f" path="res://Scenes/VFX/poof_effect_small_continous.tscn" id="3_6wsj1"]
 [ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="3_u77vp"]

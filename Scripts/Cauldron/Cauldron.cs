@@ -39,27 +39,14 @@ namespace Game.Cauldron
         {
             if (Input.IsActionJustPressed("cauldron_add"))
             {
-                ItemType itemType = _player.RequestCurrentSelectedItem();
+                ItemType itemType = _player.Inventory.RequestCurrentSelectedItem();
                 if (itemType == ItemType.None)
                 {
                     GD.Print("...No Item Selected");
                     return;
                 }
 
-                if (!GameManager.Instance.WorldItems.ContainsKey(itemType))
-                {
-                    GD.Print("...No spawnable WorldItem Found");
-                    return;
-                }
-
-                PackedScene item = GameManager.Instance.WorldItems[itemType];
-                WorldItem i = item.Instantiate() as WorldItem;
-                if (i == null)
-                {
-                    GD.Print("...Cast to WorldItem failed");
-                    return;
-                }
-
+                WorldItem i = WorldItem.CreateInstanceFromType(itemType);
                 i.Position = _itemSpawnPosition.GlobalPosition;
                 GameManager.Instance.TempSceneRoot.AddChild(i);
                 i.DropAsItemInCauldron(.7f);
@@ -84,26 +71,6 @@ namespace Game.Cauldron
             if (_content.Count == 0) return;
             ItemType result = ItemType.None;
 
-            // ItemType temp = _content[0];
-            // bool allTheSame = true;
-            // foreach (var item in _content)
-            // {
-            //     if (temp != item)
-            //         allTheSame = false;
-            // }
-            // if (allTheSame)
-            // {
-            //     List<ItemType> c = [_content[0]];
-            //     var recipeResult = Recipes.SolveRecipe(c);
-            //     result = recipeResult.Item1;
-            //     foreach (var i in _content)
-            //     {
-            //         DropResult(result);
-            //     }
-            //     _content.Clear();//NOTE: temp
-            // }
-            // else
-            // {
             var recipeResult = Recipes.SolveRecipe2(_content);
             result = recipeResult.Item1;
             DropResult(result);
@@ -122,14 +89,7 @@ namespace Game.Cauldron
 
         private void DropResult(ItemType result)
         {
-            if (!GameManager.Instance.WorldItems.ContainsKey(result))
-            {
-                GD.Print(">Failed Dropping Result > No spawnable WorldItem foundt");
-                return;
-            }
-
-            PackedScene itemScene = GameManager.Instance.WorldItems[result];
-            WorldItem item = itemScene.Instantiate() as WorldItem;
+            WorldItem item = WorldItem.CreateInstanceFromType(result);
             item.Position = GameManager.Instance.Player.GlobalPosition + new Vector3(0.0f, _itemExtractOffsetHeight, 0.0f);
             GameManager.Instance.TempSceneRoot.AddChild(item);
         }
@@ -138,22 +98,19 @@ namespace Game.Cauldron
         {
             foreach (var itemType in _content)
             {
-                if (!GameManager.Instance.WorldItems.ContainsKey(itemType))
-                    continue;
+                WorldItem item = WorldItem.CreateInstanceFromType(itemType);
 
-                PackedScene itemScene = GameManager.Instance.WorldItems[itemType];
-                WorldItem item = itemScene.Instantiate() as WorldItem;
                 item.Position = GlobalPosition + new Vector3(
                     (float)GD.RandRange(-1.0, 1.0) * _itemExplosionVelocity * 0.1f,
                      _itemExplosionHeightOffset,
                     (float)GD.RandRange(-1.0, 1.0) * _itemExplosionVelocity * 0.1f
                     );
+
                 GameManager.Instance.TempSceneRoot.AddChild(item);
-                item.GiveVelocity(new Vector3(
+
+                item.GiveRandomVelocity(new Vector3(
                     (float)GD.RandRange(-1.0, 1.0) * _itemExplosionVelocity,
                     _itemExplosionVelocity,
-                    // (float)GD.RandRange(-1.0, 1.0) * _itemExplosionVelocity,
-                    // 0.0f,
                     (float)GD.RandRange(-1.0, 1.0) * _itemExplosionVelocity
                 ));
             }

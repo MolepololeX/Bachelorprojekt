@@ -16,11 +16,11 @@
 TODO als Basis:
 
 x 2.5D Environment Ausprobieren
-- Kessel zum Kombinieren von N Materialien, immer das was drinne liegt mit dem Was reingehauen wird
+x Kessel zum Kombinieren von N Materialien, immer das was drinne liegt mit dem Was reingehauen wird
 x Simples Movement mit Jump
 x Simple Attack mit einem Dagger mit Trail
 - Slime Mob mit Slime Drop
-- Kann dann Kombiniert werden im Kessel zu Quecksilber II, welches den Spieler bei Use killt
+x Kann dann Kombiniert werden im Kessel zu Quecksilber II, welches den Spieler bei Use killt
 - Item kann geused werden
 x Simple Inventarleiste oder 3x3 Grid
 
@@ -50,7 +50,9 @@ x Simple Inventarleiste oder 3x3 Grid
 	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht
 	
 	
-    - DIGGA MAYBE EINFACH MAL NICH ALS POST PROCESSING EFFECT MACHEN SONDERN ALS MATERIAL / MATERIAL OVERLAY ODER EXTRA MATERIAL PASS
+	- DIGGA MAYBE EINFACH MAL NICH ALS POST PROCESSING EFFECT MACHEN SONDERN ALS MATERIAL / MATERIAL OVERLAY ODER EXTRA MATERIAL PASS... ok nvm funkt ne
+	https://godotforums.org/d/41442-make-a-shader-ignore-specific-objects
+	===> depth-composite und grass oder so in separate viewports rendern
 	- TODO wenn bock auf dogshit: FIX OUTLINE COMPUTE SHADER
 	- fix random memory corruption
 	- play testproject from the video to test if it hast similar problems
