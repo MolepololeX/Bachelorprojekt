@@ -456,6 +456,7 @@ transform = Transform3D(2.26, 0, 0, 0, 2.26, 0, 0, 0, 2.26, 0.008574009, 5.21301
 mesh = ExtResource("3_bvigf")
 
 [node name="Tree_Maple_Leaves" parent="Pivot/model" instance=ExtResource("6_oi0lj")]
+visible = false
 
 [node name="Tree_Maple_Leaves2" parent="Pivot/model" instance=ExtResource("6_oi0lj")]
 visible = false
@@ -467,8 +468,7 @@ visible = false
 [node name="Leaves" parent="Pivot/model/Tree_Maple_Leaves2" index="1"]
 visible = false
 
-[node name="Leaves2" parent="Pivot/model/Tree_Maple_Leaves2" index="2"]
-visible = false
+[node name="Tree_Maple_Leaves3" parent="Pivot/model" instance=ExtResource("6_oi0lj")]
 
 [node name="Collission" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
 collision_layer = 5
