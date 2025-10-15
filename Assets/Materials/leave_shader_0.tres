@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://be1h4ltm3tjqh"]
+
+[ext_resource type="Shader" uid="uid://bo5usgi6c3hn4" path="res://Assets/Shaders/LeafShader.gdshader" id="1_7py7j"]
+[ext_resource type="Texture2D" uid="uid://ou1vt2tajtwy" path="res://Assets/Textures/leave_alpha.png" id="2_1ekou"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7jp5u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3eoxa"]
+noise = SubResource("FastNoiseLite_7jp5u")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7py7j")
+shader_parameter/color = Color(0.06467812, 0.3084013, 0.1289852, 1)
+shader_parameter/leaveAlpha = ExtResource("2_1ekou")
+shader_parameter/noise = SubResource("NoiseTexture2D_3eoxa")
