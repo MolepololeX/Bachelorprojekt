@@ -47,18 +47,26 @@ namespace Game.Camera
 			if (Input.IsActionJustPressed("camera_zoom_out"))
 			{
 				float newSize = _cam.Size + _zoomIncrement;
-				if (newSize < _minZoom)
+				if (newSize <= _minZoom)
 				{
 					_cam.Size = newSize;
-				}
+                }
+                else
+                {
+					_cam.Size = _minZoom;
+                }
 			}
 			if (Input.IsActionJustPressed("camera_zoom_in"))
 			{
 				float newSize = _cam.Size - _zoomIncrement;
-				if (newSize > _maxZoom)
+				if (newSize >= _maxZoom)
 				{
 					_cam.Size = newSize;
-				}
+                }
+                else
+                {
+					_cam.Size = _maxZoom;
+                }
 			}
 			_currentZoom = _originalCamSize / _cam.Size;
 

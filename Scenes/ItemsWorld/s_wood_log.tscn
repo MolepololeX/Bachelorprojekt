@@ -5,11 +5,11 @@
 [ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/m_tree_bark.tres" id="3_ukpke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
-size = Vector3(0.5, 0.5, 1.5)
+size = Vector3(0.25, 0.25, 0.75)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iyu6f"]
-radius = 0.3
-height = 1.0
+radius = 0.15
+height = 0.5
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ukpke"]
 material = ExtResource("3_ukpke")
@@ -28,6 +28,8 @@ rings = 0
 
 [node name="WorldItem" instance=ExtResource("1_pep2k")]
 itemType = 3
+cauldronScale = 0.7
+inventoryScale = 2.5
 
 [node name="CollisionShape3D" parent="RigidBody3D" index="0"]
 shape = SubResource("BoxShape3D_iyu6f")
@@ -35,6 +37,9 @@ shape = SubResource("BoxShape3D_iyu6f")
 [node name="CollisionShape3D" parent="RigidBody3D/Area3D" index="0"]
 transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_iyu6f")
+
+[node name="Model" parent="RigidBody3D" index="2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Wood_Log_A2" parent="RigidBody3D/Model" index="0" instance=ExtResource("2_iyu6f")]
 visible = false

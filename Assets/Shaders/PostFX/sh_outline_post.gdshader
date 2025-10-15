@@ -48,7 +48,7 @@ void fragment() {
 
 	for(int i = 0; i < 4; i++){
 		float testDepth = sampleLinearDepth(depth_uv[i], INV_PROJECTION_MATRIX);
-		depthDifference += depth - testDepth;
+		depthDifference -= depth - testDepth;
 
 		if(sampleLinearDepth(closestDepthUV, INV_PROJECTION_MATRIX) > testDepth){
 			closestDepthUV = depth_uv[i];
@@ -86,12 +86,17 @@ void fragment() {
 		}else{
 			ALBEDO = mix(original, outline, depthEdge);
 		}
-
 		ALPHA = depthEdge;
 	} else{
 		ALBEDO = mix(original, original * outlineLightness, normalEdge);
 		ALPHA = normalEdge;
 	}
+	
+	//if(depthDifference >= 0.0){
+				//ALBEDO = vec3(1.0, 0.0, 0.0);
+			//}else{
+				//ALBEDO = vec3(0.0, 0.0, 1.0);
+			//}
 
 	//ALPHA = 0.9;
 

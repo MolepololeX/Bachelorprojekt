@@ -16,7 +16,7 @@ namespace Game.InventoryStuff
 
         public bool AddItem(ItemType type)
         {
-            if (Content.Count > MaxSize) return false;
+            if (Content.Count >= MaxSize) return false;
 
             Content.Add(type);
             ItemAdded?.Invoke();

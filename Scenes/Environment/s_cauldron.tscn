@@ -24,7 +24,9 @@ albedo_color = Color(0.36735147, 0.620533, 1, 0.34901962)
 _data = [Vector2(0, 1), 0.0, 1.1287661, 0, 0, Vector2(0.72674423, 0.5393259), -2.5989923, -2.5989923, 0, 0, Vector2(1, 0), -0.14494382, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p3ib6"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u55kc"]
+height = 1.0
+radius = 0.7
 
 [node name="Cauldron" type="Node3D" node_paths=PackedStringArray("_interacable", "_itemSpawnPosition")]
 script = ExtResource("1_p3ib6")
@@ -37,24 +39,28 @@ _itemExplosionVelocity = 8.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 0.099999964, 0, 0.377, 0.5)
+visible = false
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 0.099999964, 0, 0.377, -0.5)
+visible = false
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-4.371139e-08, 0, -0.099999964, 0, 0.79999995, 0, 0.99999994, 0, -4.371137e-09, -0.5, 0.377, -2.1855694e-08)
+visible = false
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-4.371139e-08, 0, -0.099999964, 0, 0.79999995, 0, 0.99999994, 0, -4.371137e-09, 0.5, 0.377, 2.1855694e-08)
+visible = false
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_1oyui")
@@ -91,6 +97,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3qbtl")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_1oyui")
@@ -145,7 +152,7 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, 0)
-shape = SubResource("BoxShape3D_p3ib6")
+shape = SubResource("CylinderShape3D_u55kc")
 
 [node name="ItemSpawnAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1154008, 0)

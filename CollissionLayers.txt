@@ -2,3 +2,4 @@
 2 - interactables
 3 - damageables/weapons
 4 - camera triggers
+5 - worlditem rigidbodys

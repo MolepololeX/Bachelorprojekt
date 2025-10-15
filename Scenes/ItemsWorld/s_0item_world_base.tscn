@@ -21,7 +21,8 @@ pickupSound = NodePath("PickupSound")
 _speedParticles = NodePath("RigidBody3D/speed_particles")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-collision_layer = 0
+collision_layer = 16
+collision_mask = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_tchc3")

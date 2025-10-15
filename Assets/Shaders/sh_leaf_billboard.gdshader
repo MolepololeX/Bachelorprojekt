@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode cull_disabled, blend_mix, depth_draw_opaque;
+render_mode cull_disabled, blend_mix, depth_draw_always;
 
 uniform vec3 color : source_color;
 uniform sampler2D leaveAlpha : filter_nearest, repeat_disable;
@@ -23,9 +23,9 @@ void vertex() {
 			//vec4(0.0, 0.0, 0.0, 1.0));
 	//MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 	 //Called for every vertex the material is visible on.
-	
+
 	lightVertexPos = MODELVIEW_MATRIX[3].xyz;
-	
+
 	// Billboard Mode: Enabled
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			MAIN_CAM_INV_VIEW_MATRIX[0],
@@ -39,11 +39,11 @@ void vertex() {
 			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
 			vec4(0.0, 0.0, 0.0, 1.0));
 	//MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
-	
+
 	vec3 up = vec3(0.0, 1.0, 0.0);
 	//NORMAL = (MODELVIEW_NORMAL_MATRIX * up).xyz;
 	NORMAL = up;
-	
+
 	//vec3 instancePos = MODEL_MATRIX[3].xyz;
 	//float seed = texture(noise, instancePos.xz).r * PI * 2.0;
 	//float sway_speed = 0.3;
@@ -56,7 +56,7 @@ void vertex() {
 		//vec4(0.0, 0.0, 1.0, 0.0),
 		//vec4(0.0, 0.0, 1.0, 1.0)
 	//);
-	
+
 	//TODO: fix rotation code
 	//VERTEX = (rotation * vec4(VERTEX, 1.0)).xyz;
 }
@@ -70,7 +70,7 @@ void fragment() {
 	ALBEDO = color;
 	ALPHA = 1.0 - texture(leaveAlpha, uvMirror).r;
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
-	
+
 	LIGHT_VERTEX = lightVertexPos;
 	// Called for every pixel the material is visible on.
 }

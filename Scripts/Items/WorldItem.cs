@@ -14,6 +14,8 @@ namespace Game.Item
 		[Export] private float inventoryScale = 1.0f;
 		[Export] private bool cauldronRandomRotate = true;
 		[Export] private bool randomRotateOnSpawn = true;
+		[Export] private bool spawnvfx = true;
+		[Export] private bool destroyvfx = true;
 		[Export] private Vector3 spawnRotation;
 
 		[ExportCategory("Base Dependencies")]
@@ -29,7 +31,8 @@ namespace Game.Item
 		public override void _Ready()
 		{
 			area.BodyEntered += OnBodyEntered;
-			SpawnVFX(spawnEffect);
+			if (spawnvfx)
+				SpawnVFX(spawnEffect);
 			_speedParticles.Emitting = false;
 
 			if (randomRotateOnSpawn)
@@ -47,7 +50,10 @@ namespace Game.Item
 			Player player = node as Player;
 			if (player.Inventory.AddItem(itemType))
 			{
-				SpawnVFX(pickupEffect);
+				if (destroyvfx)
+				{
+					SpawnVFX(pickupEffect);
+				}
 				pickupSound.Play();
 				QueueFree();
 			}
@@ -55,7 +61,7 @@ namespace Game.Item
 
 		public override void _PhysicsProcess(double delta)
 		{
-			if (rb.LinearVelocity.Length() > 1.0f)
+			if (rb.LinearVelocity.Length() > 4.0f)
 			{
 				_speedParticles.Emitting = true;
 			}
@@ -68,7 +74,7 @@ namespace Game.Item
 		private void SpawnVFX(PackedScene effect)
 		{
 			Node3D vfx = effect.Instantiate() as Node3D;
-			vfx.Position = rb.GlobalPosition;
+			vfx.Position = model.GlobalPosition;
 			GameManager.Instance.TempSceneRoot.AddChild(vfx);
 		}
 
@@ -92,17 +98,19 @@ namespace Game.Item
 
 		public void SpawnAsInventoryItem(Vector3 rotation = default)
 		{
-			if(rotation == default)
-            {
+			if (rotation == default)
+			{
 				float x = (float)Math.PI / 180.0f;
 				rotation = new Vector3(45.0f * x, 45.0f * x, 0.0f * x);
-            }
+			}
 			area.Monitoring = false;
 			rb.CollisionLayer = 0;
 			rb.CollisionMask = 0;
 			rb.GravityScale = 0.0f;
 			randomRotateOnSpawn = false;
 			spawnRotation = rotation;
+			spawnvfx = false;
+			destroyvfx = false;
 			Scale *= inventoryScale;
 		}
 

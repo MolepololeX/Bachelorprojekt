@@ -3,17 +3,18 @@ using System.Threading.Tasks;
 
 public partial class AutoDestroyEffect : GpuParticles3D
 {
-	[Export]
-	private bool autoEmitting = true;
+	private float cumulativeTime;
 	public override void _Ready()
 	{
 		Emitting = true;
-		WaitForFinished(Lifetime);
 	}
 
-	private async void WaitForFinished(double delay)
+	public override void _Process(double delta)
 	{
-		await Task.Delay((int)(delay * 1000.0));
-		QueueFree();
+		cumulativeTime += (float)delta;
+		if (cumulativeTime >= Lifetime + 0.1f)
+		{
+			QueueFree();
+		}
 	}
 }

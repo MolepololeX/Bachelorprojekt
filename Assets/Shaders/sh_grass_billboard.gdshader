@@ -54,7 +54,8 @@ void vertex() {
 
 void fragment() {
 	vec3 noiseLevel = texture(noise, (vertexWorldPos.xz + (TIME * timeScale)) / noiseScale).rgb;
-	ALBEDO = mix(color, color2, clamp(UV.y, 0.0, 1.0));// * mix(color, color2, noiseLevel.r); //TODO: fix and use UV by fixing up the grass meshes UV mapping
+	vec3 col2 = mix(color, color2, smoothstep(0.6, 0.8, noiseLevel.r));
+	ALBEDO = mix(col2, color2, clamp(UV.y, 0.0, 1.0));// * mix(color, color2, noiseLevel.r); //TODO: fix and use UV by fixing up the grass meshes UV mapping
 	ALPHA = texture(grassTexture, UV.xy).a;
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 
