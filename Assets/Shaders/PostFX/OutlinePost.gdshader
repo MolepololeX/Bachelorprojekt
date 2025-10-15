@@ -10,6 +10,7 @@ uniform float depthThreshold : hint_range(0, 10) = 0.05;
 uniform float normalThreshold : hint_range(0, 10) = 0.05;
 uniform float outlineDarkness : hint_range(-1, 1) = 0.75;
 uniform vec3 outlineColor : source_color;
+uniform float tempUseOutlineColor = 1.0;
 uniform float outlineLightness : hint_range(-10, 10) = 2.0;
 uniform float thiccness : hint_range(0, 10) = 1.0;
 
@@ -80,8 +81,12 @@ void fragment() {
 	//original = vec3(float(originalR) / steps, float(originalG) / steps, float(originalB) / steps);
 
 	if(depthEdge > 0.0){
-		//ALBEDO = mix(original, outline, depthEdge);
-		ALBEDO = mix(original, outlineColor, depthEdge);
+		if(tempUseOutlineColor >= 1.0){
+			ALBEDO = mix(original, outlineColor, depthEdge);
+		}else{
+			ALBEDO = mix(original, outline, depthEdge);
+		}
+
 		ALPHA = depthEdge;
 	} else{
 		ALBEDO = mix(original, original * outlineLightness, normalEdge);

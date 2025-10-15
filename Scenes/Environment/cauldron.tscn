@@ -2,14 +2,10 @@
 
 [ext_resource type="AudioStream" uid="uid://cs0dmypjx4evv" path="res://Assets/Sounds/Bubble heavy 1.wav" id="1_ebkes"]
 [ext_resource type="Script" uid="uid://ct4lhfy8sfioq" path="res://Scripts/Cauldron/Cauldron.cs" id="1_p3ib6"]
+[ext_resource type="Material" uid="uid://brdwpyhhoxk4a" path="res://Assets/Materials/Basic_Gray.tres" id="2_1oyui"]
 [ext_resource type="Script" uid="uid://dksyncfeem3h4" path="res://Scripts/Audio/TestAudio.cs" id="2_kammf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q8qr0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xink"]
-albedo_color = Color(0.17641911, 0.17641908, 0.17641908, 1)
-stencil_flags = 2
-stencil_outline_thickness = 0.078
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qbtl"]
 transparency = 1
@@ -43,25 +39,25 @@ _itemExplosionVelocity = 8.0
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 0.099999964, 0, 0.377, 0.5)
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xink")
+surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 0.099999964, 0, 0.377, -0.5)
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xink")
+surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-4.371139e-08, 0, -0.099999964, 0, 0.79999995, 0, 0.99999994, 0, -4.371137e-09, -0.5, 0.377, -2.1855694e-08)
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xink")
+surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-4.371139e-08, 0, -0.099999964, 0, 0.79999995, 0, 0.99999994, 0, -4.371137e-09, 0.5, 0.377, 2.1855694e-08)
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xink")
+surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-4.371139e-08, -1, 4.371139e-09, 0, -4.371139e-08, -0.1, 1, -4.371139e-08, 1.9106854e-16, 0, 0.6377536, 2.1855694e-08)
@@ -97,7 +93,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3qbtl")
 transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_q8qr0")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xink")
+surface_material_override/0 = ExtResource("2_1oyui")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
