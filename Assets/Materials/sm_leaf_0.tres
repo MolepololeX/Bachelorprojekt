@@ -12,6 +12,6 @@ seamless = true
 [resource]
 render_priority = 0
 shader = ExtResource("1_4bh6w")
-shader_parameter/color = Color(0.06467812, 0.3084013, 0.1289852, 1)
+shader_parameter/color = Color(0.19215687, 0.4117647, 0.21960784, 1)
 shader_parameter/leaveAlpha = ExtResource("2_eecnu")
 shader_parameter/noise = SubResource("NoiseTexture2D_3eoxa")

@@ -1,5 +1,6 @@
 shader_type spatial;
-render_mode cull_disabled, blend_mix, depth_draw_always;
+
+render_mode cull_disabled, blend_mix, depth_draw_opaque, diffuse_toon, specular_toon;
 
 uniform vec3 color : source_color;
 uniform vec3 color2 : source_color;
@@ -56,6 +57,7 @@ void fragment() {
 	vec3 noiseLevel = texture(noise, (vertexWorldPos.xz + (TIME * timeScale)) / noiseScale).rgb;
 	vec3 col2 = mix(color, color2, smoothstep(0.6, 0.8, noiseLevel.r));
 	ALBEDO = mix(col2, color2, clamp(UV.y, 0.0, 1.0));// * mix(color, color2, noiseLevel.r); //TODO: fix and use UV by fixing up the grass meshes UV mapping
+	ALBEDO = color2;
 	ALPHA = texture(grassTexture, UV.xy).a;
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 

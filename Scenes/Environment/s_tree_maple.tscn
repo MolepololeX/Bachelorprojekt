@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1685xjha1c0r"]
+[gd_scene load_steps=8 format=3 uid="uid://d1685xjha1c0r"]
 
 [ext_resource type="PackedScene" uid="uid://cbldjdjn77dgt" path="res://Assets/Meshes/mesh_tree_maple.glb" id="1_v5mpd"]
 [ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/m_tree_bark.tres" id="2_njofr"]
-[ext_resource type="Material" uid="uid://dqv15n7iea443" path="res://Assets/Materials/sm_leaf_1.tres" id="3_te80k"]
 [ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/sm_leaf_0.tres" id="4_te80k"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_njofr"]
-material = ExtResource("3_te80k")
+material = ExtResource("4_te80k")
 size = Vector2(2, 2)
 
 [sub_resource type="MultiMesh" id="MultiMesh_njofr"]

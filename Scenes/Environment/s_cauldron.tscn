@@ -32,7 +32,7 @@ radius = 0.7
 script = ExtResource("1_p3ib6")
 _interacable = NodePath("Area3D")
 _itemSpawnPosition = NodePath("ItemSpawnAnchor")
-_itemExplosionHeightOffset = 2.0
+_itemExplosionHeightOffset = 1.0
 _itemExplosionVelocity = 8.0
 
 [node name="Node3D" type="Node3D" parent="."]

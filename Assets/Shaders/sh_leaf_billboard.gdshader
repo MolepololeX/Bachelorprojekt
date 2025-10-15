@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode cull_disabled, blend_mix, depth_draw_always;
+render_mode cull_disabled, blend_mix, depth_draw_opaque, diffuse_toon, specular_toon;
 
 uniform vec3 color : source_color;
 uniform sampler2D leaveAlpha : filter_nearest, repeat_disable;
@@ -24,6 +24,7 @@ void vertex() {
 	//MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 	 //Called for every vertex the material is visible on.
 
+	
 	lightVertexPos = MODELVIEW_MATRIX[3].xyz;
 
 	// Billboard Mode: Enabled
@@ -44,21 +45,21 @@ void vertex() {
 	//NORMAL = (MODELVIEW_NORMAL_MATRIX * up).xyz;
 	NORMAL = up;
 
-	//vec3 instancePos = MODEL_MATRIX[3].xyz;
-	//float seed = texture(noise, instancePos.xz).r * PI * 2.0;
-	//float sway_speed = 0.3;
-	//float sway_angle = 10.0;
-	//
-	//float sway = sin((TIME * sway_speed * 2.0 * PI) + seed) * radians(sway_angle) + seed * .05;
-	//mat4 rotation = mat4(
-		//vec4(cos(sway), -sin(sway), 0.0, 0.0),
-		//vec4(sin(sway), cos(sway), 0.0, 0.0),
-		//vec4(0.0, 0.0, 1.0, 0.0),
-		//vec4(0.0, 0.0, 1.0, 1.0)
-	//);
+	
+	vec3 instancePos = MODEL_MATRIX[3].xyz;
+	float seed = texture(noise, instancePos.xz).r * PI * 2.0;
+	float sway_speed = 0.3;
+	float sway_angle = 10.0;
+	
+	float sway = sin((TIME * sway_speed * 2.0 * PI) + seed) * radians(sway_angle) + seed * .05;
+	mat4 rotation = mat4(
+		vec4(cos(sway), -sin(sway), 0.0, 0.0),
+		vec4(sin(sway), cos(sway), 0.0, 0.0),
+		vec4(0.0, 0.0, 1.0, 0.0),
+		vec4(0.0, 0.0, 0.0, 1.0)
+	);
 
-	//TODO: fix rotation code
-	//VERTEX = (rotation * vec4(VERTEX, 1.0)).xyz;
+	VERTEX = (rotation * vec4(VERTEX, 1.0)).xyz;
 }
 
 void fragment() {
