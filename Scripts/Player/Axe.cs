@@ -55,9 +55,10 @@ namespace Game.PlayerStuff
 		private void TrackMouse()
 		{
 			var mousePos = GetViewport().GetMousePosition();
-			float x = mousePos.X / GetViewport().GetWindow().Size.X;
-			float y = mousePos.Y / GetViewport().GetWindow().Size.Y;
+			float x = mousePos.X / GetViewport().GetVisibleRect().Size.X;
+			float y = mousePos.Y / GetViewport().GetVisibleRect().Size.Y;
 			Vector2 mpn = new Vector2(x * 2.0f - 1.0f, y * 2.0f - 1.0f);
+			GD.Print(mpn);
 			mpn = mpn.Rotated(-GameManager.Instance.CameraRig.Rotation.Y);
 			var lookAtPos = GameManager.Instance.Player.Position + new Vector3(mpn.X, 0.0f /*GameManager.Instance.Player.Position.Y*/, mpn.Y);
 			LookAt(lookAtPos);

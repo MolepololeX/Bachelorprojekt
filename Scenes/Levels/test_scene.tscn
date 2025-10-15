@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=67 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/grass_floor_noise.tres" id="1_5yayu"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="1_877y0"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/DebugInv.tscn" id="28_eh82s"]
 [ext_resource type="PackedScene" uid="uid://bk2n3p7qb518k" path="res://Scenes/Environment/wind_effect.tscn" id="29_hpgqd"]
 [ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/fps_counter.tscn" id="30_5yayu"]
+[ext_resource type="Script" uid="uid://c2mmo1cwktjs5" path="res://Scripts/Testing/TestButton.cs" id="30_va1if"]
 [ext_resource type="PackedScene" uid="uid://dqtnikfstlns1" path="res://Scenes/Environment/WorldItems/CopperNugget.tscn" id="32_5yayu"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/Environment/WorldItems/WoodLog.tscn" id="33_alwko"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/choppable_tree.tscn" id="33_mu1jd"]
@@ -207,27 +208,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3916308, 0)
-bones/4/rotation = Quaternion(-0.5597669, -0.06076563, -0.64376414, 0.518205)
-bones/5/rotation = Quaternion(8.744522e-09, -4.640447e-08, -0.4950352, 0.86887294)
-bones/7/rotation = Quaternion(-0.32111192, -0.32571337, 0.14596438, 0.8772071)
-bones/8/rotation = Quaternion(3.4444773e-05, 3.4450877e-05, -0.7069804, 0.70723313)
-bones/9/rotation = Quaternion(-0.61810416, 0.08062828, 0.6178434, 0.47928688)
-bones/10/rotation = Quaternion(2.8263578e-08, 4.8133398e-08, 0.5182413, 0.8552345)
-bones/12/rotation = Quaternion(-0.3193421, 0.30082777, -0.22753206, 0.8693403)
-bones/13/rotation = Quaternion(9.674595e-05, 0.0001139495, 0.7070066, 0.70720696)
-bones/15/rotation = Quaternion(0.9936981, 0.08368165, 0.07358972, 0.012091487)
-bones/16/rotation = Quaternion(0.1986448, 6.315526e-08, -1.3236196e-07, 0.9800716)
-bones/17/rotation = Quaternion(-0.519146, -0.20940985, 0.044112142, 0.8274594)
-bones/18/rotation = Quaternion(0.00010236581, 0.9202494, -0.39133257, -2.3111228e-05)
-bones/19/rotation = Quaternion(0.99727094, -0.02950213, 0.03150744, 0.059897173)
-bones/20/rotation = Quaternion(0.27618992, -6.330113e-08, 1.9455763e-07, 0.9611032)
-bones/21/rotation = Quaternion(-0.5601988, 0.11449929, -0.008807816, 0.8203595)
-bones/38/position = Vector3(0.52084064, 0.78795856, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.7879585, 0.059736922)
+bones/1/position = Vector3(0, 0.36871693, 0)
+bones/4/rotation = Quaternion(-0.5504009, -0.057475854, -0.64241886, 0.5301448)
+bones/5/rotation = Quaternion(2.5976238e-08, -5.066968e-08, -0.5082708, 0.8611974)
+bones/7/rotation = Quaternion(-0.31994745, -0.338138, 0.14621222, 0.8728793)
+bones/8/rotation = Quaternion(0.0013115155, 0.0013115106, -0.7022754, 0.711903)
+bones/9/rotation = Quaternion(-0.6092962, 0.077974685, 0.6174577, 0.49134934)
+bones/10/rotation = Quaternion(3.633738e-08, 4.072768e-08, 0.5309493, 0.8474037)
+bones/12/rotation = Quaternion(-0.3190452, 0.313877, -0.22835067, 0.8646083)
+bones/13/rotation = Quaternion(0.0040249033, 0.0047407434, 0.7029092, 0.7112524)
+bones/15/rotation = Quaternion(0.98941123, 0.083794795, 0.07885062, 0.08846812)
+bones/16/rotation = Quaternion(0.39876395, 5.823072e-08, -2.6858584e-07, 0.9170537)
+bones/17/rotation = Quaternion(-0.62347806, -0.20059149, 0.077441655, 0.7516921)
+bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
+bones/19/rotation = Quaternion(0.991235, -0.03347402, 0.029762026, 0.12428548)
+bones/20/rotation = Quaternion(0.44250673, -5.8145318e-08, 3.1029487e-07, 0.8967653)
+bones/21/rotation = Quaternion(-0.649334, 0.11240212, -0.023695614, 0.75177777)
+bones/38/position = Vector3(0.52084064, 0.7704972, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7704971, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2273928, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.204479, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("3_qhxvw")]
 
@@ -686,6 +687,14 @@ shadow_blur = 0.0
 directional_shadow_fade_start = 1.0
 directional_shadow_max_distance = 50.0
 
+[node name="SubViewport2" type="SubViewport" parent="."]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="ItemDisplayTest" parent="SubViewport2" instance=ExtResource("37_mu1jd")]
+
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(640, 360)
@@ -723,6 +732,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -760,6 +770,15 @@ layout_mode = 1
 [node name="FPSCounter" parent="UI" instance=ExtResource("30_5yayu")]
 layout_mode = 1
 
+[node name="Button" type="Button" parent="UI"]
+modulate = Color(1, 1, 1, 0.3647059)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 33.0
+offset_right = 109.0
+offset_bottom = 112.0
+script = ExtResource("30_va1if")
+
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("36_qhxvw")
 script = ExtResource("43_jxkj0")
@@ -780,14 +799,6 @@ WorldItems = Dictionary[int, PackedScene]({
 })
 ZoomShaderColorRect = NodePath("../PostPixelDeSnap")
 InventoryDebugLabel = NodePath("../UI/Control/Label")
-
-[node name="SubViewport2" type="SubViewport" parent="."]
-own_world_3d = true
-handle_input_locally = false
-size = Vector2i(640, 360)
-render_target_update_mode = 4
-
-[node name="ItemDisplayTest" parent="SubViewport2" instance=ExtResource("37_mu1jd")]
 
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]

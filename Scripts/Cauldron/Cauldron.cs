@@ -73,17 +73,19 @@ namespace Game.Cauldron
 
             var recipeResult = Recipes.SolveRecipe2(_content);
             result = recipeResult.Item1;
-            DropResult(result);
-            foreach (ItemType t in recipeResult.Item2)
-            {
-                _content.Remove(t);
-            }
-            // }
 
             if (result == ItemType.None)
             {
                 EjectContents();
                 _content.Clear();
+            }
+            else
+            {
+                DropResult(result);
+                foreach (ItemType t in recipeResult.Item2)
+                {
+                    _content.Remove(t);
+                }
             }
         }
 
