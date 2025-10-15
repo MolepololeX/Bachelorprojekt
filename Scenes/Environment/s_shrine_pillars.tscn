@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://brh3rfsotctrq"]
+
+[ext_resource type="PackedScene" uid="uid://drdotvsmaax15" path="res://Assets/Meshes/mesh_shrine_columns.glb" id="1_q36yg"]
+[ext_resource type="Material" uid="uid://brdwpyhhoxk4a" path="res://Assets/Materials/m_basic_gray.tres" id="2_b3t10"]
+
+[node name="Shrine" instance=ExtResource("1_q36yg")]
+
+[node name="Cube" parent="." index="0"]
+visible = false
+surface_material_override/0 = ExtResource("2_b3t10")
+
+[node name="Cube_001" parent="." index="1"]
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, 9, 3, 9)
+surface_material_override/0 = ExtResource("2_b3t10")
+
+[node name="Cube_002" parent="." index="2"]
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, -9, 3, 9)
+surface_material_override/0 = ExtResource("2_b3t10")
+
+[node name="Cube_003" parent="." index="3"]
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, -9, 3, -9)
+surface_material_override/0 = ExtResource("2_b3t10")
+
+[node name="Cube_004" parent="." index="4"]
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, 9, 3, -9)
+surface_material_override/0 = ExtResource("2_b3t10")

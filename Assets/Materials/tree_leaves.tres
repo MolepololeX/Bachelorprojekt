@@ -1,6 +1,0 @@
-[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://bsdj5n536sv2m"]
-
-[ext_resource type="Material" uid="uid://15weiar2k1ac" path="res://Assets/Materials/tree_leaves_mat.tres" id="1_nna64"]
-
-[resource]
-material = ExtResource("1_nna64")

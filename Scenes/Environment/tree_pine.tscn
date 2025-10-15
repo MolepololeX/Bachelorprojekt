@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7ms0n1cc5eml"]
-
-[ext_resource type="PackedScene" uid="uid://d0qft03winhal" path="res://Assets/Meshes/Tree_Pine.glb" id="1_8oosu"]
-[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/tree_bark.tres" id="2_sncnh"]
-
-[node name="Tree_Pine" instance=ExtResource("1_8oosu")]
-
-[node name="tree" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_sncnh")

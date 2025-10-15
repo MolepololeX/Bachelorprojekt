@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpnqbf76th7vn"]
+
+[ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="1_064al"]
+[ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/m_outline_post.tres" id="1_tlq43"]
+[ext_resource type="Shader" uid="uid://3c03y4ec08yb" path="res://Assets/Shaders/PostFX/sh_pixel_desnap_post.gdshader" id="3_bsstw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ynuq"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1.4439226e-07, 0.7090933, 0.37734157, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ynuq"]
+material = SubResource("StandardMaterial3D_5ynuq")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlq43"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.17092225, 0.36414653, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tlq43"]
+material = SubResource("StandardMaterial3D_tlq43")
+
+[sub_resource type="QuadMesh" id="QuadMesh_r60an"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qcaf5"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qcaf5"]
+resource_local_to_scene = true
+shader = ExtResource("3_bsstw")
+shader_parameter/viewport_texture = SubResource("ViewportTexture_qcaf5")
+shader_parameter/snapDeltaX = 0.0
+shader_parameter/snapDeltaY = 0.0
+shader_parameter/width = 320.0
+shader_parameter/height = 180.0
+shader_parameter/testMult = 0.0
+
+[node name="TestScene2" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.040291302, 4.7683716e-07, -0.008591059)
+mesh = SubResource("PlaneMesh_5ynuq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -0.003835435, 0.5, -0.010596573)
+mesh = SubResource("BoxMesh_tlq43")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.3768045, 0.6978456, -0.6091222, 0.47818568, 0.41664535, 0.7731398, 0.7933201, -0.58259606, -0.17670594, 0, 3.7789326, 0)
+shadow_enabled = true
+shadow_opacity = 0.5
+shadow_blur = 0.0
+directional_shadow_split_1 = 0.005
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(320, 180)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" node_paths=PackedStringArray("rect", "_debugLabel")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 4.524188, 7.836123)
+projection = 1
+size = 10.0
+script = ExtResource("1_064al")
+rect = NodePath("../../PostPixelDeSnap")
+_debugLabel = NodePath("../../DebugUI/Label")
+_camSpeed = 20.0
+_testmult = 35.0
+
+[node name="POSTFX" type="MeshInstance3D" parent="SubViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.8303528, -0.55723804, 0, 0.55723804, 0.8303528, -4.193416, 0.7713766, -28.380829)
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_r60an")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = ExtResource("1_tlq43")
+
+[node name="DebugUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PostPixelDeSnap" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_qcaf5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
