@@ -10,8 +10,10 @@ noise = SubResource("FastNoiseLite_7jp5u")
 seamless = true
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_4bh6w")
 shader_parameter/color = Color(0.19215687, 0.4117647, 0.21960784, 1)
 shader_parameter/leaveAlpha = ExtResource("2_eecnu")
 shader_parameter/noise = SubResource("NoiseTexture2D_3eoxa")
+shader_parameter/targetPos = Vector3(0, 0, 0)
