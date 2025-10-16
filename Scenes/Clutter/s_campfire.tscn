@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh7t32rqti3yt"]
+
+[ext_resource type="PackedScene" uid="uid://dbh8qldwocxv3" path="res://Scenes/VFX/s_fire_light_omni.tscn" id="1_f0fgg"]
+[ext_resource type="PackedScene" uid="uid://c50fjp1r550mr" path="res://Scenes/Clutter/s_clutter_wood_log.tscn" id="2_d2ikr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f0fgg"]
+
+[node name="CampFire" type="Node3D"]
+
+[node name="FireOmni" parent="." instance=ExtResource("1_f0fgg")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.38274562, 0)
+
+[node name="WoodLog3" parent="." instance=ExtResource("2_d2ikr")]
+transform = Transform3D(0.8, 0, 0, 0, 0.70295376, -0.38191107, 0, 0.38191107, 0.70295376, -7.450581e-09, 0.22947088, 0.3159247)
+
+[node name="WoodLog4" parent="." instance=ExtResource("2_d2ikr")]
+transform = Transform3D(0.33691722, 0, 0.7255941, 0, 0.8, 0, -0.7255941, 0, 0.33691722, 0.14750107, 0.13740468, 0.08515977)
+
+[node name="WoodLog5" parent="." instance=ExtResource("2_d2ikr")]
+transform = Transform3D(0.40000007, 0, -0.6928203, 0, 0.8, 0, 0.6928203, 0, 0.40000007, -0.07577099, 0.13740468, 0.043746345)
+
+[node name="WoodLog6" parent="." instance=ExtResource("2_d2ikr")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.13740468, -0.12970236)
+
+[node name="WoodLog7" parent="." instance=ExtResource("2_d2ikr")]
+transform = Transform3D(0.39999998, -0.31912562, 0.61494625, 0, 0.7100787, 0.3684945, -0.69282037, -0.18424724, 0.35503933, -0.34637332, 0.19673485, -0.19997868)
+
+[node name="WoodLog8" parent="." instance=ExtResource("2_d2ikr")]
+transform = Transform3D(0.40000007, 0.40098283, -0.56498915, 0, 0.6523933, 0.46301508, 0.6928203, -0.23150757, 0.3261967, 0.35328642, 0.1935012, -0.20397002)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_f0fgg")

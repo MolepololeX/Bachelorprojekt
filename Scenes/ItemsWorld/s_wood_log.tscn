@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1qdxfmogmenf"]
+[gd_scene load_steps=6 format=3 uid="uid://c1qdxfmogmenf"]
 
 [ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_pep2k"]
 [ext_resource type="PackedScene" uid="uid://dxvfkk0ujo78v" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Wood_Log_A.gltf" id="2_iyu6f"]
-[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/Toon/sm_toon_bark.tres" id="3_5tbjp"]
-[ext_resource type="Material" uid="uid://ctcn2okmh8ool" path="res://Assets/Materials/Toon/sm_toon_wood.tres" id="4_vj6mn"]
+[ext_resource type="PackedScene" uid="uid://c50fjp1r550mr" path="res://Scenes/Clutter/s_clutter_wood_log.tscn" id="3_5tbjp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
 size = Vector3(0.25, 0.25, 0.75)
@@ -11,16 +10,6 @@ size = Vector3(0.25, 0.25, 0.75)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iyu6f"]
 radius = 0.15
 height = 0.5
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ukpke"]
-material = ExtResource("3_5tbjp")
-radial_segments = 6
-rings = 0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_tuwnr"]
-material = ExtResource("4_vj6mn")
-radial_segments = 6
-rings = 0
 
 [node name="WorldItem" instance=ExtResource("1_pep2k")]
 itemType = 3
@@ -40,12 +29,12 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 [node name="Wood_Log_A2" parent="RigidBody3D/Model" index="0" instance=ExtResource("2_iyu6f")]
 visible = false
 
-[node name="Node3D" type="Node3D" parent="RigidBody3D/Model" index="1"]
+[node name="WoodLog" parent="RigidBody3D/Model" index="1" instance=ExtResource("3_5tbjp")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="0"]
-transform = Transform3D(0.54999995, 0, 0, 0, -3.1997736e-08, -0.54999995, 0, 0.7320229, -2.4041261e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_ukpke")
+[node name="MeshInstance3D" parent="RigidBody3D/Model/WoodLog" index="0"]
+cast_shadow = 0
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="1"]
-transform = Transform3D(0.42897728, 0, 0, 0, -3.351468e-08, -0.42897728, 0, 0.76672655, -1.8751193e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_tuwnr")
+[node name="MeshInstance3D2" parent="RigidBody3D/Model/WoodLog" index="1"]
+cast_shadow = 0
+
+[editable path="RigidBody3D/Model/WoodLog"]

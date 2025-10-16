@@ -38,4 +38,5 @@ visible = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="0"]
 transform = Transform3D(0.42897728, 0, 0, 0, -3.351468e-08, -0.42897728, 0, 0.76672655, -1.8751193e-08, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_tuwnr")

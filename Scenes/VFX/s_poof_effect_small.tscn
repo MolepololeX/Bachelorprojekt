@@ -37,6 +37,7 @@ radius = 0.25
 height = 0.5
 
 [node name="PoofEffect2" type="GPUParticles3D"]
+cast_shadow = 0
 emitting = false
 amount = 4
 one_shot = true

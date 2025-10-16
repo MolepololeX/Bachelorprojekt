@@ -30,6 +30,7 @@ mesh = SubResource("SphereMesh_b1t1t")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="Icosphere" parent="RigidBody3D/Model/IcoSphere" index="0"]
+cast_shadow = 0
 surface_material_override/0 = ExtResource("4_y8f26")
 
 [editable path="RigidBody3D/Model/IcoSphere"]
