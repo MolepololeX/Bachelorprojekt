@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode unshaded, fog_disabled, blend_mix;
+render_mode unshaded, fog_disabled, blend_mul;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
@@ -99,8 +99,8 @@ void fragment() {
 
 	//ALPHA = 0.9;
 	//ALBEDO = texture(normal_texture, SCREEN_UV.xy).xyz;
-	ALPHA = 1.0;
-	ALBEDO = texture(normal_texture, SCREEN_UV).rgb * 2.0 - 1.0;
+	//ALPHA = 1.0;
+	//ALBEDO = texture(normal_texture, SCREEN_UV).rgb * 2.0 - 1.0;
 }
 
 //void light() {
