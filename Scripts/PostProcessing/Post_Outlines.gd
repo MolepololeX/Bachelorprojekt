@@ -45,13 +45,17 @@ func _reinit_shader() -> void:
 # load and compile the shader
 func _init_shader() -> void:
 	
+	
+	
 	if not rd:
 		return
 	
 	# TODO: Highly illegal, fix later
 	#var shader_file := ResourceLoader.load(shader_path, "" , ResourceLoader.CACHE_MODE_REPLACE)
 	var file = FileAccess.open(shader_path, FileAccess.READ)
+	
 	if not file:
+		push_warning("shaderfile was null - " + shader_path)
 		return
 	var c = file.get_as_text();
 	
@@ -80,9 +84,9 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	
 	if not enable_draw:
 		return
-	
 	#if rd and p_effect_callback_type == EFFECT_CALLBACK_TYPE_POST_TRANSPARENT and shader_is_valid:
 	if rd  and shader_is_valid:
+		
 		# Get our render scene buffers object, this gives us access to our render buffers.
 		# Note that implementation differs per renderer hence the need for the cast.
 		var render_scene_buffers: RenderSceneBuffersRD = p_render_data.get_render_scene_buffers()
@@ -152,7 +156,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	
 	
 	frame_counter += 1
-	if frame_counter > reload_interval_frames:
+	if frame_counter > reload_interval_frames and live_reload:
 		frame_counter = 0
 		_reinit_shader();
 		return
