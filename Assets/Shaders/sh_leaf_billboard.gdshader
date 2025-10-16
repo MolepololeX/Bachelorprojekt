@@ -6,6 +6,10 @@ uniform vec3 color : source_color;
 uniform sampler2D leaveAlpha : filter_nearest, repeat_disable;
 uniform sampler2D noise;
 uniform vec3 targetPos;
+uniform float noiseScale = 20.0;
+uniform float timeScale = 20.0;
+uniform float maxAngle = 1.0;
+uniform float directionBias = 0.3;
 
 varying vec3 lightVertexPos;
 varying vec3 testPos;
@@ -110,6 +114,8 @@ void vertex() {
 	//localPos = (rotation * vec4(localPos, 1.0)).xyz;
 	//VERTEX = localPos + pivot;
 	//VERTEX = (rotation * vec4(VERTEX, 1.0)).xyz;
+	vec3 instancePos = MODEL_MATRIX[3].xyz;
+	VERTEX = VERTEX + vec3((texture(noise, (instancePos.xz + (TIME * timeScale)) / noiseScale).r - (0.5 - directionBias) ) * maxAngle, 0.0, 0.0) * (1.0 - UV.y);
 }
 
 void fragment() {

@@ -54,4 +54,4 @@ multimesh = SubResource("MultiMesh_te80k")
 cast_shadow = 3
 
 [node name="TreeCenter" type="Node3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.312536, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5128884, 0)

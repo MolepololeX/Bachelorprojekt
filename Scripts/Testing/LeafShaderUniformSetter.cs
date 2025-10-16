@@ -23,5 +23,10 @@ public partial class LeafShaderUniformSetter : Node3D
     // TODO: bidde nich so
     public override void _Process(double delta)
     {
+        for (int i = 0; i < _mats.Length; i++)
+        {
+            // _mats[i] = _meshes[i].Multimesh.Mesh.SurfaceGetMaterial(0) as ShaderMaterial;
+            _mats[i].SetShaderParameter("targetPos", _targetPos.GlobalPosition);
+        }
     }
 }
