@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://brh3rfsotctrq"]
+[gd_scene load_steps=15 format=3 uid="uid://brh3rfsotctrq"]
 
 [ext_resource type="PackedScene" uid="uid://drdotvsmaax15" path="res://Assets/Meshes/mesh_shrine_columns.glb" id="1_q36yg"]
-[ext_resource type="Material" uid="uid://brdwpyhhoxk4a" path="res://Assets/Materials/m_basic_gray.tres" id="2_b3t10"]
-[ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/sm_leaf_0.tres" id="3_83s4w"]
-[ext_resource type="Material" uid="uid://bbtskq3q87ex8" path="res://Assets/Materials/sm_toon_stone.tres" id="4_1jr4y"]
+[ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/Foliage/sm_leaf_0.tres" id="3_83s4w"]
+[ext_resource type="Material" uid="uid://bbtskq3q87ex8" path="res://Assets/Materials/Toon/sm_toon_stone.tres" id="4_1jr4y"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1jr4y"]
 material = ExtResource("3_83s4w")
@@ -57,7 +56,7 @@ size = Vector3(1, 0.60345745, 1)
 
 [node name="Cube" parent="." index="0"]
 transform = Transform3D(1.6, 0, 0, 0, 1.7924953, 0, 0, 0, 1.6, 0, 2.1875575, 0)
-surface_material_override/0 = ExtResource("2_b3t10")
+surface_material_override/0 = ExtResource("4_1jr4y")
 
 [node name="MultiMeshInstance3D6" type="MultiMeshInstance3D" parent="Cube" index="0"]
 transform = Transform3D(0.625, 0, 0, 0, 0.55788153, 0, 0, 0, 0.625, 0, -1.220398, 0)

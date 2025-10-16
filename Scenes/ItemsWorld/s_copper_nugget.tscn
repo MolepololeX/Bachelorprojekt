@@ -3,12 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_n18my"]
 [ext_resource type="PackedScene" uid="uid://drk3je11rv5ps" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/fbx/Copper_Nugget_Large.fbx" id="2_fdqvv"]
 [ext_resource type="PackedScene" uid="uid://dx206q1p5l7x2" path="res://Assets/Meshes/mesh_ico_sphere.glb" id="3_y4rvd"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4rvd"]
-albedo_color = Color(0.83681047, 0.49586952, 0.25460038, 1)
-metallic = 1.0
-metallic_specular = 1.0
-roughness = 0.57
+[ext_resource type="Material" uid="uid://c0d3ddlp21bic" path="res://Assets/Materials/Toon/sm_toon_copper.tres" id="4_2faxy"]
 
 [node name="WorldItem" instance=ExtResource("1_n18my")]
 itemType = 1
@@ -30,6 +25,6 @@ visible = false
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="Icosphere" parent="RigidBody3D/Model/IcoSphere" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_y4rvd")
+surface_material_override/0 = ExtResource("4_2faxy")
 
 [editable path="RigidBody3D/Model/IcoSphere"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://p1b6hvdrgefu"]
+[gd_scene load_steps=7 format=3 uid="uid://p1b6hvdrgefu"]
 
 [ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_uyxnj"]
 [ext_resource type="PackedScene" uid="uid://dxvfkk0ujo78v" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Wood_Log_A.gltf" id="2_f1ibl"]
-[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/m_tree_bark.tres" id="3_8pw6c"]
+[ext_resource type="Material" uid="uid://ctcn2okmh8ool" path="res://Assets/Materials/Toon/sm_toon_wood.tres" id="4_gv416"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
 size = Vector3(0.25, 0.25, 0.75)
@@ -11,18 +11,8 @@ size = Vector3(0.25, 0.25, 0.75)
 radius = 0.15
 height = 0.5
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_ukpke"]
-material = ExtResource("3_8pw6c")
-radial_segments = 6
-rings = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6ob8"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.68159455, 0.5869564, 0.5465682, 1)
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_tuwnr"]
-material = SubResource("StandardMaterial3D_b6ob8")
+material = ExtResource("4_gv416")
 radial_segments = 6
 rings = 0
 
@@ -46,11 +36,6 @@ visible = false
 
 [node name="Node3D" type="Node3D" parent="RigidBody3D/Model" index="1"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="0"]
-transform = Transform3D(0.54999995, 0, 0, 0, -3.1997736e-08, -0.54999995, 0, 0.7320229, -2.4041261e-08, 0, 0, 0)
-visible = false
-mesh = SubResource("CylinderMesh_ukpke")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="1"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D/Model/Node3D" index="0"]
 transform = Transform3D(0.42897728, 0, 0, 0, -3.351468e-08, -0.42897728, 0, 0.76672655, -1.8751193e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_tuwnr")

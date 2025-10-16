@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://covfmcdeyf2w1" path="res://Scripts/Player/Axe.cs" id="1_au7m6"]
 [ext_resource type="PackedScene" uid="uid://bj8k7r5f54alf" path="res://Assets/Packs/KayKit_Skeletons_1.0_FREE/assets/gltf/Skeleton_Axe.gltf" id="2_e1v0c"]
-[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/m_tree_bark.tres" id="3_e1v0c"]
-[ext_resource type="Material" uid="uid://dtv1mrif3awxc" path="res://Assets/Materials/m_axe_head.tres" id="3_tuntx"]
+[ext_resource type="Material" uid="uid://ctcn2okmh8ool" path="res://Assets/Materials/Toon/sm_toon_wood.tres" id="3_3ddg1"]
+[ext_resource type="Material" uid="uid://bbtskq3q87ex8" path="res://Assets/Materials/Toon/sm_toon_stone.tres" id="4_3ddg1"]
 [ext_resource type="AudioStream" uid="uid://caphvvtcnbf5a" path="res://Assets/Sounds/swing-whoosh-5-198498.mp3" id="5_uckau"]
 [ext_resource type="AudioStream" uid="uid://bhfivnsggkc1v" path="res://Assets/Sounds/woodChop.wav" id="6_78v2f"]
 
@@ -23,10 +23,10 @@ radius = 2.0493164
 height = 4.135742
 
 [sub_resource type="BoxMesh" id="BoxMesh_tuntx"]
-material = ExtResource("3_e1v0c")
+material = ExtResource("3_3ddg1")
 
 [sub_resource type="BoxMesh" id="BoxMesh_e1v0c"]
-material = ExtResource("3_tuntx")
+material = ExtResource("4_3ddg1")
 
 [sub_resource type="Animation" id="Animation_va1if"]
 length = 0.001

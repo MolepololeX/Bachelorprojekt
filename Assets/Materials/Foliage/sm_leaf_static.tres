@@ -1,0 +1,10 @@
+[gd_resource type="QuadMesh" load_steps=3 format=3 uid="uid://c0hg3tu7vahmw"]
+
+[ext_resource type="Shader" uid="uid://dv74lrpgtedr5" path="res://Assets/Shaders/sh_leaf_billboard_static.gdshader" id="1_fjc0x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30wnl"]
+render_priority = 0
+shader = ExtResource("1_fjc0x")
+
+[resource]
+material = SubResource("ShaderMaterial_30wnl")

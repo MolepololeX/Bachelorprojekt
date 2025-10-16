@@ -1,11 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://chmw4cno5r0ub"]
 
 [ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_aix8c"]
-[ext_resource type="Material" uid="uid://byvjw0kncb6nh" path="res://Assets/Materials/m_quicksilverII.tres" id="2_aix8c"]
 [ext_resource type="PackedScene" uid="uid://dx206q1p5l7x2" path="res://Assets/Meshes/mesh_ico_sphere.glb" id="3_b1t1t"]
+[ext_resource type="Material" uid="uid://dmwjmnw0km82m" path="res://Assets/Materials/Toon/sm_toon_quicksilver.tres" id="4_y8f26"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_b1t1t"]
-material = ExtResource("2_aix8c")
 radial_segments = 6
 rings = 1
 
@@ -31,6 +30,6 @@ mesh = SubResource("SphereMesh_b1t1t")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="Icosphere" parent="RigidBody3D/Model/IcoSphere" index="0"]
-surface_material_override/0 = ExtResource("2_aix8c")
+surface_material_override/0 = ExtResource("4_y8f26")
 
 [editable path="RigidBody3D/Model/IcoSphere"]

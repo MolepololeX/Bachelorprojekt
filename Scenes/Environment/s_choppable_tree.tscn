@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/pm_leaf.tres" id="3_o7f1v"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="4_11a77"]
 [ext_resource type="Material" uid="uid://dmbx082uxouf6" path="res://Assets/Materials/Particles/pm_leaf_explosion.tres" id="5_mrg8r"]
-[ext_resource type="QuadMesh" uid="uid://c0hg3tu7vahmw" path="res://Assets/Materials/sm_leaf_static.tres" id="6_30wnl"]
+[ext_resource type="QuadMesh" uid="uid://c0hg3tu7vahmw" path="res://Assets/Materials/Foliage/sm_leaf_static.tres" id="6_30wnl"]
 [ext_resource type="PackedScene" uid="uid://d1685xjha1c0r" path="res://Scenes/Environment/s_tree_maple.tscn" id="6_oi0lj"]
 [ext_resource type="AudioStream" uid="uid://bt1ichklq0t60" path="res://Assets/Sounds/thud-impact-sound-sfx-379990.mp3" id="10_yes1i"]
 [ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="11_w63kc"]

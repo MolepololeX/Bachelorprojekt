@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ck6qon7rivb6u"]
 
-[ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/sm_leaf_0.tres" id="1_83xaj"]
+[ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/Foliage/sm_leaf_0.tres" id="1_83xaj"]
 [ext_resource type="Script" uid="uid://bpkgp782aavkd" path="res://Scripts/Testing/LeafShaderUniformSetter.cs" id="1_wfugq"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2xp7q"]

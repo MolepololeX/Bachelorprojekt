@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cbldjdjn77dgt" path="res://Assets/Meshes/mesh_tree_maple.glb" id="1_v5mpd"]
 [ext_resource type="Script" uid="uid://bpkgp782aavkd" path="res://Scripts/Testing/LeafShaderUniformSetter.cs" id="2_vscmv"]
-[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/sm_toon_bark.tres" id="3_vscmv"]
-[ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/sm_leaf_0.tres" id="4_te80k"]
+[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/Toon/sm_toon_bark.tres" id="3_vscmv"]
+[ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/Foliage/sm_leaf_0.tres" id="4_te80k"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_njofr"]
 resource_local_to_scene = true
