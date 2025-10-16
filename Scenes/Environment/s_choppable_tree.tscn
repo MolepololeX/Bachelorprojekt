@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://ccb77ev2d130w" path="res://Scripts/Interactables/ChoppableTree.cs" id="1_4f7er"]
 [ext_resource type="PackedScene" uid="uid://bac8m4n6d68kg" path="res://Scenes/VFX/s_poof_effect_big.tscn" id="3_fxtf1"]
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/pm_leaf.tres" id="3_o7f1v"]
-[ext_resource type="ArrayMesh" uid="uid://cu8mndxv8iykw" path="res://Assets/Meshes/mesh_temp_grass_3.res" id="3_s1qbb"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="4_11a77"]
 [ext_resource type="Material" uid="uid://dmbx082uxouf6" path="res://Assets/Materials/Particles/pm_leaf_explosion.tres" id="5_mrg8r"]
+[ext_resource type="QuadMesh" uid="uid://c0hg3tu7vahmw" path="res://Assets/Materials/sm_leaf_static.tres" id="6_30wnl"]
 [ext_resource type="PackedScene" uid="uid://d1685xjha1c0r" path="res://Scenes/Environment/s_tree_maple.tscn" id="6_oi0lj"]
 [ext_resource type="AudioStream" uid="uid://bt1ichklq0t60" path="res://Assets/Sounds/thud-impact-sound-sfx-379990.mp3" id="10_yes1i"]
 [ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="11_w63kc"]
@@ -408,34 +408,38 @@ shape = SubResource("CylinderShape3D_qhxvw")
 [node name="vfx_stuff" type="Node3D" parent="Pivot"]
 
 [node name="leaves_burst" type="GPUParticles3D" parent="Pivot/vfx_stuff"]
-transform = Transform3D(0.907043, 0, 0, 0, 1, 0, 0, 0, 0.7306563, -0.01677376, 4.418764, 0.102105334)
+transform = Transform3D(0.907043, 0, 0, 0, 1, 0, 0, 0, 0.7306563, -0.01677376, 6.7238884, -0.1101989)
+cast_shadow = 0
 emitting = false
-amount = 32
-lifetime = 3.0
+amount = 128
+lifetime = 10.0
 fixed_fps = 60
 trail_lifetime = 4.1499999999999995
 process_material = ExtResource("3_o7f1v")
-draw_pass_1 = ExtResource("3_s1qbb")
+draw_pass_1 = ExtResource("6_30wnl")
 
 [node name="leaves_passive" type="GPUParticles3D" parent="Pivot/vfx_stuff"]
-transform = Transform3D(0.907043, 0, 0, 0, 1, 0, 0, 0, 0.7306563, -0.01677376, 4.418764, 0.102105334)
-amount = 1
-lifetime = 3.0
+transform = Transform3D(0.907043, 0, 0, 0, 1, 0, 0, 0, 0.7306563, -0.01677376, 6.674378, -0.086547896)
+cast_shadow = 0
+amount = 4
+lifetime = 10.0
+randomness = 1.0
 fixed_fps = 60
 trail_lifetime = 4.1499999999999995
 process_material = ExtResource("3_o7f1v")
-draw_pass_1 = ExtResource("3_s1qbb")
+draw_pass_1 = ExtResource("6_30wnl")
 
 [node name="leaves_explosion" type="GPUParticles3D" parent="Pivot/vfx_stuff"]
-transform = Transform3D(0.8227268, 0, 0, 0, 0.98741376, 0.08443404, 0, -0.15815803, 0.5271395, 0.14948283, 5.264996, -0.16417074)
+transform = Transform3D(0.8227268, 0, 0, 0, 0.98741376, 0.08443404, 0, -0.15815803, 0.5271395, 0.14948283, 6.4528413, -0.16417074)
+cast_shadow = 0
 emitting = false
-amount = 64
+amount = 100
 lifetime = 10.0
 explosiveness = 1.0
 fixed_fps = 60
 trail_lifetime = 4.1499999999999995
 process_material = ExtResource("5_mrg8r")
-draw_pass_1 = ExtResource("3_s1qbb")
+draw_pass_1 = ExtResource("6_30wnl")
 
 [node name="PoofEffectSocket" type="Node3D" parent="Pivot/vfx_stuff"]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 0, 5.241711, 0)
@@ -450,10 +454,6 @@ transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.2588
 libraries = {
 &"": SubResource("AnimationLibrary_o7f1v")
 }
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3336792, -1, -1.4050751)
-size = Vector3(18.24231, 2, 19.977203)
 
 [node name="FallingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_yes1i")

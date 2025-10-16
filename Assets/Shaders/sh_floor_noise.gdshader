@@ -21,8 +21,3 @@ void fragment() {
 
 	ALBEDO = color * s + color2 * (1.0 - s);
 }
-
-//void light() {
-//	// Called for every pixel for every light affecting the material.
-//	// Uncomment to replace the default light processing function with this one.
-//}

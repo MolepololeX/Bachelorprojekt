@@ -205,7 +205,7 @@ scale_amount_curve = SubResource("Curve_au7m6")
 
 [node name="Area3D" type="Area3D" parent="Pivot/Model"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Model/Area3D"]
 transform = Transform3D(9.685755e-08, 0.3173945, -1.3056223e-13, -0.3173945, 9.685755e-08, 5.77316e-14, -4.2099657e-13, -2.5224267e-13, 0.31739435, -0.014176256, 0.48177594, -2.085452e-13)

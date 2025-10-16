@@ -1,0 +1,13 @@
+[gd_resource type="QuadMesh" load_steps=4 format=3 uid="uid://c0hg3tu7vahmw"]
+
+[ext_resource type="Shader" uid="uid://dv74lrpgtedr5" path="res://Assets/Shaders/sh_leaf_billboard_static.gdshader" id="1_fjc0x"]
+[ext_resource type="Texture2D" uid="uid://ou1vt2tajtwy" path="res://Assets/Textures/t_leaf.png" id="2_n81mu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30wnl"]
+render_priority = 0
+shader = ExtResource("1_fjc0x")
+shader_parameter/color = Color(0.19215687, 0.4117647, 0.21960784, 1)
+shader_parameter/leaveAlpha = ExtResource("2_n81mu")
+
+[resource]
+material = SubResource("ShaderMaterial_30wnl")

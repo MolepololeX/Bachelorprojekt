@@ -105,18 +105,17 @@ namespace Game.PlayerStuff
 		private void OnHit(Node node)
 		{
 			ChoppableTree tree = node as ChoppableTree;
+			animPlayer.Pause();
+			area3D.SetDeferred("monitoring", false);
+			currentAnimPos = animPlayer.CurrentAnimationPosition;
 			if (tree != null)
 			{
-				animPlayer.Pause();
-				area3D.SetDeferred("monitoring", false);
-				currentAnimPos = animPlayer.CurrentAnimationPosition;
 				tree.OnHit();
-
-				hitSound.Play();
-				hitSound.PitchScale = (float)GD.RandRange(opHit - 0.2f, opHit + 0.2f);
-
-				HitStop();
 			}
+			hitSound.Play();
+			hitSound.PitchScale = (float)GD.RandRange(opHit - 0.2f, opHit + 0.2f);
+
+			HitStop();
 		}
 
 		private async void HitStop()

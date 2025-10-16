@@ -41,13 +41,17 @@ x Simple Inventarleiste oder 3x3 Grid
 	- actually mechanics implementieren
 	- fishing minigame
 	- color quantization und palettew
-	- falling leafes texturen aendern fuer baeume
+	x falling leafes texturen aendern fuer baeume
 	
 	- aus quecksilber II eine lupe die einem anzeigt was actually im cauldron drinne is
+	
+	- bessere noise fuer rolling grass und leaves und grass-colour
 	
 	# Fixes
 	- nochmal nachschauen wie ich komplett harte schatten bekomm
 	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht
+	- bei bsp. pillars die leaves fixen die muessen ne irgendwo hinrotiert werden
+		---> enteder andern shader um auch das movement zu haben oder anders
 	
 	
 	- DIGGA MAYBE EINFACH MAL NICH ALS POST PROCESSING EFFECT MACHEN SONDERN ALS MATERIAL / MATERIAL OVERLAY ODER EXTRA MATERIAL PASS... ok nvm funkt ne
