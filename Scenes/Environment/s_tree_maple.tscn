@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://d1685xjha1c0r"]
 
 [ext_resource type="PackedScene" uid="uid://cbldjdjn77dgt" path="res://Assets/Meshes/mesh_tree_maple.glb" id="1_v5mpd"]
-[ext_resource type="Material" uid="uid://ccv7r175pkllx" path="res://Assets/Materials/m_tree_bark.tres" id="2_njofr"]
 [ext_resource type="Script" uid="uid://bpkgp782aavkd" path="res://Scripts/Testing/LeafShaderUniformSetter.cs" id="2_vscmv"]
+[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/sm_toon_bark.tres" id="3_vscmv"]
 [ext_resource type="Material" uid="uid://be1h4ltm3tjqh" path="res://Assets/Materials/sm_leaf_0.tres" id="4_te80k"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_njofr"]
@@ -40,7 +40,7 @@ _targetPos = NodePath("TreeCenter")
 _meshes = [NodePath("MultiMeshInstance3D"), NodePath("Leaves")]
 
 [node name="tree" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_njofr")
+surface_material_override/0 = ExtResource("3_vscmv")
 
 [node name="Leaves" type="MultiMeshInstance3D" parent="." index="1"]
 cast_shadow = 0

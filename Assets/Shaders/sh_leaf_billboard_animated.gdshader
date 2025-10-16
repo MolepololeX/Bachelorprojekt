@@ -11,6 +11,14 @@ uniform float timeScale = 20.0;
 uniform float maxAngle = 1.0;
 uniform float directionBias = 0.3;
 
+///from the toon shader
+uniform int cuts : hint_range(1, 8) = 3;
+uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
+uniform float steepness : hint_range(1.0f, 8.0f) = 1.0f;
+uniform bool clamp_diffuse_to_max = false;
+uniform bool use_attenuation = true;
+
+
 varying vec3 lightVertexPos;
 varying vec3 testPos;
 
@@ -88,4 +96,36 @@ void fragment() {
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 
 	LIGHT_VERTEX = lightVertexPos;
+}
+
+
+void light() {
+	//// Attenuation.
+	float attenuation = 1.0f;
+	if (use_attenuation) {
+		attenuation = ATTENUATION;
+	}
+	
+	// Diffuse lighting.
+	float NdotL = dot(NORMAL, LIGHT);
+	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
+	//float diffuse_amount = NdotL * attenuation + wrap;
+	diffuse_amount *= steepness;
+	float cuts_inv = 1.0f / float(cuts);
+	float diffuse_stepped = clamp(diffuse_amount + mod(1.0f - diffuse_amount, cuts_inv), 0.0f, 1.0f);
+
+	// Calculate borders.
+	float border = 0.0f;
+	
+	// Apply diffuse result to different styles.
+	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR / PI;
+	diffuse *= diffuse_stepped * (1.0f - border);
+	
+	
+	if (clamp_diffuse_to_max) {
+		// Clamp diffuse to max for multiple light sources.
+		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
+	} else {
+		DIFFUSE_LIGHT += diffuse;
+	}
 }
