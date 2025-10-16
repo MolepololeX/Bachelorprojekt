@@ -31,7 +31,7 @@ void fragment() {
 		color = texture(viewport_texture, uv);
 	}
 
+	//float n = 16.0;
 	//color = floor(color * (n - 1.0) + 0.5) / (n - 1.0);
-
 	COLOR = color;
 }
