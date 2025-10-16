@@ -43,7 +43,7 @@ float sampleLinearDepth(vec2 uv){
 
 void main() {
 	//TODO: uniforms
-	vec2 VIEWPORT_SIZE = vec2(320, 180);
+	// vec2 VIEWPORT_SIZE = vec2(320, 180);
 	float thiccness = 1.0;
 	vec3 normalEdgeBias = vec3(1,1,1);
 	float normalThreshold = 0.9;
@@ -55,6 +55,8 @@ void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 	vec2 size = vec2(params.raster_size);
 	vec2 UV = uv_pixel / size;
+	vec2 texel_size = 0.5 / vec2(size);
+	vec2 snapped_uv = floor(UV / texel_size + 0.5) * texel_size;
 
 	if (uv_pixel.x >= size.x || uv_pixel.y >= size.y) {
 		return;
@@ -115,7 +117,8 @@ void main() {
 
 	//original *= vec4(getNormal(UV).rgb * 2.0 - 1.0, 1.0);
 	original = imageLoad(color_image, uv_pixel);
-	original -= vec4(sampleLinearDepth(UV) / 100.0, 0.0, 0.0, 0.0);
+	original = vec4(sampleLinearDepth(snapped_uv) / 100.0, 0.0, 0.0, 0.0);
+	// original = vec4(UV.x, UV.y, 0.0, 1.0);
 
 	imageStore(color_image, uv_pixel, original);
 }
