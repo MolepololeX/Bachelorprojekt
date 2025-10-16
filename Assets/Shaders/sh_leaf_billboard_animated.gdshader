@@ -21,7 +21,6 @@ void vertex() {
 
 
 	// bilboard code from the standard material
-	// !!! removed setting MODEL_VIEW_NORMAL_MATRIX since normals look weird when combined with the next thing
 	// Billboard Mode: Enabled
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			MAIN_CAM_INV_VIEW_MATRIX[0],
@@ -34,14 +33,15 @@ void vertex() {
 			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
 			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
 			vec4(0.0, 0.0, 0.0, 1.0));
-	//MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 
 
 
-	// the next thing in question
-	// setting the normals of each vertex to point up for consistent lighting
+
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+	// setting the normals of each vertex to point towards the center of the tree for consistent lighting
+	// NOTE: mutiplying my the ViewMatrix since we billboarded the mesh
 	vec3 up = vec3(0.0, 1.0, 0.0);
-	NORMAL = up;
+	NORMAL = (VIEW_MATRIX * vec4(-normalize(targetPos - NODE_POSITION_WORLD.xyz), 0.0)).xyz;
 
 
 
@@ -52,7 +52,7 @@ void vertex() {
 	// 2. Perspective divide (to normalized device coordinates)
 	vec3 targetNDC = targetClip.xyz / targetClip.w;  // range: -1 to +1
 	vec2 targetScreen = vec2(targetNDC.x, targetNDC.y);
-	
+
 	// Leaf Position Screen Space
 	vec3 leafPos = NODE_POSITION_WORLD.xyz;
 	// 1. Transform to clip space
@@ -64,7 +64,7 @@ void vertex() {
 
 	vec2 v1 = normalize(vec2(0.0, 1.0));
 	vec2 v2 = normalize(targetScreen - leafScreen);
-	
+
 	float angle = acos(dot(v1, v2) / (length(v1) * length(v2)));
 	if((v1.x * v2.y - v1.y * v2.x) <= 0.0) angle = -angle;
 	mat4 rotation = mat4(

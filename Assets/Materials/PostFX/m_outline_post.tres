@@ -5,10 +5,11 @@
 [resource]
 render_priority = 1
 shader = ExtResource("1_vaf8i")
-shader_parameter/depthThreshold = 2.50000011875
-shader_parameter/normalThreshold = 0.400000019
-shader_parameter/outlineDarkness = 0.70000008075
+shader_parameter/depthThreshold = 10.0
+shader_parameter/normalThreshold = 0.90000004275
+shader_parameter/outlineDarkness = 0.8000000855
 shader_parameter/outlineColor = Color(0.61710674, 0, 0.061937377, 1)
-shader_parameter/tempUseOutlineColor = -0.545
+shader_parameter/tempUseOutlineColor = 0.0
 shader_parameter/outlineLightness = 1.2000005320000007
 shader_parameter/thiccness = 1.0000000475
+shader_parameter/normalEdgeBias = Vector3(1, 1, 1)

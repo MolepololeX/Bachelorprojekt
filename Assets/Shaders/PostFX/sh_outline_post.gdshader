@@ -13,6 +13,7 @@ uniform vec3 outlineColor : source_color;
 uniform float tempUseOutlineColor = 1.0;
 uniform float outlineLightness : hint_range(-10, 10) = 2.0;
 uniform float thiccness : hint_range(0, 10) = 1.0;
+uniform vec3 normalEdgeBias = vec3(1.0);
 
 void vertex() {
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -56,8 +57,7 @@ void fragment() {
 
 		vec3 n = texture(normal_texture, depth_uv[i]).xyz * 2.0 - 1.0;
 		vec3 normalDiff = normal - n;
-
-		vec3 normalEdgeBias = vec3(1,1,1);
+		
 		float normalBiasDiff = dot(normalDiff, normalEdgeBias);
 		float normalIndicator = smoothstep(-0.01, 0.01, normalBiasDiff);
 
@@ -70,7 +70,7 @@ void fragment() {
 	float depthEdge = clamp(step(depthThreshold, depthDifference), 0.0, 1.0);
 
 	vec3 original = texture(screen_texture, SCREEN_UV).rgb;
-	vec3 outline = texture(screen_texture, closestDepthUV).rgb * outlineDarkness;
+	//vec3 outline = texture(screen_texture, closestDepthUV).rgb * outlineDarkness;
 
 	//float steps = 256.0;
 //
@@ -79,16 +79,15 @@ void fragment() {
 	//int originalB = int(original.b * steps);
 //
 	//original = vec3(float(originalR) / steps, float(originalG) / steps, float(originalB) / steps);
-
 	if(depthEdge > 0.0){
 		if(tempUseOutlineColor >= 1.0){
-			ALBEDO = mix(original, outlineColor, depthEdge);
+			ALBEDO = mix(vec3(1.0), outlineColor, depthEdge);
 		}else{
-			ALBEDO = mix(original, outline, depthEdge);
+			ALBEDO = mix(vec3(1.0), vec3(outlineDarkness), depthEdge);
 		}
 		ALPHA = depthEdge;
 	} else{
-		ALBEDO = mix(original, original * outlineLightness, normalEdge);
+		ALBEDO = mix(vec3(1.0), vec3(outlineLightness), normalEdge);
 		ALPHA = normalEdge;
 	}
 	
@@ -99,8 +98,9 @@ void fragment() {
 			//}
 
 	//ALPHA = 0.9;
-
-	//ALBEDO = texture(normal_texture, SCREEN_UV).rgb * 2.0 - 1.0;
+	//ALBEDO = texture(normal_texture, SCREEN_UV.xy).xyz;
+	ALPHA = 1.0;
+	ALBEDO = texture(normal_texture, SCREEN_UV).rgb * 2.0 - 1.0;
 }
 
 //void light() {
