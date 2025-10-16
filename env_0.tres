@@ -1,0 +1,32 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cv3muoo4ow0vf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_va1if"]
+
+[sub_resource type="Sky" id="Sky_mu1jd"]
+sky_material = SubResource("ProceduralSkyMaterial_va1if")
+
+[resource]
+background_mode = 1
+sky = SubResource("Sky_mu1jd")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.01
+reflected_light_source = 1
+ssao_radius = 0.59
+ssao_intensity = 500.0
+ssao_power = 3653.2668
+ssao_horizon = 0.0
+ssao_sharpness = 1.0
+glow_intensity = 1.0
+glow_bloom = 0.1
+glow_blend_mode = 0
+fog_mode = 1
+fog_light_color = Color(1, 1, 0.8117647, 1)
+fog_light_energy = 16.0
+fog_density = 1.0
+fog_depth_curve = 2.2043564
+fog_depth_begin = 50.0
+volumetric_fog_density = 0.01
+adjustment_brightness = 1.05
+adjustment_contrast = 0.95
