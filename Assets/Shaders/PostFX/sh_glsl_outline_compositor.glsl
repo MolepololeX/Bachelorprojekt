@@ -116,11 +116,12 @@ void main() {
 	}
 
 	//original *= vec4(getNormal(UV).rgb * 2.0 - 1.0, 1.0);
-	original = imageLoad(color_image, uv_pixel);
-	float packed = uintBitsToFloat(packHalf2x16(original.xy));
+	// original = imageLoad(color_image, uv_pixel);
+	// float packed = uintBitsToFloat(packHalf2x16(original.xy));
 	// vec2 unpacked = unpackHalf2x16(floatBitsToUint(packed));
-	original = vec4(packed, original.y, original.z ,sampleLinearDepth(snapped_uv) / 100.0);
+	// original = vec4(packed, original.y, original.z ,sampleLinearDepth(snapped_uv) / 100.0);
 	// original = vec4(UV.x, UV.y, 0.0, 1.0);
+	// original = vec4(sampleLinearDepth(snapped_uv) / 100.0);
 
 	imageStore(color_image, uv_pixel, original);
 }

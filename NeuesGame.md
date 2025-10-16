@@ -47,6 +47,8 @@ x Simple Inventarleiste oder 3x3 Grid
 	
 	- bessere noise fuer rolling grass und leaves und grass-colour
 	
+	- grass noise textur res runter damit die framerate der animation runter geht oder sowas in die richtung
+	
 	# Fixes
 	- nochmal nachschauen wie ich komplett harte schatten bekomm
 	- axe raycast maybe mal so fixen, dass das mit nicht statischem zoom auch geht
