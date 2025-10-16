@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bewxybksr5me8"]
+[gd_scene load_steps=10 format=3 uid="uid://bewxybksr5me8"]
 
 [ext_resource type="Script" uid="uid://da5s0m5wyokmv" path="res://Scripts/Inventory/InventoryDisplay.cs" id="1_dywe6"]
-[ext_resource type="Shader" uid="uid://m15iht0oajf3" path="res://Assets/Shaders/PostFX/sh_outline_post.gdshader" id="1_fxmr8"]
+[ext_resource type="Shader" uid="uid://dwinacero6lwc" path="res://Assets/Shaders/PostFX/sh_outline_inventory.gdshader" id="2_8uixt"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_vhd7v"]
 flip_faces = true
@@ -9,13 +9,9 @@ size = Vector2(2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xx5aj"]
 render_priority = 1
-shader = ExtResource("1_fxmr8")
+shader = ExtResource("2_8uixt")
 shader_parameter/depthThreshold = 10.0
-shader_parameter/normalThreshold = 0.50000002375
-shader_parameter/outlineDarkness = 0.25000005937500003
 shader_parameter/outlineColor = Color(1, 1, 1, 1)
-shader_parameter/tempUseOutlineColor = 1.0
-shader_parameter/outlineLightness = 1.2500005343749994
 shader_parameter/thiccness = 1.0000000475
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dywe6"]
@@ -24,40 +20,11 @@ albedo_color = Color(1.353256, 1.353256, 1.353256, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_dywe6"]
 material = SubResource("StandardMaterial3D_dywe6")
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xx5aj"]
-
-[sub_resource type="Sky" id="Sky_hpgqd"]
-sky_material = SubResource("ProceduralSkyMaterial_xx5aj")
-
-[sub_resource type="Environment" id="Environment_lem8n"]
+[sub_resource type="Environment" id="Environment_8uixt"]
 background_mode = 1
-sky = SubResource("Sky_hpgqd")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.0
-ambient_light_energy = 0.2
-reflected_light_source = 2
-tonemap_mode = 4
-tonemap_exposure = 1.25
-ssao_radius = 0.59
-ssao_intensity = 500.0
-ssao_power = 3653.2668
-ssao_horizon = 0.0
-ssao_sharpness = 1.0
-glow_strength = 1.2
-glow_bloom = 0.05
-glow_blend_mode = 0
-fog_mode = 1
-fog_light_color = Color(1, 1, 0.8117647, 1)
-fog_density = 1.0
-fog_depth_curve = 2.2043564
-fog_depth_begin = 50.0
-volumetric_fog_density = 0.005
-volumetric_fog_emission = Color(1.353256, 1.0025334, 0.5418828, 1)
-volumetric_fog_emission_energy = 0.2
-volumetric_fog_length = 91.68
-adjustment_brightness = 1.05
-adjustment_contrast = 0.95
+ambient_light_energy = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxmr8"]
 shading_mode = 0
@@ -90,44 +57,43 @@ surface_material_override/0 = SubResource("ShaderMaterial_xx5aj")
 [node name="TempPointer" type="Node3D" parent="."]
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(0.2, 0, 0, 0, 0.4, 0, 0, 0, 1, -0.99999994, 0.9, -6)
+transform = Transform3D(0.15, 0, 0, 0, 0.3, 0, 0, 0, 0.1, -0.99999994, 0.9, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(-8.742278e-09, 0.4, 0, -0.2, -1.7484556e-08, 0, 0, 0, 1, -0.9, 0.99999994, -6)
+transform = Transform3D(-6.5567085e-09, 0.3, 0, -0.15, -1.3113417e-08, 0, 0, 0, 0.1, -0.9, 0.99999994, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(-8.742278e-09, 0.4, 0, -0.2, -1.7484556e-08, 0, 0, 0, 1, 0.90000004, 0.9999999, -6)
+transform = Transform3D(-6.5567085e-09, 0.3, 0, -0.15, -1.3113417e-08, 0, 0, 0, 0.1, 0.90000004, 0.9999999, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(-0.2, -6.039832e-08, 0, 3.019916e-08, -0.4, 0, 0, 0, 1, 1, 0.8999999, -6)
+transform = Transform3D(-0.15, -4.5298744e-08, 0, 2.2649372e-08, -0.3, 0, 0, 0, 0.1, 1, 0.8999999, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(-0.2, -6.039832e-08, 0, 3.019916e-08, -0.4, 0, 0, 0, 1, 0.9999999, -0.90000004, -6)
+transform = Transform3D(-0.15, -4.5298744e-08, 0, 2.2649372e-08, -0.3, 0, 0, 0, 0.1, 0.9999999, -0.90000004, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(1.509958e-08, -0.4, 0, 0.2, 3.019916e-08, 0, 0, 0, 1, 0.8999999, -1, -6)
+transform = Transform3D(1.1324686e-08, -0.3, 0, 0.15, 2.2649372e-08, 0, 0, 0, 0.1, 0.8999999, -1, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(1.509958e-08, -0.4, 0, 0.2, 3.019916e-08, 0, 0, 0, 1, -0.9000001, -0.9999998, -6)
+transform = Transform3D(1.1324686e-08, -0.3, 0, 0.15, 2.2649372e-08, 0, 0, 0, 0.1, -0.9000001, -0.9999998, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="TempPointer"]
-transform = Transform3D(0.2, 6.9938224e-08, 0, -3.4969112e-08, 0.4, 0, 0, 0, 1, -1, -0.89999986, -6)
+transform = Transform3D(0.15, 5.2453668e-08, 0, -2.6226834e-08, 0.3, 0, 0, 0, 0.1, -1, -0.89999986, -6)
 mesh = SubResource("BoxMesh_dywe6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_lem8n")
+environment = SubResource("Environment_8uixt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.5, 0.7071068, 0.50000006, -0.7071068, -3.090862e-08, 0.7071068, 0.49999997, -0.70710677, 0.49999994, 7.183481, 26.443663, -9.8853855)
-light_color = Color(1.416, 1.001, 0.383, 1)
-light_energy = 0.208
+transform = Transform3D(0.50000006, 0.70710677, 0.49999997, -0.8359519, 0.5448981, 0.06534958, -0.22623986, -0.4506507, 0.86355627, 7.183481, 26.443663, -9.8853855)
+light_energy = 1.5
 light_volumetric_fog_energy = 1.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
