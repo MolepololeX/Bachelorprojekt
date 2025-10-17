@@ -56,6 +56,16 @@ x Simple Inventarleiste oder 3x3 Grid
 	--> kleine shrek ahh huette zum chillen drinne aus holz, wird hingebaut wenn der player 10 planks hat
 	
 	
+	# right now
+	
+	cloud shadows
+	grass fps
+	wind streaks anpassen
+	trees neue sachen ausprobiern
+	
+	
+	
+	
 	## Visuals
 	- water shader mit reflections
 	- regen mit splashes auf dem boden

@@ -21,7 +21,6 @@ public partial class CampFireLightFlicker : Node3D
     {
         if (cumulativeTime >= timeInterval)
         {
-            GD.Print("Stuff");
             if (shrink)
             {
                 light.OmniAttenuation = originalLightRange + GD.Randf() * amplitude;

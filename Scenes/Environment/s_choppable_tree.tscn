@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=3 uid="uid://d3ptw2yih8blu"]
 
 [ext_resource type="Script" uid="uid://ccb77ev2d130w" path="res://Scripts/Interactables/ChoppableTree.cs" id="1_4f7er"]
+[ext_resource type="PackedScene" uid="uid://dqpbahjgdq2gw" path="res://Scenes/Environment/s_tree_maple_alternate.tscn" id="2_30wnl"]
 [ext_resource type="PackedScene" uid="uid://bac8m4n6d68kg" path="res://Scenes/VFX/s_poof_effect_big.tscn" id="3_fxtf1"]
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/pm_leaf.tres" id="3_o7f1v"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="4_11a77"]
 [ext_resource type="Material" uid="uid://dmbx082uxouf6" path="res://Assets/Materials/Particles/pm_leaf_explosion.tres" id="5_mrg8r"]
 [ext_resource type="QuadMesh" uid="uid://c0hg3tu7vahmw" path="res://Assets/Materials/Foliage/sm_leaf_static.tres" id="6_30wnl"]
-[ext_resource type="PackedScene" uid="uid://d1685xjha1c0r" path="res://Scenes/Environment/s_tree_maple.tscn" id="6_oi0lj"]
 [ext_resource type="AudioStream" uid="uid://bt1ichklq0t60" path="res://Assets/Sounds/thud-impact-sound-sfx-379990.mp3" id="10_yes1i"]
 [ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="11_w63kc"]
 
@@ -385,7 +385,7 @@ _data = {
 
 [node name="model" type="Node3D" parent="Pivot"]
 
-[node name="Tree_Maple_Leaves3" parent="Pivot/model" instance=ExtResource("6_oi0lj")]
+[node name="mesh_tree_maple_separate_ico" parent="Pivot/model" instance=ExtResource("2_30wnl")]
 
 [node name="Collission" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
 collision_layer = 5

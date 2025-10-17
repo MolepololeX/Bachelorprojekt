@@ -56,6 +56,7 @@ size = Vector3(1, 0.60345745, 1)
 
 [node name="Cube" parent="." index="0"]
 transform = Transform3D(1.6, 0, 0, 0, 1.7924953, 0, 0, 0, 1.6, 0, 2.1875575, 0)
+visible = false
 surface_material_override/0 = ExtResource("4_1jr4y")
 
 [node name="MultiMeshInstance3D6" type="MultiMeshInstance3D" parent="Cube" index="0"]
@@ -69,7 +70,7 @@ transform = Transform3D(2.205, 0, 0, 0, 2.205, 0, 0, 0, 2.205, 0, -0.0071362257,
 shape = SubResource("BoxShape3D_1jr4y")
 
 [node name="Cube_001" parent="." index="1"]
-transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, 9, 3, 9)
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, 15, 3, 15)
 surface_material_override/0 = ExtResource("4_1jr4y")
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Cube_001" index="0"]
@@ -83,7 +84,7 @@ transform = Transform3D(3.36, 0, 0, 0, 3.36, 0, 0, 0, 3.36, 0, 0.4175198, 0)
 shape = SubResource("BoxShape3D_83s4w")
 
 [node name="Cube_002" parent="." index="2"]
-transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, -9, 3, 9)
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, -15, 3, 15)
 surface_material_override/0 = ExtResource("4_1jr4y")
 
 [node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="Cube_002" index="0"]
@@ -97,7 +98,7 @@ transform = Transform3D(3.36, 0, 0, 0, 3.36, 0, 0, 0, 3.36, 0, 1.0547888, 0)
 shape = SubResource("BoxShape3D_8hwkn")
 
 [node name="Cube_003" parent="." index="3"]
-transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, -9, 3, -9)
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, -15, 3, -15)
 surface_material_override/0 = ExtResource("4_1jr4y")
 
 [node name="MultiMeshInstance3D5" type="MultiMeshInstance3D" parent="Cube_003" index="0"]
@@ -111,7 +112,7 @@ transform = Transform3D(3.36, 0, 0, 0, 3.36, 0, 0, 0, 3.36, 0, 0.8959813, 0)
 shape = SubResource("BoxShape3D_8e33x")
 
 [node name="Cube_004" parent="." index="4"]
-transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, 9, 3, -9)
+transform = Transform3D(0.54525274, 0, 0.54525274, 0, 2, 0, -0.54525274, 0, 0.54525274, 15, 3, -15)
 surface_material_override/0 = ExtResource("4_1jr4y")
 
 [node name="MultiMeshInstance3D4" type="MultiMeshInstance3D" parent="Cube_004" index="0"]

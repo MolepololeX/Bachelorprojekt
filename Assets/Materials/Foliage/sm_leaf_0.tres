@@ -8,7 +8,7 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_8vlwk")
-shader_parameter/color = Color(0.4509804, 0.63529414, 0.4, 1)
+shader_parameter/color = Color(0.5647059, 0.6627451, 0.33333334, 1)
 shader_parameter/leaveAlpha = ExtResource("2_7mj7l")
 shader_parameter/noise = ExtResource("3_wbe0u")
 shader_parameter/targetPos = Vector3(0, 0, 0)

@@ -8,7 +8,7 @@
 render_priority = 0
 shader = ExtResource("1_klg18")
 shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/color2 = Color(0.44313726, 0.61960787, 0.40392157, 1)
+shader_parameter/color2 = Color(0.41568628, 0.6, 0.30588236, 1)
 shader_parameter/grassTexture = ExtResource("2_0mxab")
 shader_parameter/noise = ExtResource("3_325gy")
 shader_parameter/noiseScale = 50.0
