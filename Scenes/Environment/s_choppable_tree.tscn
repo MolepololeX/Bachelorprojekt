@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://d3ptw2yih8blu"]
 
 [ext_resource type="Script" uid="uid://ccb77ev2d130w" path="res://Scripts/Interactables/ChoppableTree.cs" id="1_4f7er"]
-[ext_resource type="PackedScene" uid="uid://dqpbahjgdq2gw" path="res://Scenes/Environment/s_tree_maple_alternate.tscn" id="2_30wnl"]
+[ext_resource type="PackedScene" uid="uid://dqpbahjgdq2gw" path="res://Scenes/Environment/s_tree_maple_alternate.tscn" id="1_sr2e5"]
 [ext_resource type="PackedScene" uid="uid://bac8m4n6d68kg" path="res://Scenes/VFX/s_poof_effect_big.tscn" id="3_fxtf1"]
 [ext_resource type="Material" uid="uid://drj8uftt5plph" path="res://Assets/Materials/Particles/pm_leaf.tres" id="3_o7f1v"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="4_11a77"]
@@ -385,7 +385,7 @@ _data = {
 
 [node name="model" type="Node3D" parent="Pivot"]
 
-[node name="mesh_tree_maple_separate_ico" parent="Pivot/model" instance=ExtResource("2_30wnl")]
+[node name="TreeMapleAlternate" parent="Pivot/model" instance=ExtResource("1_sr2e5")]
 
 [node name="Collission" type="StaticBody3D" parent="Pivot" node_paths=PackedStringArray("animPlayer", "parent", "animRoot", "poofEffectSockets", "emitter")]
 collision_layer = 5

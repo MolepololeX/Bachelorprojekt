@@ -187,27 +187,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36861715, 0)
-bones/4/rotation = Quaternion(-0.551024, -0.056538574, -0.63851297, 0.53430074)
-bones/5/rotation = Quaternion(2.2659451e-08, -6.601655e-08, -0.5152341, 0.8570495)
-bones/7/rotation = Quaternion(-0.3211236, -0.33903593, 0.14934164, 0.8715683)
-bones/8/rotation = Quaternion(0.0010838256, 0.0010838254, -0.7031167, 0.71107286)
-bones/9/rotation = Quaternion(-0.6096791, 0.07708617, 0.6140443, 0.4952765)
-bones/10/rotation = Quaternion(3.574014e-08, 4.050441e-08, 0.5376152, 0.8431904)
-bones/12/rotation = Quaternion(-0.32023746, 0.31518576, -0.23154895, 0.862839)
-bones/13/rotation = Quaternion(0.0033870381, 0.00398943, 0.70357794, 0.7105989)
-bones/15/rotation = Quaternion(0.98937726, 0.08380788, 0.078873485, 0.08881484)
-bones/16/rotation = Quaternion(0.39968282, 6.032408e-08, -2.725257e-07, 0.9166536)
-bones/17/rotation = Quaternion(-0.62396157, -0.20053338, 0.0776124, 0.7512886)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.92015594, -0.39155215, 5.9089115e-07)
-bones/19/rotation = Quaternion(0.9911946, -0.033497084, 0.02975284, 0.1246036)
-bones/20/rotation = Quaternion(0.44333357, -5.896657e-08, 3.1062112e-07, 0.8963567)
-bones/21/rotation = Quaternion(-0.64978343, 0.11238542, -0.023776336, 0.7513892)
-bones/38/position = Vector3(0.52084064, 0.7733384, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7733383, 0.059736915)
+bones/1/position = Vector3(0, 0.39130884, 0)
+bones/4/rotation = Quaternion(-0.559372, -0.061197855, -0.64543235, 0.5165026)
+bones/5/rotation = Quaternion(2.4511108e-08, -4.377508e-08, -0.49228022, 0.8704368)
+bones/7/rotation = Quaternion(-0.32060546, -0.32534462, 0.14444824, 0.87778)
+bones/8/rotation = Quaternion(0.00020609722, 0.0002060712, -0.70634997, 0.70786273)
+bones/9/rotation = Quaternion(-0.6178189, 0.08105112, 0.6193038, 0.477696)
+bones/10/rotation = Quaternion(3.0321047e-08, 4.4738776e-08, 0.51560956, 0.8568237)
+bones/12/rotation = Quaternion(-0.31884754, 0.30041006, -0.22606589, 0.87004846)
+bones/13/rotation = Quaternion(0.00043898716, 0.00051705947, 0.7066516, 0.70756143)
+bones/15/rotation = Quaternion(0.9936655, 0.083628856, 0.073734805, 0.014079703)
+bones/16/rotation = Quaternion(0.20380723, 6.392802e-08, -1.3432381e-07, 0.9790111)
+bones/17/rotation = Quaternion(-0.5218304, -0.20925945, 0.044891987, 0.8257653)
+bones/18/rotation = Quaternion(9.536303e-05, 0.92024314, -0.39134735, -2.1527245e-05)
+bones/19/rotation = Quaternion(0.99718106, -0.029579693, 0.031469814, 0.061357155)
+bones/20/rotation = Quaternion(0.27994478, -6.393758e-08, 1.9498171e-07, 0.9600162)
+bones/21/rotation = Quaternion(-0.56219447, 0.11447528, -0.009119011, 0.8189931)
+bones/38/position = Vector3(0.52084064, 0.78669834, -0.05763735)
+bones/40/position = Vector3(-0.5108437, 0.7866982, 0.059736922)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2043792, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2270708, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -267,228 +267,8 @@ skeleton = NodePath("../../../SubViewport")
 
 [node name="ChoppableTrees" type="Node3D" parent="Level/Env"]
 
-[node name="ChoppableTree" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.92, 0, 0, 0, 0.92, 0, 0, 0, 0.92, -20.560268, 0, -1.7625985)
-visible = false
-
-[node name="ChoppableTree18" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.70837444, 0, 0.32650518, 0, 0.78, 0, -0.32650518, 0, 0.70837444, -21.48014, 0, -13.343622)
-visible = false
-
-[node name="ChoppableTree19" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8147278, 0, -0.021064041, 0, 0.815, 0, 0.021064041, 0, 0.8147278, -15.918547, -9.536743e-07, -15.601194)
-visible = false
-
-[node name="ChoppableTree20" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.7928726, 0, -0.6011473, 0, 0.995, 0, 0.6011473, 0, 0.7928726, -10.429872, -9.536743e-07, -12.784208)
-visible = false
-
-[node name="ChoppableTree2" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.014468328, 0, 0.99989533, 0, 1, 0, -0.99989533, 0, -0.014468328, -25.63253, 0, -1.5692816)
-visible = false
-
-[node name="ChoppableTree3" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-1.0575066, 0, 0.9174311, 0, 1.4, 0, -0.9174311, 0, -1.0575066, -13.877816, 0, -6.3119597)
-visible = false
-
-[node name="ChoppableTree4" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.78530747, 0, 0.5166161, 0, 0.94, 0, -0.5166161, 0, 0.78530747, -24.772264, 0, 4.2810636)
-visible = false
-
-[node name="ChoppableTree5" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.62728107, 0, 0.6865992, 0, 0.93, 0, -0.6865992, 0, -0.62728107, -21.421183, 0, 6.1930685)
-visible = false
-
-[node name="ChoppableTree6" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.25044745, 0, -0.9681301, 0, 1, 0, 0.9681301, 0, -0.25044745, -12.980656, 0, 6.5392485)
-visible = false
-
-[node name="ChoppableTree16" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8579304, 0, -0.51376575, 0, 1, 0, 0.51376575, 0, 0.8579304, -8.395444, 0, 9.577357)
-visible = false
-
-[node name="ChoppableTree17" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.43524632, 0, -0.6291149, 0, 0.765, 0, 0.6291149, 0, -0.43524632, -8.831798, 0, 6.5776453)
-visible = false
-
-[node name="ChoppableTree7" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.40228316, 0, -0.69149715, 0, 0.8, 0, 0.69149715, 0, -0.40228316, -6.876932, -9.536743e-07, -6.506258)
-visible = false
-
-[node name="ChoppableTree8" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.840472, 0, -0.54185474, 0, 1, 0, 0.54185474, 0, 0.840472, -4.2368073, -9.536743e-07, -6.972748)
-visible = false
-
-[node name="ChoppableTree26" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.97574115, 0, 0.2189267, 0, 1, 0, -0.2189267, 0, 0.97574115, -5.5519986, -9.536743e-07, -13.694048)
-visible = false
-
-[node name="ChoppableTree27" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(1.0494015, 0, -0.58202803, 0, 1.2, 0, 0.58202803, 0, 1.0494015, -1.926224, -9.536743e-07, -11.816143)
-visible = false
-
-[node name="ChoppableTree28" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.5817254, 0, 0.81338507, 0, 1, 0, -0.81338507, 0, 0.5817254, 0.62364364, -9.536743e-07, -14.795102)
-visible = false
-
-[node name="ChoppableTree29" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8514157, 0, -0.5244912, 0, 1, 0, 0.5244912, 0, 0.8514157, 4.538894, -9.536743e-07, -13.286458)
-visible = false
-
-[node name="ChoppableTree53" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.835682, 0, 0.2232951, 0, 0.865, 0, -0.2232951, 0, 0.835682, 2.5227132, -9.536743e-07, -7.5908165)
-visible = false
-
-[node name="ChoppableTree54" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.16823487, 0, 0.8484822, 0, 0.865, 0, -0.8484822, 0, -0.16823487, 7.0531936, -9.536743e-07, -7.4770994)
-visible = false
-
-[node name="ChoppableTree55" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.46175498, 0, 0.5973335, 0, 0.755, 0, -0.5973335, 0, 0.46175498, -1.3250718, -1.9073486e-06, -9.227224)
-visible = false
-
-[node name="ChoppableTree30" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8514157, 0, -0.5244912, 0, 1, 0, 0.5244912, 0, 0.8514157, 9.93497, -9.536743e-07, -14.271018)
-visible = false
-
-[node name="ChoppableTree31" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(1.2771237, 0, -0.78673685, 0, 1.5, 0, 0.78673685, 0, 1.2771237, 13.648288, -9.536743e-07, -11.158234)
-visible = false
-
-[node name="ChoppableTree32" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8514157, 0, -0.5244912, 0, 1, 0, 0.5244912, 0, 0.8514157, 6.754498, -9.536743e-07, -18.392677)
-visible = false
-
-[node name="ChoppableTree33" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(1.2771237, 0, -0.78673685, 0, 1.5, 0, 0.78673685, 0, 1.2771237, 1.2809968, -9.536743e-07, -19.200502)
-visible = false
-
-[node name="ChoppableTree34" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8514157, 0, -0.5244912, 0, 1, 0, 0.5244912, 0, 0.8514157, -5.6678224, -9.536743e-07, -19.35251)
-visible = false
-
-[node name="ChoppableTree35" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(1.1068405, 0, -0.6818386, 0, 1.3, 0, 0.6818386, 0, 1.1068405, 14.747477, -9.536743e-07, -17.87642)
-visible = false
-
-[node name="ChoppableTree36" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.57260376, 0, 0.8198321, 0, 1, 0, -0.8198321, 0, 0.57260376, 20.059128, -9.536743e-07, -13.6525955)
-visible = false
-
-[node name="ChoppableTree9" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.5428827, 0, 0.69258815, 0, 0.88, 0, -0.69258815, 0, 0.5428827, -6.357784, -4.7683716e-07, -3.7597308)
-visible = false
-
-[node name="ChoppableTree21" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.7549471, 0, 0.45216677, 0, 0.88, 0, -0.45216677, 0, 0.7549471, 9.225742, 1.4305115e-06, -2.7413144)
-visible = false
-
-[node name="ChoppableTree22" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(1.2868418, 0, 0.7707387, 0, 1.5, 0, -0.7707387, 0, 1.2868418, 13.294575, 2.3841858e-06, -4.8676677)
-visible = false
-
-[node name="ChoppableTree23" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.7549471, 0, 0.45216677, 0, 0.88, 0, -0.45216677, 0, 0.7549471, 13.64239, 2.3841858e-06, -0.3086996)
-visible = false
-
-[node name="ChoppableTree24" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.7865942, 0, -0.39454967, 0, 0.88, 0, 0.39454967, 0, 0.7865942, 11.740069, 2.3841858e-06, 3.3844976)
-visible = false
-
-[node name="ChoppableTree25" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.3395265, 0, -0.81186306, 0, 0.88, 0, 0.81186306, 0, 0.3395265, 13.753676, 2.3841858e-06, 7.9214334)
-visible = false
-
-[node name="ChoppableTree10" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.9942578, 0, -0.10701007, 0, 1, 0, 0.10701007, 0, 0.9942578, 8.475075, -4.7683716e-07, -7.9751525)
-visible = false
-
-[node name="ChoppableTree11" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.7399546, 0, -0.32949528, 0, 0.81, 0, 0.32949528, 0, 0.7399546, 20.185078, 4.7683716e-07, -6.6005135)
-visible = false
-
-[node name="ChoppableTree12" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.5631945, 0, -0.8263242, 0, 1, 0, 0.8263242, 0, 0.5631945, 23.404882, 1.4305115e-06, -1.3744068)
-visible = false
-
-[node name="ChoppableTree13" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.5631945, 0, -0.8263242, 0, 1, 0, 0.8263242, 0, 0.5631945, 27.263533, 1.4305115e-06, 6.8292513)
-visible = false
-
-[node name="ChoppableTree14" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.5874463, 0, -0.7338303, 0, 0.94, 0, 0.7338303, 0, -0.5874463, 20.288054, 1.4305115e-06, 4.954749)
-visible = false
-
-[node name="ChoppableTree15" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.74873793, 0, 0.23583171, 0, 0.785, 0, -0.23583171, 0, -0.74873793, 8.995779, 1.4305115e-06, 7.79315)
-visible = false
-
-[node name="ChoppableTree37" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.7865942, 0, -0.39454967, 0, 0.88, 0, 0.39454967, 0, 0.7865942, 10.308794, 2.3841858e-06, 13.809259)
-visible = false
-
-[node name="ChoppableTree38" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.3395265, 0, -0.81186306, 0, 0.88, 0, 0.81186306, 0, 0.3395265, 6.415942, 2.3841858e-06, 22.869818)
-visible = false
-
-[node name="ChoppableTree40" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.5809284, 0, -0.66100085, 0, 0.88, 0, 0.66100085, 0, 0.5809284, 2.0051217, 2.3841858e-06, 21.924915)
-visible = false
-
-[node name="ChoppableTree41" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, 8.096531, 3.33786e-06, 18.630749)
-visible = false
-
-[node name="ChoppableTree44" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, -6.2488475, 5.2452087e-06, 30.465843)
-visible = false
-
-[node name="ChoppableTree45" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, 2.1933374, 5.2452087e-06, 30.970436)
-visible = false
-
-[node name="ChoppableTree46" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, 10.822542, 5.2452087e-06, 27.80689)
-visible = false
-
-[node name="ChoppableTree47" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, 15.839178, 3.33786e-06, 22.496181)
-visible = false
-
-[node name="ChoppableTree48" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, 16.349812, 3.33786e-06, 16.677214)
-visible = false
-
-[node name="ChoppableTree49" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, -13.41193, 3.33786e-06, 22.810028)
-visible = false
-
-[node name="ChoppableTree50" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, -13.942614, 3.33786e-06, 31.12791)
-visible = false
-
-[node name="ChoppableTree51" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, -10.603089, 3.33786e-06, 18.37864)
-visible = false
-
-[node name="ChoppableTree52" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.8581897, 0, -0.9764786, 0, 1.3, 0, 0.9764786, 0, 0.8581897, -17.554216, 3.33786e-06, 13.131256)
-visible = false
-
-[node name="ChoppableTree42" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.051791012, 0, -0.8784746, 0, 0.88, 0, 0.8784746, 0, 0.051791012, -3.0453548, 4.2915344e-06, 22.198631)
-visible = false
-
-[node name="ChoppableTree43" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.051791012, 0, -0.8784746, 0, 0.88, 0, 0.8784746, 0, 0.051791012, -8.287421, 4.2915344e-06, 19.381468)
-visible = false
-
-[node name="ChoppableTree39" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.4285177, 0, -0.6577216, 0, 0.785, 0, 0.6577216, 0, -0.4285177, -4.86566, 1.4305115e-06, 17.902071)
-visible = false
-
 [node name="ChoppableTree56" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.9939571, 0, -0.109769106, 0, 1, 0, 0.109769106, 0, -0.9939571, 6.328688, 9.536743e-07, 0.10814953)
+transform = Transform3D(0.9161179, 0, -0.4009086, 0, 1, 0, 0.4009086, 0, 0.9161179, 6.328688, 9.536743e-07, 0.10814953)
 
 [node name="WindEffect" parent="Level/Env" instance=ExtResource("21_rdm03")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56583023, 5.8686504, 11.87656)
@@ -500,19 +280,19 @@ amount = 32
 [node name="Bushes" type="Node3D" parent="Level/Env"]
 
 [node name="Bush" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.609953, 0, 3.1480732)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.924081, 0, 4.708228)
 
 [node name="Bush2" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3463173, -9.536743e-07, 2.2683172)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.660445, -9.536743e-07, 3.8284721)
 
 [node name="Bush5" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.047966, -2.861023e-06, -3.5602837)
 
 [node name="Bush6" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3521595, -2.861023e-06, -9.246994)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8573103, -2.861023e-06, 0.12290096)
 
 [node name="Bush7" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299221, -2.861023e-06, -9.325382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9102488, -2.861023e-06, 0.04451275)
 
 [node name="Shrine" parent="Level/Env" instance=ExtResource("23_136ei")]
 transform = Transform3D(0, 0, -0.3, 0, 0.30000004, 0, 0.3, 0, 0, 0, -0.3, 0)
@@ -583,7 +363,6 @@ environment = ExtResource("12_jkhpk")
 
 [node name="Daylight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
-visible = false
 shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_split_1 = 0.02
