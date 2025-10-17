@@ -75,6 +75,7 @@ x Simple Inventarleiste oder 3x3 Grid
 
 	- outline shader fixen
 	
+	- reflections fuer wasser mit oblique projection aka second camera wie ich schon probiert hatte
 	
 	- neue sounds 
 	

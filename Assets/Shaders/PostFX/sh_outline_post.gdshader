@@ -49,7 +49,7 @@ void fragment() {
 
 	for(int i = 0; i < 4; i++){
 		float testDepth = sampleLinearDepth(depth_uv[i], INV_PROJECTION_MATRIX);
-		depthDifference -= depth - testDepth;
+		depthDifference += depth - testDepth;
 
 		if(sampleLinearDepth(closestDepthUV, INV_PROJECTION_MATRIX) > testDepth){
 			closestDepthUV = depth_uv[i];
@@ -69,8 +69,8 @@ void fragment() {
 
 	float depthEdge = clamp(step(depthThreshold, depthDifference), 0.0, 1.0);
 
-	vec3 original = texture(screen_texture, SCREEN_UV).rgb;
-	//vec3 outline = texture(screen_texture, closestDepthUV).rgb * outlineDarkness;
+	//vec3 original = texture(screen_texture, SCREEN_UV).rgb;
+	vec3 outline = texture(screen_texture, closestDepthUV).rgb * outlineDarkness;
 
 	//float steps = 256.0;
 //
