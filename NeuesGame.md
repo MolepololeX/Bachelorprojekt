@@ -41,6 +41,8 @@ x Simple Inventarleiste oder 3x3 Grid
 	## Player Anim
 	- movement fixen indem alles sich nur in pixeln bewegen kann
 	- blockartige anim mit low fps
+
+    -> maybe die atzen mit baelle als haende und den grossen emojis als gesicht oder so
 	
 	
 	## Mechanics
@@ -49,10 +51,16 @@ x Simple Inventarleiste oder 3x3 Grid
 	- fishing minigame
 	- color quantization und palettew
 	- aus quecksilber II eine lupe die einem anzeigt was actually im cauldron drinne is
+
+    ## Heute SOFORT MACHEN JAAAAA
+    --> kleine shrek ahh huette zum chillen drinne aus holz, wird hingebaut wenn der player 10 planks hat
 	
 	
 	## Visuals
 	- water shader mit reflections
+    - regen mit splashes auf dem boden
+    - water + regen = ripples im wass /auf dem wasser als particle
+
 	- outline shader fixen
 	
 	
@@ -77,3 +85,8 @@ x Simple Inventarleiste oder 3x3 Grid
 	- aaaaa
 	- fix depth buffer being entirely misaligned and seemingly ignoring my camera snapping which perfectly works in the rendered image
 	- maybe durch uv's quantizen aka steppen
+
+
+    # Random Ideen
+
+    - Intro Sequence wo player aus dem himmel gefallen kommt, faded langsam in die natur rein und dann kommt der atze an
