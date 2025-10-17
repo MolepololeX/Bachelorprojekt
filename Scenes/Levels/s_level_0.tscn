@@ -192,27 +192,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39071432, 0)
-bones/4/rotation = Quaternion(-0.55947053, -0.060525015, -0.64332366, 0.51909935)
-bones/5/rotation = Quaternion(2.650158e-08, -4.1457945e-08, -0.49656817, 0.8679978)
-bones/7/rotation = Quaternion(-0.32119125, -0.32638586, 0.14637065, 0.87686044)
-bones/8/rotation = Quaternion(9.3150455e-05, 9.314903e-05, -0.7067649, 0.70744854)
-bones/9/rotation = Quaternion(-0.61780715, 0.08041889, 0.61749226, 0.48015675)
-bones/10/rotation = Quaternion(3.1880692e-08, 4.985058e-08, 0.5197018, 0.8543478)
-bones/12/rotation = Quaternion(-0.31944856, 0.30146822, -0.22791122, 0.86898)
-bones/13/rotation = Quaternion(0.00026161838, 0.00030814498, 0.70683557, 0.70737773)
-bones/15/rotation = Quaternion(0.9935974, 0.08353982, 0.07399209, 0.017622361)
-bones/16/rotation = Quaternion(0.21300843, 6.531394e-08, -1.4077538e-07, 0.97705036)
-bones/17/rotation = Quaternion(-0.5266131, -0.20898351, 0.046289627, 0.8227161)
-bones/18/rotation = Quaternion(8.631503e-05, 0.920235, -0.39136645, -1.9480636e-05)
-bones/19/rotation = Quaternion(0.9970133, -0.029720785, 0.03140173, 0.06399333)
-bones/20/rotation = Quaternion(0.2867245, -6.4044045e-08, 1.9900675e-07, 0.9580132)
-bones/21/rotation = Quaternion(-0.5657983, 0.1144297, -0.0096831545, 0.81650746)
-bones/38/position = Vector3(0.52084064, 0.78735584, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.7873558, 0.059736922)
+bones/1/position = Vector3(0, 0.37707686, 0)
+bones/4/rotation = Quaternion(-0.5547533, -0.057470046, -0.63804775, 0.53088695)
+bones/5/rotation = Quaternion(1.36068e-08, -7.777392e-08, -0.51229775, 0.8588079)
+bones/7/rotation = Quaternion(-0.32186037, -0.33454904, 0.15014394, 0.8728916)
+bones/8/rotation = Quaternion(0.00053439965, 0.0005343889, -0.7051425, 0.7090652)
+bones/9/rotation = Quaternion(-0.61314845, 0.07777912, 0.6133375, 0.4917487)
+bones/10/rotation = Quaternion(1.5830713e-08, 5.747226e-08, 0.5348032, 0.8449767)
+bones/12/rotation = Quaternion(-0.32065594, 0.31059703, -0.23218703, 0.864175)
+bones/13/rotation = Quaternion(0.0017174562, 0.0020229076, 0.70532215, 0.7088821)
+bones/15/rotation = Quaternion(0.9912916, 0.08323434, 0.07739117, 0.066510685)
+bones/16/rotation = Quaternion(0.340787, 5.9911414e-08, -2.4251275e-07, 0.9401406)
+bones/17/rotation = Quaternion(-0.59309375, -0.20387916, 0.06703815, 0.77600193)
+bones/18/rotation = Quaternion(6.368537e-06, 0.9201634, -0.39153475, -1.3838487e-06)
+bones/19/rotation = Quaternion(0.9935475, -0.032112956, 0.030321738, 0.10446483)
+bones/20/rotation = Quaternion(0.3911065, -6.066596e-08, 2.7352797e-07, 0.9203454)
+bones/21/rotation = Quaternion(-0.6215528, 0.113303535, -0.018822767, 0.77490664)
+bones/38/position = Vector3(0.52084064, 0.7807198, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.7807197, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2264763, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2128389, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -368,6 +368,7 @@ environment = ExtResource("12_jkhpk")
 
 [node name="Daylight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -376,6 +377,7 @@ directional_shadow_split_1 = 0.02
 
 [node name="DaylightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -383,7 +385,6 @@ directional_shadow_split_1 = 0.02
 
 [node name="NightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true
