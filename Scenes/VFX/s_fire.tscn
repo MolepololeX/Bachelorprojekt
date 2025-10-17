@@ -49,5 +49,7 @@ material = SubResource("StandardMaterial3D_7fjln")
 [node name="GPUParticles3D" type="GPUParticles3D"]
 cast_shadow = 0
 amount = 2500
+fixed_fps = 12
+interpolate = false
 process_material = SubResource("ParticleProcessMaterial_g5egk")
 draw_pass_1 = SubResource("QuadMesh_ufcya")

@@ -3,10 +3,11 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e6ero"]
 noise_type = 3
 seed = 13
-frequency = 0.001
+frequency = 0.1
 
 [resource]
-width = 1024
-height = 1024
+width = 100
+height = 100
+generate_mipmaps = false
 noise = SubResource("FastNoiseLite_e6ero")
 seamless = true

@@ -4,12 +4,11 @@ render_mode cull_disabled, blend_mix, depth_draw_opaque, diffuse_toon, specular_
 
 uniform vec3 color : source_color;
 uniform sampler2D leaveAlpha : filter_nearest, repeat_disable;
-uniform sampler2D noise;
+uniform sampler2D noise : filter_nearest;
 uniform vec3 targetPos;
-uniform float noiseScale = 20.0;
-uniform float timeScale = 20.0;
+uniform float timeScale = 0.01;
 uniform float maxAngle = 1.0;
-uniform float directionBias = 0.3;
+uniform float directionBias = 0.0;
 
 ///from the toon shader
 uniform int cuts : hint_range(1, 8) = 3;
@@ -86,8 +85,17 @@ void vertex() {
 
 
 	// move the leaf in the wind, temp ripped from grass shader
+	//vec3 instancePos = MODEL_MATRIX[3].xyz;
+	//VERTEX = VERTEX + vec3((texture(noise, (instancePos.xz + (TIME * timeScale)) / noiseScale).r - (0.5 - directionBias) ) * maxAngle, 0.0, 0.0) * (1.0 - UV.y);
 	vec3 instancePos = MODEL_MATRIX[3].xyz;
-	VERTEX = VERTEX + vec3((texture(noise, (instancePos.xz + (TIME * timeScale)) / noiseScale).r - (0.5 - directionBias) ) * maxAngle, 0.0, 0.0) * (1.0 - UV.y);
+	angle = texture(noise, (instancePos.xz + (TIME * timeScale))).r - (0.5 - directionBias) * maxAngle;
+	rotation = mat4(
+		vec4(cos(angle), -sin(angle), 0.0, 0.0),
+		vec4(sin(angle), cos(angle), 0.0, 0.0),
+		vec4(0.0, 0.0, 1.0, 0.0),
+		vec4(0.0, 0.0, 0.0, 1.0)
+	);
+	VERTEX = (rotation * vec4(VERTEX, 1.0)).xyz;
 }
 
 void fragment() {
@@ -105,7 +113,7 @@ void light() {
 	if (use_attenuation) {
 		attenuation = ATTENUATION;
 	}
-	
+
 	// Diffuse lighting.
 	float NdotL = dot(NORMAL, LIGHT);
 	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
@@ -116,12 +124,12 @@ void light() {
 
 	// Calculate borders.
 	float border = 0.0f;
-	
+
 	// Apply diffuse result to different styles.
 	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR / PI;
 	diffuse *= diffuse_stepped * (1.0f - border);
-	
-	
+
+
 	if (clamp_diffuse_to_max) {
 		// Clamp diffuse to max for multiple light sources.
 		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);

@@ -40,7 +40,7 @@ turbulence_influence_min = 0.010000001
 turbulence_influence_max = 0.010000001
 
 [sub_resource type="Curve" id="Curve_7pvd7"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.20057304, 1), 0.0, 0.0, 0, 0, Vector2(0.50143266, 0.9926636), 0.0, 0.0, 0, 0, Vector2(0.8022922, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.38541663, 0.5273651), 0.0, 0.0, 0, 0, Vector2(0.53541666, 0.45621574), 0.0, 0.0, 0, 0, Vector2(0.6875, 0.5172009), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_31ao3"]

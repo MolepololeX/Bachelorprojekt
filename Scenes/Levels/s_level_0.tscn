@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=49 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Environment" uid="uid://csoowc3revmqe" path="res://env_1.tres" id="12_jkhpk"]
 [ext_resource type="PackedScene" uid="uid://bh7t32rqti3yt" path="res://Scenes/Clutter/s_campfire.tscn" id="12_qnigd"]
 [ext_resource type="PackedScene" uid="uid://bg6uur18cv4hs" path="res://Scenes/Environment/s_cauldron.tscn" id="13_jqdjy"]
+[ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/Foliage/sm_cloud_shadows.tres" id="13_qnigd"]
 [ext_resource type="PackedScene" uid="uid://dqpbahjgdq2gw" path="res://Scenes/Environment/s_tree_maple_alternate.tscn" id="16_jkhpk"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/sh_water.gdshader" id="19_8auip"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/s_choppable_tree.tscn" id="20_5yjbh"]
@@ -175,6 +176,10 @@ material = SubResource("StandardMaterial3D_d8r0m")
 radius = 0.15
 height = 0.3
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_7b3aa"]
+material = ExtResource("13_qnigd")
+size = Vector2(20, 20)
+
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_k6vpp")]
@@ -187,27 +192,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39130884, 0)
-bones/4/rotation = Quaternion(-0.559372, -0.061197855, -0.64543235, 0.5165026)
-bones/5/rotation = Quaternion(2.4511108e-08, -4.377508e-08, -0.49228022, 0.8704368)
-bones/7/rotation = Quaternion(-0.32060546, -0.32534462, 0.14444824, 0.87778)
-bones/8/rotation = Quaternion(0.00020609722, 0.0002060712, -0.70634997, 0.70786273)
-bones/9/rotation = Quaternion(-0.6178189, 0.08105112, 0.6193038, 0.477696)
-bones/10/rotation = Quaternion(3.0321047e-08, 4.4738776e-08, 0.51560956, 0.8568237)
-bones/12/rotation = Quaternion(-0.31884754, 0.30041006, -0.22606589, 0.87004846)
-bones/13/rotation = Quaternion(0.00043898716, 0.00051705947, 0.7066516, 0.70756143)
-bones/15/rotation = Quaternion(0.9936655, 0.083628856, 0.073734805, 0.014079703)
-bones/16/rotation = Quaternion(0.20380723, 6.392802e-08, -1.3432381e-07, 0.9790111)
-bones/17/rotation = Quaternion(-0.5218304, -0.20925945, 0.044891987, 0.8257653)
-bones/18/rotation = Quaternion(9.536303e-05, 0.92024314, -0.39134735, -2.1527245e-05)
-bones/19/rotation = Quaternion(0.99718106, -0.029579693, 0.031469814, 0.061357155)
-bones/20/rotation = Quaternion(0.27994478, -6.393758e-08, 1.9498171e-07, 0.9600162)
-bones/21/rotation = Quaternion(-0.56219447, 0.11447528, -0.009119011, 0.8189931)
-bones/38/position = Vector3(0.52084064, 0.78669834, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.7866982, 0.059736922)
+bones/1/position = Vector3(0, 0.39071432, 0)
+bones/4/rotation = Quaternion(-0.55947053, -0.060525015, -0.64332366, 0.51909935)
+bones/5/rotation = Quaternion(2.650158e-08, -4.1457945e-08, -0.49656817, 0.8679978)
+bones/7/rotation = Quaternion(-0.32119125, -0.32638586, 0.14637065, 0.87686044)
+bones/8/rotation = Quaternion(9.3150455e-05, 9.314903e-05, -0.7067649, 0.70744854)
+bones/9/rotation = Quaternion(-0.61780715, 0.08041889, 0.61749226, 0.48015675)
+bones/10/rotation = Quaternion(3.1880692e-08, 4.985058e-08, 0.5197018, 0.8543478)
+bones/12/rotation = Quaternion(-0.31944856, 0.30146822, -0.22791122, 0.86898)
+bones/13/rotation = Quaternion(0.00026161838, 0.00030814498, 0.70683557, 0.70737773)
+bones/15/rotation = Quaternion(0.9935974, 0.08353982, 0.07399209, 0.017622361)
+bones/16/rotation = Quaternion(0.21300843, 6.531394e-08, -1.4077538e-07, 0.97705036)
+bones/17/rotation = Quaternion(-0.5266131, -0.20898351, 0.046289627, 0.8227161)
+bones/18/rotation = Quaternion(8.631503e-05, 0.920235, -0.39136645, -1.9480636e-05)
+bones/19/rotation = Quaternion(0.9970133, -0.029720785, 0.03140173, 0.06399333)
+bones/20/rotation = Quaternion(0.2867245, -6.4044045e-08, 1.9900675e-07, 0.9580132)
+bones/21/rotation = Quaternion(-0.5657983, 0.1144297, -0.0096831545, 0.81650746)
+bones/38/position = Vector3(0.52084064, 0.78735584, -0.05763735)
+bones/40/position = Vector3(-0.5108437, 0.7873558, 0.059736922)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2270708, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2264763, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -363,13 +368,23 @@ environment = ExtResource("12_jkhpk")
 
 [node name="Daylight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
+light_energy = 0.5
+shadow_enabled = true
+shadow_reverse_cull_face = true
+shadow_caster_mask = 4294967293
+directional_shadow_split_1 = 0.02
+
+[node name="DaylightShadows" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
+light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_split_1 = 0.02
 
-[node name="Night" type="DirectionalLight3D" parent="."]
+[node name="NightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
 visible = false
+light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_split_1 = 0.02
@@ -400,6 +415,13 @@ _camSpeed = 3.0
 visible = false
 cast_shadow = 0
 skeleton = NodePath("")
+
+[node name="CloudShadows" type="MeshInstance3D" parent="SubViewport/CameraRig"]
+transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.91362, 14.314774, 5.2585087)
+layers = 2
+transparency = 0.4
+mesh = SubResource("PlaneMesh_7b3aa")
+skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 own_world_3d = true

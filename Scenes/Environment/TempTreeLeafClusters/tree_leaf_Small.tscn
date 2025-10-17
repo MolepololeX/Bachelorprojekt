@@ -53,5 +53,6 @@ skeleton = NodePath("")
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.68559176, 0)
+cast_shadow = 0
 multimesh = SubResource("MultiMesh_dgeol")
 script = ExtResource("1_70nxf")
