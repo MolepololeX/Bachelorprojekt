@@ -59,7 +59,7 @@ x Simple Inventarleiste oder 3x3 Grid
 	# right now
 	
 	grass spitzen color per noise
-	cloud shadows
+	x cloud shadows
 	feuer mit trail wie ds1
 	x grass fps
 	x wind streaks anpassen
