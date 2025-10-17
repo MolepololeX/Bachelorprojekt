@@ -60,7 +60,7 @@ x Simple Inventarleiste oder 3x3 Grid
 	
 	grass spitzen color per noise
 	x cloud shadows
-	feuer mit trail wie ds1
+	x feuer mit trail wie ds1
 	x grass fps
 	x wind streaks anpassen
 	x trees neue sachen ausprobiern
@@ -75,6 +75,8 @@ x Simple Inventarleiste oder 3x3 Grid
 
 	- outline shader fixen
 	
+	
+	- neue sounds 
 	
 	## Foliage Upgrades
 	- bessere noise fuer rolling grass und leaves und grass-colour	

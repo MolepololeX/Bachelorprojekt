@@ -1,13 +1,16 @@
-[gd_scene load_steps=49 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=57 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
 [ext_resource type="Shader" uid="uid://ot0bv71kcr4g" path="res://Assets/Shaders/sh_toon_material.gdshader" id="3_d8r0m"]
 [ext_resource type="PackedScene" uid="uid://bwic0egi0ejsk" path="res://Scenes/Environment/s_floor_tile.tscn" id="4_d8r0m"]
+[ext_resource type="PackedScene" uid="uid://b24shvq54jb53" path="res://Assets/Meshes/pond_floor.glb" id="5_7f1sr"]
 [ext_resource type="Environment" uid="uid://csoowc3revmqe" path="res://env_1.tres" id="12_jkhpk"]
 [ext_resource type="PackedScene" uid="uid://bh7t32rqti3yt" path="res://Scenes/Clutter/s_campfire.tscn" id="12_qnigd"]
+[ext_resource type="Material" uid="uid://c7ucxh3ki20ld" path="res://Assets/Materials/Toon/sm_toon_grass.tres" id="13_2uyb1"]
 [ext_resource type="PackedScene" uid="uid://bg6uur18cv4hs" path="res://Scenes/Environment/s_cauldron.tscn" id="13_jqdjy"]
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/Foliage/sm_cloud_shadows.tres" id="13_qnigd"]
+[ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="14_7f1sr"]
 [ext_resource type="PackedScene" uid="uid://dqpbahjgdq2gw" path="res://Scenes/Environment/s_tree_maple_alternate.tscn" id="16_jkhpk"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/sh_water.gdshader" id="19_8auip"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/s_choppable_tree.tscn" id="20_5yjbh"]
@@ -176,6 +179,26 @@ material = SubResource("StandardMaterial3D_d8r0m")
 radius = 0.15
 height = 0.3
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnigd"]
+metallic = 1.0
+metallic_specular = 0.0
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7b3aa"]
+material = SubResource("StandardMaterial3D_qnigd")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qnigd"]
+material = ExtResource("13_2uyb1")
+
+[sub_resource type="QuadMesh" id="QuadMesh_604nk"]
+material = ExtResource("14_7f1sr")
+
+[sub_resource type="MultiMesh" id="MultiMesh_jxwji"]
+transform_format = 1
+instance_count = 32
+mesh = SubResource("QuadMesh_604nk")
+buffer = PackedFloat32Array(0.15858611, 0.08686073, -0.087787576, 0.2181943, -0.0047565983, -0.13847859, -0.14560926, -0.35638207, -0.12340511, 0.11696106, -0.10720209, 0.27375716, -0.0045505986, 0.008840662, 0.20075393, 0.017035412, 0.17871419, 0.091990456, 0, 0.24447325, -0.09187783, 0.17849539, -0.009943102, 0.43500456, -0.18040109, -0.07239556, 0.051140383, -0.18384916, -0.0043301093, -0.10863364, -0.16905913, -0.26763362, 0.08853082, -0.15283528, 0.095941, -0.3789587, 0.05513243, -0.18709555, 0.048545584, -0.46674004, 0.19280335, 0.05681437, 0, 0.1468259, -0.013721826, 0.046565928, 0.19504955, 0.09912382, -0.108422466, -0.16895773, 0.009943102, -0.4252028, 0.16916482, -0.10855537, 0, -0.26134762, 0.005370035, 0.008368273, 0.20075393, 0.010223241, 0.11318274, 0.06717914, -0.15191326, 0.176714, -0.003658262, -0.18277483, -0.08355233, -0.4515316, -0.16606413, 0.049813032, -0.10169748, 0.119724624, 0.08644874, 0.16845363, -0.067461096, 0.41712686, 0.17882648, -0.09177198, 0, -0.23816523, -0.030801186, -0.060019054, -0.18934096, -0.13614249, 0.13004443, 0.08668457, 0.12639317, 0.23165852, 0.0043323855, 0.16361594, -0.116670705, 0.39725667, -0.15320143, 0.078208745, 0.10398902, 0.19522107, 0.14699034, 0.11348964, -0.07690868, 0.27106342, -0.004536876, -0.10867063, -0.16902992, -0.28761244, -0.1370192, 0.12534672, -0.07690868, 0.30540434, -0.2007721, 0.009568933, 0, 0.017233497, -0.0026978492, -0.05660535, -0.19284594, -0.15099815, -0.009180746, -0.1926273, 0.056669608, -0.47531772, -0.17246442, 0.10323287, 0, 0.24790843, 0, 0, -0.201, -0.016942773, -0.10323287, -0.17246442, 0, -0.43301278, 0.04934039, -0.18717796, 0.054138225, -0.4594959, -0.0028131192, -0.056525454, -0.19286774, -0.14713964, 0.19482972, 0.046586428, -0.01649523, 0.12773675, -0.06973233, 0.04968376, -0.1818514, 0.11081496, 0.11663441, 0.16369916, 0, 0.4187778, 0.14810407, -0.10552304, -0.08562169, -0.24903564, -0.18399899, 0.05644356, -0.05796123, 0.13345887, -0.005137895, -0.15186287, -0.1315761, -0.38562262, -0.08074021, -0.11896553, 0.14046076, -0.28782523, -0.19909018, 0.026034119, -0.009291431, 0.048914336, -0.0036985863, -0.09204292, -0.17864889, -0.24489953, -0.027393913, -0.17678046, 0.09164741, -0.43259627, 0.04725166, 0.0067268093, -0.19525121, 0.016316786, 0.028329, -0.19899367, 0, -0.49426806, -0.19330223, -0.027518766, -0.047728077, -0.06970158, 0.10724918, -0.12496102, 0.11525348, -0.29495567, -0.00477684, -0.13843505, -0.14565001, -0.35546893, 0.16992882, 0.07497659, -0.076835625, 0.19014797, 0.11216079, 0.14288868, 0.08604526, 0.35991707, 0.1581085, -0.12410763, 0, -0.30356395, 0.053128727, 0.06768402, -0.18165135, 0.16561478, -0.1355803, 0.06210401, -0.13476674, 0.14821051, 0.08370642, 0.18274091, 0, 0.45961618, 0.12252436, -0.05612359, -0.14912722, -0.1277233, 0.06002408, 0.07888488, -0.17485791, 0.18676718, -0.003452071, -0.18274434, -0.08362772, -0.45830068, -0.19179729, 0.027976613, -0.053217627, 0.06715004, 0.03824463, -0.095796466, 0.1725149, -0.2521924, 0.18667348, 0.07452529, 0, 0.17469987, -0.063963786, 0.16021869, 0.103148505, 0.39385343, 0.054294024, -0.12769665, 0.14541915, -0.30437058, -0.0052598566, -0.15195145, -0.131469, -0.38906038, 0.1934567, 0.03170695, -0.04438667, 0.07406275, -0.13766684, 0.117168866, -0.08786527, 0.27897623, -0.0048425705, -0.12416587, -0.1579886, -0.31272697, -0.14637417, -0.106091015, 0.08786527, -0.27136698, -0.029575385, -0.19881222, 0, -0.49198517, 0, 0, -0.201, -0.013461292, 0.19881222, -0.029575385, 0, -0.0827107, -0.011261555, 0.1864192, 0.07431064, 0.46817702, 0.0032333806, 0.074586436, -0.18662106, 0.16938013, -0.20065823, -0.00926054, -0.007177728, -0.039664168, -0.08948069, 0.14288868, 0.10943965, 0.35804206, 0.0049010688, 0.12410763, -0.15803252, 0.3022388, -0.17991717, -0.06768402, -0.058734052, -0.17200303, 0.018374523, -0.023448324, -0.19878018, -0.04971222, 0.15821101, 0.12397696, 0, 0.3101337, 0.12260775, -0.15646374, 0.029790048, -0.38787618, 0.18187773, -0.08427752, 0.014791591, -0.19073234, -0.0015739604, -0.03803586, -0.19736211, -0.102402695, 0.08555124, 0.17847009, -0.03507724, 0.44992086, -0.18407826, -0.063538305, 0.049790356, -0.1802094, 0.06558228, -0.18999994, 0, -0.46455503, 0.04706549, 0.016245598, 0.19473553, 0.04032439, 0.11972267, -0.16077673, 0.014775918, -0.39881533, -0.00069703796, -0.018909581, -0.20010734, -0.05149728, 0.16145277, 0.11913972, -0.011820762, 0.29524487, 0.13828984, -0.10809079, 0.097945444, -0.2567087, -0.005036281, -0.13842419, -0.14565161, -0.351768, 0.14577916, 0.0977555, -0.09794544, 0.2442948, 0.1604104, 0.111324675, -0.0477108, 0.29428887, -0.003760896, -0.07456167, -0.18662106, -0.18478326, -0.12105932, 0.14982784, -0.057421826, 0.35870326)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_7b3aa"]
 material = ExtResource("13_qnigd")
 size = Vector2(20, 20)
@@ -192,27 +215,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37257874, 0)
-bones/4/rotation = Quaternion(-0.5507547, -0.05991794, -0.6498991, 0.52029824)
-bones/5/rotation = Quaternion(3.35164e-08, -5.3273034e-08, -0.49272788, 0.8701835)
-bones/7/rotation = Quaternion(-0.3180838, -0.3343978, 0.1401217, 0.87599474)
-bones/8/rotation = Quaternion(0.0015297072, 0.0015297, -0.70146817, 0.71269745)
-bones/9/rotation = Quaternion(-0.60999715, 0.08025311, 0.6238719, 0.48191983)
-bones/10/rotation = Quaternion(1.1287494e-08, 7.210366e-08, 0.5160377, 0.856566)
-bones/12/rotation = Quaternion(-0.31699818, 0.3092961, -0.222044, 0.86864525)
-bones/13/rotation = Quaternion(0.0045048427, 0.005306042, 0.7024052, 0.71174324)
-bones/15/rotation = Quaternion(0.99032116, 0.08347921, 0.078199126, 0.0786139)
-bones/16/rotation = Quaternion(0.37269077, 6.2738124e-08, -2.5747585e-07, 0.9279556)
-bones/17/rotation = Quaternion(-0.6097847, -0.20215943, 0.072674766, 0.7628975)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.92015594, -0.39155215, 5.9089115e-07)
-bones/19/rotation = Quaternion(0.9923332, -0.032839123, 0.030018607, 0.11530595)
-bones/20/rotation = Quaternion(0.41919023, -6.034214e-08, 2.920416e-07, 0.9078984)
-bones/21/rotation = Quaternion(-0.6366937, 0.11284377, -0.021450201, 0.7625138)
-bones/38/position = Vector3(0.52084064, 0.7680697, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.76806957, 0.059736915)
+bones/1/position = Vector3(0, 0.38604286, 0)
+bones/4/rotation = Quaternion(-0.5554247, -0.06313419, -0.6546229, 0.50890726)
+bones/5/rotation = Quaternion(1.8139955e-08, -6.303957e-08, -0.4771571, 0.87881804)
+bones/7/rotation = Quaternion(-0.31774488, -0.3262134, 0.13620992, 0.8798124)
+bones/8/rotation = Quaternion(0.001414934, 0.0014149171, -0.7018929, 0.7122796)
+bones/9/rotation = Quaternion(-0.614583, 0.0830622, 0.62750304, 0.4707742)
+bones/10/rotation = Quaternion(6.3767325e-09, 4.8739615e-08, 0.5011868, 0.8653391)
+bones/12/rotation = Quaternion(-0.31611463, 0.30044013, -0.21782064, 0.8731332)
+bones/13/rotation = Quaternion(0.0029393933, 0.0034621705, 0.70404637, 0.7101395)
+bones/15/rotation = Quaternion(0.99297476, 0.08319532, 0.07539529, 0.0373534)
+bones/16/rotation = Quaternion(0.26438305, 6.488902e-08, -1.8450302e-07, 0.9644178)
+bones/17/rotation = Quaternion(-0.5533126, -0.20723267, 0.0543197, 0.8049529)
+bones/18/rotation = Quaternion(5.3147418e-05, 0.9202052, -0.39143634, -1.1978325e-05)
+bones/19/rotation = Quaternion(0.99588037, -0.030587653, 0.03099522, 0.07953625)
+bones/20/rotation = Quaternion(0.32671618, -6.261674e-08, 2.2726044e-07, 0.94512254)
+bones/21/rotation = Quaternion(-0.5870873, 0.11409665, -0.013078913, 0.80133605)
+bones/38/position = Vector3(0.52084064, 0.77532095, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7753209, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2083408, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2218049, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -250,12 +273,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
 
 [node name="floorTile7" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+visible = false
 
 [node name="floorTile8" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 20)
 
 [node name="floorTile9" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 20)
+
+[node name="pond_floor" parent="Level/Env/Floor" instance=ExtResource("5_7f1sr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07701421, -9.536743e-07, 19.866993)
 
 [node name="GroundColl" type="StaticBody3D" parent="Level/Env"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 9.536743e-07)
@@ -363,12 +390,31 @@ timeInterval = 0.25
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4373565, 9.536743e-07, 1.1893387)
 visible = false
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Level/TempRoot"]
+transform = Transform3D(3.865, 0, 0, 0, 3.865, 0, 0, 0, 3.865, -8.604511, 5.3535194, -1.7444372)
+visible = false
+mesh = SubResource("SphereMesh_7b3aa")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Level/TempRoot/MeshInstance3D4"]
+update_mode = 1
+blend_distance = 0.0
+max_distance = 16384.0
+size = Vector3(4, 4, 4)
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Level/TempRoot"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -2.077207, 6.0823216, -1.5037084)
+visible = false
+mesh = SubResource("SphereMesh_qnigd")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Level/TempRoot/MeshInstance3D5"]
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_jxwji")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("12_jkhpk")
 
 [node name="Daylight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -377,7 +423,6 @@ directional_shadow_split_1 = 0.02
 
 [node name="DaylightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -385,6 +430,7 @@ directional_shadow_split_1 = 0.02
 
 [node name="NightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true

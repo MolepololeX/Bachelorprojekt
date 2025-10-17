@@ -20,7 +20,7 @@ void fragment() {
 	float s = noiseLevel + noiseLevel2;
 	s = step(s, threshold);
 
-	ALBEDO = vec3 (0.0);
+	ALBEDO = vec3 (0.38, 0.537, 0.929);
 	
 	ALPHA = s;
 	ALPHA_SCISSOR_THRESHOLD = .5;

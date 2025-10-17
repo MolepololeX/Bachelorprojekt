@@ -6,6 +6,7 @@ public partial class PitchVarianceTest : AudioStreamPlayer
 	[Export]
 	public AudioStreamPlayer audioPlayer;
 
+	[Export] private bool play = false;
 	[Export]
 	public float DelayMax = 5.0f;
 	[Export]
@@ -24,6 +25,7 @@ public partial class PitchVarianceTest : AudioStreamPlayer
 
 	public override void _Process(double delta)
 	{
+		if (!play) return;
 		timer -= (float)delta;
 		if (timer <= 0)
 		{
