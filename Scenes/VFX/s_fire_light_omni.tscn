@@ -10,7 +10,7 @@ light_color = Color(1, 0.5019608, 0.31764707, 1)
 light_energy = 1.5
 shadow_enabled = true
 shadow_blur = 0.0
-omni_range = 25.0
+omni_range = 20.0
 omni_attenuation = 0.0
 
 [node name="GPUParticles3D" parent="." instance=ExtResource("1_ig86t")]

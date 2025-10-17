@@ -5,6 +5,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_30wnl"]
 render_priority = 0
 shader = ExtResource("1_fjc0x")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/use_attenuation = true
 
 [resource]
 material = SubResource("ShaderMaterial_30wnl")
