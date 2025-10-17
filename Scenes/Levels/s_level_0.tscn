@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=62 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -16,6 +16,7 @@
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="14_7f1sr"]
 [ext_resource type="PackedScene" uid="uid://dqpbahjgdq2gw" path="res://Scenes/Environment/s_tree_maple_alternate.tscn" id="16_jkhpk"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/sh_water.gdshader" id="19_8auip"]
+[ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_scuffed_reflections.gdshader" id="19_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/s_choppable_tree.tscn" id="20_5yjbh"]
 [ext_resource type="PackedScene" uid="uid://bk2n3p7qb518k" path="res://Scenes/VFX/s_wind_effect.tscn" id="21_rdm03"]
 [ext_resource type="PackedScene" uid="uid://brh3rfsotctrq" path="res://Scenes/Environment/s_shrine_pillars.tscn" id="23_136ei"]
@@ -199,24 +200,31 @@ instance_count = 32
 mesh = SubResource("QuadMesh_2uyb1")
 buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.25, 0, 0, -0.46560273, -7.071353, 0, 0, -0.4294046, 3.4593773, 0, 0.4294046, 0, -0.25, 0.4294046, 0, 0, 6.6896777, 0, 0, -0.52239263, 7.3587294, 0, 0.52239263, 0, -0.25, 0.52239263, 0, 0, -1.0456486, -0.4561778, 0, 0, 3.666774, 0, 0.4561778, 0, -0.25, 0, 0, -0.4561778, -6.1167946, -0.5498114, 0, 0, 7.658682, 0, 0.5498114, 0, -0.25, 0, 0, -0.5498114, -8.1954365, 0, 0, -0.51422876, 6.6156254, 0, 0.51422876, 0, -0.25, 0.51422876, 0, 0, 8.270901, 0, 0, -0.43236572, -0.15191221, 0, 0.43236572, 0, -0.25, 0.43236572, 0, 0, 2.4847875, -0.5798938, 0, 0, -0.3319111, 0, 0.5798938, 0, -0.25, 0, 0, -0.5798938, -2.3492599, -0.4976822, 0, 0, -1.4722252, 0, 0.4976822, 0, -0.25, 0, 0, -0.4976822, -4.0541296, -0.48367304, 0, 0, -2.948555, 0, 0.48367304, 0, -0.25, 0, 0, -0.48367304, -0.4132557, -0.43364775, 0, 0, -4.16146, 0, 0.43364775, 0, -0.25, 0, 0, -0.43364775, -9.878329, 0, 0, -0.5677553, 2.8411903, 0, 0.5677553, 0, -0.25, 0.5677553, 0, 0, 3.2071123, -0.4523895, 0, 0, -8.612387, 0, 0.4523895, 0, -0.25, 0, 0, -0.4523895, 2.4905894, -0.5340342, 0, 0, 1.4516335, 0, 0.5340342, 0, -0.25, 0, 0, -0.5340342, -4.08615, -0.5971356, 0, 0, -1.6651235, 0, 0.5971356, 0, -0.25, 0, 0, -0.5971356, -1.5439909, -0.59302926, 0, 0, -3.0199733, 0, 0.59302926, 0, -0.25, 0, 0, -0.59302926, -3.0694559, -0.435382, 0, 0, -9.695772, 0, 0.435382, 0, -0.25, 0, 0, -0.435382, -7.916979, 0, 0, -0.48925787, -2.430519, 0, 0.48925787, 0, -0.25, 0.48925787, 0, 0, 5.350853, -0.4716084, 0, 0, -5.7099733, 0, 0.4716084, 0, -0.25, 0, 0, -0.4716084, -0.033985138, -0.5505619, 0, 0, -9.434938, 0, 0.5505619, 0, -0.25, 0, 0, -0.5505619, -7.9830666, -0.52070904, 0, 0, 3.1583195, 0, 0.52070904, 0, -0.25, 0, 0, -0.52070904, -6.7850323, 0, 0, -0.5766344, 3.3585548, 0, 0.5766344, 0, -0.25, 0.5766344, 0, 0, 8.436419, -0.5313874, 0, 0, 0.4788828, 0, 0.5313874, 0, -0.25, 0, 0, -0.5313874, -7.271953, 0, 0, -0.53797513, 9.037353, 0, 0.53797513, 0, -0.25, 0.53797513, 0, 0, 7.0597525, 0, 0, -0.4519407, -5.5942206, 0, 0.4519407, 0, -0.25, 0.4519407, 0, 0, 9.369019, 0, 0, -0.52578884, 9.905735, 0, 0.52578884, 0, -0.25, 0.52578884, 0, 0, 6.075041, 0, 0, -0.40521136, 3.3614676, 0, 0.40521136, 0, -0.24999999, 0.40521136, 0, 0, -1.9278269, 0, 0, -0.41503188, 1.4828773, 0, 0.41503188, 0, -0.25, 0.41503188, 0, 0, 1.9067693, -0.5527097, 0, 0, -6.065634, 0, 0.5527097, 0, -0.25, 0, 0, -0.5527097, 2.3781536, -0.4785935, 0, 0, -6.1704845, 0, 0.4785935, 0, -0.25, 0, 0, -0.4785935, 3.158952, -0.5452208, 0, 0, 4.7976885, 0, 0.5452208, 0, -0.25, 0, 0, -0.5452208, -8.42766, 0, 0, -0.46936435, 8.716628, 0, 0.46936435, 0, -0.25, 0.46936435, 0, 0, 2.104229)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_xxtuw"]
-resource_local_to_scene = true
-size = Vector2(20, 20)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xxtuw"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmlk7"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_xxtuw")
+[sub_resource type="BoxMesh" id="BoxMesh_xxtuw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7b3aa"]
 material = ExtResource("13_qnigd")
 size = Vector2(20, 20)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_xxtuw"]
+resource_local_to_scene = true
+size = Vector2(20, 20)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8qg5c"]
+viewport_path = NodePath("ReflectionViewPortTest")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_roplx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("19_wmlk7")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/viewport_texture = SubResource("ViewportTexture_8qg5c")
+shader_parameter/alpha = 1.0
+
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_k6vpp")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2.1740232, 1.4386984, -0.1605246)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2.174, 0, -0.161)
 collision_layer = 10
 Speed = 2.03
 DragMult = 10.0
@@ -225,27 +233,30 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39076513, 0)
-bones/4/rotation = Quaternion(-0.5594871, -0.060538113, -0.6433475, 0.5190504)
-bones/5/rotation = Quaternion(2.6859084e-08, -4.1391186e-08, -0.4965, 0.8680368)
-bones/7/rotation = Quaternion(-0.32118887, -0.32636568, 0.14635846, 0.8768708)
-bones/8/rotation = Quaternion(9.138977e-05, 9.138856e-05, -0.7067713, 0.7074421)
-bones/9/rotation = Quaternion(-0.6178237, 0.0804302, 0.61751115, 0.48010916)
-bones/10/rotation = Quaternion(3.153508e-08, 4.9471236e-08, 0.519637, 0.85438716)
-bones/12/rotation = Quaternion(-0.31944275, 0.3014329, -0.22789091, 0.86899966)
-bones/13/rotation = Quaternion(0.00025667358, 0.00030232078, 0.70684075, 0.70737267)
-bones/15/rotation = Quaternion(0.9936024, 0.08354539, 0.07397481, 0.017383521)
-bones/16/rotation = Quaternion(0.2123873, 6.5216746e-08, -1.4010209e-07, 0.97718567)
-bones/17/rotation = Quaternion(-0.5262901, -0.2090025, 0.046194702, 0.8229233)
-bones/18/rotation = Quaternion(8.6796426e-05, 0.92023546, -0.39136538, -1.9589526e-05)
-bones/19/rotation = Quaternion(0.997025, -0.029711034, 0.031406403, 0.06381279)
-bones/20/rotation = Quaternion(0.28625986, -6.405131e-08, 1.985648e-07, 0.95815206)
-bones/21/rotation = Quaternion(-0.5655511, 0.11443292, -0.009644338, 0.81667864)
-bones/38/position = Vector3(0.52084064, 0.78737396, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.78737384, 0.059736922)
+bones/1/position = Vector3(0, 0.37258524, 0)
+bones/4/rotation = Quaternion(-0.55075574, -0.05992139, -0.6499085, 0.520285)
+bones/5/rotation = Quaternion(3.342239e-08, -5.3339065e-08, -0.49270713, 0.87019527)
+bones/7/rotation = Quaternion(-0.31808165, -0.3343923, 0.14011386, 0.87599885)
+bones/8/rotation = Quaternion(0.0015298997, 0.0015298924, -0.70146745, 0.71269816)
+bones/9/rotation = Quaternion(-0.6099985, 0.08025625, 0.62387997, 0.48190737)
+bones/10/rotation = Quaternion(1.1293994e-08, 7.1969026e-08, 0.5160179, 0.8565778)
+bones/12/rotation = Quaternion(-0.31699577, 0.3092896, -0.22203591, 0.8686506)
+bones/13/rotation = Quaternion(0.004504573, 0.0053057247, 0.7024055, 0.71174306)
+bones/15/rotation = Quaternion(0.9903226, 0.083478756, 0.078198016, 0.07859729)
+bones/16/rotation = Quaternion(0.37264696, 6.2738955e-08, -2.5745786e-07, 0.9279732)
+bones/17/rotation = Quaternion(-0.6097618, -0.20216195, 0.07266688, 0.762916)
+bones/18/rotation = Quaternion(-2.243216e-06, 0.92015594, -0.39155215, 5.9089115e-07)
+bones/19/rotation = Quaternion(0.9923349, -0.032838088, 0.030019028, 0.115290925)
+bones/20/rotation = Quaternion(0.4191513, -6.03406e-08, 2.9200928e-07, 0.90791637)
+bones/21/rotation = Quaternion(-0.6366727, 0.11284445, -0.021446504, 0.7625314)
+bones/38/position = Vector3(0.52084064, 0.7680675, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.76806736, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2265271, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2083472, 1.5739471e-15)
+
+[node name="CollisionShape3D" parent="Player" index="1"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -287,6 +298,15 @@ visible = false
 
 [node name="floorTile8" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 20)
+
+[node name="floorTile10" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 40)
+
+[node name="floorTile11" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="floorTile12" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 40)
 
 [node name="floorTile9" parent="Level/Env/Floor" instance=ExtResource("4_d8r0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 20)
@@ -368,7 +388,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4373565, 9.536743e-07, 1.18
 visible = false
 
 [node name="Shrine" parent="Level/TempRoot" instance=ExtResource("23_136ei")]
-transform = Transform3D(0, 0, -0.3, 0, 0.30000004, 0, 0.3, 0, 0, 0, -0.6683953, 20.174374)
+transform = Transform3D(0, 0, -0.3, 0, 0.30000004, 0, 0.3, 0, 0, 0, -1.4035021, 20.174374)
 
 [node name="Cauldron" parent="Level/TempRoot/Shrine" instance=ExtResource("13_jqdjy")]
 transform = Transform3D(0, 0, 2.9999998, 0, 2.9999995, 0, -2.9999998, 0, 0, 0, 1.6484165, 0)
@@ -400,10 +420,9 @@ visible = false
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_k6vpp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/TempRoot/pond_floor_hp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24310112, 0)
-mesh = SubResource("PlaneMesh_xxtuw")
-surface_material_override/0 = SubResource("StandardMaterial3D_wmlk7")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/TempRoot"]
+transform = Transform3D(0.89700395, 0, 0.44202256, 0, 1, 0, -0.44202256, 0, 0.89700395, 0, 1.4566808, 18.441301)
+mesh = SubResource("BoxMesh_xxtuw")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("12_jkhpk")
@@ -414,14 +433,14 @@ light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_caster_mask = 4294967293
-directional_shadow_split_1 = 0.02
+directional_shadow_split_1 = 0.05
 
 [node name="DaylightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
-directional_shadow_split_1 = 0.02
+directional_shadow_split_1 = 0.05
 
 [node name="NightShadows" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.70710665, -0.5, 0.49999988, 0, 0.7071068, 0.7071066, -0.70710665, -0.5, 0.49999988, -0.042895563, 2.593475, 0.042895563)
@@ -473,6 +492,26 @@ render_target_update_mode = 4
 
 [node name="ItemDisplayTest" parent="SubViewport2" instance=ExtResource("25_wiqqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14184332, -9.536743e-07, -0.0030822754)
+
+[node name="ReflectionViewPortTest" type="SubViewport" parent="."]
+size = Vector2i(1024, 1024)
+
+[node name="CameraPivot" type="Node3D" parent="ReflectionViewPortTest"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 20)
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="ReflectionViewPortTest/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, -12.023636, 20.825548)
+visible = false
+projection = 1
+size = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ReflectionViewPortTest"]
+transform = Transform3D(0.7071067, 0, 1.4182982, 0, 1, 0, -0.7071067, 0, 1.4182982, 0, -0.5, 20)
+visible = false
+mesh = SubResource("PlaneMesh_xxtuw")
+skeleton = NodePath("../../Level/TempRoot/pond_floor_hp")
+surface_material_override/0 = SubResource("ShaderMaterial_roplx")
 
 [node name="PostPixelDeSnap" type="ColorRect" parent="."]
 material = ExtResource("28_c1cc1")

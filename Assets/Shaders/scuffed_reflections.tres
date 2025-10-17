@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cxpcbhj6rw4xq"]
+
+[ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_scuffed_reflections.gdshader" id="1_luqsx"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_luqsx")
+shader_parameter/tint = Color(0, 0, 0, 1)
+shader_parameter/alpha = 0.0
