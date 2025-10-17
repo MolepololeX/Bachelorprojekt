@@ -14,3 +14,4 @@ omni_range = 20.0
 omni_attenuation = 0.0
 
 [node name="GPUParticles3D" parent="." instance=ExtResource("1_ig86t")]
+amount = 256

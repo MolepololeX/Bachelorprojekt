@@ -1,8 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://gce2tcepfqn2"]
 
 [sub_resource type="Gradient" id="Gradient_g5egk"]
-offsets = PackedFloat32Array(0, 0.8436019, 1)
-colors = PackedColorArray(1.1453815, 0.083432615, 0, 1, 0, 0, 0, 0.48235294, 0, 0, 0, 0)
+colors = PackedColorArray(1.145, 0.083, 0, 1, 1.1450349, 0.08339264, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7wp6y"]
 gradient = SubResource("Gradient_g5egk")
@@ -25,12 +24,12 @@ radial_accel_min = -1.0000023
 radial_accel_max = -1.0000023
 tangential_accel_min = -2.2351742e-06
 tangential_accel_max = -2.2351742e-06
-damping_min = 5.0
-damping_max = 7.0000005
+damping_min = 8.0
+damping_max = 8.0
 scale_min = 0.049999997
 scale_max = 0.049999997
 scale_curve = SubResource("CurveTexture_7wp6y")
-color = Color(3.2944162, 3.2944162, 3.2944162, 1)
+color = Color(1.353256, 1.353256, 1.353256, 1)
 color_ramp = SubResource("GradientTexture1D_7wp6y")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fjln"]
@@ -47,9 +46,11 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_7fjln")
 
 [node name="GPUParticles3D" type="GPUParticles3D"]
+layers = 2
 cast_shadow = 0
-amount = 2500
-fixed_fps = 12
+amount = 32
+lifetime = 2.5
+fixed_fps = 6
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_g5egk")
 draw_pass_1 = SubResource("QuadMesh_ufcya")

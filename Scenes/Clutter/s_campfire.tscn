@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh7t32rqti3yt"]
+[gd_scene load_steps=7 format=3 uid="uid://bh7t32rqti3yt"]
 
 [ext_resource type="Script" uid="uid://m8daxd0ltdbm" path="res://Scripts/Testing/CampFireLightFlicker.cs" id="1_d2ikr"]
 [ext_resource type="PackedScene" uid="uid://dbh8qldwocxv3" path="res://Scenes/VFX/s_fire_light_omni.tscn" id="1_f0fgg"]
 [ext_resource type="PackedScene" uid="uid://c50fjp1r550mr" path="res://Scenes/Clutter/s_clutter_wood_log.tscn" id="2_d2ikr"]
+[ext_resource type="PackedScene" uid="uid://bm481hpb2qu05" path="res://Scenes/VFX/s_fire_new.tscn" id="4_ijq62"]
+[ext_resource type="PackedScene" uid="uid://gce2tcepfqn2" path="res://Scenes/VFX/s_fire.tscn" id="5_vbndc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_f0fgg"]
 
@@ -16,6 +18,9 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.38274562, 0)
 [node name="OmniLight3D" parent="FireOmni" index="0"]
 omni_range = 12.0
 omni_attenuation = -0.25
+
+[node name="GPUParticles3D" parent="FireOmni" index="1"]
+visible = false
 
 [node name="WoodLog3" parent="." instance=ExtResource("2_d2ikr")]
 transform = Transform3D(0.8, 0, 0, 0, 0.70295376, -0.38191107, 0, 0.38191107, 0.70295376, -7.450581e-09, 0.22947088, 0.3159247)
@@ -38,5 +43,11 @@ transform = Transform3D(0.40000007, 0.40098283, -0.56498915, 0, 0.6523933, 0.463
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("PlaneMesh_f0fgg")
+
+[node name="GPUParticles3D" parent="." instance=ExtResource("4_ijq62")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.22757769, 0)
+
+[node name="GPUParticles3D2" parent="." instance=ExtResource("5_vbndc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26135623, 0)
 
 [editable path="FireOmni"]
