@@ -34,20 +34,32 @@ x Simple Inventarleiste oder 3x3 Grid
 	x wasser shader mit cell noise simpel aber mit reflections
 	x poof particles mit no depth test testen
 	x kleine zoom ui die mir den aktuellen zoom anzeigt und dann wegfaded
-	
-	# Features
-	- wind sound effekt mit grass wind kombinieeren -> 1 sfx der random spielt -> dann per korve den wind machen und im shader setzten
-	- movement fixen indem alles sich nur in pixeln bewegen kann
-	- actually mechanics implementieren
-	- fishing minigame
-	- color quantization und palettew
 	x falling leafes texturen aendern fuer baeume
 	
+	# Features
+	
+	## Player Anim
+	- movement fixen indem alles sich nur in pixeln bewegen kann
+	- blockartige anim mit low fps
+	
+	
+	## Mechanics
+	- actually mechanics implementieren
+	- fishing minigame
+	- fishing minigame
+	- color quantization und palettew
 	- aus quecksilber II eine lupe die einem anzeigt was actually im cauldron drinne is
 	
-	- bessere noise fuer rolling grass und leaves und grass-colour
 	
+	## Visuals
+	- water shader mit reflections
+	- outline shader fixen
+	
+	
+	## Foliage Upgrades
+	- bessere noise fuer rolling grass und leaves und grass-colour	
 	- grass noise textur res runter damit die framerate der animation runter geht oder sowas in die richtung
+	- wind sound effekt mit grass wind kombinieeren -> 1 sfx der random spielt -> dann per korve den wind machen und im shader setzten
 	
 	# Fixes
 	- nochmal nachschauen wie ich komplett harte schatten bekomm
