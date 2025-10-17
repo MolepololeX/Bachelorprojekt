@@ -42,7 +42,7 @@ x Simple Inventarleiste oder 3x3 Grid
 	- movement fixen indem alles sich nur in pixeln bewegen kann
 	- blockartige anim mit low fps
 
-    -> maybe die atzen mit baelle als haende und den grossen emojis als gesicht oder so
+	-> maybe die atzen mit baelle als haende und den grossen emojis als gesicht oder so
 	
 	
 	## Mechanics
@@ -52,14 +52,14 @@ x Simple Inventarleiste oder 3x3 Grid
 	- color quantization und palettew
 	- aus quecksilber II eine lupe die einem anzeigt was actually im cauldron drinne is
 
-    ## Heute SOFORT MACHEN JAAAAA
-    --> kleine shrek ahh huette zum chillen drinne aus holz, wird hingebaut wenn der player 10 planks hat
+	## Heute SOFORT MACHEN JAAAAA
+	--> kleine shrek ahh huette zum chillen drinne aus holz, wird hingebaut wenn der player 10 planks hat
 	
 	
 	## Visuals
 	- water shader mit reflections
-    - regen mit splashes auf dem boden
-    - water + regen = ripples im wass /auf dem wasser als particle
+	- regen mit splashes auf dem boden
+	- water + regen = ripples im wass /auf dem wasser als particle
 
 	- outline shader fixen
 	
