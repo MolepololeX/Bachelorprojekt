@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=73 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -19,6 +19,7 @@
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="19_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/s_choppable_tree.tscn" id="20_5yjbh"]
 [ext_resource type="Shader" uid="uid://dnv5ywlkngrek" path="res://Assets/Shaders/sh_cloud_shadows.gdshader" id="21_8qg5c"]
+[ext_resource type="PackedScene" uid="uid://88fra0se8rwl" path="res://Scenes/Structures/s_pole_lantern.tscn" id="21_pty70"]
 [ext_resource type="PackedScene" uid="uid://bk2n3p7qb518k" path="res://Scenes/VFX/s_wind_effect.tscn" id="21_rdm03"]
 [ext_resource type="Texture2D" uid="uid://djx0rsbayemo4" path="res://Assets/Textures/Procedural/t_cloud_shadow_noise.tres" id="22_roplx"]
 [ext_resource type="PackedScene" uid="uid://brh3rfsotctrq" path="res://Scenes/Environment/s_shrine_pillars.tscn" id="23_136ei"]
@@ -40,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="37_2cb14"]
 [ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/ItemsWorld/s_wood_plank.tscn" id="38_16jvh"]
 [ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="39_r6n5j"]
+[ext_resource type="PackedScene" uid="uid://ceb2yhmkluqi" path="res://Scenes/Structures/s_pier.tscn" id="41_2xp7q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
 render_priority = 0
@@ -278,30 +280,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36883956, 0)
-bones/4/rotation = Quaternion(-0.5503886, -0.057620347, -0.64292115, 0.5295326)
-bones/5/rotation = Quaternion(2.350478e-08, -5.8294408e-08, -0.50729173, 0.8617745)
-bones/7/rotation = Quaternion(-0.31981066, -0.33793584, 0.14581168, 0.8730747)
-bones/8/rotation = Quaternion(0.0013317234, 0.0013317176, -0.7022007, 0.7119766)
-bones/9/rotation = Quaternion(-0.6093104, 0.07810845, 0.6178908, 0.49076575)
-bones/10/rotation = Quaternion(3.3870446e-08, 4.7711033e-08, 0.5300126, 0.84798986)
-bones/12/rotation = Quaternion(-0.31889978, 0.31361955, -0.22793844, 0.86486405)
-bones/13/rotation = Quaternion(0.004070878, 0.0047948943, 0.70286095, 0.7112994)
-bones/15/rotation = Quaternion(0.9894527, 0.08377869, 0.07882253, 0.08804198)
-bones/16/rotation = Quaternion(0.3976341, 6.036873e-08, -2.6731516e-07, 0.9175442)
-bones/17/rotation = Quaternion(-0.6228834, -0.20066275, 0.077231795, 0.7521875)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.920156, -0.39155215, 5.9089115e-07)
-bones/19/rotation = Quaternion(0.9912846, -0.03344566, 0.029773312, 0.12389448)
-bones/20/rotation = Quaternion(0.4414899, -5.7858525e-08, 3.0878076e-07, 0.8972662)
-bones/21/rotation = Quaternion(-0.64878124, 0.11242261, -0.023596372, 0.7522549)
-bones/38/position = Vector3(0.52084064, 0.77027637, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.77027625, 0.059736915)
+bones/1/position = Vector3(0, 0.39133155, 0)
+bones/4/rotation = Quaternion(-0.55940026, -0.061181404, -0.64535636, 0.5165689)
+bones/5/rotation = Quaternion(2.4870813e-08, -4.401865e-08, -0.49240723, 0.87036496)
+bones/7/rotation = Quaternion(-0.3206294, -0.32534274, 0.144515, 0.87776095)
+bones/8/rotation = Quaternion(0.00019542704, 0.00019540147, -0.7063892, 0.70782363)
+bones/9/rotation = Quaternion(-0.6178414, 0.0810343, 0.61923647, 0.47775707)
+bones/10/rotation = Quaternion(3.1119647e-08, 4.3850118e-08, 0.51573086, 0.8567507)
+bones/12/rotation = Quaternion(-0.3188706, 0.30041543, -0.22613294, 0.8700207)
+bones/13/rotation = Quaternion(0.00042577976, 0.0005015031, 0.70666534, 0.7075477)
+bones/15/rotation = Quaternion(0.9936685, 0.08363331, 0.073722586, 0.013911873)
+bones/16/rotation = Quaternion(0.20337154, 6.386422e-08, -1.3413926e-07, 0.97910166)
+bones/17/rotation = Quaternion(-0.52160394, -0.20927224, 0.044826116, 0.82590866)
+bones/18/rotation = Quaternion(9.5857074e-05, 0.92024356, -0.3913463, -2.1638993e-05)
+bones/19/rotation = Quaternion(0.9971887, -0.029573128, 0.031473, 0.061233677)
+bones/20/rotation = Quaternion(0.27962732, -6.3925164e-08, 1.9487764e-07, 0.96010864)
+bones/21/rotation = Quaternion(-0.5620257, 0.11447735, -0.009092683, 0.81910896)
+bones/38/position = Vector3(0.52084064, 0.7867834, -0.05763735)
+bones/40/position = Vector3(-0.5108437, 0.7867833, 0.059736922)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2046015, 1.5739471e-15)
-
-[node name="CollisionShape3D" parent="Player" index="1"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2270936, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -395,7 +394,7 @@ transform = Transform3D(-0.4193305, 0, -0.27232695, 0, 0.5, 0, 0.27232695, 0, -0
 transform = Transform3D(-0.42294058, 0, 0.67905915, 0, 0.8, 0, -0.67905915, 0, -0.42294058, 6.7967176, -0.26247054, 27.704817)
 
 [node name="ChoppableTree59" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(0.38482144, 0, 0.46033955, 0, 0.6, 0, -0.46033955, 0, 0.38482144, 4.2269, -0.26247054, 30.160065)
+transform = Transform3D(0.37949607, -0.06379868, 0.46033955, 0.09947266, 0.5916969, 0, -0.45396915, 0.07631866, 0.38482144, 6.6221943, -0.6005061, 15.075812)
 
 [node name="WindEffect" parent="Level/Env" instance=ExtResource("21_rdm03")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56583023, 5.8686504, 11.87656)
@@ -559,6 +558,18 @@ shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_split_1 = 0.02
 
+[node name="lantern_pole" parent="Lighting" instance=ExtResource("21_pty70")]
+transform = Transform3D(-0.9659258, 0, 0.2588191, 0, 1, 0, -0.2588191, 0, -0.9659258, -1.4196497, -0.5066421, 14.533093)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lighting/lantern_pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62557554, 2.5498672, 0)
+light_color = Color(0.99649125, 0.51750886, 7.70092e-07, 1)
+light_energy = 0.5
+shadow_enabled = true
+shadow_caster_mask = 4294967287
+omni_range = 6.0
+omni_attenuation = 0.5
+
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(640, 360)
@@ -620,7 +631,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14184332, -9.536743e-07, -
 size = Vector2i(640, 360)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ReflectionViewPortTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37635025, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45869026, 20)
 mesh = SubResource("PlaneMesh_xxtuw")
 skeleton = NodePath("../../Level/TempRoot/pond_floor_hp")
 
@@ -713,6 +724,15 @@ WorldItems = Dictionary[int, PackedScene]({
 ZoomShaderColorRect = NodePath("../PostPixelDeSnap")
 InventoryDebugLabel = NodePath("../UI/Control/Label")
 
+[node name="pier" parent="." instance=ExtResource("41_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02964127, -0.909009, 15.189346)
+
+[node name="Cylinder_004" parent="pier" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.3703316, 0, 0, 0, 1, 0, 0.6384975, 0)
+
+[node name="Cylinder_016" parent="pier" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.8312669, 0, 0, 0, 1, 0, 0.032132268, 0)
+
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]
 [editable path="Level/Env/Floor/pond_floor"]
@@ -720,3 +740,4 @@ InventoryDebugLabel = NodePath("../UI/Control/Label")
 [editable path="Level/TempRoot/pond_floor_hp"]
 [editable path="SubViewport/CameraRig"]
 [editable path="UI/Control"]
+[editable path="pier"]
