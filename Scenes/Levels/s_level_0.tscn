@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=80 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -43,6 +43,8 @@
 [ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="39_r6n5j"]
 [ext_resource type="PackedScene" uid="uid://ceb2yhmkluqi" path="res://Scenes/Structures/s_pier.tscn" id="41_2xp7q"]
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="43_3rm2s"]
+[ext_resource type="PackedScene" uid="uid://ctly6ohubsyv0" path="res://Scenes/Player/s_fishing_rod.tscn" id="44_v7n50"]
+[ext_resource type="PackedScene" uid="uid://cy0gtj770t2i" path="res://Scenes/Player/s_fishing_bobber.tscn" id="45_ey2wc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
 render_priority = 0
@@ -111,6 +113,19 @@ shader_parameter/timeScale2 = 0.3
 [sub_resource type="PlaneMesh" id="PlaneMesh_hpgqd"]
 material = SubResource("ShaderMaterial_hb2rl")
 size = Vector2(60, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pty70"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3rm2s"]
+material = ExtResource("43_3rm2s")
+size = Vector2(1, 2)
+center_offset = Vector3(0, 1, 0)
+
+[sub_resource type="MultiMesh" id="MultiMesh_v7n50"]
+transform_format = 1
+instance_count = 8
+mesh = SubResource("QuadMesh_3rm2s")
+buffer = PackedFloat32Array(0, 0, -0.501, 0.8020613, 0, 0.501, 0, 0, 0.501, 0, 0, 0.6862334, -0.501, 0, 0, -0.04512024, 0, 0.501, 0, 0, 0, 0, -0.501, -0.65431964, 0, 0, -0.501, 0.33665955, 0, 0.501, 0, 0, 0.501, 0, 0, 0.23731661, -0.501, 0, 0, -0.9010111, 0, 0.501, 0, 0, 0, 0, -0.501, -0.015998363, -0.501, 0, 0, 0.027920246, 0, 0.501, 0, 0, 0, 0, -0.501, -0.16559613, -0.501, 0, 0, -0.20991004, 0, 0.501, 0, 0, 0, 0, -0.501, -0.24844897, -0.501, 0, 0, -0.006225705, 0, 0.501, 0, 0, 0, 0, -0.501, -0.13461667, -0.501, 0, 0, -0.7804576, 0, 0.501, 0, 0, 0, 0, -0.501, 0.31482565)
 
 [sub_resource type="Shader" id="Shader_k6vpp"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.5.stable.mono's StandardMaterial3D.
@@ -269,57 +284,48 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_roplx")
 size = Vector2(20, 20)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_pty70"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_3rm2s"]
-material = ExtResource("43_3rm2s")
-size = Vector2(1, 2)
-center_offset = Vector3(0, 1, 0)
-
-[sub_resource type="MultiMesh" id="MultiMesh_v7n50"]
-transform_format = 1
-instance_count = 8
-mesh = SubResource("QuadMesh_3rm2s")
-buffer = PackedFloat32Array(0, 0, -0.501, 0.8020613, 0, 0.501, 0, 0, 0.501, 0, 0, 0.6862334, -0.501, 0, 0, -0.04512024, 0, 0.501, 0, 0, 0, 0, -0.501, -0.65431964, 0, 0, -0.501, 0.33665955, 0, 0.501, 0, 0, 0.501, 0, 0, 0.23731661, -0.501, 0, 0, -0.9010111, 0, 0.501, 0, 0, 0, 0, -0.501, -0.015998363, -0.501, 0, 0, 0.027920246, 0, 0.501, 0, 0, 0, 0, -0.501, -0.16559613, -0.501, 0, 0, -0.20991004, 0, 0.501, 0, 0, 0, 0, -0.501, -0.24844897, -0.501, 0, 0, -0.006225705, 0, 0.501, 0, 0, 0, 0, -0.501, -0.13461667, -0.501, 0, 0, -0.7804576, 0, 0.501, 0, 0, 0, 0, -0.501, 0.31482565)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ey2wc"]
+size = Vector3(20, 0.1, 20)
 
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_k6vpp")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2.174, 0, 16.139503)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10495067, 0, 15.131481)
 collision_layer = 10
 Speed = 2.03
 DragMult = 10.0
 
-[node name="Pivot" parent="Player" index="0"]
-visible = false
-
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3869148, 0)
-bones/4/rotation = Quaternion(-0.55821425, -0.059577227, -0.64160854, 0.5226719)
-bones/5/rotation = Quaternion(2.3998016e-08, -5.193223e-08, -0.5014945, 0.8651608)
-bones/7/rotation = Quaternion(-0.3214287, -0.3285719, 0.14759848, 0.87575054)
-bones/8/rotation = Quaternion(0.00019581405, 0.00019579944, -0.70638776, 0.70782495)
-bones/9/rotation = Quaternion(-0.61655647, 0.079577446, 0.6161141, 0.483662)
-bones/10/rotation = Quaternion(2.7696293e-08, 5.3661324e-08, 0.5244511, 0.8514406)
-bones/12/rotation = Quaternion(-0.319852, 0.30409536, -0.22937803, 0.86752903)
-bones/13/rotation = Quaternion(0.0005499447, 0.00064775115, 0.70653635, 0.70767623)
-bones/15/rotation = Quaternion(0.99311, 0.08323467, 0.07515977, 0.033994272)
-bones/16/rotation = Quaternion(0.25562453, 6.450069e-08, -1.7837161e-07, 0.9667762)
-bones/17/rotation = Quaternion(-0.5487565, -0.20755944, 0.05291789, 0.80807495)
-bones/18/rotation = Quaternion(5.824563e-05, 0.92020977, -0.39142564, -1.3131508e-05)
-bones/19/rotation = Quaternion(0.99609846, -0.030429069, 0.031067703, 0.07679198)
-bones/20/rotation = Quaternion(0.31966826, -6.300334e-08, 2.225284e-07, 0.94752955)
-bones/21/rotation = Quaternion(-0.58333045, 0.11416362, -0.012471545, 0.804075)
-bones/38/position = Vector3(0.52084064, 0.78591293, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.7859128, 0.059736922)
+bones/1/position = Vector3(0, 0.3778941, 0)
+bones/4/rotation = Quaternion(-0.55175817, -0.06254552, -0.6564747, 0.51058)
+bones/5/rotation = Quaternion(1.0841667e-08, -5.233719e-08, -0.47750142, 0.87863106)
+bones/7/rotation = Quaternion(-0.31671262, -0.3301092, 0.13445783, 0.87900066)
+bones/8/rotation = Quaternion(0.0016668083, 0.0016668075, -0.70096046, 0.7131962)
+bones/9/rotation = Quaternion(-0.6112466, 0.082680546, 0.62941617, 0.4726276)
+bones/10/rotation = Quaternion(3.5238404e-08, 4.8497146e-08, 0.5015145, 0.8651493)
+bones/12/rotation = Quaternion(-0.31536558, 0.30427545, -0.2161935, 0.8724801)
+bones/13/rotation = Quaternion(0.004307713, 0.005073851, 0.70261234, 0.7115417)
+bones/15/rotation = Quaternion(0.9914592, 0.08320052, 0.077235505, 0.06419618)
+bones/16/rotation = Quaternion(0.33468857, 5.7036036e-08, -2.3635732e-07, 0.9423288)
+bones/17/rotation = Quaternion(-0.58990705, -0.20418666, 0.065980114, 0.7784371)
+bones/18/rotation = Quaternion(1.1136722e-05, 0.9201675, -0.391525, -2.4757542e-06)
+bones/19/rotation = Quaternion(0.99376357, -0.03197916, 0.030378383, 0.102413744)
+bones/20/rotation = Quaternion(0.38579124, -6.0935584e-08, 2.6994942e-07, 0.92258614)
+bones/21/rotation = Quaternion(-0.6186931, 0.11338282, -0.01833319, 0.7771919)
+bones/38/position = Vector3(0.52084064, 0.7679085, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7679084, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2226768, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2136561, 1.5739471e-15)
+
+[node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" groups=["Snap"]]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_qhxvw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Player" groups=["Snap"]]
@@ -424,6 +430,105 @@ transform = Transform3D(0.2217676, 0.016322916, -0.11424837, -0.02743759, 0.2478
 
 [node name="ChoppableTree61" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
 transform = Transform3D(-0.22229955, -0.01012024, 0.20119765, -0.03292511, 0.29741755, -0.021418242, -0.19874318, -0.0379524, -0.22149667, 5.031053, -0.8462196, 24.45927)
+
+[node name="Forest" type="Node3D" parent="Level/Env/ChoppableTrees"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6734343, 0, -3.3158913)
+
+[node name="ChoppableTree65" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.72326607, 0, -0.3418863, 0, 0.79999995, 0, 0.3418863, 0, 0.72326607, 14.742004, -0.2624696, 28.237154)
+
+[node name="ChoppableTree66" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.7876026, 0, 0.14029334, 0, 0.79999995, 0, -0.14029334, 0, -0.7876026, 6.204939, -0.2624696, 33.103107)
+
+[node name="ChoppableTree67" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.27292034, 0, 0.75200695, 0, 0.79999995, 0, -0.75200695, 0, 0.27292034, 9.605051, -0.2624696, 38.473957)
+
+[node name="ChoppableTree68" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.27292034, 0, 0.75200695, 0, 0.79999995, 0, -0.75200695, 0, 0.27292034, 19.749083, -0.2624696, 23.90572)
+
+[node name="ChoppableTree69" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.7936918, 0, -0.10026651, 0, 0.79999995, 0, 0.10026651, 0, -0.7936918, 14.016531, -0.2624696, 21.325397)
+
+[node name="ChoppableTree70" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.27292034, 0, 0.75200695, 0, 0.79999995, 0, -0.75200695, 0, 0.27292034, -0.3891163, -0.2624696, 40.038654)
+
+[node name="ChoppableTree71" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.27292034, 0, 0.75200695, 0, 0.79999995, 0, -0.75200695, 0, 0.27292034, 15.202284, -0.2624696, 42.728718)
+
+[node name="ChoppableTree72" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.7876026, 0, 0.14029334, 0, 0.79999995, 0, -0.14029334, 0, -0.7876026, 23.304571, -0.2624696, 32.07076)
+
+[node name="ChoppableTree73" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.7349146, 0, -0.67815965, 0, 1, 0, 0.67815965, 0, 0.7349146, 19.609983, -0.2624696, 28.446491)
+
+[node name="ChoppableTree74" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.9921147, 0, -0.12533313, 0, 1, 0, 0.12533313, 0, -0.9921147, 13.991637, -0.2624696, 36.212315)
+
+[node name="ChoppableTree75" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.3411505, 0, 0.9400087, 0, 1, 0, -0.9400087, 0, 0.3411505, 4.907465, -0.2624696, 38.05428)
+
+[node name="ChoppableTree76" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.3411505, 0, 0.9400087, 0, 1, 0, -0.9400087, 0, 0.3411505, 9.710806, -0.2624696, 43.4576)
+
+[node name="ChoppableTree77" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.90408254, 0, -0.42735788, 0, 1, 0, 0.42735788, 0, 0.90408254, 19.3986, -0.2624696, 33.301228)
+
+[node name="ChoppableTree78" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.9845032, 0, 0.17536667, 0, 1, 0, -0.17536667, 0, -0.9845032, 16.34489, -0.2624696, 25.417437)
+
+[node name="ChoppableTree79" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.2046903, 0, 0.56400526, 0, 0.6, 0, -0.56400526, 0, 0.2046903, 15.826471, -0.2624696, 29.382038)
+
+[node name="ChoppableTree80" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.52527875, 0, -0.28996947, 0, 0.6, 0, 0.28996947, 0, -0.52527875, 11.98131, -0.2624696, 29.45608)
+
+[node name="ChoppableTree81" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.5952689, 0, -0.07519989, 0, 0.6, 0, 0.07519989, 0, -0.5952689, 11.183706, -0.2624696, 23.21111)
+
+[node name="ChoppableTree82" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.590702, 0, 0.10522002, 0, 0.6, 0, -0.10522002, 0, -0.590702, 2.0736523, -0.2624696, 30.751057)
+
+[node name="ChoppableTree83" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.2046903, 0, 0.56400526, 0, 0.6, 0, -0.56400526, 0, 0.2046903, 0.5771389, -0.2624696, 34.455036)
+
+[node name="ChoppableTree84" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.5424496, 0, -0.25641477, 0, 0.6, 0, 0.25641477, 0, 0.5424496, 4.3062344, -0.2624696, 41.51595)
+
+[node name="ChoppableTree85" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.4409488, 0, -0.40689585, 0, 0.6, 0, 0.40689585, 0, 0.4409488, 14.141329, -0.2624696, 38.519855)
+
+[node name="ChoppableTree86" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.590702, 0, 0.10522002, 0, 0.6, 0, -0.10522002, 0, -0.590702, 19.448774, -0.2624696, 40.548176)
+
+[node name="ChoppableTree87" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.2046903, 0, 0.56400526, 0, 0.6, 0, -0.56400526, 0, 0.2046903, 26.58856, -0.2624696, 36.332478)
+
+[node name="ChoppableTree88" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.2046903, 0, 0.56400526, 0, 0.6, 0, -0.56400526, 0, 0.2046903, 26.482092, -0.2624696, 24.241291)
+
+[node name="ChoppableTree89" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.5424496, 0, -0.25641477, 0, 0.6, 0, 0.25641477, 0, 0.5424496, 18.2568, -0.2624696, 19.593708)
+
+[node name="ChoppableTree90" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.590702, 0, 0.10522002, 0, 0.6, 0, -0.10522002, 0, -0.590702, 0.285635, -0.2624696, 44.94637)
+
+[node name="ChoppableTree91" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.5952689, 0, -0.07519989, 0, 0.6, 0, 0.07519989, 0, -0.5952689, 22.607073, -0.2624696, 47.957966)
+
+[node name="ChoppableTree92" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.52527875, 0, -0.28996947, 0, 0.6, 0, 0.28996947, 0, -0.52527875, -6.5206814, -0.2624696, 34.168293)
+
+[node name="ChoppableTree93" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.1364602, 0, 0.37600347, 0, 0.4, 0, -0.37600347, 0, 0.1364602, -11.383806, -0.2624696, 41.516315)
+
+[node name="ChoppableTree94" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.3501858, 0, -0.19331296, 0, 0.4, 0, 0.19331296, 0, -0.3501858, 5.867586, -0.2624696, 47.7701)
+
+[node name="ChoppableTree95" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.1364602, 0, 0.37600347, 0, 0.4, 0, -0.37600347, 0, 0.1364602, 13.401308, -0.2624696, 12.08321)
+
+[node name="ChoppableTree96" parent="Level/Env/ChoppableTrees/Forest" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.36163303, 0, -0.17094316, 0, 0.4, 0, 0.17094316, 0, 0.36163303, 27.252344, -0.2624696, 42.027058)
 
 [node name="WindEffect" parent="Level/Env" instance=ExtResource("21_rdm03")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56583023, 5.8686504, 11.87656)
@@ -568,6 +673,190 @@ transform = Transform3D(1, 0, 0, 0, 0.3703316, 0, 0, 0, 1, 0, 0.6384975, 0)
 [node name="Cylinder_016" parent="Level/Env/pier" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.8312669, 0, 0, 0, 1, 0, 0.032132268, 0)
 
+[node name="WaterGrass" type="Node3D" parent="Level/Env"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.140232, 0, 14.2043)
+visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_pty70")
+skeleton = NodePath("../../../../Testing")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4714243, -0.49308562, 13.620338)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0560088, -0.49308562, 13.703056)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D3" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 1.7812573, -0.49308562, 13.416404)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D4" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.416007, -0.49308562, 15.35816)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D5" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0005913, -0.49308562, 15.440878)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D6" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.0382724, -0.49308562, 14.024057)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D7" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 5.1205997, -0.49308562, 13.536117)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D8" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 5.0714674, -0.49308562, 14.476273)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D9" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.6416206, -0.49308562, 15.078885)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D10" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.482814, -0.49308562, 14.2604265)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D16" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.5859346, -0.49308562, 20.558804)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D17" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.624461, -0.49308562, 22.641064)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D18" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 5.8518295, -0.49308562, 21.75312)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D19" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 5.6853943, -0.49308562, 21.271042)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D20" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 7.2042885, -0.4930855, 21.758337)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D21" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 3.2569256, -0.4930855, 26.690748)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D22" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 2.4065325, -0.4930855, 25.580156)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D23" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 1.3903027, -0.4930855, 26.304459)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D24" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 2.219157, -0.4930855, 26.177969)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D25" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 1.2547586, -0.4930855, 25.101377)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D26" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 1.1984603, -0.4930855, 25.28293)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D27" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, -4.802113, -0.4930855, 24.07313)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D28" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -4.8121367, -0.4930855, 23.503685)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D29" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -3.8149152, -0.4930855, 24.525776)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D30" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -5.9194155, -0.4930855, 22.311586)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D31" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -5.1893606, -0.4930855, 22.230528)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D32" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.3929953, 0, 0.91954046, 0, 1, 0, -0.91954046, 0, -0.3929953, -6.6282883, -0.4930855, 18.868704)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D33" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(-0.3929953, 0, 0.91954046, 0, 1, 0, -0.91954046, 0, -0.3929953, -6.061387, -0.4930855, 18.396807)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D11" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.3950214, -0.49308562, 16.363647)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D12" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -4.987122, -0.49308562, 13.673067)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D13" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -5.8996835, -0.49308562, 14.0364)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D14" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -5.283083, -0.49308562, 15.08371)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D15" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -6.0563135, -0.49308562, 14.767559)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
 [node name="TempRoot" type="Node3D" parent="Level"]
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Level/TempRoot"]
@@ -710,6 +999,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45869026, 20)
 mesh = SubResource("PlaneMesh_xxtuw")
 skeleton = NodePath("../../Level/TempRoot/pond_floor_hp")
 
+[node name="Area3D" type="Area3D" parent="ReflectionViewPortTest/MeshInstance3D"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReflectionViewPortTest/MeshInstance3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06768802, 0)
+shape = SubResource("BoxShape3D_ey2wc")
+
 [node name="Camera3D" type="Camera3D" parent="ReflectionViewPortTest" node_paths=PackedStringArray("mainCam", "reflector")]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, -7.021361, 32.161354)
 cull_mask = 1048571
@@ -801,186 +1098,9 @@ InventoryDebugLabel = NodePath("../UI/Control/Label")
 
 [node name="Testing" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.140232, 0, 14.2043)
+[node name="Bobber" parent="Testing" instance=ExtResource("45_ey2wc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5341598, 17.480604)
 visible = false
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_pty70")
-
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4714243, -0.49308562, 13.620338)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0560088, -0.49308562, 13.703056)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D3" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 1.7812573, -0.49308562, 13.416404)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D4" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.416007, -0.49308562, 15.35816)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D5" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0005913, -0.49308562, 15.440878)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D6" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.0382724, -0.49308562, 14.024057)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D7" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 5.1205997, -0.49308562, 13.536117)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D8" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 5.0714674, -0.49308562, 14.476273)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D9" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.6416206, -0.49308562, 15.078885)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D10" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.482814, -0.49308562, 14.2604265)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D16" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.5859346, -0.49308562, 20.558804)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D17" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.624461, -0.49308562, 22.641064)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D18" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 5.8518295, -0.49308562, 21.75312)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D19" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 5.6853943, -0.49308562, 21.271042)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D20" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 7.2042885, -0.4930855, 21.758337)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D21" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 3.2569256, -0.4930855, 26.690748)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D22" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 2.4065325, -0.4930855, 25.580156)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D23" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 1.3903027, -0.4930855, 26.304459)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D24" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 2.219157, -0.4930855, 26.177969)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D25" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 1.2547586, -0.4930855, 25.101377)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D26" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 1.1984603, -0.4930855, 25.28293)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D27" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, -4.802113, -0.4930855, 24.07313)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D28" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -4.8121367, -0.4930855, 23.503685)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D29" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -3.8149152, -0.4930855, 24.525776)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D30" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -5.9194155, -0.4930855, 22.311586)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D31" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -5.1893606, -0.4930855, 22.230528)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D32" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.3929953, 0, 0.91954046, 0, 1, 0, -0.91954046, 0, -0.3929953, -6.6282883, -0.4930855, 18.868704)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D33" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(-0.3929953, 0, 0.91954046, 0, 1, 0, -0.91954046, 0, -0.3929953, -6.061387, -0.4930855, 18.396807)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D11" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.3950214, -0.49308562, 16.363647)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D12" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -4.987122, -0.49308562, 13.673067)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D13" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -5.8996835, -0.49308562, 14.0364)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D14" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -5.283083, -0.49308562, 15.08371)
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
-
-[node name="MultiMeshInstance3D15" type="MultiMeshInstance3D" parent="Testing"]
-transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -6.0563135, -0.49308562, 14.767559)
-visible = false
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_v7n50")
 
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]

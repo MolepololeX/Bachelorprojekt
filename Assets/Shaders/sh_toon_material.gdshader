@@ -4,7 +4,7 @@ shader_type spatial;
 
 
 uniform vec4 albedo : source_color = vec4(1.0f);
-uniform sampler2D albedo_texture : source_color;
+uniform sampler2D albedo_texture : source_color, filter_nearest;
 uniform bool clamp_diffuse_to_max = false;
 
 uniform int cuts : hint_range(1, 8) = 3;

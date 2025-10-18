@@ -26,7 +26,6 @@ scale_max = 0.39999998
 scale_curve = SubResource("CurveTexture_b7tns")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpc0r"]
-blend_mode = 1
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 1

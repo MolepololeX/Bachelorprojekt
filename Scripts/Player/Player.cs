@@ -93,7 +93,7 @@ namespace Game.PlayerStuff
 			}
 			MoveAndSlide();
 
-			AnimTree.Set("parameters/RunningBlend/blend_amount", Math.Clamp((velXZ.Length() / Speed) - 1.0, -1.0, 1.0));
+			AnimTree.Set("parameters/RunningBlend/blend_amount", Math.Clamp(velXZ.Length() / Speed, 0.0, 1.0));
 		}
 
 		public override void _Process(double delta)
