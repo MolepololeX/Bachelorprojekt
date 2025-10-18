@@ -4,18 +4,69 @@ shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
 
 uniform vec4 tint : source_color;
-uniform sampler2D viewport_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D viewport_texture : source_color, filter_nearest, repeat_disable;
+uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 uniform float alpha : hint_range(0.0, 1.0, 0.001) = 1.0;
+
+
+uniform vec2 rimThreshold0 = vec2(0.0, 0.0277);
+uniform vec2 rimThreshold1 = vec2(0.0, 0.0277);
+uniform vec2 rimThreshold2 = vec2(0.0, 0.0277);
+
+uniform vec3 rimColor : source_color;
+
+uniform vec2 noiseScale = vec2 (1.0, 1.0);
+uniform float timeScale = 1.0;
+uniform float impact = 0.01;
+uniform sampler2D noiseTexture;
+
 uniform mat4 obliqueProjection;
+
+
 
 varying float test;
 
 void vertex() {}
 
+float linearizeDepth(vec2 uv, float depth, mat4 inv_proj_matrix){
+	//from godot documentation
+	#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
+	#else
+	vec3 ndc = vec3(uv * 2.0 - 1.0, depth);
+	#endif
+	vec4 view = inv_proj_matrix * vec4(ndc, 1.0);
+  	view.xyz /= view.w;
+  	return -view.z;
+}
+
 void fragment() {
+	
+	
 	vec2 base_uv = SCREEN_UV;
+	float noise = texture(noiseTexture, (SCREEN_UV * noiseScale) + (TIME * timeScale)).r;
+	float n = noise * 2.0 - 1.0;
+	base_uv.x += n * impact;
+	
 	vec4 albedo_tex = texture(viewport_texture, base_uv);
 	ALBEDO = tint.rgb * albedo_tex.rgb;
 	ALPHA = alpha;
+	
+	float depth = texture(depth_texture, SCREEN_UV).r;
+	depth = linearizeDepth(SCREEN_UV, depth, INV_PROJECTION_MATRIX);
+	float fragDepth = FRAGCOORD.z;
+	fragDepth = linearizeDepth(SCREEN_UV, fragDepth, INV_PROJECTION_MATRIX);
+	
+	float diff = depth - fragDepth;
+	if(
+		(diff < rimThreshold0.y && diff > rimThreshold0.x) ||
+		(diff < rimThreshold1.y && diff > rimThreshold1.x) ||
+		(diff < rimThreshold2.y && diff > rimThreshold2.x)
+		){
+		ALBEDO *= rimColor;
+	}
+	//ALBEDO = vec3();
+	//ALBEDO = vec3(noise);
 	//ALBEDO = vec3(test, 0.0, 0.0);
+	
 }
