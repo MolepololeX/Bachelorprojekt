@@ -17,12 +17,11 @@ void vertex() {
 
 void fragment() {
 	float noiseLevel = texture(noise, (vertexWorldPos.xz + (TIME * timeScale)) * noiseScale).r;
-	float noiseLevel2 = texture(noise, (vertexWorldPos.xz + (TIME * scaleFalloff * timeScale)) * noiseScale * scaleFalloff).r;
-	float s = noiseLevel + noiseLevel2;
-	s = step(s, threshold);
+	//float noiseLevel2 = texture(noise, (vertexWorldPos.xz + (TIME * scaleFalloff * timeScale)) * noiseScale * scaleFalloff).r;
+	//float s = noiseLevel + noiseLevel2;
+	float s = step(noiseLevel, threshold);
 
 	ALBEDO = color;
 
 	ALPHA = s;
-	ALPHA_SCISSOR_THRESHOLD = .5;
 }
