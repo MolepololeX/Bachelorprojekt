@@ -113,3 +113,5 @@ x Simple Inventarleiste oder 3x3 Grid
     # Random Ideen
 
     - Intro Sequence wo player aus dem himmel gefallen kommt, faded langsam in die natur rein und dann kommt der atze an
+	
+	- lotus auf dem wasser

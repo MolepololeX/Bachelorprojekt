@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=77 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/ItemsWorld/s_wood_plank.tscn" id="38_16jvh"]
 [ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="39_r6n5j"]
 [ext_resource type="PackedScene" uid="uid://ceb2yhmkluqi" path="res://Scenes/Structures/s_pier.tscn" id="41_2xp7q"]
+[ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="43_3rm2s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
 render_priority = 0
@@ -268,6 +269,19 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_roplx")
 size = Vector2(20, 20)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_pty70"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_3rm2s"]
+material = ExtResource("43_3rm2s")
+size = Vector2(1, 2)
+center_offset = Vector3(0, 1, 0)
+
+[sub_resource type="MultiMesh" id="MultiMesh_v7n50"]
+transform_format = 1
+instance_count = 8
+mesh = SubResource("QuadMesh_3rm2s")
+buffer = PackedFloat32Array(0, 0, -0.501, 0.8020613, 0, 0.501, 0, 0, 0.501, 0, 0, 0.6862334, -0.501, 0, 0, -0.04512024, 0, 0.501, 0, 0, 0, 0, -0.501, -0.65431964, 0, 0, -0.501, 0.33665955, 0, 0.501, 0, 0, 0.501, 0, 0, 0.23731661, -0.501, 0, 0, -0.9010111, 0, 0.501, 0, 0, 0, 0, -0.501, -0.015998363, -0.501, 0, 0, 0.027920246, 0, 0.501, 0, 0, 0, 0, -0.501, -0.16559613, -0.501, 0, 0, -0.20991004, 0, 0.501, 0, 0, 0, 0, -0.501, -0.24844897, -0.501, 0, 0, -0.006225705, 0, 0.501, 0, 0, 0, 0, -0.501, -0.13461667, -0.501, 0, 0, -0.7804576, 0, 0.501, 0, 0, 0, 0, -0.501, 0.31482565)
+
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_k6vpp")]
@@ -280,27 +294,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39133155, 0)
-bones/4/rotation = Quaternion(-0.55940026, -0.061181404, -0.64535636, 0.5165689)
-bones/5/rotation = Quaternion(2.4870813e-08, -4.401865e-08, -0.49240723, 0.87036496)
-bones/7/rotation = Quaternion(-0.3206294, -0.32534274, 0.144515, 0.87776095)
-bones/8/rotation = Quaternion(0.00019542704, 0.00019540147, -0.7063892, 0.70782363)
-bones/9/rotation = Quaternion(-0.6178414, 0.0810343, 0.61923647, 0.47775707)
-bones/10/rotation = Quaternion(3.1119647e-08, 4.3850118e-08, 0.51573086, 0.8567507)
-bones/12/rotation = Quaternion(-0.3188706, 0.30041543, -0.22613294, 0.8700207)
-bones/13/rotation = Quaternion(0.00042577976, 0.0005015031, 0.70666534, 0.7075477)
-bones/15/rotation = Quaternion(0.9936685, 0.08363331, 0.073722586, 0.013911873)
-bones/16/rotation = Quaternion(0.20337154, 6.386422e-08, -1.3413926e-07, 0.97910166)
-bones/17/rotation = Quaternion(-0.52160394, -0.20927224, 0.044826116, 0.82590866)
-bones/18/rotation = Quaternion(9.5857074e-05, 0.92024356, -0.3913463, -2.1638993e-05)
-bones/19/rotation = Quaternion(0.9971887, -0.029573128, 0.031473, 0.061233677)
-bones/20/rotation = Quaternion(0.27962732, -6.3925164e-08, 1.9487764e-07, 0.96010864)
-bones/21/rotation = Quaternion(-0.5620257, 0.11447735, -0.009092683, 0.81910896)
-bones/38/position = Vector3(0.52084064, 0.7867834, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.7867833, 0.059736922)
+bones/1/position = Vector3(0, 0.3869148, 0)
+bones/4/rotation = Quaternion(-0.55821425, -0.059577227, -0.64160854, 0.5226719)
+bones/5/rotation = Quaternion(2.3998016e-08, -5.193223e-08, -0.5014945, 0.8651608)
+bones/7/rotation = Quaternion(-0.3214287, -0.3285719, 0.14759848, 0.87575054)
+bones/8/rotation = Quaternion(0.00019581405, 0.00019579944, -0.70638776, 0.70782495)
+bones/9/rotation = Quaternion(-0.61655647, 0.079577446, 0.6161141, 0.483662)
+bones/10/rotation = Quaternion(2.7696293e-08, 5.3661324e-08, 0.5244511, 0.8514406)
+bones/12/rotation = Quaternion(-0.319852, 0.30409536, -0.22937803, 0.86752903)
+bones/13/rotation = Quaternion(0.0005499447, 0.00064775115, 0.70653635, 0.70767623)
+bones/15/rotation = Quaternion(0.99311, 0.08323467, 0.07515977, 0.033994272)
+bones/16/rotation = Quaternion(0.25562453, 6.450069e-08, -1.7837161e-07, 0.9667762)
+bones/17/rotation = Quaternion(-0.5487565, -0.20755944, 0.05291789, 0.80807495)
+bones/18/rotation = Quaternion(5.824563e-05, 0.92020977, -0.39142564, -1.3131508e-05)
+bones/19/rotation = Quaternion(0.99609846, -0.030429069, 0.031067703, 0.07679198)
+bones/20/rotation = Quaternion(0.31966826, -6.300334e-08, 2.225284e-07, 0.94752955)
+bones/21/rotation = Quaternion(-0.58333045, 0.11416362, -0.012471545, 0.804075)
+bones/38/position = Vector3(0.52084064, 0.78591293, -0.05763735)
+bones/40/position = Vector3(-0.5108437, 0.7859128, 0.059736922)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2270936, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2226768, 1.5739471e-15)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -391,10 +405,25 @@ transform = Transform3D(0.9161179, 0, -0.4009086, 0, 1, 0, 0.4009086, 0, 0.91611
 transform = Transform3D(-0.4193305, 0, -0.27232695, 0, 0.5, 0, 0.27232695, 0, -0.4193305, 2.0206308, -0.26247054, 9.358919)
 
 [node name="ChoppableTree58" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.42294058, 0, 0.67905915, 0, 0.8, 0, -0.67905915, 0, -0.42294058, 6.7967176, -0.26247054, 27.704817)
+transform = Transform3D(-0.42294058, 0, 0.67905915, 0, 0.8, 0, -0.67905915, 0, -0.42294058, -17.914413, -0.2624696, 10.911804)
+
+[node name="ChoppableTree62" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.27292034, 0, 0.75200695, 0, 0.79999995, 0, -0.75200695, 0, 0.27292034, 17.22583, -0.2624696, 36.360672)
+
+[node name="ChoppableTree63" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.7273364, 0, 0.33313912, 0, 0.7999999, 0, -0.33313912, 0, 0.7273364, 22.668972, -0.2624696, 13.173578)
 
 [node name="ChoppableTree59" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
 transform = Transform3D(0.37949607, -0.06379868, 0.46033955, 0.09947266, 0.5916969, 0, -0.45396915, 0.07631866, 0.38482144, 6.6221943, -0.6005061, 15.075812)
+
+[node name="ChoppableTree60" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.24958566, 0.049852077, 0.30858025, -0.043900147, 0.39655674, -0.028557658, -0.30948308, -0.016047841, 0.25290847, -0.42395067, -0.81562483, 25.63049)
+
+[node name="ChoppableTree64" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.2217676, 0.016322916, -0.11424837, -0.02743759, 0.24784796, -0.017848544, 0.11209954, 0.028371714, 0.22165005, -5.67501, -0.7601367, 16.883322)
+
+[node name="ChoppableTree61" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(-0.22229955, -0.01012024, 0.20119765, -0.03292511, 0.29741755, -0.021418242, -0.19874318, -0.0379524, -0.22149667, 5.031053, -0.8462196, 24.45927)
 
 [node name="WindEffect" parent="Level/Env" instance=ExtResource("21_rdm03")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56583023, 5.8686504, 11.87656)
@@ -420,6 +449,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8573103, -2.861023e-06, 0.1
 [node name="Bush7" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9102488, -2.861023e-06, 0.04451275)
 
+[node name="Bush8" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5193844, -0.45874882, 15.647675)
+
+[node name="Bush9" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96065, -0.45874906, 16.418858)
+
+[node name="Bush10" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.714739, -0.4587493, 16.584831)
+
+[node name="Bush11" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9464316, -0.5761205, 16.965397)
+visible = false
+
+[node name="Bush12" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9404984, 0.11428869, 29.714888)
+
+[node name="Bush13" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7497807, -0.1713177, 29.218285)
+
+[node name="Bush14" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8592463, -0.4862889, 26.25875)
+
+[node name="Bush15" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0207896, -0.6721293, 26.709272)
+
+[node name="Bush16" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9963093, -0.2970661, 13.850067)
+
+[node name="Bush17" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7176895, -0.29706633, 14.246332)
+
+[node name="Bush18" parent="Level/Env/Bushes" instance=ExtResource("23_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0473194, -0.2970662, 14.594868)
+visible = false
+
 [node name="Shrine" parent="Level/Env" instance=ExtResource("23_136ei")]
 transform = Transform3D(0, 0, -0.3, 0, 0.30000004, 0, 0.3, 0, 0, 0, -0.3, 0)
 
@@ -432,6 +496,77 @@ _itemExplosionVelocity = 5.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19872022, 0)
 amplitude = 0.003
 timeInterval = 0.25
+
+[node name="rocks" type="Node3D" parent="Level/Env"]
+
+[node name="rock_tall" parent="Level/Env/rocks" instance=ExtResource("18_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.73674, 1.1436589, -12.541313)
+
+[node name="rock_medium" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9743798, 0.0031478405, 9.07582)
+
+[node name="rock_medium11" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.715786, 0.0031478405, 26.127728)
+
+[node name="rock_medium12" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.255764, 0.0031478405, 24.027767)
+
+[node name="rock_medium2" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.80207807, 0.450296, -0.3923064, 0.5972192, -0.6047571, 0.5268758, 0, -0.6568884, -0.7539878, 6.758737, 0.26444972, -2.6697059)
+
+[node name="rock_medium13" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(-0.5831926, -0.7783843, -0.23238805, 0.5972192, -0.6047571, 0.5268758, -0.5506501, 0.1684835, 0.817556, 9.173996, 0.26444972, 15.161581)
+
+[node name="rock_medium3" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, -9.952872, -0.25924504, 0.35463428)
+
+[node name="rock_medium9" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, -16.114424, -0.25924504, 33.85179)
+
+[node name="rock_medium10" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, 6.250616, -0.25924504, 29.899094)
+
+[node name="rock_tall2" parent="Level/Env/rocks" instance=ExtResource("18_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 0.16093211, 0.9869655, 0, -0.9869655, 0.16093211, -15.613197, 0.23044443, 20.494331)
+
+[node name="rock_tall3" parent="Level/Env/rocks" instance=ExtResource("18_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 0.16093211, 0.9869655, 0, -0.9869655, 0.16093211, 4.0201797, 0.23044443, -24.297646)
+
+[node name="rock_medium4" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 16.699032, -0.07444012, 9.230349)
+
+[node name="rock_medium5" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, -23.363117, -0.07444012, -8.720911)
+
+[node name="rock_medium6" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 22.37701, -0.07444012, -21.210497)
+
+[node name="rock_medium7" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, -19.989117, -0.07444012, 27.861994)
+
+[node name="rock_medium8" parent="Level/Env/rocks" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 18.190819, -0.07444012, 42.720093)
+
+[node name="lantern_pole" parent="Level/Env" instance=ExtResource("21_pty70")]
+transform = Transform3D(-0.9659258, 0, 0.2588191, 0, 1, 0, -0.2588191, 0, -0.9659258, -1.4196497, -0.5066421, 14.533093)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Level/Env/lantern_pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62557554, 2.5498672, 0)
+light_color = Color(0.99649125, 0.51750886, 7.70092e-07, 1)
+light_energy = 0.5
+shadow_enabled = true
+shadow_caster_mask = 4294967287
+omni_range = 6.0
+omni_attenuation = 0.5
+
+[node name="pier" parent="Level/Env" instance=ExtResource("41_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02964127, -0.909009, 15.189346)
+
+[node name="Cylinder_004" parent="Level/Env/pier" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.3703316, 0, 0, 0, 1, 0, 0.6384975, 0)
+
+[node name="Cylinder_016" parent="Level/Env/pier" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.8312669, 0, 0, 0, 1, 0, 0.032132268, 0)
 
 [node name="TempRoot" type="Node3D" parent="Level"]
 
@@ -480,54 +615,6 @@ transform = Transform3D(0.89700395, 0, 0.44202256, 0, 1, 0, -0.44202256, 0, 0.89
 visible = false
 mesh = SubResource("BoxMesh_xxtuw")
 
-[node name="rock_tall" parent="Level" instance=ExtResource("18_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.73674, 1.1436589, -12.541313)
-
-[node name="rock_medium" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9743798, 0.0031478405, 9.07582)
-
-[node name="rock_medium11" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.715786, 0.0031478405, 26.127728)
-
-[node name="rock_medium12" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.255764, 0.0031478405, 24.027767)
-
-[node name="rock_medium2" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.80207807, 0.450296, -0.3923064, 0.5972192, -0.6047571, 0.5268758, 0, -0.6568884, -0.7539878, 6.758737, 0.26444972, -2.6697059)
-
-[node name="rock_medium13" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(-0.5831926, -0.7783843, -0.23238805, 0.5972192, -0.6047571, 0.5268758, -0.5506501, 0.1684835, 0.817556, 9.173996, 0.26444972, 15.161581)
-
-[node name="rock_medium3" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, -9.952872, -0.25924504, 0.35463428)
-
-[node name="rock_medium9" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, -16.114424, -0.25924504, 33.85179)
-
-[node name="rock_medium10" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, 6.250616, -0.25924504, 29.899094)
-
-[node name="rock_tall2" parent="Level" instance=ExtResource("18_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 0.16093211, 0.9869655, 0, -0.9869655, 0.16093211, -15.613197, 0.23044443, 20.494331)
-
-[node name="rock_tall3" parent="Level" instance=ExtResource("18_al5aw")]
-transform = Transform3D(1, 0, 0, 0, 0.16093211, 0.9869655, 0, -0.9869655, 0.16093211, 4.0201797, 0.23044443, -24.297646)
-
-[node name="rock_medium4" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 16.699032, -0.07444012, 9.230349)
-
-[node name="rock_medium5" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, -23.363117, -0.07444012, -8.720911)
-
-[node name="rock_medium6" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 22.37701, -0.07444012, -21.210497)
-
-[node name="rock_medium7" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, -19.989117, -0.07444012, 27.861994)
-
-[node name="rock_medium8" parent="Level" instance=ExtResource("19_2xp7q")]
-transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 18.190819, -0.07444012, 42.720093)
-
 [node name="Lighting" type="Node" parent="."]
 
 [node name="day(2770be)night()" type="WorldEnvironment" parent="Lighting"]
@@ -557,18 +644,6 @@ light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_split_1 = 0.02
-
-[node name="lantern_pole" parent="Lighting" instance=ExtResource("21_pty70")]
-transform = Transform3D(-0.9659258, 0, 0.2588191, 0, 1, 0, -0.2588191, 0, -0.9659258, -1.4196497, -0.5066421, 14.533093)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lighting/lantern_pole"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62557554, 2.5498672, 0)
-light_color = Color(0.99649125, 0.51750886, 7.70092e-07, 1)
-light_energy = 0.5
-shadow_enabled = true
-shadow_caster_mask = 4294967287
-omni_range = 6.0
-omni_attenuation = 0.5
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -724,20 +799,194 @@ WorldItems = Dictionary[int, PackedScene]({
 ZoomShaderColorRect = NodePath("../PostPixelDeSnap")
 InventoryDebugLabel = NodePath("../UI/Control/Label")
 
-[node name="pier" parent="." instance=ExtResource("41_2xp7q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02964127, -0.909009, 15.189346)
+[node name="Testing" type="Node3D" parent="."]
 
-[node name="Cylinder_004" parent="pier" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.3703316, 0, 0, 0, 1, 0, 0.6384975, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Testing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.140232, 0, 14.2043)
+visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_pty70")
 
-[node name="Cylinder_016" parent="pier" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.8312669, 0, 0, 0, 1, 0, 0.032132268, 0)
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4714243, -0.49308562, 13.620338)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0560088, -0.49308562, 13.703056)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D3" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 1.7812573, -0.49308562, 13.416404)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D4" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.416007, -0.49308562, 15.35816)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D5" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0005913, -0.49308562, 15.440878)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D6" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.0382724, -0.49308562, 14.024057)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D7" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 5.1205997, -0.49308562, 13.536117)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D8" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 5.0714674, -0.49308562, 14.476273)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D9" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.6416206, -0.49308562, 15.078885)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D10" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.482814, -0.49308562, 14.2604265)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D16" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.5859346, -0.49308562, 20.558804)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D17" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.624461, -0.49308562, 22.641064)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D18" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 5.8518295, -0.49308562, 21.75312)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D19" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 5.6853943, -0.49308562, 21.271042)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D20" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 7.2042885, -0.4930855, 21.758337)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D21" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 3.2569256, -0.4930855, 26.690748)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D22" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 2.4065325, -0.4930855, 25.580156)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D23" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.11583862, 0, -0.993268, 0, 1, 0, 0.993268, 0, -0.11583862, 1.3903027, -0.4930855, 26.304459)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D24" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 2.219157, -0.4930855, 26.177969)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D25" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 1.2547586, -0.4930855, 25.101377)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D26" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, 1.1984603, -0.4930855, 25.28293)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D27" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.5603498, 0, -0.828256, 0, 1, 0, 0.828256, 0, -0.5603498, -4.802113, -0.4930855, 24.07313)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D28" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -4.8121367, -0.4930855, 23.503685)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D29" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -3.8149152, -0.4930855, 24.525776)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D30" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -5.9194155, -0.4930855, 22.311586)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D31" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.9416704, 0, 0.33653644, 0, 1, 0, -0.33653644, 0, -0.9416704, -5.1893606, -0.4930855, 22.230528)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D32" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.3929953, 0, 0.91954046, 0, 1, 0, -0.91954046, 0, -0.3929953, -6.6282883, -0.4930855, 18.868704)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D33" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(-0.3929953, 0, 0.91954046, 0, 1, 0, -0.91954046, 0, -0.3929953, -6.061387, -0.4930855, 18.396807)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D11" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, 6.3950214, -0.49308562, 16.363647)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D12" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -4.987122, -0.49308562, 13.673067)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D13" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -5.8996835, -0.49308562, 14.0364)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D14" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -5.283083, -0.49308562, 15.08371)
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
+
+[node name="MultiMeshInstance3D15" type="MultiMeshInstance3D" parent="Testing"]
+transform = Transform3D(0.6881266, 0, -0.7255906, 0, 1, 0, 0.7255906, 0, 0.6881266, -6.0563135, -0.49308562, 14.767559)
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_v7n50")
 
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]
 [editable path="Level/Env/Floor/pond_floor"]
 [editable path="Level/Env/WindEffect"]
+[editable path="Level/Env/pier"]
 [editable path="Level/TempRoot/pond_floor_hp"]
 [editable path="SubViewport/CameraRig"]
 [editable path="UI/Control"]
-[editable path="pier"]
