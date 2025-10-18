@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=63 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -15,11 +15,12 @@
 [ext_resource type="Material" uid="uid://cdu6qq5rjpf61" path="res://Assets/Materials/Foliage/sm_cloud_shadows.tres" id="13_qnigd"]
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="14_7f1sr"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/sh_water.gdshader" id="19_8auip"]
-[ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_scuffed_reflections.gdshader" id="19_wmlk7"]
+[ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="19_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/s_choppable_tree.tscn" id="20_5yjbh"]
 [ext_resource type="PackedScene" uid="uid://bk2n3p7qb518k" path="res://Scenes/VFX/s_wind_effect.tscn" id="21_rdm03"]
 [ext_resource type="PackedScene" uid="uid://brh3rfsotctrq" path="res://Scenes/Environment/s_shrine_pillars.tscn" id="23_136ei"]
 [ext_resource type="PackedScene" uid="uid://ck6qon7rivb6u" path="res://Scenes/Environment/s_bush.tscn" id="23_al5aw"]
+[ext_resource type="Script" uid="uid://bh3mglv5tsnmk" path="res://Scripts/Testing/ObliqueReflectionCamera.cs" id="24_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://bewxybksr5me8" path="res://Scenes/Levels/s_inventory_display.tscn" id="25_wiqqe"]
 [ext_resource type="PackedScene" uid="uid://bm7odeqtwcook" path="res://Scenes/Camera/s_camera_rig.tscn" id="26_st3wf"]
 [ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="27_j72op"]
@@ -201,12 +202,10 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_xxtuw"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_wmlk7"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_7b3aa"]
 material = ExtResource("13_qnigd")
-size = Vector2(20, 20)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_xxtuw"]
-resource_local_to_scene = true
 size = Vector2(20, 20)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8qg5c"]
@@ -219,11 +218,17 @@ shader = ExtResource("19_wmlk7")
 shader_parameter/tint = Color(1, 1, 1, 1)
 shader_parameter/viewport_texture = SubResource("ViewportTexture_8qg5c")
 shader_parameter/alpha = 1.0
+shader_parameter/obliqueProjection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xxtuw"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_roplx")
+size = Vector2(20, 20)
 
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_k6vpp")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2.174, 0, -0.161)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2.174, 0, 16.139503)
 collision_layer = 10
 Speed = 2.03
 DragMult = 10.0
@@ -232,27 +237,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37352553, 0)
-bones/4/rotation = Quaternion(-0.55339533, -0.056867577, -0.63729185, 0.5332719)
-bones/5/rotation = Quaternion(2.1202677e-08, -5.6593553e-08, -0.5151667, 0.8570901)
-bones/7/rotation = Quaternion(-0.3218554, -0.33658674, 0.15057744, 0.8720349)
-bones/8/rotation = Quaternion(0.00070112036, 0.00070110965, -0.7045284, 0.70967513)
-bones/9/rotation = Quaternion(-0.6118384, 0.077285595, 0.6127984, 0.4941243)
-bones/10/rotation = Quaternion(-2.867356e-09, 6.1210784e-08, 0.53755033, 0.84323174)
-bones/12/rotation = Quaternion(-0.32078305, 0.31277424, -0.23270456, 0.8632028)
-bones/13/rotation = Quaternion(0.0022370045, 0.0026348594, 0.7047803, 0.7094173)
-bones/15/rotation = Quaternion(0.9905284, 0.08341509, 0.078038245, 0.076193206)
-bones/16/rotation = Quaternion(0.36629006, 6.2857744e-08, -2.548529e-07, 0.9305008)
-bones/17/rotation = Quaternion(-0.6064282, -0.20252302, 0.071523964, 0.76558053)
-bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
-bones/19/rotation = Quaternion(0.9925884, -0.032688107, 0.030080501, 0.11311471)
-bones/20/rotation = Quaternion(0.41350082, -6.011581e-08, 2.8732288e-07, 0.91050375)
-bones/21/rotation = Quaternion(-0.6336175, 0.11294352, -0.02091036, 0.76507217)
-bones/38/position = Vector3(0.52084064, 0.77841556, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.77841544, 0.059736915)
+bones/1/position = Vector3(0, 0.39121485, 0)
+bones/4/rotation = Quaternion(-0.55925477, -0.061266318, -0.64574665, 0.51622856)
+bones/5/rotation = Quaternion(2.3022231e-08, -4.276689e-08, -0.49175447, 0.870734)
+bones/7/rotation = Quaternion(-0.32050642, -0.32535243, 0.14417194, 0.8778587)
+bones/8/rotation = Quaternion(0.00025026247, 0.00025023447, -0.70618767, 0.7080247)
+bones/9/rotation = Quaternion(-0.61772525, 0.081120655, 0.61958265, 0.47744358)
+bones/10/rotation = Quaternion(2.7015528e-08, 4.8416975e-08, 0.51510745, 0.85712564)
+bones/12/rotation = Quaternion(-0.318752, 0.3003878, -0.22578834, 0.8701632)
+bones/13/rotation = Quaternion(0.00049365417, 0.00058144925, 0.7065948, 0.7076179)
+bones/15/rotation = Quaternion(0.9936533, 0.08361048, 0.073785424, 0.014774387)
+bones/16/rotation = Quaternion(0.20561007, 6.4191916e-08, -1.350873e-07, 0.97863406)
+bones/17/rotation = Quaternion(-0.5227673, -0.20920631, 0.0451646, 0.825171)
+bones/18/rotation = Quaternion(9.331806e-05, 0.9202413, -0.39135164, -2.1064685e-05)
+bones/19/rotation = Quaternion(0.9971491, -0.029606862, 0.03145664, 0.06186821)
+bones/20/rotation = Quaternion(0.28125843, -6.39889e-08, 1.9541213e-07, 0.95963216)
+bones/21/rotation = Quaternion(-0.56289244, 0.11446672, -0.009227996, 0.8185136)
+bones/38/position = Vector3(0.52084064, 0.78634644, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.7863463, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2092875, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2269769, 1.5739471e-15)
 
 [node name="CollisionShape3D" parent="Player" index="1"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0)
@@ -425,6 +430,18 @@ transform = Transform3D(0.89700395, 0, 0.44202256, 0, 1, 0, -0.44202256, 0, 0.89
 visible = false
 mesh = SubResource("BoxMesh_xxtuw")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Level/TempRoot"]
+transform = Transform3D(0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, 0.81915206, 0, 0.5, 20)
+mesh = SubResource("BoxMesh_wmlk7")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Level/TempRoot"]
+transform = Transform3D(0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, 0.81915206, -1.3927286, 1.5, 19.754425)
+mesh = SubResource("BoxMesh_wmlk7")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Level/TempRoot"]
+transform = Transform3D(0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, 0.81915206, -2.7854571, 2.5, 19.50885)
+mesh = SubResource("BoxMesh_wmlk7")
+
 [node name="Lighting" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
@@ -497,24 +514,20 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14184332, -9.536743e-07, -0.0030822754)
 
 [node name="ReflectionViewPortTest" type="SubViewport" parent="."]
-size = Vector2i(1024, 1024)
-
-[node name="CameraPivot" type="Node3D" parent="ReflectionViewPortTest"]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 20)
-visible = false
-
-[node name="Camera3D" type="Camera3D" parent="ReflectionViewPortTest/CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, -12.023636, 20.825548)
-visible = false
-projection = 1
-size = 20.0
+size = Vector2i(640, 360)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ReflectionViewPortTest"]
-transform = Transform3D(0.7071067, 0, 1.4182982, 0, 1, 0, -0.7071067, 0, 1.4182982, 0, -0.5, 20)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37635025, 20)
 mesh = SubResource("PlaneMesh_xxtuw")
 skeleton = NodePath("../../Level/TempRoot/pond_floor_hp")
-surface_material_override/0 = SubResource("ShaderMaterial_roplx")
+
+[node name="Camera3D" type="Camera3D" parent="ReflectionViewPortTest" node_paths=PackedStringArray("mainCam", "reflector")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, -7.021361, 32.161354)
+projection = 1
+size = 10.0
+script = ExtResource("24_wmlk7")
+mainCam = NodePath("../../SubViewport/CameraRig/Camera3D")
+reflector = NodePath("../MeshInstance3D")
 
 [node name="PostPixelDeSnap" type="ColorRect" parent="."]
 material = ExtResource("28_c1cc1")

@@ -8,6 +8,7 @@ public partial class CameraPixelSnapping : Camera3D
 {
 	[ExportCategory("Config")]
 	[Export] private bool _snapping = true;
+	[Export] private bool _snapCorrection = true;
 	[Export] private bool _snappingObjects = false;
 	[Export] private float _objectSnappingTexelSizeMultiplier = 1.0f;
 	[Export] private ColorRect rect;
@@ -54,12 +55,15 @@ public partial class CameraPixelSnapping : Camera3D
 			HOffset = snapError.X;
 			VOffset = snapError.Y;
 
+
 			Vector2 snapDelta;
 			snapDelta.X = snapError.X / _texelSizeInMeters;// * (1.0f / viewPortSize.X);
 			snapDelta.Y = snapError.Y / _texelSizeInMeters;// * (1.0f / viewPortSize.X);
-
-			mat.SetShaderParameter("snapDeltaX", snapDelta.X);
-			mat.SetShaderParameter("snapDeltaY", snapDelta.Y);
+			if (_snapCorrection)
+			{
+				mat.SetShaderParameter("snapDeltaX", snapDelta.X);
+				mat.SetShaderParameter("snapDeltaY", snapDelta.Y);
+			}
 			mat.SetShaderParameter("width", viewPortSize.X);
 			mat.SetShaderParameter("height", viewPortSize.Y);
 			mat.SetShaderParameter("testMult", _testmult);

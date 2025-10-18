@@ -6,14 +6,16 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 uniform vec4 tint : source_color;
 uniform sampler2D viewport_texture : source_color, filter_nearest, repeat_enable;
 uniform float alpha : hint_range(0.0, 1.0, 0.001) = 1.0;
+uniform mat4 obliqueProjection;
 
-void vertex() {
-}
+varying float test;
+
+void vertex() {}
 
 void fragment() {
-	vec2 base_uv = vec2(UV.x, -UV.y);
-
+	vec2 base_uv = SCREEN_UV;
 	vec4 albedo_tex = texture(viewport_texture, base_uv);
 	ALBEDO = tint.rgb * albedo_tex.rgb;
 	ALPHA = alpha;
+	//ALBEDO = vec3(test, 0.0, 0.0);
 }
