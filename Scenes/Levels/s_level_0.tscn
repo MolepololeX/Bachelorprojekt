@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=71 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -13,6 +13,8 @@
 [ext_resource type="Material" uid="uid://c7ucxh3ki20ld" path="res://Assets/Materials/Toon/sm_toon_grass.tres" id="13_2uyb1"]
 [ext_resource type="PackedScene" uid="uid://bg6uur18cv4hs" path="res://Scenes/Environment/s_cauldron.tscn" id="13_jqdjy"]
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="14_7f1sr"]
+[ext_resource type="PackedScene" uid="uid://brmmoeccvv557" path="res://Scenes/Environment/s_rock_tall.tscn" id="18_al5aw"]
+[ext_resource type="PackedScene" uid="uid://chsle8yky1v4q" path="res://Scenes/Environment/s_rock_medium.tscn" id="19_2xp7q"]
 [ext_resource type="Shader" uid="uid://bibkybla88lkg" path="res://Assets/Shaders/sh_water.gdshader" id="19_8auip"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="19_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://d3ptw2yih8blu" path="res://Scenes/Environment/s_choppable_tree.tscn" id="20_5yjbh"]
@@ -31,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/s_debug_inventory.tscn" id="30_6pq5l"]
 [ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/s_debug_fps.tscn" id="31_yuh1v"]
 [ext_resource type="Script" uid="uid://c2mmo1cwktjs5" path="res://Scripts/Testing/TestButton.cs" id="32_6iawo"]
-[ext_resource type="AudioStream" uid="uid://d0nemtjqmxxeg" path="res://Assets/Sounds/forest-wind-with-birds-singing-364368.mp3" id="33_o8cqg"]
+[ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="34_al5aw"]
 [ext_resource type="Script" uid="uid://cchta2hcc0oal" path="res://Scripts/Audio/AudioFade.cs" id="34_c3yn4"]
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="35_bqowl"]
 [ext_resource type="PackedScene" uid="uid://dqtnikfstlns1" path="res://Scenes/ItemsWorld/s_copper_nugget.tscn" id="36_gydl0"]
@@ -276,27 +278,27 @@ DragMult = 10.0
 visible = false
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36883178, 0)
-bones/4/rotation = Quaternion(-0.55122054, -0.05649481, -0.63815504, 0.53453004)
-bones/5/rotation = Quaternion(2.9561447e-08, -6.857769e-08, -0.51572204, 0.856756)
-bones/7/rotation = Quaternion(-0.3212568, -0.33894315, 0.14964205, 0.8715039)
-bones/8/rotation = Quaternion(0.0010432604, 0.0010432603, -0.7032665, 0.71092474)
-bones/9/rotation = Quaternion(-0.6098448, 0.07703778, 0.61371994, 0.49548197)
-bones/10/rotation = Quaternion(2.4830078e-08, 4.521719e-08, 0.5380825, 0.84289217)
-bones/12/rotation = Quaternion(-0.32035956, 0.31512484, -0.23184931, 0.8627353)
-bones/13/rotation = Quaternion(0.0032644598, 0.0038450512, 0.70370626, 0.71047306)
-bones/15/rotation = Quaternion(0.9894502, 0.08377973, 0.07882432, 0.088069014)
-bones/16/rotation = Quaternion(0.3977057, 6.217909e-08, -2.6887113e-07, 0.91751313)
-bones/17/rotation = Quaternion(-0.6229211, -0.2006582, 0.0772451, 0.75215614)
-bones/18/rotation = Quaternion(-2.243216e-06, 0.920156, -0.39155215, 5.908911e-07)
-bones/19/rotation = Quaternion(0.9912815, -0.033447463, 0.029772598, 0.12391928)
-bones/20/rotation = Quaternion(0.44155443, -5.8175203e-08, 3.0841719e-07, 0.89723456)
-bones/21/rotation = Quaternion(-0.6488163, 0.11242132, -0.02360266, 0.7522246)
-bones/38/position = Vector3(0.52084064, 0.7738694, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7738693, 0.059736915)
+bones/1/position = Vector3(0, 0.36883956, 0)
+bones/4/rotation = Quaternion(-0.5503886, -0.057620347, -0.64292115, 0.5295326)
+bones/5/rotation = Quaternion(2.350478e-08, -5.8294408e-08, -0.50729173, 0.8617745)
+bones/7/rotation = Quaternion(-0.31981066, -0.33793584, 0.14581168, 0.8730747)
+bones/8/rotation = Quaternion(0.0013317234, 0.0013317176, -0.7022007, 0.7119766)
+bones/9/rotation = Quaternion(-0.6093104, 0.07810845, 0.6178908, 0.49076575)
+bones/10/rotation = Quaternion(3.3870446e-08, 4.7711033e-08, 0.5300126, 0.84798986)
+bones/12/rotation = Quaternion(-0.31889978, 0.31361955, -0.22793844, 0.86486405)
+bones/13/rotation = Quaternion(0.004070878, 0.0047948943, 0.70286095, 0.7112994)
+bones/15/rotation = Quaternion(0.9894527, 0.08377869, 0.07882253, 0.08804198)
+bones/16/rotation = Quaternion(0.3976341, 6.036873e-08, -2.6731516e-07, 0.9175442)
+bones/17/rotation = Quaternion(-0.6228834, -0.20066275, 0.077231795, 0.7521875)
+bones/18/rotation = Quaternion(-2.243216e-06, 0.920156, -0.39155215, 5.9089115e-07)
+bones/19/rotation = Quaternion(0.9912846, -0.03344566, 0.029773312, 0.12389448)
+bones/20/rotation = Quaternion(0.4414899, -5.7858525e-08, 3.0878076e-07, 0.8972662)
+bones/21/rotation = Quaternion(-0.64878124, 0.11242261, -0.023596372, 0.7522549)
+bones/38/position = Vector3(0.52084064, 0.77027637, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.77027625, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2045938, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2046015, 1.5739471e-15)
 
 [node name="CollisionShape3D" parent="Player" index="1"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0)
@@ -390,7 +392,10 @@ transform = Transform3D(0.9161179, 0, -0.4009086, 0, 1, 0, 0.4009086, 0, 0.91611
 transform = Transform3D(-0.4193305, 0, -0.27232695, 0, 0.5, 0, 0.27232695, 0, -0.4193305, 2.0206308, -0.26247054, 9.358919)
 
 [node name="ChoppableTree58" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
-transform = Transform3D(-0.78275603, 0, -0.90955657, 0, 1.2, 0, 0.90955657, 0, -0.78275603, -10.452941, -0.5087061, 17.750772)
+transform = Transform3D(-0.42294058, 0, 0.67905915, 0, 0.8, 0, -0.67905915, 0, -0.42294058, 6.7967176, -0.26247054, 27.704817)
+
+[node name="ChoppableTree59" parent="Level/Env/ChoppableTrees" instance=ExtResource("20_5yjbh")]
+transform = Transform3D(0.38482144, 0, 0.46033955, 0, 0.6, 0, -0.46033955, 0, 0.38482144, 4.2269, -0.26247054, 30.160065)
 
 [node name="WindEffect" parent="Level/Env" instance=ExtResource("21_rdm03")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56583023, 5.8686504, 11.87656)
@@ -475,6 +480,54 @@ multimesh = SubResource("MultiMesh_k6vpp")
 transform = Transform3D(0.89700395, 0, 0.44202256, 0, 1, 0, -0.44202256, 0, 0.89700395, 0, 1.4566808, 18.441301)
 visible = false
 mesh = SubResource("BoxMesh_xxtuw")
+
+[node name="rock_tall" parent="Level" instance=ExtResource("18_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.73674, 1.1436589, -12.541313)
+
+[node name="rock_medium" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9743798, 0.0031478405, 9.07582)
+
+[node name="rock_medium11" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.715786, 0.0031478405, 26.127728)
+
+[node name="rock_medium12" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.255764, 0.0031478405, 24.027767)
+
+[node name="rock_medium2" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.80207807, 0.450296, -0.3923064, 0.5972192, -0.6047571, 0.5268758, 0, -0.6568884, -0.7539878, 6.758737, 0.26444972, -2.6697059)
+
+[node name="rock_medium13" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(-0.5831926, -0.7783843, -0.23238805, 0.5972192, -0.6047571, 0.5268758, -0.5506501, 0.1684835, 0.817556, 9.173996, 0.26444972, 15.161581)
+
+[node name="rock_medium3" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, -9.952872, -0.25924504, 0.35463428)
+
+[node name="rock_medium9" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, -16.114424, -0.25924504, 33.85179)
+
+[node name="rock_medium10" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.5139762, 0.4119438, 0.7524167, -0.23236078, 0.9112093, -0.34015608, -0.8257342, 0, 0.56405944, 6.250616, -0.25924504, 29.899094)
+
+[node name="rock_tall2" parent="Level" instance=ExtResource("18_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 0.16093211, 0.9869655, 0, -0.9869655, 0.16093211, -15.613197, 0.23044443, 20.494331)
+
+[node name="rock_tall3" parent="Level" instance=ExtResource("18_al5aw")]
+transform = Transform3D(1, 0, 0, 0, 0.16093211, 0.9869655, 0, -0.9869655, 0.16093211, 4.0201797, 0.23044443, -24.297646)
+
+[node name="rock_medium4" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 16.699032, -0.07444012, 9.230349)
+
+[node name="rock_medium5" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, -23.363117, -0.07444012, -8.720911)
+
+[node name="rock_medium6" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 22.37701, -0.07444012, -21.210497)
+
+[node name="rock_medium7" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, -19.989117, -0.07444012, 27.861994)
+
+[node name="rock_medium8" parent="Level" instance=ExtResource("19_2xp7q")]
+transform = Transform3D(0.9748767, -0.19620815, -0.105441034, -0.16011953, -0.28822437, -0.9440808, 0.15484567, 0.9372455, -0.31239992, 18.190819, -0.07444012, 42.720093)
 
 [node name="Lighting" type="Node" parent="."]
 
@@ -639,9 +692,10 @@ offset_bottom = 112.0
 script = ExtResource("32_6iawo")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("33_o8cqg")
+stream = ExtResource("34_al5aw")
 script = ExtResource("34_c3yn4")
-_targetDB = -5.0
+_targetDB = -10.0
+_minDB = -35.0
 _fadeInScale = 5.0
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TempSceneRoot", "Player", "Camera", "CameraRig", "ZoomShaderColorRect", "InventoryDebugLabel")]

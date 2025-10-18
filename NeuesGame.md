@@ -82,7 +82,7 @@ x Simple Inventarleiste oder 3x3 Grid
 	- water + regen = ripples im wass /auf dem wasser als particle
 
 	- outline shader fixen
-	
+	- cloud shadows abgestuft machen/soft edges kp wie tho
 	- reflections fuer wasser mit oblique projection aka second camera wie ich schon probiert hatte
 	
 	- neue sounds 

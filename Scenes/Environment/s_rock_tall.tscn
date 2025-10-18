@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://brmmoeccvv557"]
+
+[ext_resource type="PackedScene" uid="uid://df4ew55h5u4o2" path="res://Assets/Meshes/rock_tall.glb" id="1_0xeud"]
+[ext_resource type="Material" uid="uid://bbtskq3q87ex8" path="res://Assets/Materials/Toon/sm_toon_stone.tres" id="2_3i3jv"]
+
+[node name="rock_tall" instance=ExtResource("1_0xeud")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_3i3jv")

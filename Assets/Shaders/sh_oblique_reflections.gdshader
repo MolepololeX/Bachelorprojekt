@@ -26,7 +26,24 @@ uniform mat4 obliqueProjection;
 
 varying float test;
 
-void vertex() {}
+void vertex() {
+	//y billboard temp solution for sampling noise not by screen-uv
+	
+	// Billboard Mode: Y-Billboard
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+			vec4(normalize(cross(vec3(0.0, 1.0, 0.0), MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+			vec4(0.0, 1.0, 0.0, 0.0),
+			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, vec3(0.0, 1.0, 0.0))), 0.0),
+			MODEL_MATRIX[3]);
+
+	// Billboard Keep Scale: Enabled
+	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(
+			vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
+			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
+			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
+			vec4(0.0, 0.0, 0.0, 1.0));
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+}
 
 float linearizeDepth(vec2 uv, float depth, mat4 inv_proj_matrix){
 	//from godot documentation
@@ -44,7 +61,7 @@ void fragment() {
 	
 	
 	vec2 base_uv = SCREEN_UV;
-	float noise = texture(noiseTexture, (SCREEN_UV * noiseScale) + (TIME * timeScale)).r;
+	float noise = texture(noiseTexture, (UV * noiseScale) + (TIME * timeScale)).r;
 	float n = noise * 2.0 - 1.0;
 	base_uv.x += n * impact;
 	
@@ -52,6 +69,7 @@ void fragment() {
 	ALBEDO = tint.rgb * albedo_tex.rgb;
 	ALPHA = alpha;
 	
+	//thin line at the shore
 	float depth = texture(depth_texture, SCREEN_UV).r;
 	depth = linearizeDepth(SCREEN_UV, depth, INV_PROJECTION_MATRIX);
 	float fragDepth = FRAGCOORD.z;
