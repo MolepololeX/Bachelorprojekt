@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://blaixftpi6web"]
+
+[ext_resource type="Shader" uid="uid://dnv5ywlkngrek" path="res://Assets/Shaders/sh_cloud_shadows.gdshader" id="1_gq8t6"]
+[ext_resource type="Texture2D" uid="uid://djx0rsbayemo4" path="res://Assets/Textures/Procedural/t_cloud_shadow_noise.tres" id="2_jq3a4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gq8t6")
+shader_parameter/noise = ExtResource("2_jq3a4")
+shader_parameter/noiseScale = 0.005
+shader_parameter/scaleFalloff = 2.0
+shader_parameter/timeScale = 0.3
+shader_parameter/threshold = 0.81999998167136
+shader_parameter/color = Color(0.38039216, 0.5372549, 0.92941177, 1)
