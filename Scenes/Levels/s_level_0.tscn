@@ -229,7 +229,7 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 background_mode = 1
 background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
+ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
 tonemap_mode = 4
 tonemap_exposure = 1.5
 tonemap_white = 0.25
@@ -303,27 +303,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39098558, 0)
-bones/4/rotation = Quaternion(-0.55898905, -0.061420046, -0.64645386, 0.5156126)
-bones/5/rotation = Quaternion(2.0093225e-08, -4.0876834e-08, -0.49057123, 0.8714012)
-bones/7/rotation = Quaternion(-0.32028374, -0.32537198, 0.1435493, 0.8780348)
-bones/8/rotation = Quaternion(0.0003493838, 0.000349352, -0.70582324, 0.7083878)
-bones/9/rotation = Quaternion(-0.6175128, 0.08127728, 0.6202101, 0.47687674)
-bones/10/rotation = Quaternion(2.054227e-08, 5.546595e-08, 0.5139776, 0.85780364)
-bones/12/rotation = Quaternion(-0.31853732, 0.30033985, -0.22516306, 0.87042034)
-bones/13/rotation = Quaternion(0.00062481634, 0.00073593913, 0.7064587, 0.70775366)
-bones/15/rotation = Quaternion(0.99362355, 0.083569445, 0.07389978, 0.016347008)
-bones/16/rotation = Quaternion(0.20969087, 6.4776806e-08, -1.3718133e-07, 0.9777677)
-bones/17/rotation = Quaternion(-0.52488756, -0.20908472, 0.045782678, 0.8238207)
-bones/18/rotation = Quaternion(8.888553e-05, 0.9202373, -0.39136103, -2.0062067e-05)
-bones/19/rotation = Quaternion(0.99707544, -0.02966871, 0.03142666, 0.06302937)
-bones/20/rotation = Quaternion(0.28424263, -6.405707e-08, 1.9657672e-07, 0.9587524)
-bones/21/rotation = Quaternion(-0.56447804, 0.11444685, -0.009475899, 0.8174208)
-bones/38/position = Vector3(0.52084064, 0.78555065, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.78555053, 0.05973692)
+bones/1/position = Vector3(0, 0.3769692, 0)
+bones/4/rotation = Quaternion(-0.55471325, -0.057450473, -0.63801986, 0.53096455)
+bones/5/rotation = Quaternion(1.2862337e-08, -7.6216274e-08, -0.5123941, 0.8587505)
+bones/7/rotation = Quaternion(-0.32186177, -0.3346119, 0.15016134, 0.8728639)
+bones/8/rotation = Quaternion(0.00053923915, 0.0005392285, -0.7051247, 0.7090829)
+bones/9/rotation = Quaternion(-0.61310935, 0.07776289, 0.6133168, 0.49182564)
+bones/10/rotation = Quaternion(1.753707e-08, 5.7351667e-08, 0.5348953, 0.84491843)
+bones/12/rotation = Quaternion(-0.3206614, 0.31066468, -0.23220709, 0.8641434)
+bones/13/rotation = Quaternion(0.0017325453, 0.0020406807, 0.70530635, 0.70889753)
+bones/15/rotation = Quaternion(0.9912693, 0.08323898, 0.077411525, 0.0668135)
+bones/16/rotation = Quaternion(0.34158462, 6.0369764e-08, -2.4329685e-07, 0.9398511)
+bones/17/rotation = Quaternion(-0.59351057, -0.20383848, 0.06717688, 0.7756819)
+bones/18/rotation = Quaternion(5.7287243e-06, 0.9201628, -0.391536, -1.2371352e-06)
+bones/19/rotation = Quaternion(0.9935188, -0.032130543, 0.030314298, 0.104733616)
+bones/20/rotation = Quaternion(0.39180273, -6.062546e-08, 2.739906e-07, 0.92004925)
+bones/21/rotation = Quaternion(-0.6219274, 0.11329298, -0.018887036, 0.7746059)
+bones/38/position = Vector3(0.52084064, 0.7806529, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.78065276, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2267476, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2127312, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1118,6 +1118,8 @@ _dayTimeLights = [NodePath("../Lighting/Daylight"), NodePath("../Lighting/Daylig
 _nightTimeLights = [NodePath("../Lighting/NightShadows"), NodePath("../SubViewport/CameraRig/stars"), NodePath("../SubViewport/CameraRig/CloudShadowsNight")]
 _nightSkyColor = Color(0.050980393, 0.07450981, 0.14117648, 1)
 _daySkyColor = Color(0.15294118, 0.4392157, 0.74509805, 1)
+_nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
+_dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
 _worldEnvironment = NodePath("../Lighting/day(2770be)night(0d1324)")
 
 [editable path="Player"]
