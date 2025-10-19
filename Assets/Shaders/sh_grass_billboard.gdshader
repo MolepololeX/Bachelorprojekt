@@ -10,6 +10,12 @@ uniform float timeScale = 0.01;
 uniform float maxAngle = 1.0;
 uniform float directionBias = 0.0;
 
+uniform sampler2D highLightNoise : filter_linear;
+uniform vec2 highlightScale = vec2(1.0, 1.0);
+uniform float highlightThreshold = 0.8;
+uniform float highlightTimeScale = 1.0;
+uniform float highlightStep = 0.5;
+
 ///from the toon shader
 uniform int cuts : hint_range(1, 8) = 3;
 uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
@@ -66,13 +72,22 @@ void vertex() {
 		vec4(0.0, 0.0, 0.0, 1.0)
 	);
 	VERTEX = (rotation * vec4(VERTEX, 1.0)).xyz;
+	
+	
+	
+	vertexWorldPos = NODE_POSITION_WORLD;
 }
 
 void fragment() {
 	//vec3 noiseLevel = texture(noise, (vertexWorldPos.xz + (TIME * timeScale)) / noiseScale).rgb;
 	//vec3 col2 = mix(color, color2, smoothstep(0.6, 0.8, noiseLevel.r));
 	//ALBEDO = mix(col2, color2, clamp(UV.y, 0.0, 1.0));
-	ALBEDO = color2;
+	
+	float n = texture(highLightNoise, (vec2(vertexWorldPos.x, -vertexWorldPos.z) - TIME * highlightTimeScale) * highlightScale * 0.01).r;
+	
+	float s = step(highlightThreshold, n);
+	vec3 highlight = mix(color, color2, step(highlightStep, UV.y));
+	ALBEDO = (color2 * s) + (highlight * (1.0 - s));
 	ALPHA = texture(grassTexture, UV.xy).a;
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 
