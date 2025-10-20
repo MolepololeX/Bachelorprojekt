@@ -119,3 +119,7 @@ x Simple Inventarleiste oder 3x3 Grid
     - Intro Sequence wo player aus dem himmel gefallen kommt, faded langsam in die natur rein und dann kommt der atze an
 	
 	- lotus auf dem wasser
+	
+	- biom mit anderer grass colour -> 	dark	mid		light	extra?	mit AGX 1.5 exposure getestet
+										F08787 	FFC7A7 	FEE2AD 	F8FAB4
+										EAEBD0	DA6C6C	CD5656	AF3E3E
