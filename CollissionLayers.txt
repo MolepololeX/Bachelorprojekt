@@ -4,3 +4,10 @@
 4 - camera triggers
 5 - worlditem rigidbodys
 6 - fishable water and fishing bober
+
+
+visualinstance
+
+1 default
+2 ????????????
+3 ignored by reflection camera
