@@ -36,9 +36,8 @@ void fragment() {
 	float n = noise * 2.0 - 1.0;
 	base_uv.x += n * impact;
 	
-	
-	
 	ALBEDO = texture(screen_texture, base_uv).rgb;
+	
 	ALPHA = alpha;
 	
 	// Vertex Color Use as Albedo: Enabled

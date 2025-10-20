@@ -227,15 +227,14 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 
 [sub_resource type="Environment" id="Environment_oqg80"]
 background_mode = 1
-background_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
+background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
+ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
 tonemap_mode = 4
 tonemap_exposure = 1.5
 tonemap_white = 0.25
 glow_enabled = true
 glow_bloom = 0.05
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_emission = Color(1, 1, 1, 1)
 volumetric_fog_emission_energy = 0.1
@@ -329,10 +328,12 @@ shader_parameter/alpha = 1.0
 shader_parameter/rimThreshold0 = Vector2(0, 0.028)
 shader_parameter/rimThreshold1 = Vector2(0, 0.0277)
 shader_parameter/rimThreshold2 = Vector2(0, 0.0277)
-shader_parameter/rimColor = Color(1.8247963, 1.8247963, 1.8247963, 1)
-shader_parameter/noiseScale = Vector2(1, 2)
+shader_parameter/rimColor = Color(2.1168277, 2.1168277, 2.1168277, 1)
+shader_parameter/noiseScale = Vector2(1, 3)
 shader_parameter/timeScale = 0.01
-shader_parameter/impact = 0.1
+shader_parameter/impact = 0.03
+shader_parameter/useBlurr = true
+shader_parameter/blurrStength = 1.0
 shader_parameter/noiseTexture = SubResource("NoiseTexture2D_wmlk7")
 shader_parameter/obliqueProjection = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
@@ -356,27 +357,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39110208, 0)
-bones/4/rotation = Quaternion(-0.55959654, -0.06062556, -0.64350694, 0.5187244)
-bones/5/rotation = Quaternion(2.5225399e-08, -4.171846e-08, -0.49599892, 0.86832315)
-bones/7/rotation = Quaternion(-0.32116878, -0.3261952, 0.14625548, 0.8769588)
-bones/8/rotation = Quaternion(7.650713e-05, 7.650783e-05, -0.70682603, 0.7073875)
-bones/9/rotation = Quaternion(-0.6179334, 0.08050573, 0.6176378, 0.47979248)
-bones/10/rotation = Quaternion(2.9720008e-08, 4.749332e-08, 0.51916057, 0.8546767)
-bones/12/rotation = Quaternion(-0.31940407, 0.30119836, -0.2277546, 0.8691308)
-bones/13/rotation = Quaternion(0.00021487629, 0.00025308967, 0.7068841, 0.70732933)
-bones/15/rotation = Quaternion(0.99363786, 0.08358839, 0.073846065, 0.015607491)
-bones/16/rotation = Quaternion(0.20777123, 6.450813e-08, -1.360024e-07, 0.9781774)
-bones/17/rotation = Quaternion(-0.52389014, -0.20914224, 0.045491472, 0.824457)
-bones/18/rotation = Quaternion(9.0865506e-05, 0.9202391, -0.39135683, -2.0509926e-05)
-bones/19/rotation = Quaternion(0.99711037, -0.029639432, 0.031440817, 0.062481064)
-bones/20/rotation = Quaternion(0.28283313, -6.396674e-08, 1.9606817e-07, 0.9591692)
-bones/21/rotation = Quaternion(-0.56372905, 0.114456326, -0.009358698, 0.81793755)
-bones/38/position = Vector3(0.52084064, 0.7875267, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.78752667, 0.059736922)
+bones/1/position = Vector3(0, 0.36829478, 0)
+bones/4/rotation = Quaternion(-0.5507913, -0.056679145, -0.63925135, 0.53364235)
+bones/5/rotation = Quaternion(3.2708854e-08, -4.9513655e-08, -0.5140477, 0.8577616)
+bones/7/rotation = Quaternion(-0.32087907, -0.33901146, 0.14874148, 0.87177056)
+bones/8/rotation = Quaternion(0.001144746, 0.0011447457, -0.70289165, 0.71129507)
+bones/9/rotation = Quaternion(-0.6094992, 0.07722495, 0.6146994, 0.4946634)
+bones/10/rotation = Quaternion(4.7197176e-08, 4.9192234e-08, 0.53647894, 0.84391373)
+bones/12/rotation = Quaternion(-0.32000044, 0.31508806, -0.23094088, 0.86312544)
+bones/13/rotation = Quaternion(0.003555741, 0.0041881376, 0.7034012, 0.7107718)
+bones/15/rotation = Quaternion(0.9893496, 0.08381842, 0.0788919, 0.08909482)
+bones/16/rotation = Quaternion(0.4004246, 5.8564737e-08, -2.7309142e-07, 0.9163298)
+bones/17/rotation = Quaternion(-0.6243518, -0.20048638, 0.077750236, 0.7509626)
+bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
+bones/19/rotation = Quaternion(0.9911618, -0.033515707, 0.029745417, 0.1248605)
+bones/20/rotation = Quaternion(0.444001, -5.9100543e-08, 3.1169918e-07, 0.8960263)
+bones/21/rotation = Quaternion(-0.6501462, 0.11237189, -0.02384153, 0.7510752)
+bones/38/position = Vector3(0.52084064, 0.77257496, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7725749, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2268641, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2040567, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -974,7 +975,6 @@ environment = SubResource("Environment_oqg80")
 
 [node name="Daylight" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -984,7 +984,6 @@ directional_shadow_split_1 = 0.05
 
 [node name="DaylightShadows" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -992,6 +991,7 @@ directional_shadow_split_1 = 0.05
 
 [node name="NightShadows" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -1026,7 +1026,6 @@ skeleton = NodePath("")
 
 [node name="CloudShadows" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.91362, 14.314774, 5.2585087)
-visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_lcmyg")
@@ -1042,11 +1041,13 @@ skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="stars" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(125.34626, 0, 0, 0, -4.364362e-06, -0.9999996, 0, 99.844955, -4.3711374e-08, 0, 19.38371, 0)
+visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_8qg5c")
 surface_material_override/0 = SubResource("ShaderMaterial_2xp7q")
 
 [node name="Rain" type="Node3D" parent="SubViewport/CameraRig"]
+visible = false
 
 [node name="raindrops" type="GPUParticles3D" parent="SubViewport/CameraRig/Rain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)

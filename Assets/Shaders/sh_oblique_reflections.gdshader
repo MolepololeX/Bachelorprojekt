@@ -19,6 +19,8 @@ uniform vec3 rimColor : source_color;
 uniform vec2 noiseScale = vec2 (1.0, 1.0);
 uniform float timeScale = 1.0;
 uniform float impact = 0.01;
+uniform bool useBlurr = false;
+uniform float blurrStength = 1.0;
 uniform sampler2D noiseTexture;
 
 uniform mat4 obliqueProjection;
@@ -58,6 +60,32 @@ float linearizeDepth(vec2 uv, float depth, mat4 inv_proj_matrix){
   	return -view.z;
 }
 
+vec3 sampleBlurredColor(vec2 uTexelSize, vec2 base_uv){
+	vec2 offsets[9] = vec2[](
+        vec2(-uTexelSize.x, -uTexelSize.y),
+        vec2(0.0,           -uTexelSize.y),
+        vec2( uTexelSize.x, -uTexelSize.y),
+        vec2(-uTexelSize.x,  0.0),
+        vec2(0.0,            0.0),
+        vec2( uTexelSize.x,  0.0),
+        vec2(-uTexelSize.x,  uTexelSize.y),
+        vec2(0.0,            uTexelSize.y),
+        vec2( uTexelSize.x,  uTexelSize.y)
+    );
+
+    float kernel[9] = float[](
+        1.0/16.0, 2.0/16.0, 1.0/16.0,
+        2.0/16.0, 4.0/16.0, 2.0/16.0,
+        1.0/16.0, 2.0/16.0, 1.0/16.0
+    );
+
+    vec3 color = vec3(0.0);
+    for (int i = 0; i < 9; i++) {
+        color += texture(viewport_texture, base_uv + offsets[i]).rgb * kernel[i];
+    }
+	return color;
+}
+
 void fragment() {
 	
 	
@@ -67,7 +95,18 @@ void fragment() {
 	base_uv.x += n * impact;
 	
 	vec4 albedo_tex = texture(viewport_texture, base_uv);
-	ALBEDO = tint.rgb * albedo_tex.rgb;
+	
+	//blurr testing
+	vec2 uTexelSize = 1.0 / VIEWPORT_SIZE.xy;
+	uTexelSize *= blurrStength;
+	vec3 blurredCol = sampleBlurredColor(uTexelSize, base_uv);
+	
+	if(useBlurr){
+		ALBEDO = tint.rgb * blurredCol;
+	}else{
+		ALBEDO = tint.rgb * albedo_tex.rgb;
+	}
+
 	ALPHA = alpha;
 	
 	//thin line at the shore
@@ -75,6 +114,9 @@ void fragment() {
 	depth = linearizeDepth(SCREEN_UV, depth, INV_PROJECTION_MATRIX);
 	float fragDepth = FRAGCOORD.z;
 	fragDepth = linearizeDepth(SCREEN_UV, fragDepth, INV_PROJECTION_MATRIX);
+	
+	
+	
 	
 	float diff = depth - fragDepth;
 	if(
@@ -87,5 +129,4 @@ void fragment() {
 	//ALBEDO = vec3();
 	//ALBEDO = vec3(noise);
 	//ALBEDO = vec3(test, 0.0, 0.0);
-	
 }
