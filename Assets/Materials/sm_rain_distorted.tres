@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bfyloeklnnt1v"]
+
+[ext_resource type="Shader" uid="uid://ct45yuccvwf7c" path="res://Assets/Shaders/sh_rain_distortion.gdshader" id="1_fpj7w"]
+[ext_resource type="Texture2D" uid="uid://dd0qlknpe4lbr" path="res://Assets/Textures/Procedural/t_grass_noise.tres" id="2_2dqsl"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fpj7w")
+shader_parameter/alpha = 0.999999977648
+shader_parameter/noiseScale = Vector2(1, 5)
+shader_parameter/timeScale = 0.05
+shader_parameter/impact = 0.01
+shader_parameter/useColorOverride = false
+shader_parameter/colorOverride = Color(1, 1, 1, 1)
+shader_parameter/noiseTexture = ExtResource("2_2dqsl")

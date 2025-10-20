@@ -61,7 +61,8 @@ x Simple Inventarleiste oder 3x3 Grid
 	mond der sich im wasser reflektieren kann, ozean im norden hin hauen
 	x steg am wasser
 	x grass spitzen color per noise
-	tag und nacht kleines script zum wechseln zum testen usw was env coloru und directional lights switch
+	x tag und nacht kleines script zum wechseln zum testen usw was env coloru und directional lights switch
+	
 	sound aendern mal wieder
 	
 	x cloud shadows

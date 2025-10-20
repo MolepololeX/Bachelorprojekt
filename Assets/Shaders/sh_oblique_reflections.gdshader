@@ -9,6 +9,7 @@ uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nea
 uniform float alpha : hint_range(0.0, 1.0, 0.001) = 1.0;
 
 
+
 uniform vec2 rimThreshold0 = vec2(0.0, 0.0277);
 uniform vec2 rimThreshold1 = vec2(0.0, 0.0277);
 uniform vec2 rimThreshold2 = vec2(0.0, 0.0277);
