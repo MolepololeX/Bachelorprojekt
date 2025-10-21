@@ -123,3 +123,6 @@ x Simple Inventarleiste oder 3x3 Grid
 	- biom mit anderer grass colour -> 	dark	mid		light	extra?	mit AGX 1.5 exposure getestet
 										F08787 	FFC7A7 	FEE2AD 	F8FAB4
 										EAEBD0	DA6C6C	CD5656	AF3E3E
+										
+										
+	- tool um multimeshed grass besser verteilen zu koennen mit excludes usw

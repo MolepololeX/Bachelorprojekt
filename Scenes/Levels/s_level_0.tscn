@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=94 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -45,7 +45,9 @@
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="43_3rm2s"]
 [ext_resource type="PackedScene" uid="uid://ctly6ohubsyv0" path="res://Scenes/Player/s_fishing_rod.tscn" id="44_v7n50"]
 [ext_resource type="Material" uid="uid://bfyloeklnnt1v" path="res://Assets/Materials/sm_rain_distorted.tres" id="45_oqg80"]
+[ext_resource type="Material" uid="uid://c0d3ddlp21bic" path="res://Assets/Materials/Toon/sm_toon_copper.tres" id="46_lcmyg"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="46_oqg80"]
+[ext_resource type="Script" uid="uid://bh6ov3jhx5i12" path="res://Scripts/Testing/Testcube.cs" id="47_sit86"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
 render_priority = 0
@@ -348,36 +350,39 @@ size = Vector3(20, 0.1, 20)
 [sub_resource type="QuadMesh" id="QuadMesh_lcmyg"]
 material = ExtResource("45_oqg80")
 
+[sub_resource type="BoxMesh" id="BoxMesh_mot55"]
+material = ExtResource("46_lcmyg")
+
 [node name="TestScene" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("1_k6vpp")]
+[node name="Player" parent="." groups=["Snap"] instance=ExtResource("1_k6vpp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10495067, 0, 15.131481)
 collision_layer = 10
 Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36829478, 0)
-bones/4/rotation = Quaternion(-0.5507913, -0.056679145, -0.63925135, 0.53364235)
-bones/5/rotation = Quaternion(3.2708854e-08, -4.9513655e-08, -0.5140477, 0.8577616)
-bones/7/rotation = Quaternion(-0.32087907, -0.33901146, 0.14874148, 0.87177056)
-bones/8/rotation = Quaternion(0.001144746, 0.0011447457, -0.70289165, 0.71129507)
-bones/9/rotation = Quaternion(-0.6094992, 0.07722495, 0.6146994, 0.4946634)
-bones/10/rotation = Quaternion(4.7197176e-08, 4.9192234e-08, 0.53647894, 0.84391373)
-bones/12/rotation = Quaternion(-0.32000044, 0.31508806, -0.23094088, 0.86312544)
-bones/13/rotation = Quaternion(0.003555741, 0.0041881376, 0.7034012, 0.7107718)
-bones/15/rotation = Quaternion(0.9893496, 0.08381842, 0.0788919, 0.08909482)
-bones/16/rotation = Quaternion(0.4004246, 5.8564737e-08, -2.7309142e-07, 0.9163298)
-bones/17/rotation = Quaternion(-0.6243518, -0.20048638, 0.077750236, 0.7509626)
-bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
-bones/19/rotation = Quaternion(0.9911618, -0.033515707, 0.029745417, 0.1248605)
-bones/20/rotation = Quaternion(0.444001, -5.9100543e-08, 3.1169918e-07, 0.8960263)
-bones/21/rotation = Quaternion(-0.6501462, 0.11237189, -0.02384153, 0.7510752)
-bones/38/position = Vector3(0.52084064, 0.77257496, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7725749, 0.059736915)
+bones/1/position = Vector3(0, 0.37920868, 0)
+bones/4/rotation = Quaternion(-0.55553406, -0.057879657, -0.6386777, 0.52926606)
+bones/5/rotation = Quaternion(2.5838016e-08, -5.16589e-08, -0.5102461, 0.8600285)
+bones/7/rotation = Quaternion(-0.32180864, -0.333287, 0.14973003, 0.87346435)
+bones/8/rotation = Quaternion(0.00044842775, 0.00044841485, -0.705459, 0.7087505)
+bones/9/rotation = Quaternion(-0.6139104, 0.07812133, 0.61381483, 0.49014556)
+bones/10/rotation = Quaternion(1.4858965e-08, 6.1587386e-08, 0.5328393, 0.84621656)
+bones/12/rotation = Quaternion(-0.32052416, 0.30923423, -0.23171963, 0.8648379)
+bones/13/rotation = Quaternion(0.0014396519, 0.0016956952, 0.7056114, 0.70859545)
+bones/15/rotation = Quaternion(0.99172866, 0.083164886, 0.07697093, 0.060276855)
+bones/16/rotation = Quaternion(0.3244035, 5.984054e-08, -2.2399674e-07, 0.94591886)
+bones/17/rotation = Quaternion(-0.5845451, -0.2046841, 0.06422251, 0.78248775)
+bones/18/rotation = Quaternion(1.7723607e-05, 0.9201734, -0.39151108, -3.965669e-06)
+bones/19/rotation = Quaternion(0.9941155, -0.03176107, 0.030472523, 0.09898114)
+bones/20/rotation = Quaternion(0.37692565, -6.091446e-08, 2.6340751e-07, 0.92624354)
+bones/21/rotation = Quaternion(-0.61393607, 0.11350791, -0.017525924, 0.78095543)
+bones/38/position = Vector3(0.52084064, 0.7819722, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.7819721, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2040567, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2149707, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1013,7 +1018,6 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 11.52
 size = 10.0
 far = 1000.0
 script = ExtResource("27_j72op")
-_snappingObjects = true
 rect = NodePath("../../../PostPixelDeSnap")
 _debugInfo = false
 _debugMovement = false
@@ -1199,6 +1203,12 @@ InventoryDebugLabel = NodePath("../UI/Control/Label")
 transform = Transform3D(0.85579795, 0, -0.51731026, 0, 1, 0, 0.51731026, 0, 0.85579795, 0, 4.4736447, 0)
 visible = false
 mesh = SubResource("QuadMesh_lcmyg")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Testing" groups=["Snap"]]
+transform = Transform3D(0.8535533, -0.14644662, 0.49999997, 0.49999997, 0.49999997, -0.70710677, -0.14644662, 0.8535533, 0.49999997, -4, 3, 0)
+mesh = SubResource("BoxMesh_mot55")
+script = ExtResource("47_sit86")
+_texelSizeInMeters = 0.027
 
 [node name="DayNightToggler" type="Node" parent="." node_paths=PackedStringArray("_dayObjects", "_nightObjects", "_rainObjects", "_clearSkyObjects", "_worldEnvironment")]
 script = ExtResource("46_oqg80")
