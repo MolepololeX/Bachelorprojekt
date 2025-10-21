@@ -91,6 +91,9 @@ x Simple Inventarleiste oder 3x3 Grid
 	
 	- neue sounds 
 	
+	- grass boden mit dunkel grassfreien dirt spots -> custom multimeshinstance tool was die so platziert, dass die ne dort sind wo dirt is
+	---> winter grass und winter baeume mit extra leaves die rund sind und weiss --> schnee
+	
 	## Foliage Upgrades
 	- bessere noise fuer rolling grass und leaves und grass-colour	
 	- grass noise textur res runter damit die framerate der animation runter geht oder sowas in die richtung

@@ -358,31 +358,32 @@ material = ExtResource("46_lcmyg")
 [node name="Player" parent="." groups=["Snap"] instance=ExtResource("1_k6vpp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10495067, 0, 15.131481)
 collision_layer = 10
-Speed = 2.03
-DragMult = 10.0
+Speed = 14.0
+FallAcceleration = 75
+JumpForce = 500.0
+DragMult = 0.8
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37920868, 0)
-bones/4/rotation = Quaternion(-0.55553406, -0.057879657, -0.6386777, 0.52926606)
-bones/5/rotation = Quaternion(2.5838016e-08, -5.16589e-08, -0.5102461, 0.8600285)
-bones/7/rotation = Quaternion(-0.32180864, -0.333287, 0.14973003, 0.87346435)
-bones/8/rotation = Quaternion(0.00044842775, 0.00044841485, -0.705459, 0.7087505)
-bones/9/rotation = Quaternion(-0.6139104, 0.07812133, 0.61381483, 0.49014556)
-bones/10/rotation = Quaternion(1.4858965e-08, 6.1587386e-08, 0.5328393, 0.84621656)
-bones/12/rotation = Quaternion(-0.32052416, 0.30923423, -0.23171963, 0.8648379)
-bones/13/rotation = Quaternion(0.0014396519, 0.0016956952, 0.7056114, 0.70859545)
-bones/15/rotation = Quaternion(0.99172866, 0.083164886, 0.07697093, 0.060276855)
-bones/16/rotation = Quaternion(0.3244035, 5.984054e-08, -2.2399674e-07, 0.94591886)
-bones/17/rotation = Quaternion(-0.5845451, -0.2046841, 0.06422251, 0.78248775)
-bones/18/rotation = Quaternion(1.7723607e-05, 0.9201734, -0.39151108, -3.965669e-06)
-bones/19/rotation = Quaternion(0.9941155, -0.03176107, 0.030472523, 0.09898114)
-bones/20/rotation = Quaternion(0.37692565, -6.091446e-08, 2.6340751e-07, 0.92624354)
-bones/21/rotation = Quaternion(-0.61393607, 0.11350791, -0.017525924, 0.78095543)
-bones/38/position = Vector3(0.52084064, 0.7819722, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.7819721, 0.05973692)
+bones/1/position = Vector3(0, 0.37299803, 0)
+bones/4/rotation = Quaternion(-0.55082035, -0.060139515, -0.6505038, 0.51944673)
+bones/5/rotation = Quaternion(2.7443894e-08, -5.753857e-08, -0.49139196, 0.8709386)
+bones/7/rotation = Quaternion(-0.31794688, -0.33404273, 0.13961495, 0.87626076)
+bones/8/rotation = Quaternion(0.0015421297, 0.0015421229, -0.7014223, 0.71274275)
+bones/9/rotation = Quaternion(-0.6100879, 0.080457725, 0.6243851, 0.48110566)
+bones/10/rotation = Quaternion(1.1707633e-08, 6.340753e-08, 0.51476187, 0.85733324)
+bones/12/rotation = Quaternion(-0.31684098, 0.30887341, -0.22152045, 0.8689866)
+bones/13/rotation = Quaternion(0.0044873846, 0.0052854787, 0.7024235, 0.7117254)
+bones/15/rotation = Quaternion(0.9904137, 0.08345088, 0.078127936, 0.077541985)
+bones/16/rotation = Quaternion(0.36985844, 6.279146e-08, -2.5631576e-07, 0.9290881)
+bones/17/rotation = Quaternion(-0.60829985, -0.20232096, 0.072165325, 0.7640875)
+bones/19/rotation = Quaternion(0.9924468, -0.032772265, 0.030046035, 0.11433565)
+bones/20/rotation = Quaternion(0.41667277, -6.0242186e-08, 2.899534e-07, 0.90905654)
+bones/21/rotation = Quaternion(-0.6353327, 0.11288815, -0.021211185, 0.7636483)
+bones/38/position = Vector3(0.52084064, 0.76792705, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.76792693, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2149707, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.20876, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1208,7 +1209,6 @@ mesh = SubResource("QuadMesh_lcmyg")
 transform = Transform3D(0.8535533, -0.14644662, 0.49999997, 0.49999997, 0.49999997, -0.70710677, -0.14644662, 0.8535533, 0.49999997, -4, 3, 0)
 mesh = SubResource("BoxMesh_mot55")
 script = ExtResource("47_sit86")
-_texelSizeInMeters = 0.027
 
 [node name="DayNightToggler" type="Node" parent="." node_paths=PackedStringArray("_dayObjects", "_nightObjects", "_rainObjects", "_clearSkyObjects", "_worldEnvironment")]
 script = ExtResource("46_oqg80")
