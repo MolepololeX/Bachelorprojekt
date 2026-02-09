@@ -10,6 +10,6 @@ shader_parameter/normalThreshold = 0.90000004275
 shader_parameter/outlineDarkness = 4.7499999933364734e-08
 shader_parameter/outlineColor = Color(0.61710674, 0, 0.061937377, 1)
 shader_parameter/tempUseOutlineColor = 0.0
-shader_parameter/outlineLightness = 4.7500000022182576e-07
+shader_parameter/outlineLightness = 4.750000002218258e-07
 shader_parameter/thiccness = 1.0000000475
 shader_parameter/normalEdgeBias = Vector3(1, 1, 1)

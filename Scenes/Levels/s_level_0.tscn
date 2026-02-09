@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=99 format=3 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://brh3rfsotctrq" path="res://Scenes/Environment/s_shrine_pillars.tscn" id="23_136ei"]
 [ext_resource type="PackedScene" uid="uid://ck6qon7rivb6u" path="res://Scenes/Environment/s_bush.tscn" id="23_al5aw"]
 [ext_resource type="Shader" uid="uid://ddtvr04n8rdjk" path="res://Assets/Shaders/sh_stars.gdshader" id="23_roplx"]
+[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="24_sit86"]
 [ext_resource type="Script" uid="uid://bh3mglv5tsnmk" path="res://Scripts/Testing/ObliqueReflectionCamera.cs" id="24_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://bewxybksr5me8" path="res://Scenes/Levels/s_inventory_display.tscn" id="25_wiqqe"]
 [ext_resource type="PackedScene" uid="uid://bm7odeqtwcook" path="res://Scenes/Camera/s_camera_rig.tscn" id="26_st3wf"]
@@ -229,17 +230,35 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 
 [sub_resource type="Environment" id="Environment_oqg80"]
 background_mode = 1
-background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
+background_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
-tonemap_mode = 4
-tonemap_exposure = 1.5
+ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
 tonemap_white = 0.25
 glow_enabled = true
-glow_bloom = 0.05
+glow_intensity = 0.47
+glow_strength = 1.67
+glow_bloom = 0.08
+glow_hdr_threshold = 0.76
 volumetric_fog_density = 0.01
 volumetric_fog_emission = Color(1, 1, 1, 1)
 volumetric_fog_emission_energy = 0.1
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_sit86"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("24_sit86")
+enable_draw = true
+shader_path = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
+live_reload = true
+reload_interval_frames = 30
+metadata/_custom_type_script = "uid://dj2paefo16n4y"
+
+[sub_resource type="Compositor" id="Compositor_jqdjy"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_sit86")])
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lcmyg"]
 material = ExtResource("27_oqg80")
@@ -353,6 +372,15 @@ material = ExtResource("45_oqg80")
 [sub_resource type="BoxMesh" id="BoxMesh_mot55"]
 material = ExtResource("46_lcmyg")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcmyg"]
+albedo_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+emission_enabled = true
+emission = Color(18.765959, 10.828071, 0.0007809883, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_sit86"]
+material = SubResource("StandardMaterial3D_lcmyg")
+
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." groups=["Snap"] instance=ExtResource("1_k6vpp")]
@@ -362,26 +390,26 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36985856, 0)
-bones/4/rotation = Quaternion(-0.5504177, -0.058382347, -0.6454181, 0.52637184)
-bones/5/rotation = Quaternion(2.6096426e-08, -4.6463914e-08, -0.5022772, 0.8647067)
-bones/7/rotation = Quaternion(-0.31915757, -0.3368105, 0.1438063, 0.87408066)
-bones/8/rotation = Quaternion(0.0014247297, 0.0014247197, -0.70185673, 0.7123153)
-bones/9/rotation = Quaternion(-0.60946083, 0.07883584, 0.6200534, 0.4877257)
-bones/10/rotation = Quaternion(2.9698905e-08, 5.4222372e-08, 0.5251616, 0.8510026)
-bones/12/rotation = Quaternion(-0.31820226, 0.3122086, -0.22584757, 0.86617905)
-bones/13/rotation = Quaternion(0.0042824717, 0.0050441227, 0.7026388, 0.71151596)
-bones/15/rotation = Quaternion(0.98970914, 0.08368314, 0.0786462, 0.0853685)
-bones/16/rotation = Quaternion(0.39055133, 5.897798e-08, -2.65159e-07, 0.9205812)
-bones/17/rotation = Quaternion(-0.6191588, -0.20110232, 0.07592342, 0.7552721)
-bones/19/rotation = Quaternion(0.9915912, -0.033269748, 0.029843707, 0.121447444)
-bones/20/rotation = Quaternion(0.43513036, -5.8556694e-08, 3.0277064e-07, 0.90036756)
-bones/21/rotation = Quaternion(-0.6453272, 0.11254811, -0.022978488, 0.75522023)
-bones/38/position = Vector3(0.52084064, 0.76925987, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7692598, 0.059736915)
+bones/1/position = Vector3(0, 0.3725842, 0)
+bones/4/rotation = Quaternion(-0.5507555, -0.059920833, -0.649907, 0.5202872)
+bones/5/rotation = Quaternion(3.343764e-08, -5.3328346e-08, -0.49271053, 0.87019336)
+bones/7/rotation = Quaternion(-0.318082, -0.3343932, 0.14011514, 0.8759982)
+bones/8/rotation = Quaternion(0.0015298683, 0.0015298611, -0.7014676, 0.71269804)
+bones/9/rotation = Quaternion(-0.6099983, 0.08025571, 0.6238787, 0.48190942)
+bones/10/rotation = Quaternion(1.1292944e-08, 7.1990875e-08, 0.5160212, 0.8565759)
+bones/12/rotation = Quaternion(-0.31699616, 0.30929065, -0.22203723, 0.86864966)
+bones/13/rotation = Quaternion(0.0045046164, 0.0053057754, 0.70240545, 0.711743)
+bones/15/rotation = Quaternion(0.99032235, 0.08347884, 0.078198195, 0.0786)
+bones/16/rotation = Quaternion(0.3726541, 6.273881e-08, -2.574608e-07, 0.92797035)
+bones/17/rotation = Quaternion(-0.60976547, -0.20216155, 0.07266816, 0.7629129)
+bones/19/rotation = Quaternion(0.9923346, -0.032838244, 0.030018957, 0.11529335)
+bones/20/rotation = Quaternion(0.41915768, -6.034086e-08, 2.9201456e-07, 0.9079135)
+bones/21/rotation = Quaternion(-0.6366761, 0.11284435, -0.021447102, 0.76252854)
+bones/38/position = Vector3(0.52084064, 0.76806784, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7680677, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2056205, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2083462, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -976,9 +1004,11 @@ mesh = SubResource("BoxMesh_xxtuw")
 
 [node name="day(2770be)night(0d1324)" type="WorldEnvironment" parent="Lighting"]
 environment = SubResource("Environment_oqg80")
+compositor = SubResource("Compositor_jqdjy")
 
 [node name="Daylight" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -988,6 +1018,7 @@ directional_shadow_split_1 = 0.05
 
 [node name="DaylightShadows" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -995,7 +1026,6 @@ directional_shadow_split_1 = 0.05
 
 [node name="NightShadows" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -1029,6 +1059,7 @@ skeleton = NodePath("")
 
 [node name="CloudShadows" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.91362, 14.314774, 5.2585087)
+visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_lcmyg")
@@ -1036,7 +1067,6 @@ skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="CloudShadowsNight" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.9461555, 14.228361, 5.2018223)
-visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_sit86")
@@ -1044,7 +1074,6 @@ skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="stars" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(125.34626, 0, 0, 0, -4.364362e-06, -0.9999996, 0, 99.844955, -4.3711374e-08, 0, 19.38371, 0)
-visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_8qg5c")
 surface_material_override/0 = SubResource("ShaderMaterial_2xp7q")
@@ -1219,6 +1248,27 @@ _daySkyColor = Color(0.15294118, 0.4392157, 0.74509805, 1)
 _nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
 _dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
 _worldEnvironment = NodePath("../Lighting/day(2770be)night(0d1324)")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.5, 2.8178196, -4.5)
+mesh = SubResource("SphereMesh_sit86")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
+light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.5, 2.031211, 4.5)
+mesh = SubResource("SphereMesh_sit86")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D2"]
+light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1.5840359, 4.5)
+mesh = SubResource("SphereMesh_sit86")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D3"]
+light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
 
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]

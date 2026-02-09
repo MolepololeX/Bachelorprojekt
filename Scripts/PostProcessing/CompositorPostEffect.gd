@@ -10,8 +10,11 @@ var shader_path : String = "res://Assets/Shaders/PostFX/Post_Outline_Shader.glsl
 var live_reload : bool = false
 @export
 var reload_interval_frames : int = 60
+@export
+var uniforms : float = 1.0
 
 @export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
+
 
 var rd: RenderingDevice
 var shader: RID
