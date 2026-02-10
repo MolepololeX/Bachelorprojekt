@@ -10,8 +10,16 @@ var shader_path : String = "res://Assets/Shaders/PostFX/Post_Outline_Shader.glsl
 var live_reload : bool = false
 @export
 var reload_interval_frames : int = 60
+
+@export_category("Uniforms")
+@export_range(0.0, 10.0, 0.05)
+var base_exposure : float = 1.0
 @export
-var uniforms : float = 1.0
+var tonemapper_mode : int = 0
+@export_range(0.0, 10.0, 0.05)
+var tonemapper_exposure : float = 1.5
+@export
+var draw_mode : int = 0
 
 @export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
 
@@ -110,19 +118,19 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				
 				# Get the RID for our color image, we will be reading from and writing to it.
 				var input_image : RID = render_scene_buffers.get_color_layer(view)
-				var input_depth : RID = render_scene_buffers.get_depth_layer(view)
-				var input_normal : RID = render_scene_buffers.get_texture("forward_clustered", "normal_roughness")
+				#var input_depth : RID = render_scene_buffers.get_depth_layer(view)
+				#var input_normal : RID = render_scene_buffers.get_texture("forward_clustered", "normal_roughness")
 
 				var texture_sampler = RDSamplerState.new()
 				texture_sampler.mip_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				texture_sampler = rd.sampler_create(texture_sampler)
 
-				var parameters := PackedFloat32Array([size.x, size.y, 0.0, 0.0])
-				var inv_proj_mat = p_render_data.get_render_scene_data().get_cam_projection().inverse()
-				var inv_proj_mat_array := PackedVector4Array([inv_proj_mat.x, inv_proj_mat.y, inv_proj_mat.z, inv_proj_mat.w])
+				var parameters := PackedFloat32Array([base_exposure, tonemapper_mode, tonemapper_exposure, draw_mode])
+				#var inv_proj_mat = p_render_data.get_render_scene_data().get_cam_projection().inverse()
+				#var inv_proj_mat_array := PackedVector4Array([inv_proj_mat.x, inv_proj_mat.y, inv_proj_mat.z, inv_proj_mat.w])
 
 				var parameter_data := parameters.to_byte_array()
-				parameter_data.append_array(inv_proj_mat_array.to_byte_array())
+				#parameter_data.append_array(inv_proj_mat_array.to_byte_array())
 				rd.buffer_update(parameter_storage_buffer, 0, parameter_data.size(), parameter_data)
 
 				# Create a uniform set, this will be cached, the cache will be cleared if our viewports configuration is changed.
@@ -135,20 +143,25 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				uniform_color.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 				uniform_color.binding = 1
 				uniform_color.add_id(input_image)
-				
-				var uniform_depth := RDUniform.new()
-				uniform_depth.uniform_type = RenderingDevice.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
-				uniform_depth.binding = 2
-				uniform_depth.add_id(texture_sampler)
-				uniform_depth.add_id(input_depth)
+				#
+				#var uniform_depth := RDUniform.new()
+				#uniform_depth.uniform_type = RenderingDevice.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
+				#uniform_depth.binding = 2
+				#uniform_depth.add_id(texture_sampler)
+				#uniform_depth.add_id(input_depth)
+#
+				#var uniform_normal := RDUniform.new()
+				#uniform_normal.uniform_type = RenderingDevice.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
+				#uniform_normal.binding = 3
+				#uniform_normal.add_id(texture_sampler)
+				#uniform_normal.add_id(input_normal)
 
-				var uniform_normal := RDUniform.new()
-				uniform_normal.uniform_type = RenderingDevice.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
-				uniform_normal.binding = 3
-				uniform_normal.add_id(texture_sampler)
-				uniform_normal.add_id(input_normal)
-
-				var uniform_set := UniformSetCacheRD.get_cache(shader, 0, [uniform_parameter, uniform_color, uniform_depth, uniform_normal])
+				var uniform_set := UniformSetCacheRD.get_cache(shader, 0, [
+					uniform_parameter, 
+					uniform_color, 
+					#uniform_depth, 
+					#uniform_normal
+					])
 
 				# Run our compute shader.
 				var compute_list:= rd.compute_list_begin()

@@ -4,9 +4,10 @@
 layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
 
 layout(set = 0, binding = 0, std430) readonly buffer Params {
-	vec2 raster_size;
-	vec2 reserved;
-	mat4 inv_proj_mat;
+	float base_exposure;
+	float tonemapper_mode;
+	float tonemapper_exposure;
+	float draw_mode;
 } params;
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
@@ -50,54 +51,63 @@ vec3 oklab_to_linear_srgb(vec3 c)
 
 
 float tonemap(float l){
-	float exposure = -1.5;
-	return -exp(exposure*l) + 1;
+	return -exp(-params.tonemapper_exposure*l) + 1;
 }
 
 vec4 tonemap(vec4 l){
-	float exposure = -1.5;
-	return -exp(exposure*l) + 1;
+	return -exp(-params.tonemapper_exposure*l) + 1;
 }
 
 
 void main() {
-	float base_exposure = 1.0;
-
-	int mode = 1;
-
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 
 	vec4 base = imageLoad(color_image, uv_pixel);
 
-	base = base * base_exposure;
+	base = base * params.base_exposure;
 
 	vec4 color = base;
 
-	vec4 test1 = color;
-	vec4 test2 = color;
+	vec4 pre;
+	vec4 post;
 
-	float L = 0.0;
+	pre = color;
 
-	if(mode == 0){
-	}
-	if(mode == 1){
+
+
+	if(params.tonemapper_mode == 1.0){
 		color = tonemap(color);
 	}
-	if(mode == 2){
+	if(params.tonemapper_mode == 2.0){
 		color = vec4(linear_srgb_to_oklab(color.xyz),1.0);
 		color.x = tonemap(color.x);
 		color = vec4(oklab_to_linear_srgb(color.xyz),1.0);
 	}
 
-	// if(color.r > 1.0 || color.g > 1.0 || color.b > 1.0){
-	// 	color = vec4(0.0);
-	// }
-	// if(L > 0.0){
-	// 	color = vec4(L);
-	// }
-	// else{
-	// 	color = vec4(0.0);
-	// }
+	post = color;
 
-	imageStore(color_image, uv_pixel, color);
+
+
+	pre = vec4(linear_srgb_to_oklab(pre.xyz),1.0);
+	post = vec4(linear_srgb_to_oklab(post.xyz),1.0);
+
+	float hue_pre = atan(pre.y, pre.z);
+	float hue_post = atan(post.y, post.z);
+
+	vec4 hue_diff_mask = vec4(vec3(0.0), 1.0);
+	float hue_diff = hue_pre - hue_post;
+	if(hue_diff < 0.0){
+		hue_diff_mask.r = abs(hue_diff);
+	}else{
+		hue_diff_mask.b = hue_diff;
+	}
+
+
+
+	if(params.draw_mode == 1.0){
+		imageStore(color_image, uv_pixel, color);
+	}
+	if(params.draw_mode == 2.0){
+		imageStore(color_image, uv_pixel, hue_diff_mask);
+	}
 }
