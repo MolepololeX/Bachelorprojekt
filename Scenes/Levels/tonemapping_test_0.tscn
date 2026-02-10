@@ -19,7 +19,7 @@ live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 2
 tonemapper_exposure = 1.35
-draw_mode = 1
+draw_mode = 3
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Compositor" id="Compositor_yxoe1"]
