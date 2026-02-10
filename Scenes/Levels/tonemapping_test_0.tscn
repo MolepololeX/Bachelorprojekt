@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="1_kx62c"]
 
 [sub_resource type="Environment" id="Environment_ovrgn"]
+background_mode = 1
 glow_enabled = true
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_v23jt"]
@@ -18,8 +19,8 @@ shader_path = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 2
-tonemapper_exposure = 1.315
-draw_mode = 1
+tonemapper_exposure = 1.35
+draw_mode = 3
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Compositor" id="Compositor_yxoe1"]

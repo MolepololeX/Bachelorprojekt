@@ -58,6 +58,18 @@ vec4 tonemap(vec4 l){
 	return -exp(-params.tonemapper_exposure*l) + 1;
 }
 
+//oklab delta_h
+float get_oklab_delta_h(vec3 c1, vec3 c2){
+	float hue_1 = atan(c1.y, c1.z);
+	float hue_2 = atan(c2.y, c2.z);
+	return hue_2 - hue_1;
+}
+
+//c1 and c2 need to be in Lab format
+float get_cie76_delta_E(vec3 c1, vec3 c2){
+	return sqrt(pow((c2.x - c1.x), 2.0) + pow((c2.y - c1.y), 2.0) + pow((c2.z - c1.z), 2.0));
+}
+
 
 void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
@@ -74,10 +86,11 @@ void main() {
 	pre = color;
 
 
-
+	//directly on sRGB values
 	if(params.tonemapper_mode == 1.0){
 		color = tonemap(color);
 	}
+	//using oklab L
 	if(params.tonemapper_mode == 2.0){
 		color = vec4(linear_srgb_to_oklab(color.xyz),1.0);
 		color.x = tonemap(color.x);
@@ -87,27 +100,38 @@ void main() {
 	post = color;
 
 
-
-	pre = vec4(linear_srgb_to_oklab(pre.xyz),1.0);
-	post = vec4(linear_srgb_to_oklab(post.xyz),1.0);
-
-	float hue_pre = atan(pre.y, pre.z);
-	float hue_post = atan(post.y, post.z);
-
-	vec4 hue_diff_mask = vec4(vec3(0.0), 1.0);
-	float hue_diff = hue_pre - hue_post;
-	if(hue_diff < 0.0){
-		hue_diff_mask.r = abs(hue_diff);
-	}else{
-		hue_diff_mask.b = hue_diff;
-	}
-
-
-
+	//normal image
 	if(params.draw_mode == 1.0){
 		imageStore(color_image, uv_pixel, color);
 	}
+
+	//oklab delta_h
 	if(params.draw_mode == 2.0){
+
+		float hue_diff = get_oklab_delta_h(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
+
+		vec4 hue_diff_mask = vec4(vec3(0.0), 1.0);
+		if(hue_diff < 0.0){
+			hue_diff_mask.r = abs(hue_diff);
+		}else{
+			hue_diff_mask.b = hue_diff;
+		}
+
 		imageStore(color_image, uv_pixel, hue_diff_mask);
+	}
+
+	//cie76
+	if(params.draw_mode == 3.0){
+
+		float diff = get_cie76_delta_E(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
+
+		vec4 diff_mask = vec4(vec3(0.0), 1.0);
+		if(diff < 0.0){
+			diff_mask.r = abs(diff);
+		}else{
+			diff_mask.b = diff;
+		}
+
+		imageStore(color_image, uv_pixel, diff_mask);
 	}
 }
