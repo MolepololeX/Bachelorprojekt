@@ -7,6 +7,14 @@
 - Kombinieren um neue Substanzen zu erstellen
 
 
+# Probleme
+
+height differences
+
+gameloop
+
+-> explore -> new res -> craft new equip -> new expore -> ...
+
 
 ** Fokus des Games mit den Entstandenen Potions und Materials staerker werden und neue Rezepte fuer Waffen freischalten oder diese Verkaufen und interessantes NPC interaktionssystem machen wo wenn der NPC an deinem Shit stirbt du nen schlechtes Review bekommst **
 
