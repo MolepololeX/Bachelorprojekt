@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=133 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -54,8 +54,6 @@
 [ext_resource type="Material" uid="uid://bfyloeklnnt1v" path="res://Assets/Materials/sm_rain_distorted.tres" id="45_oqg80"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="46_oqg80"]
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://Scripts/SSIM.cs" id="54_sf7op"]
-[ext_resource type="Texture2D" uid="uid://r1bjjiclxiid" path="res://Screenshot_original.png" id="55_7sabu"]
-[ext_resource type="Texture2D" uid="uid://bwa1oea23asiw" path="res://Screenshot_sRGB.png" id="56_8auip"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
 render_priority = 0
@@ -535,7 +533,6 @@ enable_draw = true
 shader_path = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
 live_reload = true
 reload_interval_frames = 30
-tonemapper_mode = 2
 draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
@@ -670,27 +667,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3814265, 0)
-bones/4/rotation = Quaternion(-0.55296373, -0.06344782, -0.6577562, 0.50750595)
-bones/5/rotation = Quaternion(2.859347e-08, -5.408075e-08, -0.47320244, 0.88095385)
-bones/7/rotation = Quaternion(-0.3166352, -0.32794526, 0.13332479, 0.88001055)
-bones/8/rotation = Quaternion(0.001633615, 0.0016336142, -0.7010834, 0.7130755)
-bones/9/rotation = Quaternion(-0.6124311, 0.08347726, 0.6304021, 0.46963066)
-bones/10/rotation = Quaternion(-3.2445938e-10, 5.699452e-08, 0.4974218, 0.8675089)
-bones/12/rotation = Quaternion(-0.31514052, 0.30193618, -0.21498333, 0.8736723)
-bones/13/rotation = Quaternion(0.0041883443, 0.004933252, 0.7027377, 0.7114197)
-bones/15/rotation = Quaternion(0.99216294, 0.08312875, 0.07650248, 0.053384475)
-bones/16/rotation = Quaternion(0.30632243, 6.3848e-08, -2.1270847e-07, 0.9519279)
-bones/17/rotation = Quaternion(-0.57512397, -0.20551576, 0.061172627, 0.7894642)
-bones/18/rotation = Quaternion(2.8836243e-05, 0.92018336, -0.3914877, -6.47928e-06)
-bones/19/rotation = Quaternion(0.994699, -0.031388454, 0.030635025, 0.093006484)
-bones/20/rotation = Quaternion(0.36149028, -6.179546e-08, 2.5170147e-07, 0.93237585)
-bones/21/rotation = Quaternion(-0.6056396, 0.11370947, -0.016134474, 0.78740746)
-bones/38/position = Vector3(0.52084064, 0.76918924, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7691892, 0.059736915)
+bones/1/position = Vector3(0, 0.381015, 0)
+bones/4/rotation = Quaternion(-0.55279136, -0.06339727, -0.657784, 0.507664)
+bones/5/rotation = Quaternion(2.5921736e-08, -4.7879745e-08, -0.4733514, 0.8808738)
+bones/7/rotation = Quaternion(-0.31659997, -0.32815665, 0.1332969, 0.87994874)
+bones/8/rotation = Quaternion(0.0016374819, 0.0016374813, -0.7010691, 0.7130896)
+bones/9/rotation = Quaternion(-0.61227137, 0.08343768, 0.63044167, 0.46979284)
+bones/10/rotation = Quaternion(-1.6767977e-09, 5.3850098e-08, 0.4975635, 0.8674276)
+bones/12/rotation = Quaternion(-0.31512022, 0.30215085, -0.21496235, 0.87361056)
+bones/13/rotation = Quaternion(0.00420225, 0.0049496307, 0.702723, 0.7114339)
+bones/15/rotation = Quaternion(0.99208426, 0.083132744, 0.07659184, 0.054694604)
+bones/16/rotation = Quaternion(0.30975762, 6.318513e-08, -2.1373414e-07, 0.9508156)
+bones/17/rotation = Quaternion(-0.57691324, -0.20536205, 0.061747894, 0.7881529)
+bones/18/rotation = Quaternion(2.677429e-05, 0.9201815, -0.391492, -6.0128787e-06)
+bones/19/rotation = Quaternion(0.9945915, -0.0314581, 0.030604446, 0.094135515)
+bones/20/rotation = Quaternion(0.36440662, -6.1529505e-08, 2.5394746e-07, 0.93123996)
+bones/21/rotation = Quaternion(-0.6072086, 0.113673024, -0.016395938, 0.786198)
+bones/38/position = Vector3(0.52084064, 0.7688344, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7688343, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2171885, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.216777, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1613,6 +1610,9 @@ _nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
 _dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
 _worldEnvironment = NodePath("../Lighting/day(2770be)night(0d1324)")
 
+[node name="Node" type="Node" parent="."]
+script = ExtResource("54_sf7op")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.5, 2.8178196, -4.5)
 visible = false
@@ -1636,11 +1636,6 @@ mesh = SubResource("SphereMesh_sit86")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D3"]
 light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("54_sf7op")
-image_base = ExtResource("55_7sabu")
-image_compare = ExtResource("56_8auip")
 
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]

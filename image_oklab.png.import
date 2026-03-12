@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwa1oea23asiw"
-path.s3tc="res://.godot/imported/Screenshot_sRGB.png-a43ece7d4024438651860778053fbbeb.s3tc.ctex"
+uid="uid://4bp4d5q80c0k"
+path.s3tc="res://.godot/imported/image_oklab.png-1c72991947385b155bd22a14e4ad4500.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Screenshot_sRGB.png"
-dest_files=["res://.godot/imported/Screenshot_sRGB.png-a43ece7d4024438651860778053fbbeb.s3tc.ctex"]
+source_file="res://image_oklab.png"
+dest_files=["res://.godot/imported/image_oklab.png-1c72991947385b155bd22a14e4ad4500.s3tc.ctex"]
 
 [params]
 

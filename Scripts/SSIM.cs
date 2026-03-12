@@ -5,6 +5,8 @@ using System;
 public partial class SSIM : Node
 {
     [ExportToolButton("CalculateSSIMFromImages")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
+    [ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewport);
+    [ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportComparison);
 	[Export] public Texture2D image_base;
 	[Export] public Texture2D image_compare;
 	// Called when the node enters the scene tree for the first time.
@@ -15,6 +17,19 @@ public partial class SSIM : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	public void CaptureViewport()
+	{
+		var img = GetViewport().GetTexture().GetImage();
+		string imagePath = "res://screenshot_0.png";
+		img.SavePng(imagePath);
+	}
+	public void CaptureViewportComparison()
+	{
+		var img = GetViewport().GetTexture().GetImage();
+		string imagePath = "res://screenshot_1.png";
+		img.SavePng(imagePath);
 	}
 
 //nutzt rgb 0...255
@@ -29,8 +44,8 @@ public partial class SSIM : Node
 		double C2 = Math.Pow(0.03 * 255.0, 2.0);
 	 	double C3 = C2 / 2.0;
 
-		int M = image_base.GetHeight();
-		int N = image_base.GetWidth();
+		int M = image_base.GetWidth();
+		int N = image_base.GetHeight();
 		int O = 3;
 
 		double mue_i = 0.0;
@@ -41,7 +56,7 @@ public partial class SSIM : Node
 			{
 				for(int z = 0; z < O; z++)
 				{
-					// GD.Print(x + "/" + M + ", " + y + "/" + N + ", " + z + "/" + O);
+					// if((x + y + z) % 10000 == 0) GD.Print(x + "/" + M + ", " + y + "/" + N + ", " + z + "/" + O);
 					mue_i += i.GetPixel(x, y)[z] * 255.0; //check if format correct
 					mue_I += I.GetPixel(x, y)[z] * 255.0; //check if format correct
 				}
