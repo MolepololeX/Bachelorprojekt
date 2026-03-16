@@ -533,7 +533,7 @@ shader_path = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 2
-draw_mode = 4
+draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
@@ -684,27 +684,26 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3851196, 0)
-bones/4/rotation = Quaternion(-0.55760634, -0.05915478, -0.6408551, 0.52429074)
-bones/5/rotation = Quaternion(3.1919338e-09, -5.2967625e-08, -0.5036879, 0.8638858)
-bones/7/rotation = Quaternion(-0.32153705, -0.32968763, 0.14816932, 0.8751948)
-bones/8/rotation = Quaternion(0.00023314182, 0.00023312241, -0.7062506, 0.70796186)
-bones/9/rotation = Quaternion(-0.61595374, 0.07920592, 0.61551267, 0.48525426)
-bones/10/rotation = Quaternion(3.255962e-08, 5.5846588e-08, 0.52658135, 0.85012484)
-bones/12/rotation = Quaternion(-0.3200272, 0.30531773, -0.23000464, 0.86686885)
-bones/13/rotation = Quaternion(0.0007377679, 0.0008689788, 0.7063413, 0.7078704)
-bones/15/rotation = Quaternion(0.9928249, 0.08316501, 0.07563333, 0.04076819)
-bones/16/rotation = Quaternion(0.27329063, 6.49834e-08, -1.9117795e-07, 0.9619315)
-bones/17/rotation = Quaternion(-0.55795276, -0.20688567, 0.05576518, 0.801734)
-bones/18/rotation = Quaternion(4.803978e-05, 0.9202006, -0.39144713, -1.0823006e-05)
-bones/19/rotation = Quaternion(0.99564683, -0.03075531, 0.030919896, 0.08237432)
-bones/20/rotation = Quaternion(0.33398506, -6.243573e-08, 2.3179156e-07, 0.9425784)
-bones/21/rotation = Quaternion(-0.590965, 0.114023626, -0.013709755, 0.7984806)
-bones/38/position = Vector3(0.52084064, 0.7850679, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.7850678, 0.05973692)
+bones/1/position = Vector3(0, 0.36835867, 0)
+bones/4/rotation = Quaternion(-0.55048484, -0.057110753, -0.6410798, 0.5317156)
+bones/5/rotation = Quaternion(3.5624847e-08, -3.6836536e-08, -0.51081145, 0.8596929)
+bones/7/rotation = Quaternion(-0.32032397, -0.3386105, 0.14727868, 0.87237865)
+bones/8/rotation = Quaternion(0.0012524804, 0.0012524779, -0.7024936, 0.71168786)
+bones/9/rotation = Quaternion(-0.60930634, 0.07763461, 0.6162987, 0.49284348)
+bones/10/rotation = Quaternion(4.5337064e-08, 4.1000565e-08, 0.5333804, 0.8458755)
+bones/12/rotation = Quaternion(-0.31943947, 0.3144951, -0.2294463, 0.8639478)
+bones/13/rotation = Quaternion(0.0038670183, 0.004554778, 0.7030749, 0.71109074)
+bones/15/rotation = Quaternion(0.9893496, 0.08381841, 0.0788919, 0.08909485)
+bones/16/rotation = Quaternion(0.40042466, 5.586788e-08, -2.7104684e-07, 0.91632974)
+bones/17/rotation = Quaternion(-0.6243519, -0.2004864, 0.07775024, 0.75096256)
+bones/19/rotation = Quaternion(0.9911618, -0.033515707, 0.029745415, 0.12486053)
+bones/20/rotation = Quaternion(0.44400108, -5.868693e-08, 3.1233623e-07, 0.89602625)
+bones/21/rotation = Quaternion(-0.65014625, 0.11237187, -0.023841549, 0.7510752)
+bones/38/position = Vector3(0.52084064, 0.7712049, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7712048, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2208816, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2041206, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
