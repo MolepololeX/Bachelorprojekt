@@ -12,6 +12,50 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
 
+vec3 oklab_to_xyz(vec3 c){
+    float l_ = c.x + 0.3963377774f * c.y + 0.2158037573f * c.z;
+    float m_ = c.x - 0.1055613458f * c.y - 0.0638541728f * c.z;
+    float s_ = c.x - 0.0894841775f * c.y - 1.2914855480f * c.z;
+
+    float l = l_*l_*l_;
+    float m = m_*m_*m_;
+    float s = s_*s_*s_;
+
+    vec3 lms = vec3(l, m, s);
+
+    mat3 lms_to_xyz = mat3(
+        1.2270, -0.5575, 0.2810,
+        -0.0406, 1.1030, -0.0125,
+        -0.0171, -0.0709, 0.9427
+    );
+
+    vec3 xyz = lms * lms_to_xyz;
+
+    return xyz;
+}
+
+float f(float I){
+    if(I > pow(6.0/29.0, 3.0)){
+        return pow(I, 1.0/3.0);
+    }else{
+        return (841.0/108.0) * I + (16.0/116.0);
+    }
+}
+
+vec3 xyz_to_cielab(vec3 xyz){
+    vec3 d65 = vec3(94.811, 100, 107.304);
+
+    float Yy = xyz.y / d65.y;
+    float Xx = xyz.x / d65.x;
+    float Zz = xyz.z / d65.z;
+
+    float L = 116.0 * f(Yy) - 16.0;
+    float a = 500 * (f(Xx) - f(Yy));
+    float b = 200 * (f(Yy) - f(Zz));
+
+    return vec3(L, a, b);
+}
+
 vec3 linear_srgb_to_oklab(vec3 c) 
 {
     float l = 0.4122214708f * c.r + 0.5363325363f * c.g + 0.0514459929f * c.b;
@@ -117,6 +161,44 @@ float calculate_cie_de_2000(vec3 cs, vec3 cb){
 	return d_E_00;
 }
 
+//from https://www.shadertoy.com/view/XljGzV
+vec3 rgb_to_hsl(vec3 c){
+  float h = 0.0;
+	float s = 0.0;
+	float l = 0.0;
+	float r = c.r;
+	float g = c.g;
+	float b = c.b;
+	float cMin = min( r, min( g, b ) );
+	float cMax = max( r, max( g, b ) );
+
+	l = ( cMax + cMin ) / 2.0;
+	if ( cMax > cMin ) {
+		float cDelta = cMax - cMin;
+        
+		s = l < .0 ? cDelta / ( cMax + cMin ) : cDelta / ( 2.0 - ( cMax + cMin ) );
+		if ( r == cMax ) {
+			h = ( g - b ) / cDelta;
+		} else if ( g == cMax ) {
+			h = 2.0 + ( b - r ) / cDelta;
+		} else {
+			h = 4.0 + ( r - g ) / cDelta;
+		}
+		if ( h < 0.0) {
+			h += 6.0;
+		}
+		h = h / 6.0;
+	}
+	return vec3( h, s, l );
+}
+
+//from https://www.shadertoy.com/view/XljGzV
+vec3 hsl_to_rgb(vec3 c)
+{
+    vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
+    return c.z + c.y * (rgb-0.5)*(1.0-abs(2.0*c.z-1.0));
+}
+
 void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 
@@ -180,4 +262,25 @@ void main() {
 
 		imageStore(color_image, uv_pixel, diff_mask);
 	}
+
+    //cie76
+	if(params.draw_mode == 4.0){
+        vec3 c1 = linear_srgb_to_oklab(pre.xyz);
+        vec3 c2 = linear_srgb_to_oklab(post.xyz);
+        c1 = oklab_to_xyz(c1);
+        c2 = oklab_to_xyz(c2);
+        c1 = xyz_to_cielab(c1);
+        c2 = xyz_to_cielab(c2);
+		float diff = calculate_cie_de_2000(c1, c2);
+
+		vec4 diff_mask = vec4(vec3(0.0), 1.0);
+		if(diff < 0.0){
+			diff_mask.r = abs(diff);
+		}else{
+			diff_mask.b = diff;
+		}
+
+		imageStore(color_image, uv_pixel, diff_mask);
+	}
+
 }
