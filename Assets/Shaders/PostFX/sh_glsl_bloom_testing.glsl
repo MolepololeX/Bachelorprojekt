@@ -50,19 +50,77 @@ vec3 oklab_to_linear_srgb(vec3 c)
     );
 }
 
+//from https://www.shadertoy.com/view/XljGzV
+vec3 rgb_to_hsl(vec3 c){
+  float h = 0.0;
+	float s = 0.0;
+	float l = 0.0;
+	float r = c.r;
+	float g = c.g;
+	float b = c.b;
+	float cMin = min( r, min( g, b ) );
+	float cMax = max( r, max( g, b ) );
+
+	l = ( cMax + cMin ) / 2.0;
+	if ( cMax > cMin ) {
+		float cDelta = cMax - cMin;
+        
+		s = l < .0 ? cDelta / ( cMax + cMin ) : cDelta / ( 2.0 - ( cMax + cMin ) );
+		if ( r == cMax ) {
+			h = ( g - b ) / cDelta;
+		} else if ( g == cMax ) {
+			h = 2.0 + ( b - r ) / cDelta;
+		} else {
+			h = 4.0 + ( r - g ) / cDelta;
+		}
+		if ( h < 0.0) {
+			h += 6.0;
+		}
+		h = h / 6.0;
+	}
+	return vec3( h, s, l );
+}
+
 void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 	vec4 base = imageLoad(color_image, uv_pixel);
 
-    vec3 baseLAB = linear_srgb_to_oklab(base.xyz);
-
-	//normal image
+	//none
 	if(params.draw_mode == 0.0){
-		imageStore(color_image, uv_pixel, base);
+		// imageStore(color_image, uv_pixel, base);
 	}
 
-    //bloom
+    //srgb bloom
     if(params.draw_mode == 1.0){
+        int kernelSize = int(params.blurr_kernelsize);
+        vec3 color = vec3(0.0);
+        for(int i = -kernelSize; i <= kernelSize; i++){
+            for(int j = -kernelSize; j <= kernelSize; j++){
+                vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
+                vec3 colHSL = rgb_to_hsl(col.xyz);
+                if (colHSL.z < params.bloom_threshold){
+                    col = vec4(vec3(0.0), 1.0);
+                }
+                color += col.xyz;
+            }
+        }
+        color /= pow(kernelSize + kernelSize + 1, 2.0);
+
+        imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
+    }
+
+    //srgb bloom mask
+    if(params.draw_mode == 2.0){
+        vec3 baseHSL = rgb_to_hsl(base.xyz);
+        if (baseHSL.z >=params.bloom_threshold){
+            imageStore(color_image, uv_pixel, base);
+        }else{
+            imageStore(color_image, uv_pixel, vec4(vec3(0.0), 1.0));
+        }
+    }
+
+    //oklab bloom
+    if(params.draw_mode == 3.0){
         int kernelSize = int(params.blurr_kernelsize);
         vec3 color = vec3(0.0);
         for(int i = -kernelSize; i <= kernelSize; i++){
@@ -76,11 +134,13 @@ void main() {
             }
         }
         color /= pow(kernelSize + kernelSize + 1, 2.0);
+
         imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
     }
 
-    //bloom mask
-    if(params.draw_mode == 2.0){
+    //oklab bloom mask
+    if(params.draw_mode == 4.0){
+        vec3 baseLAB = linear_srgb_to_oklab(base.xyz);
         if (baseLAB.x >=params.bloom_threshold){
             imageStore(color_image, uv_pixel, base);
         }else{

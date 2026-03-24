@@ -2,6 +2,14 @@
 extends CompositorEffect
 class_name BloomPostProcessShader
 
+enum DrawMode{
+	none,
+	srgb,
+	srgb_mask,
+	oklab,
+	oklab_mask
+}
+
 @export
 var enable_draw : bool = false
 @export
@@ -21,7 +29,7 @@ var blurr_kernelsize : int = 1
 @export
 var blurr_kernelspacing : int = 1
 @export
-var draw_mode : int = 0
+var draw_mode : DrawMode = DrawMode.none
 
 @export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
 
