@@ -4,39 +4,63 @@ using System;
 [Tool]
 public partial class SSIM : Node
 {
-    [ExportToolButton("CalculateSSIMFromImages")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
+    [ExportToolButton("CalculateSSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
+    [ExportToolButton("CalculateAverage")] public Callable CalcAverage => Callable.From(Calculate_Average);
     [ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewport);
     [ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportComparison);
-	[Export] public Texture2D image_base;
-	[Export] public Texture2D image_compare;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	// [Export] public Texture2D image_base;
+	// [Export] public Texture2D image_compare;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+	Image i;
+	Image I;
+
+	public override void _Ready() { }
+	public override void _Process(double delta) { }
 
 	public void CaptureViewport()
 	{
 		var img = GetViewport().GetTexture().GetImage();
-		string imagePath = "res://screenshot_0.png";
-		img.SavePng(imagePath);
+		// string imagePath = "res://screenshot_base.png";
+		// img.SavePng(imagePath);
+		i = img;
 	}
 	public void CaptureViewportComparison()
 	{
 		var img = GetViewport().GetTexture().GetImage();
-		string imagePath = "res://screenshot_1.png";
-		img.SavePng(imagePath);
+		// string imagePath = "res://screenshot_comp.png";
+		// img.SavePng(imagePath);
+		I = img;
+	}
+
+	public double Calculate_Average()
+	{
+		var img = GetViewport().GetTexture().GetImage();
+		int M = img.GetWidth();
+		int N = img.GetHeight();
+		int O = 3;
+
+		double total = 0.0;
+		for(int x = 0; x < M; x++)
+		{
+			for(int y = 0; y < N; y++)
+			{
+				for(int z = 0; z < O; z++)
+				{
+					// if((x + y + z) % 10000 == 0) GD.Print(x + "/" + M + ", " + y + "/" + N + ", " + z + "/" + O);
+					total += img.GetPixel(x, y)[z]; //check if format correct
+				}
+			}
+		}
+		double average = total / (M * N); //O component is ignored since there can only be values in either the r xor b channel
+		GD.Print("Image Average: " + average);
+		return average;
 	}
 
 //nutzt rgb 0...255
 	public double Calculate_SSIM()
 	{
-		Image i = image_base.GetImage();
-		Image I = image_compare.GetImage();
+		// Image i = image_base.GetImage();
+		// Image I = image_compare.GetImage();
 		i.Decompress();
 		I.Decompress();
 
@@ -44,8 +68,8 @@ public partial class SSIM : Node
 		double C2 = Math.Pow(0.03 * 255.0, 2.0);
 	 	double C3 = C2 / 2.0;
 
-		int M = image_base.GetWidth();
-		int N = image_base.GetHeight();
+		int M = i.GetWidth();
+		int N = i.GetHeight();
 		int O = 3;
 
 		double mue_i = 0.0;
@@ -92,6 +116,9 @@ public partial class SSIM : Node
 		double SSIM = l * c * s;
 
 		GD.Print("SSIM: " + SSIM);
+		GD.Print("luminance: " + l);
+		GD.Print("contrast: " + c);
+		GD.Print("structure: " + s);
 		return SSIM;
 	}
 }

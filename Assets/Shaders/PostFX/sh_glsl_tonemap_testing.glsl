@@ -228,7 +228,7 @@ void main() {
 	post = color;
 
 
-	//normal image
+	//color image
 	if(params.draw_mode == 1.0){
 		imageStore(color_image, uv_pixel, color);
 	}
@@ -247,9 +247,12 @@ void main() {
 
 		imageStore(color_image, uv_pixel, hue_diff_mask);
 	}
+	
+	//oklab delta_C
+	if(params.draw_mode == 3.0){}
 
-	//cie76
-	if(params.draw_mode == 3.0){
+	//cie76 / OKLAB deltaE
+	if(params.draw_mode == 4.0){
 
 		float diff = get_cie76_delta_E(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
 
@@ -263,8 +266,14 @@ void main() {
 		imageStore(color_image, uv_pixel, diff_mask);
 	}
 
-    //cie76
-	if(params.draw_mode == 4.0){
+	//cie delta_H
+	if(params.draw_mode == 5.0){}
+
+	//cie delta_C
+	if(params.draw_mode == 6.0){}
+
+    //ciede2000
+	if(params.draw_mode == 7.0){
         vec3 c1 = linear_srgb_to_oklab(pre.xyz);
         vec3 c2 = linear_srgb_to_oklab(post.xyz);
         c1 = oklab_to_xyz(c1);

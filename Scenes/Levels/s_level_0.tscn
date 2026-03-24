@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=134 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -47,7 +47,9 @@
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="35_bqowl"]
 [ext_resource type="PackedScene" uid="uid://dqtnikfstlns1" path="res://Scenes/ItemsWorld/s_copper_nugget.tscn" id="36_gydl0"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="37_2cb14"]
+[ext_resource type="Texture2D" uid="uid://d22yv4sy4hu5q" path="res://screenshot_base.png" id="38_8auip"]
 [ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/ItemsWorld/s_wood_plank.tscn" id="38_16jvh"]
+[ext_resource type="Texture2D" uid="uid://bm5xikijlydmt" path="res://screenshot_comp.png" id="39_5yjbh"]
 [ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="39_r6n5j"]
 [ext_resource type="PackedScene" uid="uid://ceb2yhmkluqi" path="res://Scenes/Structures/s_pier.tscn" id="41_2xp7q"]
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="43_3rm2s"]
@@ -504,58 +506,6 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_xxtuw"]
 
-[sub_resource type="Environment" id="Environment_oqg80"]
-background_mode = 1
-background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
-tonemap_white = 0.25
-glow_intensity = 0.23
-glow_strength = 1.73
-glow_bloom = 0.17
-glow_hdr_threshold = 0.35
-glow_hdr_scale = 0.16
-glow_hdr_luminance_cap = 52.49
-volumetric_fog_density = 0.0049
-volumetric_fog_emission = Color(1, 1, 1, 1)
-volumetric_fog_emission_energy = 0.1
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_sit86"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("24_sit86")
-enable_draw = true
-shader_path = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
-live_reload = true
-reload_interval_frames = 30
-tonemapper_mode = 2
-draw_mode = 1
-metadata/_custom_type_script = "uid://dj2paefo16n4y"
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("31_km60j")
-enable_draw = true
-shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
-live_reload = true
-bloom_threshold = 0.7
-bloom_strength = 0.4
-blurr_kernelsize = 3
-draw_mode = 1
-metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
-
-[sub_resource type="Compositor" id="Compositor_jqdjy"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_7sabu")])
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_lcmyg"]
 material = ExtResource("27_oqg80")
 size = Vector2(20, 20)
@@ -623,6 +573,57 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_sit86"]
 material = SubResource("StandardMaterial3D_oqg80")
 
+[sub_resource type="Environment" id="Environment_oqg80"]
+background_mode = 1
+background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
+tonemap_white = 0.25
+glow_intensity = 0.23
+glow_strength = 1.73
+glow_bloom = 0.17
+glow_hdr_threshold = 0.35
+glow_hdr_scale = 0.16
+glow_hdr_luminance_cap = 52.49
+volumetric_fog_density = 0.0049
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_emission_energy = 0.1
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_sit86"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("24_sit86")
+enable_draw = true
+live_reload = true
+reload_interval_frames = 30
+tonemapper_mode = 1
+draw_mode = 2
+metadata/_custom_type_script = "uid://dj2paefo16n4y"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("31_km60j")
+enable_draw = true
+shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
+live_reload = true
+bloom_threshold = 0.7
+bloom_strength = 0.4
+blurr_kernelsize = 3
+draw_mode = 1
+metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
+
+[sub_resource type="Compositor" id="Compositor_jqdjy"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_7sabu")])
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wmlk7"]
 frequency = 0.1
 
@@ -662,18 +663,6 @@ size = Vector2(20, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ey2wc"]
 size = Vector3(20, 0.1, 20)
 
-[sub_resource type="QuadMesh" id="QuadMesh_lcmyg"]
-material = ExtResource("45_oqg80")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcmyg"]
-albedo_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
-emission_enabled = true
-emission = Color(18.892155, 18.390743, 18.022465, 1)
-emission_energy_multiplier = 16.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_sit86"]
-material = SubResource("StandardMaterial3D_lcmyg")
-
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." groups=["Snap"] instance=ExtResource("1_k6vpp")]
@@ -684,26 +673,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36835867, 0)
-bones/4/rotation = Quaternion(-0.55048484, -0.057110753, -0.6410798, 0.5317156)
-bones/5/rotation = Quaternion(3.5624847e-08, -3.6836536e-08, -0.51081145, 0.8596929)
-bones/7/rotation = Quaternion(-0.32032397, -0.3386105, 0.14727868, 0.87237865)
-bones/8/rotation = Quaternion(0.0012524804, 0.0012524779, -0.7024936, 0.71168786)
-bones/9/rotation = Quaternion(-0.60930634, 0.07763461, 0.6162987, 0.49284348)
-bones/10/rotation = Quaternion(4.5337064e-08, 4.1000565e-08, 0.5333804, 0.8458755)
-bones/12/rotation = Quaternion(-0.31943947, 0.3144951, -0.2294463, 0.8639478)
-bones/13/rotation = Quaternion(0.0038670183, 0.004554778, 0.7030749, 0.71109074)
-bones/15/rotation = Quaternion(0.9893496, 0.08381841, 0.0788919, 0.08909485)
-bones/16/rotation = Quaternion(0.40042466, 5.586788e-08, -2.7104684e-07, 0.91632974)
-bones/17/rotation = Quaternion(-0.6243519, -0.2004864, 0.07775024, 0.75096256)
-bones/19/rotation = Quaternion(0.9911618, -0.033515707, 0.029745415, 0.12486053)
-bones/20/rotation = Quaternion(0.44400108, -5.868693e-08, 3.1233623e-07, 0.89602625)
-bones/21/rotation = Quaternion(-0.65014625, 0.11237187, -0.023841549, 0.7510752)
-bones/38/position = Vector3(0.52084064, 0.7712049, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7712048, 0.059736915)
+bones/1/position = Vector3(0, 0.37205917, 0)
+bones/4/rotation = Quaternion(-0.5506725, -0.0596433, -0.64914864, 0.52135265)
+bones/5/rotation = Quaternion(4.104163e-08, -4.7986774e-08, -0.49438167, 0.86924493)
+bones/7/rotation = Quaternion(-0.31825325, -0.33483762, 0.1407496, 0.8756645)
+bones/8/rotation = Quaternion(0.0015143128, 0.0015143049, -0.7015252, 0.7126415)
+bones/9/rotation = Quaternion(-0.6098839, 0.07999939, 0.62323517, 0.4829283)
+bones/10/rotation = Quaternion(1.07668e-08, 8.28801e-08, 0.5176171, 0.8556124)
+bones/12/rotation = Quaternion(-0.3171927, 0.3098196, -0.22269265, 0.8682215)
+bones/13/rotation = Quaternion(0.0045264782, 0.005331526, 0.7023825, 0.71176535)
+bones/15/rotation = Quaternion(0.9902049, 0.08351417, 0.07828721, 0.079942115)
+bones/16/rotation = Quaternion(0.3761959, 6.267121e-08, -2.5891003e-07, 0.92654014)
+bones/17/rotation = Quaternion(-0.6116216, -0.20195821, 0.07330568, 0.76141864)
+bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
+bones/19/rotation = Quaternion(0.9921911, -0.03292192, 0.029984578, 0.11650823)
+bones/20/rotation = Quaternion(0.42230558, -6.046535e-08, 2.946263e-07, 0.90645355)
+bones/21/rotation = Quaternion(-0.6383775, 0.11278823, -0.021746313, 0.76110446)
+bones/38/position = Vector3(0.52084064, 0.7682464, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.76824635, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2041206, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2078211, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1158,7 +1148,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.140232, 0, 14.2043)
 visible = false
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_pty70")
-skeleton = NodePath("../../../../Testing")
+skeleton = NodePath("")
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Level/Env/WaterGrass"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4714243, -0.49308562, 13.620338)
@@ -1384,10 +1374,6 @@ mesh = SubResource("BoxMesh_xxtuw")
 
 [node name="Lighting" type="Node" parent="."]
 
-[node name="day(2770be)night(0d1324)" type="WorldEnvironment" parent="Lighting"]
-environment = SubResource("Environment_oqg80")
-compositor = SubResource("Compositor_jqdjy")
-
 [node name="Daylight" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
 light_energy = 0.5
@@ -1492,6 +1478,15 @@ draw_pass_1 = SubResource("QuadMesh_sit86")
 [node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="SubViewport/CameraRig/Rain"]
 size = Vector3(20, 20, 20)
 heightfield_mask = 1048567
+
+[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
+script = ExtResource("54_sf7op")
+image_base = ExtResource("38_8auip")
+image_compare = ExtResource("39_5yjbh")
+
+[node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_oqg80")
+compositor = SubResource("Compositor_jqdjy")
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 own_world_3d = true
@@ -1607,13 +1602,6 @@ WorldItems = Dictionary[int, PackedScene]({
 ZoomShaderColorRect = NodePath("../PostPixelDeSnap")
 InventoryDebugLabel = NodePath("../UI/Control/Label")
 
-[node name="Testing" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Testing"]
-transform = Transform3D(0.85579795, 0, -0.51731026, 0, 1, 0, 0.51731026, 0, 0.85579795, 0, 4.4736447, 0)
-visible = false
-mesh = SubResource("QuadMesh_lcmyg")
-
 [node name="DayNightToggler" type="Node" parent="." node_paths=PackedStringArray("_dayObjects", "_nightObjects", "_rainObjects", "_clearSkyObjects", "_worldEnvironment")]
 script = ExtResource("46_oqg80")
 _dayObjects = [NodePath("../Lighting/Daylight"), NodePath("../Lighting/DaylightShadows"), NodePath("../SubViewport/CameraRig/CloudShadows")]
@@ -1624,34 +1612,7 @@ _nightSkyColor = Color(0.050980393, 0.07450981, 0.14117648, 1)
 _daySkyColor = Color(0.15294118, 0.4392157, 0.74509805, 1)
 _nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
 _dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
-_worldEnvironment = NodePath("../Lighting/day(2770be)night(0d1324)")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("54_sf7op")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.5, 2.8178196, -4.5)
-visible = false
-mesh = SubResource("SphereMesh_sit86")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
-light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.5, 2.031211, 4.5)
-visible = false
-mesh = SubResource("SphereMesh_sit86")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D2"]
-light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1.5840359, 4.5)
-visible = false
-mesh = SubResource("SphereMesh_sit86")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D3"]
-light_color = Color(0.91760826, 0.68030757, 0.31171542, 1)
+_worldEnvironment = NodePath("../SubViewport/PostTesting")
 
 [editable path="Player"]
 [editable path="Player/Pivot/Skeleton_Mage"]

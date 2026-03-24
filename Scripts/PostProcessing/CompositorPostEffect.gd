@@ -2,10 +2,27 @@
 extends CompositorEffect
 class_name PostProcessShader
 
+enum TonemapperMode{
+	linear,
+	srgb,
+	oklab
+}
+
+enum DrawMode{
+	none,		# 0
+	colorImage,	# 1
+	oklab_d_h,	# 2
+	oklab_d_C,	# 3
+	oklab_d_E,	# 4
+	cie_d_H,	# 5
+	cie_d_C,	# 6
+	cie_d_E		# 7
+}
+
 @export
 var enable_draw : bool = false
 @export
-var shader_path : String = "res://Assets/Shaders/PostFX/Post_Outline_Shader.glsl"
+var shader_path : String = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
 @export
 var live_reload : bool = false
 @export
@@ -15,11 +32,11 @@ var reload_interval_frames : int = 60
 @export_range(0.0, 10.0, 0.05)
 var base_exposure : float = 1.0
 @export
-var tonemapper_mode : int = 0
+var tonemapper_mode : TonemapperMode = TonemapperMode.linear
 @export_range(0.0, 10.0, 0.05)
 var tonemapper_exposure : float = 1.5
 @export
-var draw_mode : int = 0
+var draw_mode : DrawMode = DrawMode.none
 
 @export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
 
