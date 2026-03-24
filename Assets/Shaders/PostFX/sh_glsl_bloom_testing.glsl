@@ -61,6 +61,7 @@ void main() {
 		imageStore(color_image, uv_pixel, base);
 	}
 
+    //bloom
     if(params.draw_mode == 1.0){
         int kernelSize = int(params.blurr_kernelsize);
         vec3 color = vec3(0.0);
@@ -78,6 +79,7 @@ void main() {
         imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
     }
 
+    //bloom mask
     if(params.draw_mode == 2.0){
         if (baseLAB.x >=params.bloom_threshold){
             imageStore(color_image, uv_pixel, base);

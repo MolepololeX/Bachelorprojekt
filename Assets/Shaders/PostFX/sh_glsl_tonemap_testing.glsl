@@ -104,14 +104,75 @@ vec4 tonemap(vec4 l){
 
 //oklab delta_h
 float get_oklab_delta_h(vec3 c1, vec3 c2){
-	float hue_1 = atan(c1.y, c1.z);
-	float hue_2 = atan(c2.y, c2.z);
+	float hue_1 = atan(c1.z, c1.y);
+	float hue_2 = atan(c2.z, c2.y);
 	return hue_2 - hue_1;
+}
+
+//oklab delta_C
+float get_oklab_delta_C(vec3 c1, vec3 c2){
+	float chroma_1 = sqrt(pow(c1.y, 2.0) + pow(c1.z, 2.0));
+	float chroma_2 = sqrt(pow(c2.y, 2.0) + pow(c2.z, 2.0));
+	return chroma_2 - chroma_1;
 }
 
 //c1 and c2 need to be in Lab format
 float get_cie76_delta_E(vec3 c1, vec3 c2){
 	return sqrt(pow((c2.x - c1.x), 2.0) + pow((c2.y - c1.y), 2.0) + pow((c2.z - c1.z), 2.0));
+}
+
+//cs and cb need to be in CIELAB and Lab Format
+float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
+
+
+	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
+	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+
+	float Ls = cs.x;
+	float as = (1.0 + G)*cs.y;
+	float bs = cs.z;
+
+	float Lb = cb.x;
+	float ab = (1.0 + G)*cb.y;
+	float bb = cb.z;
+
+	float Cs = sqrt(as * as + bs * bs);
+	float Cb = sqrt(ab * ab + bb * bb);
+
+	float hs = atan(bs / as);
+	float hb = atan(bb / ab);
+
+	float d_h = hb - hs;
+	float d_L = Lb - Ls;
+	float d_C = Cb - Cs;
+
+	return d_C;
+}
+
+float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
+	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
+	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+
+	float Ls = cs.x;
+	float as = (1.0 + G)*cs.y;
+	float bs = cs.z;
+
+	float Lb = cb.x;
+	float ab = (1.0 + G)*cb.y;
+	float bb = cb.z;
+
+	float Cs = sqrt(as * as + bs * bs);
+	float Cb = sqrt(ab * ab + bb * bb);
+
+	float hs = atan(bs / as);
+	float hb = atan(bb / ab);
+
+	float d_h = hb - hs;
+	float d_L = Lb - Ls;
+	float d_C = Cb - Cs;
+	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
+
+	return d_H;
 }
 
 //cs and cb need to be in CIELAB and Lab Format
@@ -249,7 +310,18 @@ void main() {
 	}
 	
 	//oklab delta_C
-	if(params.draw_mode == 3.0){}
+	if(params.draw_mode == 3.0){
+		float hue_diff = get_oklab_delta_C(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
+
+		vec4 hue_diff_mask = vec4(vec3(0.0), 1.0);
+		if(hue_diff < 0.0){
+			hue_diff_mask.r = abs(hue_diff);
+		}else{
+			hue_diff_mask.b = hue_diff;
+		}
+
+		imageStore(color_image, uv_pixel, hue_diff_mask);
+	}
 
 	//cie76 / OKLAB deltaE
 	if(params.draw_mode == 4.0){
@@ -267,10 +339,44 @@ void main() {
 	}
 
 	//cie delta_H
-	if(params.draw_mode == 5.0){}
+	if(params.draw_mode == 5.0){
+		vec3 c1 = linear_srgb_to_oklab(pre.xyz);
+        vec3 c2 = linear_srgb_to_oklab(post.xyz);
+        c1 = oklab_to_xyz(c1);
+        c2 = oklab_to_xyz(c2);
+        c1 = xyz_to_cielab(c1);
+        c2 = xyz_to_cielab(c2);
+		float diff = calculate_cie_de_2000_H(c1, c2);
+
+		vec4 diff_mask = vec4(vec3(0.0), 1.0);
+		if(diff < 0.0){
+			diff_mask.r = abs(diff);
+		}else{
+			diff_mask.b = diff;
+		}
+
+		imageStore(color_image, uv_pixel, diff_mask);
+	}
 
 	//cie delta_C
-	if(params.draw_mode == 6.0){}
+	if(params.draw_mode == 6.0){
+		vec3 c1 = linear_srgb_to_oklab(pre.xyz);
+        vec3 c2 = linear_srgb_to_oklab(post.xyz);
+        c1 = oklab_to_xyz(c1);
+        c2 = oklab_to_xyz(c2);
+        c1 = xyz_to_cielab(c1);
+        c2 = xyz_to_cielab(c2);
+		float diff = calculate_cie_de_2000_C(c1, c2);
+
+		vec4 diff_mask = vec4(vec3(0.0), 1.0);
+		if(diff < 0.0){
+			diff_mask.r = abs(diff);
+		}else{
+			diff_mask.b = diff;
+		}
+
+		imageStore(color_image, uv_pixel, diff_mask);
+	}
 
     //ciede2000
 	if(params.draw_mode == 7.0){

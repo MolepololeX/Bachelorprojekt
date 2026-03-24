@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=132 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -47,9 +47,7 @@
 [ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="35_bqowl"]
 [ext_resource type="PackedScene" uid="uid://dqtnikfstlns1" path="res://Scenes/ItemsWorld/s_copper_nugget.tscn" id="36_gydl0"]
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="37_2cb14"]
-[ext_resource type="Texture2D" uid="uid://d22yv4sy4hu5q" path="res://screenshot_base.png" id="38_8auip"]
 [ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/ItemsWorld/s_wood_plank.tscn" id="38_16jvh"]
-[ext_resource type="Texture2D" uid="uid://bm5xikijlydmt" path="res://screenshot_comp.png" id="39_5yjbh"]
 [ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="39_r6n5j"]
 [ext_resource type="PackedScene" uid="uid://ceb2yhmkluqi" path="res://Scenes/Structures/s_pier.tscn" id="41_2xp7q"]
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="43_3rm2s"]
@@ -601,7 +599,6 @@ enable_draw = true
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 1
-draw_mode = 2
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
@@ -673,27 +670,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37205917, 0)
-bones/4/rotation = Quaternion(-0.5506725, -0.0596433, -0.64914864, 0.52135265)
-bones/5/rotation = Quaternion(4.104163e-08, -4.7986774e-08, -0.49438167, 0.86924493)
-bones/7/rotation = Quaternion(-0.31825325, -0.33483762, 0.1407496, 0.8756645)
-bones/8/rotation = Quaternion(0.0015143128, 0.0015143049, -0.7015252, 0.7126415)
-bones/9/rotation = Quaternion(-0.6098839, 0.07999939, 0.62323517, 0.4829283)
-bones/10/rotation = Quaternion(1.07668e-08, 8.28801e-08, 0.5176171, 0.8556124)
-bones/12/rotation = Quaternion(-0.3171927, 0.3098196, -0.22269265, 0.8682215)
-bones/13/rotation = Quaternion(0.0045264782, 0.005331526, 0.7023825, 0.71176535)
-bones/15/rotation = Quaternion(0.9902049, 0.08351417, 0.07828721, 0.079942115)
-bones/16/rotation = Quaternion(0.3761959, 6.267121e-08, -2.5891003e-07, 0.92654014)
-bones/17/rotation = Quaternion(-0.6116216, -0.20195821, 0.07330568, 0.76141864)
-bones/18/rotation = Quaternion(-2.2432162e-06, 0.920156, -0.39155224, 5.908912e-07)
-bones/19/rotation = Quaternion(0.9921911, -0.03292192, 0.029984578, 0.11650823)
-bones/20/rotation = Quaternion(0.42230558, -6.046535e-08, 2.946263e-07, 0.90645355)
-bones/21/rotation = Quaternion(-0.6383775, 0.11278823, -0.021746313, 0.76110446)
-bones/38/position = Vector3(0.52084064, 0.7682464, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.76824635, 0.059736915)
+bones/1/position = Vector3(0, 0.39038503, 0)
+bones/4/rotation = Quaternion(-0.55851066, -0.061685443, -0.6476772, 0.5145631)
+bones/5/rotation = Quaternion(1.9920735e-08, -4.200275e-08, -0.48853213, 0.8725459)
+bones/7/rotation = Quaternion(-0.31990236, -0.32543057, 0.14246486, 0.87832874)
+bones/8/rotation = Quaternion(0.00051743205, 0.0005174003, -0.70520496, 0.7090031)
+bones/9/rotation = Quaternion(-0.6171272, 0.0815493, 0.621297, 0.47591373)
+bones/10/rotation = Quaternion(2.0552429e-08, 5.340339e-08, 0.51203156, 0.85896665)
+bones/12/rotation = Quaternion(-0.31817037, 0.30028358, -0.22407533, 0.87085456)
+bones/13/rotation = Quaternion(0.00094561186, 0.0011137888, 0.7061254, 0.7080854)
+bones/15/rotation = Quaternion(0.9935634, 0.083503656, 0.074103974, 0.019170562)
+bones/16/rotation = Quaternion(0.21703255, 6.568941e-08, -1.4516526e-07, 0.97616446)
+bones/17/rotation = Quaternion(-0.5287047, -0.20885937, 0.04690478, 0.8213703)
+bones/18/rotation = Quaternion(8.319482e-05, 0.9202322, -0.39137304, -1.8774868e-05)
+bones/19/rotation = Quaternion(0.99693656, -0.029783962, 0.03137143, 0.065163456)
+bones/20/rotation = Quaternion(0.28973484, -6.3629884e-08, 2.008697e-07, 0.95710695)
+bones/21/rotation = Quaternion(-0.56739885, 0.11440843, -0.009934734, 0.8153959)
+bones/38/position = Vector3(0.52084064, 0.78413284, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.7841328, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2078211, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.226147, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1481,8 +1478,6 @@ heightfield_mask = 1048567
 
 [node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
 script = ExtResource("54_sf7op")
-image_base = ExtResource("38_8auip")
-image_compare = ExtResource("39_5yjbh")
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_oqg80")
