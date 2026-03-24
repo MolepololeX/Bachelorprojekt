@@ -348,6 +348,9 @@ void main() {
         c2 = xyz_to_cielab(c2);
 		float diff = calculate_cie_de_2000_H(c1, c2);
 
+		//cielab normalisierung
+		diff/=100.0;
+
 		vec4 diff_mask = vec4(vec3(0.0), 1.0);
 		if(diff < 0.0){
 			diff_mask.r = abs(diff);
@@ -368,6 +371,9 @@ void main() {
         c2 = xyz_to_cielab(c2);
 		float diff = calculate_cie_de_2000_C(c1, c2);
 
+		//cielab normalisierung
+		diff/=100.0;
+
 		vec4 diff_mask = vec4(vec3(0.0), 1.0);
 		if(diff < 0.0){
 			diff_mask.r = abs(diff);
@@ -387,6 +393,9 @@ void main() {
         c1 = xyz_to_cielab(c1);
         c2 = xyz_to_cielab(c2);
 		float diff = calculate_cie_de_2000(c1, c2);
+
+		//cielab normalisierung
+		diff/=100.0;
 
 		vec4 diff_mask = vec4(vec3(0.0), 1.0);
 		if(diff < 0.0){
