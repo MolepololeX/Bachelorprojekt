@@ -8,6 +8,7 @@ public partial class SSIM : Node
     [ExportToolButton("CalculateAverage")] public Callable CalcAverage => Callable.From(Calculate_Average);
     [ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewport);
     [ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportComparison);
+    [ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
 	// [Export] public Texture2D image_base;
 	// [Export] public Texture2D image_compare;
 
@@ -16,6 +17,23 @@ public partial class SSIM : Node
 
 	public override void _Ready() { }
 	public override void _Process(double delta) { }
+
+	public void Test_CalcD65()
+	{
+		double T = 6504;
+		double x1 = (-4.6070 * Math.Pow(10.0, 9.0)) / Math.Pow(T, 3.0);
+		double x2 = (2.9678 * Math.Pow(10.0, 6.0)) / Math.Pow(T, 2.0);
+		double x3 = (0.09911 * Math.Pow(10.0, 3.0)) / T;
+		double x4 = 0.244063;
+		double x = x1 + x2 + x3 + x4;
+		GD.Print("x: " + x);
+
+		double y1 = -3.0 * Math.Pow(x, 2.0);
+		double y2 = 2.87 * x;
+		double y3 = -0.275;
+		double y = y1 + y2 + y3;
+		GD.Print("y: " + y);
+	}
 
 	public void CaptureViewport()
 	{
