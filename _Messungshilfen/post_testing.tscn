@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyf2yo5mt2imq"]
+
+[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="1_5eb0e"]
+[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://Scripts/PostProcessing/BloomCompositorEffect.gd" id="2_q1ytr"]
+
+[sub_resource type="Environment" id="Environment_oqg80"]
+background_mode = 1
+background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
+tonemap_white = 0.25
+glow_intensity = 0.23
+glow_strength = 1.73
+glow_bloom = 0.17
+glow_hdr_threshold = 0.35
+glow_hdr_scale = 0.16
+glow_hdr_luminance_cap = 52.49
+volumetric_fog_density = 0.0049
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_emission_energy = 0.1
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_sit86"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_5eb0e")
+enable_draw = true
+live_reload = true
+reload_interval_frames = 30
+tonemapper_mode = 1
+draw_mode = 3
+metadata/_custom_type_script = "uid://dj2paefo16n4y"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_q1ytr")
+enable_draw = true
+shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
+live_reload = true
+bloom_threshold = 0.7
+bloom_strength = 0.4
+blurr_kernelsize = 3
+draw_mode = 3
+metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
+
+[sub_resource type="Compositor" id="Compositor_jqdjy"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_7sabu")])
+
+[node name="PostTesting" type="WorldEnvironment"]
+environment = SubResource("Environment_oqg80")
+compositor = SubResource("Compositor_jqdjy")
