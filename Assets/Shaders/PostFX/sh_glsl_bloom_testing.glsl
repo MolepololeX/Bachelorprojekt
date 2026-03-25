@@ -13,6 +13,14 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
 
+
+
+
+
+//=========================================================================================
+//==========Conversion Functions===========================================================
+//=========================================================================================
+
 vec3 linear_srgb_to_oklab(vec3 c) 
 {
     float l = 0.4122214708f * c.r + 0.5363325363f * c.g + 0.0514459929f * c.b;
@@ -30,9 +38,6 @@ vec3 linear_srgb_to_oklab(vec3 c)
     );
 }
 
-// L | c.x
-// A | c.y
-// B | c.z
 vec3 oklab_to_linear_srgb(vec3 c) 
 {
     float l_ = c.x + 0.3963377774f * c.y + 0.2158037573f * c.z;
@@ -50,36 +55,56 @@ vec3 oklab_to_linear_srgb(vec3 c)
     );
 }
 
-//from https://www.shadertoy.com/view/XljGzV
-vec3 rgb_to_hsl(vec3 c){
-  float h = 0.0;
-	float s = 0.0;
-	float l = 0.0;
-	float r = c.r;
-	float g = c.g;
-	float b = c.b;
-	float cMin = min( r, min( g, b ) );
-	float cMax = max( r, max( g, b ) );
+//from https://github.com/flixel-gdx/flixel-gdx/blob/master/flixel-core/src/org/flixel/data/shaders/blend/luminosity.glsl
+vec4 RGBToHSL(vec4 color)
+{
+	vec4 hsl; // init to 0 to avoid warnings ? (and reverse if + remove first part)
+	
+	float fmin = min(min(color.r, color.g), color.b);    //Min. value of RGB
+	float fmax = max(max(color.r, color.g), color.b);    //Max. value of RGB
+	float delta = fmax - fmin;             //Delta RGB value
 
-	l = ( cMax + cMin ) / 2.0;
-	if ( cMax > cMin ) {
-		float cDelta = cMax - cMin;
-        
-		s = l < .0 ? cDelta / ( cMax + cMin ) : cDelta / ( 2.0 - ( cMax + cMin ) );
-		if ( r == cMax ) {
-			h = ( g - b ) / cDelta;
-		} else if ( g == cMax ) {
-			h = 2.0 + ( b - r ) / cDelta;
-		} else {
-			h = 4.0 + ( r - g ) / cDelta;
-		}
-		if ( h < 0.0) {
-			h += 6.0;
-		}
-		h = h / 6.0;
+	hsl.z = (fmax + fmin) / 2.0; // Luminance
+
+	if (delta == 0.0)		//This is a gray, no chroma...
+	{
+		hsl.x = 0.0;	// Hue
+		hsl.y = 0.0;	// Saturation
 	}
-	return vec3( h, s, l );
+	else                                    //Chromatic data...
+	{
+		if (hsl.z < 0.5)
+			hsl.y = delta / (fmax + fmin); // Saturation
+		else
+			hsl.y = delta / (2.0 - fmax - fmin); // Saturation
+		
+		float deltaR = (((fmax - color.r) / 6.0) + (delta / 2.0)) / delta;
+		float deltaG = (((fmax - color.g) / 6.0) + (delta / 2.0)) / delta;
+		float deltaB = (((fmax - color.b) / 6.0) + (delta / 2.0)) / delta;
+
+		if (color.r == fmax )
+			hsl.x = deltaB - deltaG; // Hue
+		else if (color.g == fmax)
+			hsl.x = (1.0 / 3.0) + deltaR - deltaB; // Hue
+		else if (color.b == fmax)
+			hsl.x = (2.0 / 3.0) + deltaG - deltaR; // Hue
+
+		if (hsl.x < 0.0)
+			hsl.x += 1.0; // Hue
+		else if (hsl.x > 1.0)
+			hsl.x -= 1.0; // Hue
+	}
+
+	return hsl;
 }
+
+
+
+
+
+//=========================================================================================
+//==========Main===========================================================================
+//=========================================================================================
 
 void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
@@ -97,7 +122,7 @@ void main() {
         for(int i = -kernelSize; i <= kernelSize; i++){
             for(int j = -kernelSize; j <= kernelSize; j++){
                 vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
-                vec3 colHSL = rgb_to_hsl(col.xyz);
+                vec3 colHSL = RGBToHSL(col).xyz;
                 if (colHSL.z < params.bloom_threshold){
                     col = vec4(vec3(0.0), 1.0);
                 }
@@ -111,7 +136,7 @@ void main() {
 
     //srgb bloom mask
     if(params.draw_mode == 2.0){
-        vec3 baseHSL = rgb_to_hsl(base.xyz);
+        vec3 baseHSL = RGBToHSL(base).xyz;
         if (baseHSL.z >=params.bloom_threshold){
             imageStore(color_image, uv_pixel, base);
         }else{
