@@ -377,6 +377,8 @@ void main() {
 
 		float hue_diff = calculate_oklab_delta_h(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
 
+		hue_diff /= 6.28318530718; //2PI
+
 		vec4 hue_diff_mask = vec4(vec3(0.0), 1.0);
 		if(hue_diff < 0.0){
 			hue_diff_mask.r = abs(hue_diff);
