@@ -57,7 +57,7 @@ float f(float I){
 }
 
 vec3 xyz_to_cielab(vec3 xyz){
-    vec3 d65 = vec3(94.811, 100, 107.304);
+    vec3 d65 = vec3(95.014, 100, 108.827);
 
     float Yy = xyz.y / d65.y;
     float Xx = xyz.x / d65.x;
