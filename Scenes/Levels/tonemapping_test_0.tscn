@@ -159,7 +159,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_kx62c")
-enable_draw = true
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 2
@@ -177,18 +176,16 @@ script = ExtResource("3_k0f2q")
 enable_draw = true
 shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
 live_reload = true
-bloom_threshold = 0.0
-bloom_strength = 0.3
+bloom_threshold = 0.6
 blurr_kernelsize = 5
-blurr_kernelspacing = 4
-draw_mode = 4
+draw_mode = 3
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_hijju")])
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_k0f2q"]
-size = Vector2(0.5, 0.5)
+size = Vector2(0.25, 0.25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rgddx"]
 
@@ -423,6 +420,8 @@ _nodeSpacing = 0.5
 _hueSteps = 32
 _lightnessSteps = 32
 _chroma = 0.1
+_textureHueSteps = 2048
+_textureLightnessSteps = 2048
 
 [node name="GridStart" type="Node3D" parent="."]
 
