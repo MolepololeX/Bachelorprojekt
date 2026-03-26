@@ -16,8 +16,7 @@ public partial class SSIM : Node
 	[Export] private WorldEnvironment _env = null;
 	[Export] private string _fileNameAtt = "";
 	[ExportToolButton("Create Histogramm")] public Callable CreateDeltaHGraph => Callable.From(Create_Histogram_Delta_Hue);
-
-	[ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
+	// [ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
 
 
 	[ExportCategory("Images")]
@@ -26,6 +25,7 @@ public partial class SSIM : Node
 	[ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportPost);
 	[ExportCategory("Test")]
 	[ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
+	[Export] private bool _autoCapturePrePost = true;
 	// [Export] public Texture2D image_base;
 	// [Export] public Texture2D image_compare;
 
@@ -33,7 +33,11 @@ public partial class SSIM : Node
 	Image comparisonImage;
 
 
-	public async void CapturePrePost()
+	public override void _Process(double delta)
+	{
+	}
+
+	public async Task CapturePrePost()
 	{
 		if (_env == null)
 		{
@@ -49,11 +53,15 @@ public partial class SSIM : Node
 
 		comp.CompositorEffects[0].Enabled = false;
 		await Task.Delay(100);
+
 		CaptureViewportPre();
 		await Task.Delay(100);
+
 		comp.CompositorEffects[0].Enabled = true;
 		await Task.Delay(100);
+
 		CaptureViewportPost();
+		await Task.Delay(100);
 	}
 
 	public async void SetEffectDrawType()
@@ -76,14 +84,23 @@ public partial class SSIM : Node
 		Calculate_Percentile(0.999f);
 	}
 
-	public void CreateAllGraphs()
+	public async Task CreateAllGraphs()
 	{
-		CapturePrePost();
-		Create_Histogram_Delta_Hue();
+		// await Create_Histogram_Delta_Hue();
 	}
 
 	public void Create_Histogram_Delta_Hue()
 	{
+		Create_Histogram_Delta_Hue_Task();
+	}
+
+	public async Task Create_Histogram_Delta_Hue_Task()
+	{
+		if (_autoCapturePrePost)
+		{
+			await CapturePrePost();
+		}
+
 		int M = baseImage.GetWidth();
 		int N = baseImage.GetHeight();
 
