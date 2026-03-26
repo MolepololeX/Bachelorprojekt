@@ -29,30 +29,39 @@ public partial class SSIM : Node
 		Calculate_Percentile(0.999f);
 	}
 
-	public double Calculate_Percentile(float p)
+	public void Calculate_Percentile(float p)
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		int M = img.GetWidth();
 		int N = img.GetHeight();
 
-		float[] data = new float[M * N * 2]; //will include r and b channel, b are neagtive values
+		float[] data_R = new float[M * N];
+		float[] data_G = new float[M * N];
+		float[] data_B = new float[M * N];
 
 		for (int x = 0; x < M; x++)
 		{
 			for (int y = 0; y < N; y++)
 			{
-				data[x * N + y] = img.GetPixel(x, y).R;
-				data[x * N + y + (M * N)] = -img.GetPixel(x, y).B;
+				data_R[x * N + y] = img.GetPixel(x, y).R;
+				data_G[x * N + y] = img.GetPixel(x, y).G;
+				data_B[x * N + y] = img.GetPixel(x, y).B;
 				// data[x + y + (M * N)] = -img.GetPixel(x, y).B;
 				//g channel is unused
 			}
 		}
 
-		Array.Sort(data);
-		double percentile = data[(int)Math.Round(data.Length * p)];
+		Array.Sort(data_R);
+		Array.Sort(data_G);
+		Array.Sort(data_B);
 
-		GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile: " + percentile);
-		return percentile;
+		double percentile_R = data_R[(int)Math.Round(data_R.Length * p)];
+		double percentile_G = data_G[(int)Math.Round(data_G.Length * p)];
+		double percentile_B = data_B[(int)Math.Round(data_B.Length * p)];
+
+		GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile R: " + percentile_R);
+		// GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile G: " + percentile_G);
+		GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile B: " + percentile_B);
 	}
 
 	public void Test_CalcD65()
@@ -87,28 +96,30 @@ public partial class SSIM : Node
 		I = img;
 	}
 
-	public double Calculate_Average()
+	public void Calculate_Average()
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		int M = img.GetWidth();
 		int N = img.GetHeight();
-		int O = 3;
 
-		double total = 0.0;
+		double total_R = 0.0;
+		double total_G = 0.0;
+		double total_B = 0.0;
 		for (int x = 0; x < M; x++)
 		{
 			for (int y = 0; y < N; y++)
 			{
-				for (int z = 0; z < O; z++)
-				{
-					// if((x + y + z) % 10000 == 0) GD.Print(x + "/" + M + ", " + y + "/" + N + ", " + z + "/" + O);
-					total += img.GetPixel(x, y)[z]; //check if format correct
-				}
+					total_R += img.GetPixel(x, y).R;
+					total_G += img.GetPixel(x, y).G;
+					total_B += img.GetPixel(x, y).B;
 			}
 		}
-		double average = total / (M * N); //O component is ignored since there can only be values in either the r xor b channel
-		GD.Print("Image Average: " + average);
-		return average;
+		double average_R = total_R / (M * N);
+		double average_G = total_G / (M * N);
+		double average_B = total_B / (M * N);
+		GD.Print("Image Average R: " + average_R);
+		// GD.Print("Image Average G: " + average_G);
+		GD.Print("Image Average B: " + average_B);
 	}
 
 	//nutzt rgb 0...255
