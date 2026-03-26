@@ -218,7 +218,8 @@ vec4 tonemap(vec4 l){
 float calculate_oklab_delta_h(vec3 c1, vec3 c2){
 	float hue_1 = atan(c1.z, c1.y);
 	float hue_2 = atan(c2.z, c2.y);
-	return hue_2 - hue_1;
+	float delta = hue_2 - hue_1;
+	return atan(sin(delta), cos(delta));
 }
 
 float calculate_oklab_delta_C(vec3 c1, vec3 c2){
@@ -271,10 +272,11 @@ float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 	float Cs = sqrt(as * as + bs * bs);
 	float Cb = sqrt(ab * ab + bb * bb);
 
-	float hs = atan(bs / as);
-	float hb = atan(bb / ab);
+	float hs = atan(bs , as);
+	float hb = atan(bb , ab);
 
 	float d_h = hb - hs;
+	d_h = atan(sin(d_h), cos(d_h));
 	float d_L = Lb - Ls;
 	float d_C = Cb - Cs;
 	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
@@ -297,10 +299,11 @@ float calculate_cie_de_2000(vec3 cs, vec3 cb){
 	float Cs = sqrt(as * as + bs * bs);
 	float Cb = sqrt(ab * ab + bb * bb);
 
-	float hs = atan(bs / as);
-	float hb = atan(bb / ab);
+	float hs = atan(bs , as);
+	float hb = atan(bb , ab);
 
 	float d_h = hb - hs;
+	d_h = atan(sin(d_h), cos(d_h));
 	float d_L = Lb - Ls;
 	float d_C = Cb - Cs;
 	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
