@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbo2sm3wwi386"
-path="res://.godot/imported/chart_test.png-b557ce5a497fb5e195f71573867d819c.ctex"
+uid="uid://c5vmyps44k4hq"
+path="res://.godot/imported/2026-03-26__14_42_30.png-141911a3e554ac0433db186f3b25376c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chart_test.png"
-dest_files=["res://.godot/imported/chart_test.png-b557ce5a497fb5e195f71573867d819c.ctex"]
+source_file="res://_Messdaten/2026-03-26__14_42_30.png"
+dest_files=["res://.godot/imported/2026-03-26__14_42_30.png-141911a3e554ac0433db186f3b25376c.ctex"]
 
 [params]
 

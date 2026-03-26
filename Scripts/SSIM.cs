@@ -19,8 +19,8 @@ public partial class SSIM : Node
 	// [Export] public Texture2D image_base;
 	// [Export] public Texture2D image_compare;
 
-	Image i;
-	Image I;
+	Image baseImage;
+	Image comparisonImage;
 
 	public override void _Ready() { }
 	public override void _Process(double delta) { }
@@ -35,78 +35,84 @@ public partial class SSIM : Node
 		Calculate_Percentile(0.999f);
 	}
 
-	public void Create_Histogram_Delta_Hue_Chroma()
-    {
-        int M = i.GetWidth();
-        int N = i.GetHeight();
+	public void Create_Histogram_Delta_Hue()
+	{
+		int M = baseImage.GetWidth();
+		int N = baseImage.GetHeight();
 
-        Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-        chart.Fill(Colors.White);
+		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+		chart.Fill(Colors.White);
 
-        //TODO: Draw Grid
+		//TODO: Draw Grid
+		for(int x = 0; x < _graphRes; x++)
+		{
+			for(int y = -(_pointRadius / 3); y <=(_pointRadius / 3); y++)
+			{
+				chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
+			}
+		}
 
-        (float, float)[] pairs = new (float, float)[M * N];
+		(float, float)[] pairs = new (float, float)[M * N];
 
-        CreateGraph(M, N, chart, pairs);
 
-        string imagePath = "res://graph_d.png";
-        chart.SavePng(imagePath);
-    }
+		for (int x = 0; x < M; x++)
+		{
+			for (int y = 0; y < N; y++)
+			{
+				Color c = baseImage.GetPixel(x, y);
 
-    private void CreateGraph(int M, int N, Image chart, (float, float)[] pairs)
-    {
-        for (int x = 0; x < M; x++)
-        {
-            for (int y = 0; y < N; y++)
-            {
-                Color c = i.GetPixel(x, y);
+				float delta = comparisonImage.GetPixel(x, y).R - comparisonImage.GetPixel(x, y).B;
 
-                float delta = i.GetPixel(x, y).R - i.GetPixel(x, y).B;
+				int ix = 0;
+				int iy = 0;
 
-                int ix = 0;
-                int iy = 0;
+				ix = (int)(c.H * (_graphRes - 1));
 
-                ix = (int)(c.H * (_graphRes - 1));
+				if (delta <= 0.0)
+				{
+					iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+					// c = Colors.Blue;
+				}
+				else
+				{
+					iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+					// c = Colors.Red;
+				}
 
-                if (delta <= 0.0)
-                {
-                    iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-                    // c = Colors.Blue;
-                }
-                else
-                {
-                    iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
-                    // c = Colors.Red;
-                }
+				if (ix >= _graphRes || ix < 0)
+				{
+					ix = 0;
+					// GD.PushWarning("Hue was greater than 1");
+				}
+				if (iy >= _graphRes || iy < 0)
+				{
+					iy = 0;
+					// GD.PushWarning("Delta value was greater than 1: " + delta);
+				}
 
-                if (ix >= _graphRes || ix < 0)
-                {
-                    ix = 0;
-                    // GD.PushWarning("Hue was greater than 1");
-                }
-                if (iy >= _graphRes || iy < 0)
-                {
-                    iy = 0;
-                    // GD.PushWarning("Delta value was greater than 1: " + delta);
-                }
+				for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+				{
+					for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+					{
+						if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+						if (rx + ix >= _graphRes || rx + ix < 0) continue;
+						if (ry + iy >= _graphRes || ry + iy < 0) continue;
+						chart.SetPixel(ix + rx, iy + ry, c);
+					}
+				}
 
-                for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
-                {
-                    for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
-                    {
-                        if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
-                        if (rx + ix >= _graphRes || rx + ix < 0) continue;
-                        if (ry + iy >= _graphRes || ry + iy < 0) continue;
-                        chart.SetPixel(ix + rx, iy + ry, c);
-                    }
-                }
+				pairs[x * N + y] = (c.H, delta);
+			}
+		}
 
-                pairs[x * N + y] = (c.H, delta);
-            }
-        }
-    }
+		// chart.FlipY();
 
-    public void Calculate_Percentile(float p)
+		string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + ".png";
+		GD.Print("Saved chart to: " + imagePath);
+		GD.Print(chart.SavePng(imagePath));
+	}
+
+	public void Calculate_Percentile(float p)
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		int M = img.GetWidth();
@@ -163,14 +169,14 @@ public partial class SSIM : Node
 		var img = GetViewport().GetTexture().GetImage();
 		string imagePath = "res://screenshot_base.png";
 		img.SavePng(imagePath);
-		i = img;
+		baseImage = img;
 	}
 	public void CaptureViewportComparison()
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		string imagePath = "res://screenshot_comp.png";
 		img.SavePng(imagePath);
-		I = img;
+		comparisonImage = img;
 	}
 
 	public void Calculate_Average()
@@ -204,15 +210,15 @@ public partial class SSIM : Node
 	{
 		// Image i = image_base.GetImage();
 		// Image I = image_compare.GetImage();
-		i.Decompress();
-		I.Decompress();
+		baseImage.Decompress();
+		comparisonImage.Decompress();
 
 		double C1 = Math.Pow(0.01 * 255.0, 2.0);
 		double C2 = Math.Pow(0.03 * 255.0, 2.0);
 		double C3 = C2 / 2.0;
 
-		int M = i.GetWidth();
-		int N = i.GetHeight();
+		int M = baseImage.GetWidth();
+		int N = baseImage.GetHeight();
 		int O = 3;
 
 		double mue_i = 0.0;
@@ -224,8 +230,8 @@ public partial class SSIM : Node
 				for (int z = 0; z < O; z++)
 				{
 					// if((x + y + z) % 10000 == 0) GD.Print(x + "/" + M + ", " + y + "/" + N + ", " + z + "/" + O);
-					mue_i += i.GetPixel(x, y)[z] * 255.0; //check if format correct
-					mue_I += I.GetPixel(x, y)[z] * 255.0; //check if format correct
+					mue_i += baseImage.GetPixel(x, y)[z] * 255.0; //check if format correct
+					mue_I += comparisonImage.GetPixel(x, y)[z] * 255.0; //check if format correct
 				}
 			}
 		}
@@ -241,10 +247,10 @@ public partial class SSIM : Node
 			{
 				for (int z = 0; z < O; z++)
 				{
-					sig_i2 += Math.Pow(i.GetPixel(x, y)[z] * 255.0 - mue_i, 2.0); //check if format correct
-					sig_I2 += Math.Pow(I.GetPixel(x, y)[z] * 255.0 - mue_I, 2.0); //check if format correct
+					sig_i2 += Math.Pow(baseImage.GetPixel(x, y)[z] * 255.0 - mue_i, 2.0); //check if format correct
+					sig_I2 += Math.Pow(comparisonImage.GetPixel(x, y)[z] * 255.0 - mue_I, 2.0); //check if format correct
 
-					sig_iI += (i.GetPixel(x, y)[z] * 255.0 - mue_i) * (I.GetPixel(x, y)[z] * 255.0 - mue_I); //check if format correct
+					sig_iI += (baseImage.GetPixel(x, y)[z] * 255.0 - mue_i) * (comparisonImage.GetPixel(x, y)[z] * 255.0 - mue_I); //check if format correct
 				}
 			}
 		}

@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4bp4d5q80c0k"
-path.s3tc="res://.godot/imported/image_oklab.png-1c72991947385b155bd22a14e4ad4500.s3tc.ctex"
+uid="uid://e4yt12wco3xs"
+path="res://.godot/imported/2026-03-26__14_45_07.png-4c98d85fe3772ee2b6208af25b8e3c48.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://image_oklab.png"
-dest_files=["res://.godot/imported/image_oklab.png-1c72991947385b155bd22a14e4ad4500.s3tc.ctex"]
+source_file="res://_Messdaten/2026-03-26__14_45_07.png"
+dest_files=["res://.godot/imported/2026-03-26__14_45_07.png-4c98d85fe3772ee2b6208af25b8e3c48.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
