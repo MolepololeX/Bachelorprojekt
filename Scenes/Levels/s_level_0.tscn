@@ -595,6 +595,7 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("24_sit86")
+enable_draw = true
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 1
@@ -669,33 +670,35 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3903092, 0)
-bones/4/rotation = Quaternion(-0.5584501, -0.061718993, -0.64783144, 0.51443046)
-bones/5/rotation = Quaternion(1.9898955e-08, -4.2144872e-08, -0.4882745, 0.87269014)
-bones/7/rotation = Quaternion(-0.31985414, -0.3254379, 0.14232793, 0.8783657)
-bones/8/rotation = Quaternion(0.0005386463, 0.00053861446, -0.70512694, 0.7090809)
-bones/9/rotation = Quaternion(-0.61707836, 0.081583574, 0.62143415, 0.47579208)
-bones/10/rotation = Quaternion(2.0553708e-08, 5.3142998e-08, 0.51178575, 0.8591131)
-bones/12/rotation = Quaternion(-0.31812403, 0.30027643, -0.22393799, 0.8709093)
-bones/13/rotation = Quaternion(0.0009861086, 0.001161488, 0.7060833, 0.70812726)
-bones/15/rotation = Quaternion(0.9935553, 0.08349531, 0.074129686, 0.019526992)
-bones/16/rotation = Quaternion(0.21795842, 6.580434e-08, -1.4617254e-07, 0.9759581)
-bones/17/rotation = Quaternion(-0.5291857, -0.20883058, 0.047046352, 0.8210597)
-bones/18/rotation = Quaternion(8.247643e-05, 0.9202315, -0.39137453, -1.8612373e-05)
-bones/19/rotation = Quaternion(0.9969187, -0.029798502, 0.031364445, 0.06543284)
-bones/20/rotation = Quaternion(0.2904275, -6.3575804e-08, 2.0141115e-07, 0.956897)
-bones/21/rotation = Quaternion(-0.56776714, 0.114403486, -0.009992648, 0.81513953)
-bones/38/position = Vector3(0.52084064, 0.7839539, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.7839538, 0.05973692)
+bones/1/position = Vector3(0, 0.368729, 0)
+bones/4/rotation = Quaternion(-0.5511264, -0.056515835, -0.63832647, 0.5344203)
+bones/5/rotation = Quaternion(2.6256277e-08, -6.735124e-08, -0.5154884, 0.8568965)
+bones/7/rotation = Quaternion(-0.321193, -0.33898762, 0.1494982, 0.87153476)
+bones/8/rotation = Quaternion(0.0010626859, 0.0010626857, -0.70319474, 0.7109957)
+bones/9/rotation = Quaternion(-0.6097655, 0.07706096, 0.61387527, 0.49538356)
+bones/10/rotation = Quaternion(3.0054593e-08, 4.2960373e-08, 0.53785866, 0.843035)
+bones/12/rotation = Quaternion(-0.3203011, 0.315154, -0.23170549, 0.8627849)
+bones/13/rotation = Quaternion(0.0033231592, 0.0039141905, 0.7036448, 0.7105333)
+bones/15/rotation = Quaternion(0.9894153, 0.083793215, 0.07884788, 0.08842617)
+bones/16/rotation = Quaternion(0.39865276, 6.129081e-08, -2.7062134e-07, 0.917102)
+bones/17/rotation = Quaternion(-0.6234196, -0.20059848, 0.077421024, 0.75174093)
+bones/19/rotation = Quaternion(0.9912399, -0.033471227, 0.029763138, 0.124246985)
+bones/20/rotation = Quaternion(0.44240656, -5.8554186e-08, 3.094727e-07, 0.8968146)
+bones/21/rotation = Quaternion(-0.6492796, 0.112404145, -0.023685835, 0.7518247)
+bones/38/position = Vector3(0.52084064, 0.7736151, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.773615, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2260712, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.204491, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
 
 [node name="right foot" parent="Player/Pivot/playermodel" index="1"]
 transform = Transform3D(0.3, 0, 0, 0, 0.29999998, 0, 0, 0, 0.49999997, 0.25, 0.15, 0)
+
+[node name="left foot" parent="Player/Pivot/playermodel" index="2"]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.30000004, 0, 0, 0, 0.49999997, -0.25, 0.15, 0)
 
 [node name="Axe" parent="Player" instance=ExtResource("2_al5aw")]
 
@@ -978,8 +981,8 @@ _itemExplosionVelocity = 5.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19872022, 0)
 script = ExtResource("14_jqdjy")
 light = NodePath("FireOmni/OmniLight3D")
-amplitude = 0.003
-timeInterval = 0.25
+amplitude = 0.0
+timeInterval = 0.0
 
 [node name="FireOmni" parent="Level/Env/CampFire" instance=ExtResource("15_d4r3s")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.38274562, 0)
@@ -1016,10 +1019,14 @@ mesh = SubResource("PlaneMesh_f0fgg")
 
 [node name="GPUParticles3D" parent="Level/Env/CampFire" instance=ExtResource("17_sf7op")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.22757769, 0)
+preprocess = 5.0
+speed_scale = 0.0
 process_material = SubResource("ParticleProcessMaterial_7sabu")
 
 [node name="GPUParticles3D2" parent="Level/Env/CampFire" instance=ExtResource("18_km60j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26135623, 0)
+preprocess = 5.0
+speed_scale = 0.0
 
 [node name="rocks" type="Node3D" parent="Level/Env"]
 

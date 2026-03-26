@@ -6,7 +6,7 @@ uniform vec3 color : source_color;
 uniform sampler2D leaveAlpha : filter_nearest, repeat_disable;
 uniform sampler2D noise : filter_nearest;
 uniform vec3 targetPos;
-uniform float timeScale = 0.01;
+uniform float timeScale = 0.0;
 uniform float maxAngle = 1.0;
 uniform float directionBias = 0.0;
 
