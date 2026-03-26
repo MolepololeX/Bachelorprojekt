@@ -595,11 +595,10 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("24_sit86")
-enable_draw = true
 live_reload = true
 reload_interval_frames = 30
-tonemapper_mode = 2
-draw_mode = 5
+tonemapper_mode = 1
+draw_mode = 2
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
@@ -670,24 +669,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.36819926, 0)
-bones/4/rotation = Quaternion(-0.55054414, -0.056973968, -0.6405423, 0.5323164)
-bones/5/rotation = Quaternion(4.1014076e-08, -3.4490082e-08, -0.5117981, 0.85910577)
-bones/7/rotation = Quaternion(-0.32048115, -0.3387675, 0.14770651, 0.87218755)
-bones/8/rotation = Quaternion(0.0012262105, 0.0012262091, -0.70259076, 0.711592)
-bones/9/rotation = Quaternion(-0.6093341, 0.07750627, 0.615831, 0.49341342)
-bones/10/rotation = Quaternion(5.0150703e-08, 5.0450435e-08, 0.53432494, 0.84527916)
-bones/12/rotation = Quaternion(-0.3196013, 0.31470975, -0.22988488, 0.8636932)
-bones/13/rotation = Quaternion(0.0037861252, 0.004459497, 0.70315963, 0.7110079)
-bones/15/rotation = Quaternion(0.9893496, 0.08381841, 0.0788919, 0.08909485)
-bones/16/rotation = Quaternion(0.40042463, 5.656873e-08, -2.7157813e-07, 0.91632974)
-bones/20/rotation = Quaternion(0.44400105, -5.8794416e-08, 3.121707e-07, 0.89602625)
-bones/21/rotation = Quaternion(-0.65014625, 0.112371884, -0.023841549, 0.7510752)
-bones/38/position = Vector3(0.52084064, 0.77154803, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.771548, 0.059736915)
+bones/1/position = Vector3(0, 0.3903092, 0)
+bones/4/rotation = Quaternion(-0.5584501, -0.061718993, -0.64783144, 0.51443046)
+bones/5/rotation = Quaternion(1.9898955e-08, -4.2144872e-08, -0.4882745, 0.87269014)
+bones/7/rotation = Quaternion(-0.31985414, -0.3254379, 0.14232793, 0.8783657)
+bones/8/rotation = Quaternion(0.0005386463, 0.00053861446, -0.70512694, 0.7090809)
+bones/9/rotation = Quaternion(-0.61707836, 0.081583574, 0.62143415, 0.47579208)
+bones/10/rotation = Quaternion(2.0553708e-08, 5.3142998e-08, 0.51178575, 0.8591131)
+bones/12/rotation = Quaternion(-0.31812403, 0.30027643, -0.22393799, 0.8709093)
+bones/13/rotation = Quaternion(0.0009861086, 0.001161488, 0.7060833, 0.70812726)
+bones/15/rotation = Quaternion(0.9935553, 0.08349531, 0.074129686, 0.019526992)
+bones/16/rotation = Quaternion(0.21795842, 6.580434e-08, -1.4617254e-07, 0.9759581)
+bones/17/rotation = Quaternion(-0.5291857, -0.20883058, 0.047046352, 0.8210597)
+bones/18/rotation = Quaternion(8.247643e-05, 0.9202315, -0.39137453, -1.8612373e-05)
+bones/19/rotation = Quaternion(0.9969187, -0.029798502, 0.031364445, 0.06543284)
+bones/20/rotation = Quaternion(0.2904275, -6.3575804e-08, 2.0141115e-07, 0.956897)
+bones/21/rotation = Quaternion(-0.56776714, 0.114403486, -0.009992648, 0.81513953)
+bones/38/position = Vector3(0.52084064, 0.7839539, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.7839538, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2039613, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2260712, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1475,8 +1477,6 @@ heightfield_mask = 1048567
 
 [node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
 script = ExtResource("54_sf7op")
-_graphRes = 4096
-_pointRadius = 15
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_oqg80")
