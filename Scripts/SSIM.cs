@@ -15,7 +15,7 @@ public partial class SSIM : Node
 	[Export] private int _pointRadius = 9;
 	[Export] private WorldEnvironment _env = null;
 	[Export] private string _fileNameAtt = "";
-	[ExportToolButton("Create Histogramm")] public Callable CreateDeltaHGraph => Callable.From(Create_Histogram_Delta_Hue);
+	[ExportToolButton("Create Chart Delta By Hue")] public Callable CreateDeltaHGraph => Callable.From(Create_Chart_Delta_By_Hue);
 	// [ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
 
 
@@ -89,7 +89,7 @@ public partial class SSIM : Node
 		// await Create_Histogram_Delta_Hue();
 	}
 
-	public void Create_Histogram_Delta_Hue()
+	public void Create_Chart_Delta_By_Hue()
 	{
 		Create_Histogram_Delta_Hue_Task();
 	}

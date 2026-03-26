@@ -33,7 +33,7 @@ enable_draw = true
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 1
-draw_mode = 2
+draw_mode = 5
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_hijju"]
@@ -206,8 +206,9 @@ size = 16.0
 
 [node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
 script = ExtResource("1_rgddx")
+_graphRes = 1024
+_pointRadius = 5
 _env = NodePath("../PostTesting")
-_fileNameAtt = "srgb_cie_d_h"
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_duult")
