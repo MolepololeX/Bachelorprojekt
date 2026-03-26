@@ -7,8 +7,14 @@ public partial class SSIM : Node
 	[ExportToolButton("Calculate SSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
 	[ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);
 	[ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
+	[ExportCategory("Graphs")]
+	[Export] private int _graphRes = 2048;
+	[Export] private int _pointRadius = 9;
+	[ExportToolButton("Create Histogramm deltaH")] public Callable CreateDeltaHGraph => Callable.From(Create_Histogram_Delta_Hue);
+	[ExportCategory("Images")]
 	[ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewport);
 	[ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportComparison);
+	[ExportCategory("Test")]
 	[ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
 	// [Export] public Texture2D image_base;
 	// [Export] public Texture2D image_compare;
@@ -27,6 +33,68 @@ public partial class SSIM : Node
 		Calculate_Percentile(0.9f);
 		Calculate_Percentile(0.99f);
 		Calculate_Percentile(0.999f);
+	}
+
+	public void Create_Histogram_Delta_Hue()
+	{
+		int M = i.GetWidth();
+		int N = i.GetHeight();
+
+		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+		chart.Fill(Colors.White);
+
+		(float, float)[] pairs = new (float, float)[M * N];
+
+		for (int x = 0; x < M; x++)
+		{
+			for (int y = 0; y < N; y++)
+			{
+				Color c = i.GetPixel(x, y);
+
+				float delta = i.GetPixel(x, y).R - i.GetPixel(x, y).B;
+
+				int ix = 0;
+				int iy = 0;
+
+				ix = (int)(c.H * (_graphRes - 1));
+
+				if (delta <= 0.0)
+				{
+					iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+				}
+				else
+				{
+					iy = (_graphRes - (int)(delta * ((_graphRes - 1) / 2))) - ((_graphRes - 1) / 2);
+				}
+
+				if (ix >= _graphRes || ix < 0)
+				{
+					ix = 0;
+					// GD.PushWarning("Hue was greater than 1");
+				}
+				if (iy >= _graphRes || iy < 0)
+				{
+					iy = 0;
+					// GD.PushWarning("Delta value was greater than 1: " + delta);
+				}
+
+				for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+				{
+					for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+					{
+						if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+						if (rx + ix >= _graphRes || rx + ix < 0) continue;
+						if (ry + iy >= _graphRes || ry + iy < 0) continue;
+						chart.SetPixel(ix + rx, iy + ry, c);
+					}
+				}
+
+				pairs[x * N + y] = (c.H, delta);
+			}
+		}
+
+		string imagePath = "res://chart_test.png";
+		chart.SavePng(imagePath);
 	}
 
 	public void Calculate_Percentile(float p)
@@ -84,15 +152,15 @@ public partial class SSIM : Node
 	public void CaptureViewport()
 	{
 		var img = GetViewport().GetTexture().GetImage();
-		// string imagePath = "res://screenshot_base.png";
-		// img.SavePng(imagePath);
+		string imagePath = "res://screenshot_base.png";
+		img.SavePng(imagePath);
 		i = img;
 	}
 	public void CaptureViewportComparison()
 	{
 		var img = GetViewport().GetTexture().GetImage();
-		// string imagePath = "res://screenshot_comp.png";
-		// img.SavePng(imagePath);
+		string imagePath = "res://screenshot_comp.png";
+		img.SavePng(imagePath);
 		I = img;
 	}
 
@@ -109,9 +177,9 @@ public partial class SSIM : Node
 		{
 			for (int y = 0; y < N; y++)
 			{
-					total_R += img.GetPixel(x, y).R;
-					total_G += img.GetPixel(x, y).G;
-					total_B += img.GetPixel(x, y).B;
+				total_R += img.GetPixel(x, y).R;
+				total_G += img.GetPixel(x, y).G;
+				total_B += img.GetPixel(x, y).B;
 			}
 		}
 		double average_R = total_R / (M * N);

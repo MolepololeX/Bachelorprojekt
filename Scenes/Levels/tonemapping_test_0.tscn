@@ -1,10 +1,58 @@
 [gd_scene load_steps=46 format=3 uid="uid://bck3bskcnoh8q"]
 
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="1_kx62c"]
-[ext_resource type="PackedScene" uid="uid://cyf2yo5mt2imq" path="res://_Messungshilfen/post_testing.tscn" id="1_yxoe1"]
+[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://Scripts/SSIM.cs" id="1_rgddx"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://Scripts/PostProcessing/BloomCompositorEffect.gd" id="3_k0f2q"]
 [ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://Scenes/Levels/GenerateColorGrid.cs" id="4_k0f2q"]
 [ext_resource type="Texture2D" uid="uid://dfps58dy8vwb0" path="res://color_palette_oklab.png" id="5_duult"]
+
+[sub_resource type="Environment" id="Environment_duult"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
+tonemap_white = 0.25
+glow_intensity = 0.23
+glow_strength = 1.73
+glow_bloom = 0.17
+glow_hdr_threshold = 0.35
+glow_hdr_scale = 0.16
+glow_hdr_luminance_cap = 52.49
+volumetric_fog_density = 0.0049
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_emission_energy = 0.1
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_rgddx"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_kx62c")
+enable_draw = true
+live_reload = true
+reload_interval_frames = 30
+tonemapper_mode = 2
+draw_mode = 1
+metadata/_custom_type_script = "uid://dj2paefo16n4y"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_hijju"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("3_k0f2q")
+shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
+live_reload = true
+bloom_threshold = 0.65
+blurr_kernelsize = 5
+draw_mode = 3
+metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
+
+[sub_resource type="Compositor" id="Compositor_bmgda"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_hijju")])
 
 [sub_resource type="SphereMesh" id="SphereMesh_ovrgn"]
 
@@ -136,54 +184,6 @@ albedo_color = Color(0.7697178, 0.829201, 1, 1)
 shading_mode = 0
 albedo_color = Color(0.9251754, 0.76325554, 1, 1)
 
-[sub_resource type="Environment" id="Environment_duult"]
-background_mode = 1
-ambient_light_source = 2
-ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
-tonemap_white = 0.25
-glow_intensity = 0.23
-glow_strength = 1.73
-glow_bloom = 0.17
-glow_hdr_threshold = 0.35
-glow_hdr_scale = 0.16
-glow_hdr_luminance_cap = 52.49
-volumetric_fog_density = 0.0049
-volumetric_fog_emission = Color(1, 1, 1, 1)
-volumetric_fog_emission_energy = 0.1
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_rgddx"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("1_kx62c")
-enable_draw = true
-live_reload = true
-reload_interval_frames = 30
-draw_mode = 1
-metadata/_custom_type_script = "uid://dj2paefo16n4y"
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_hijju"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("3_k0f2q")
-enable_draw = true
-shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
-live_reload = true
-bloom_threshold = 0.65
-blurr_kernelsize = 5
-draw_mode = 3
-metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
-
-[sub_resource type="Compositor" id="Compositor_bmgda"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_hijju")])
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_k0f2q"]
 size = Vector2(0.25, 0.25)
 
@@ -195,6 +195,21 @@ albedo_texture = ExtResource("5_duult")
 texture_filter = 0
 
 [node name="TonemappingTest0" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -2.9802319e-08, 1, 0, -1, -2.9802319e-08, 7.75, 4, 7.75)
+projection = 1
+size = 16.0
+
+[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
+script = ExtResource("1_rgddx")
+
+[node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_duult")
+compositor = SubResource("Compositor_bmgda")
 
 [node name="Node3D" type="Node3D" parent="."]
 visible = false
@@ -403,16 +418,7 @@ mesh = SubResource("SphereMesh_ovrgn")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_sfcqk")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -2.9802319e-08, 1, 0, -1, -2.9802319e-08, 8, 4, 7.75)
-projection = 1
-size = 16.0
-
-[node name="PostTesting" parent="." instance=ExtResource("1_yxoe1")]
-environment = SubResource("Environment_duult")
-compositor = SubResource("Compositor_bmgda")
-
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("_startPos")]
+[node name="GridGenerator" type="Node" parent="." node_paths=PackedStringArray("_startPos")]
 script = ExtResource("4_k0f2q")
 _startPos = NodePath("../GridStart")
 _nodeMesh = SubResource("PlaneMesh_k0f2q")
