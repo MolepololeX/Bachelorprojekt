@@ -4,8 +4,8 @@ using System;
 [Tool]
 public partial class GenerateColorGrid : Node
 {
-	internal struct Lab { public float L; public float a; public float b; };
-	internal struct RGB { public float r; public float g; public float b; };
+	public struct Lab { public float L; public float a; public float b; };
+	public struct RGB { public float r; public float g; public float b; };
 
 	[Export] private Node3D _startPos;
 	[Export] private Mesh _nodeMesh;
@@ -104,7 +104,7 @@ public partial class GenerateColorGrid : Node
 	}
 
 
-	Lab linear_srgb_to_oklab(RGB c)
+	public static Lab linear_srgb_to_oklab(RGB c)
 	{
 		float l = 0.4122214708f * c.r + 0.5363325363f * c.g + 0.0514459929f * c.b;
 		float m = 0.2119034982f * c.r + 0.6806995451f * c.g + 0.1073969566f * c.b;

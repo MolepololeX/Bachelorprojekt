@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Godot;
+using static GenerateColorGrid;
 
 [Tool]
 public partial class SSIM : Node
@@ -11,6 +12,7 @@ public partial class SSIM : Node
 
 
 	[ExportCategory("Graphs")]
+	[Export] private Color _backGroundColor = Colors.Black;
 	[Export] private int _graphRes = 2048;
 	[Export] private int _pointRadius = 9;
 	[Export] private WorldEnvironment _env = null;
@@ -26,6 +28,7 @@ public partial class SSIM : Node
 	[ExportCategory("Test")]
 	[ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
 	[Export] private bool _autoCapturePrePost = true;
+	[Export] private bool _plotByOKLCh = true;
 	// [Export] public Texture2D image_base;
 	// [Export] public Texture2D image_compare;
 
@@ -91,7 +94,7 @@ public partial class SSIM : Node
 
 	public void Create_Chart_Delta_By_Hue()
 	{
-		Create_Histogram_Delta_Hue_Task();
+		_ = Create_Histogram_Delta_Hue_Task();
 	}
 
 	public async Task Create_Histogram_Delta_Hue_Task()
@@ -105,7 +108,7 @@ public partial class SSIM : Node
 		int N = baseImage.GetHeight();
 
 		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-		chart.Fill(Colors.White);
+		chart.Fill(_backGroundColor);
 
 		//TODO: Draw Grid
 		for (int x = 0; x < _graphRes; x++)
@@ -130,7 +133,12 @@ public partial class SSIM : Node
 				int ix = 0;
 				int iy = 0;
 
+				Lab cl = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+				double hue_l = (Math.Atan2(cl.a, cl.b) + Math.PI) / (Math.PI * 2.0);
+
 				ix = (int)(c.H * (_graphRes - 1));
+				if (_plotByOKLCh)
+					ix = (int)(hue_l * (_graphRes - 1));
 
 				if (delta <= 0.0)
 				{
