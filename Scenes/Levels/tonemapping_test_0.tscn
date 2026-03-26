@@ -32,8 +32,8 @@ script = ExtResource("1_kx62c")
 enable_draw = true
 live_reload = true
 reload_interval_frames = 30
-tonemapper_mode = 2
-draw_mode = 1
+tonemapper_mode = 1
+draw_mode = 5
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_hijju"]

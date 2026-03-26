@@ -35,69 +35,78 @@ public partial class SSIM : Node
 		Calculate_Percentile(0.999f);
 	}
 
-	public void Create_Histogram_Delta_Hue()
-	{
-		int M = i.GetWidth();
-		int N = i.GetHeight();
+	public void Create_Histogram_Delta_Hue_Chroma()
+    {
+        int M = i.GetWidth();
+        int N = i.GetHeight();
 
-		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-		chart.Fill(Colors.White);
+        Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+        chart.Fill(Colors.White);
 
-		(float, float)[] pairs = new (float, float)[M * N];
+        //TODO: Draw Grid
 
-		for (int x = 0; x < M; x++)
-		{
-			for (int y = 0; y < N; y++)
-			{
-				Color c = i.GetPixel(x, y);
+        (float, float)[] pairs = new (float, float)[M * N];
 
-				float delta = i.GetPixel(x, y).R - i.GetPixel(x, y).B;
+        CreateGraph(M, N, chart, pairs);
 
-				int ix = 0;
-				int iy = 0;
+        string imagePath = "res://graph_d.png";
+        chart.SavePng(imagePath);
+    }
 
-				ix = (int)(c.H * (_graphRes - 1));
+    private void CreateGraph(int M, int N, Image chart, (float, float)[] pairs)
+    {
+        for (int x = 0; x < M; x++)
+        {
+            for (int y = 0; y < N; y++)
+            {
+                Color c = i.GetPixel(x, y);
 
-				if (delta <= 0.0)
-				{
-					iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-				}
-				else
-				{
-					iy = (_graphRes - (int)(delta * ((_graphRes - 1) / 2))) - ((_graphRes - 1) / 2);
-				}
+                float delta = i.GetPixel(x, y).R - i.GetPixel(x, y).B;
 
-				if (ix >= _graphRes || ix < 0)
-				{
-					ix = 0;
-					// GD.PushWarning("Hue was greater than 1");
-				}
-				if (iy >= _graphRes || iy < 0)
-				{
-					iy = 0;
-					// GD.PushWarning("Delta value was greater than 1: " + delta);
-				}
+                int ix = 0;
+                int iy = 0;
 
-				for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
-				{
-					for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
-					{
-						if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
-						if (rx + ix >= _graphRes || rx + ix < 0) continue;
-						if (ry + iy >= _graphRes || ry + iy < 0) continue;
-						chart.SetPixel(ix + rx, iy + ry, c);
-					}
-				}
+                ix = (int)(c.H * (_graphRes - 1));
 
-				pairs[x * N + y] = (c.H, delta);
-			}
-		}
+                if (delta <= 0.0)
+                {
+                    iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+                    // c = Colors.Blue;
+                }
+                else
+                {
+                    iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+                    // c = Colors.Red;
+                }
 
-		string imagePath = "res://chart_test.png";
-		chart.SavePng(imagePath);
-	}
+                if (ix >= _graphRes || ix < 0)
+                {
+                    ix = 0;
+                    // GD.PushWarning("Hue was greater than 1");
+                }
+                if (iy >= _graphRes || iy < 0)
+                {
+                    iy = 0;
+                    // GD.PushWarning("Delta value was greater than 1: " + delta);
+                }
 
-	public void Calculate_Percentile(float p)
+                for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+                {
+                    for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+                    {
+                        if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+                        if (rx + ix >= _graphRes || rx + ix < 0) continue;
+                        if (ry + iy >= _graphRes || ry + iy < 0) continue;
+                        chart.SetPixel(ix + rx, iy + ry, c);
+                    }
+                }
+
+                pairs[x * N + y] = (c.H, delta);
+            }
+        }
+    }
+
+    public void Calculate_Percentile(float p)
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		int M = img.GetWidth();
