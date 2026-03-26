@@ -1,5 +1,6 @@
-using Godot;
 using System;
+using System.Threading.Tasks;
+using Godot;
 
 [Tool]
 public partial class SSIM : Node
@@ -7,13 +8,22 @@ public partial class SSIM : Node
 	[ExportToolButton("Calculate SSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
 	[ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);
 	[ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
+
+
 	[ExportCategory("Graphs")]
 	[Export] private int _graphRes = 2048;
 	[Export] private int _pointRadius = 9;
-	[ExportToolButton("Create Histogramm deltaH")] public Callable CreateDeltaHGraph => Callable.From(Create_Histogram_Delta_Hue);
+	[Export] private WorldEnvironment _env = null;
+	[Export] private string _fileNameAtt = "";
+	[ExportToolButton("Create Histogramm")] public Callable CreateDeltaHGraph => Callable.From(Create_Histogram_Delta_Hue);
+
+	[ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
+
+
 	[ExportCategory("Images")]
-	[ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewport);
-	[ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportComparison);
+	[ExportToolButton("CapturePrePost")] public Callable CaptureBoth => Callable.From(CapturePrePost);
+	[ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewportPre);
+	[ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportPost);
 	[ExportCategory("Test")]
 	[ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
 	// [Export] public Texture2D image_base;
@@ -22,8 +32,39 @@ public partial class SSIM : Node
 	Image baseImage;
 	Image comparisonImage;
 
-	public override void _Ready() { }
-	public override void _Process(double delta) { }
+
+	public async void CapturePrePost()
+	{
+		if (_env == null)
+		{
+			GD.PushError("No World Environment");
+			return;
+		}
+		Compositor comp = _env.Compositor;
+		if (comp == null)
+		{
+			GD.PushError("No Compositor in World Environment");
+			return;
+		}
+
+		comp.CompositorEffects[0].Enabled = false;
+		await Task.Delay(100);
+		CaptureViewportPre();
+		await Task.Delay(100);
+		comp.CompositorEffects[0].Enabled = true;
+		await Task.Delay(100);
+		CaptureViewportPost();
+	}
+
+	public async void SetEffectDrawType()
+	{
+
+	}
+
+	public async void SetEffectColorSpace()
+	{
+
+	}
 
 	public void Calculate_All_Percentile()
 	{
@@ -35,6 +76,12 @@ public partial class SSIM : Node
 		Calculate_Percentile(0.999f);
 	}
 
+	public void CreateAllGraphs()
+	{
+		CapturePrePost();
+		Create_Histogram_Delta_Hue();
+	}
+
 	public void Create_Histogram_Delta_Hue()
 	{
 		int M = baseImage.GetWidth();
@@ -44,9 +91,9 @@ public partial class SSIM : Node
 		chart.Fill(Colors.White);
 
 		//TODO: Draw Grid
-		for(int x = 0; x < _graphRes; x++)
+		for (int x = 0; x < _graphRes; x++)
 		{
-			for(int y = -(_pointRadius / 3); y <=(_pointRadius / 3); y++)
+			for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
 			{
 				chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
 			}
@@ -107,7 +154,7 @@ public partial class SSIM : Node
 
 		// chart.FlipY();
 
-		string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + ".png";
+		string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "_" + _fileNameAtt + "_" + ".png";
 		GD.Print("Saved chart to: " + imagePath);
 		GD.Print(chart.SavePng(imagePath));
 	}
@@ -164,14 +211,14 @@ public partial class SSIM : Node
 		GD.Print("y: " + y);
 	}
 
-	public void CaptureViewport()
+	public void CaptureViewportPre()
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		string imagePath = "res://screenshot_base.png";
 		img.SavePng(imagePath);
 		baseImage = img;
 	}
-	public void CaptureViewportComparison()
+	public void CaptureViewportPost()
 	{
 		var img = GetViewport().GetTexture().GetImage();
 		string imagePath = "res://screenshot_comp.png";

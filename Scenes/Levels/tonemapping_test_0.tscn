@@ -204,8 +204,9 @@ transform = Transform3D(1, 0, 0, 0, -2.9802319e-08, 1, 0, -1, -2.9802319e-08, 7.
 projection = 1
 size = 16.0
 
-[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
+[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
 script = ExtResource("1_rgddx")
+_env = NodePath("../PostTesting")
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_duult")
