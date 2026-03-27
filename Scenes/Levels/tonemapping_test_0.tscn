@@ -48,8 +48,9 @@ enable_draw = true
 shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
 live_reload = true
 bloom_threshold = 0.35
+bloom_strength = 0.65
 blurr_kernelsize = 5
-draw_mode = 5
+draw_mode = 6
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
