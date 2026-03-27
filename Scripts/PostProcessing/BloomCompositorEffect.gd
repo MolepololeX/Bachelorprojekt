@@ -26,6 +26,8 @@ var reload_interval_frames : int = 60
 var bloom_threshold : float = 1.0
 @export_range(0.0, 1.0, 0.05)
 var bloom_strength : float = 1.0
+@export_range(0.0, 1.0, 0.05)
+var bloom_weight : float = 0.5
 @export
 var blurr_kernelsize : int = 1
 @export
@@ -137,7 +139,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				texture_sampler.mip_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				texture_sampler = rd.sampler_create(texture_sampler)
 
-				var parameters := PackedFloat32Array([bloom_threshold, bloom_strength, blurr_kernelsize, blurr_kernelspacing, draw_mode])
+				var parameters := PackedFloat32Array([bloom_threshold, bloom_strength, bloom_weight, blurr_kernelsize, blurr_kernelspacing, draw_mode])
 				#var inv_proj_mat = p_render_data.get_render_scene_data().get_cam_projection().inverse()
 				#var inv_proj_mat_array := PackedVector4Array([inv_proj_mat.x, inv_proj_mat.y, inv_proj_mat.z, inv_proj_mat.w])
 

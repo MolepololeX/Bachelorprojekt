@@ -6,6 +6,7 @@ layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
 layout(set = 0, binding = 0, std430) readonly buffer Params {
 	float bloom_threshold;
     float bloom_strength;
+    float bloom_weight;
 	float blurr_kernelsize;
     float blurr_kernelspacing;
 	float draw_mode;
@@ -98,7 +99,9 @@ vec4 RGBToHSL(vec4 color)
 	return hsl;
 }
 
-
+float gaussian(float r, float o){
+   return (1.0 / (o * sqrt(2.0 * 3.14159265359)))   *   pow(2.71828182845, - ( (pow(r,2.0)) / (2.0*pow(o,2.0)) ));
+}
 
 
 
@@ -121,13 +124,16 @@ void main() {
         vec3 color = vec3(0.0);
         for(int i = -kernelSize; i <= kernelSize; i++){
             for(int j = -kernelSize; j <= kernelSize; j++){
+
+
                 vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
                 vec3 colHSL = RGBToHSL(col).xyz;
-                // float Y = 0.2126 * col.r + 0.7152 * col.g + 0.0722 * col.b;
                 if (colHSL.z < params.bloom_threshold){
                     col = vec4(vec3(0.0), 1.0);
                 }
                 color += col.xyz;
+
+
             }
         }
         color /= pow(kernelSize + kernelSize + 1, 2.0);
@@ -151,12 +157,18 @@ void main() {
         vec3 color = vec3(0.0);
         for(int i = -kernelSize; i <= kernelSize; i++){
             for(int j = -kernelSize; j <= kernelSize; j++){
+
+
+
                 vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
                 vec3 colLAB = linear_srgb_to_oklab(col.xyz);
                 if (colLAB.x < params.bloom_threshold){
                     col = vec4(vec3(0.0), 1.0);
                 }
                 color += col.xyz;
+
+
+
             }
         }
         color /= pow(kernelSize + kernelSize + 1, 2.0);
@@ -166,7 +178,6 @@ void main() {
 
         // vec3 blendLAB = colorLAB * params.bloom_strength + baseLAB;
         // vec4 blend = vec4(oklab_to_linear_srgb(blendLAB),1.0);
-        
 
         imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
         // imageStore(color_image, uv_pixel, blend);
@@ -184,21 +195,28 @@ void main() {
 
     //srgb Y bloom
     if(params.draw_mode == 5.0){
-        int kernelSize = int(params.blurr_kernelsize);
+        // int kernelSize = int(params.blurr_kernelsize);
+        int kernelSize = 9;
         vec3 color = vec3(0.0);
         for(int i = -kernelSize; i <= kernelSize; i++){
             for(int j = -kernelSize; j <= kernelSize; j++){
-                vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
+
+
+
+                vec4 col = imageLoad(color_image, uv_pixel + ivec2(i, j));
                 float Y = 0.2126 * col.r + 0.7152 * col.g + 0.0722 * col.b;
                 if (Y < params.bloom_threshold){
                     col = vec4(vec3(0.0), 1.0);
                 }
-                color += col.xyz;
+                color += col.xyz * gaussian(j, params.bloom_weight);
+
+
+
             }
         }
-        color /= pow(kernelSize + kernelSize + 1, 2.0);
+        // color /= pow(kernelSize + kernelSize + 1, 2.0);
 
-        imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
+        imageStore(color_image, uv_pixel, /*base + */ vec4(color.xyz, 1.0) * params.bloom_strength);
     }
 
     //srgb Y bloom mask
