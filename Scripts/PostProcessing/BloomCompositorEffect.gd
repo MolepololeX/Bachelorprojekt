@@ -7,7 +7,9 @@ enum DrawMode{
 	srgb,
 	srgb_mask,
 	oklab,
-	oklab_mask
+	oklab_mask,
+	srgb_Y,
+	srgb_Y_mask
 }
 
 @export
