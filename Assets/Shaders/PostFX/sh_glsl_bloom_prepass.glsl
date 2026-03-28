@@ -120,6 +120,7 @@ float gaussian(float r, float o){
 void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 	vec4 base = imageLoad(color_image, uv_pixel * int(params.image_size_x / params.bloom_size_x)); //TODO maybe make this a sampler aswell
+	// vec4 base = imageLoad(color_image, uv_pixel * 2); //TODO maybe make this a sampler aswell
 
     //srgb bloom
     if(params.draw_mode == 1.0){

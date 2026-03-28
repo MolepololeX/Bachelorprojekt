@@ -118,9 +118,10 @@ float gaussian(float r, float o){
 //=========================================================================================
 
 void main() {
-
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
-    vec2 uv = uv_pixel / vec2(params.image_size_x, params.image_size_y);
+    vec2 imageSize = vec2(params.image_size_x, params.image_size_y);
+
+    vec2 uv = (uv_pixel + 0.5 * (params.image_size_x / params.bloom_size_x)) / imageSize;
 	vec4 base = imageLoad(color_image, uv_pixel);
 	vec4 bloom = texture(ping_sampler, uv);
     base += bloom * params.bloom_strength;

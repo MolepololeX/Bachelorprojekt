@@ -614,8 +614,9 @@ enable_draw = true
 bloom_threshold = 0.9
 bloom_weight = 3.0
 blurr_kernelsize = 7
-blurr_passes = 0
+blurr_passes = 5
 draw_mode = 2
+half_size = true
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -670,27 +671,26 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37570867, 0)
-bones/4/rotation = Quaternion(-0.5542423, -0.057221383, -0.63769275, 0.53187335)
-bones/5/rotation = Quaternion(4.1468735e-09, -5.7980653e-08, -0.51351964, 0.85807794)
-bones/7/rotation = Quaternion(-0.32187834, -0.33534792, 0.15036516, 0.8725403)
-bones/8/rotation = Quaternion(0.00059589563, 0.00059588486, -0.70491606, 0.7092902)
-bones/9/rotation = Quaternion(-0.61265206, 0.077573195, 0.613074, 0.49272737)
-bones/10/rotation = Quaternion(3.7513406e-08, 5.5939896e-08, 0.53597313, 0.8442351)
-bones/12/rotation = Quaternion(-0.32072496, 0.31145594, -0.23244175, 0.8637717)
-bones/13/rotation = Quaternion(0.0019091978, 0.0022487515, 0.7051223, 0.7090797)
-bones/15/rotation = Quaternion(0.99100083, 0.08329268, 0.07764905, 0.070358045)
-bones/16/rotation = Quaternion(0.3509042, 6.5732245e-08, -2.524631e-07, 0.9364114)
-bones/17/rotation = Quaternion(-0.598377, -0.20335802, 0.06879965, 0.7719178)
-bones/18/rotation = Quaternion(-1.7615296e-06, 0.9201563, -0.39155114, 4.804369e-07)
-bones/19/rotation = Quaternion(0.99317807, -0.03233628, 0.030227061, 0.10787958)
-bones/20/rotation = Quaternion(0.39993683, -6.0148786e-08, 2.7939433e-07, 0.9165428)
-bones/21/rotation = Quaternion(-0.6263026, 0.11316751, -0.019639168, 0.77107227)
-bones/38/position = Vector3(0.52084064, 0.77986914, -0.057637352)
-bones/40/position = Vector3(-0.5108437, 0.779869, 0.059736915)
+bones/1/position = Vector3(0, 0.37118372, 0)
+bones/4/rotation = Quaternion(-0.55055666, -0.059158392, -0.64775556, 0.52325946)
+bones/5/rotation = Quaternion(3.9045737e-08, -4.1062652e-08, -0.49737725, 0.86753446)
+bones/7/rotation = Quaternion(-0.31858313, -0.33560464, 0.14189991, 0.875065)
+bones/8/rotation = Quaternion(0.0014851547, 0.0014851452, -0.7016331, 0.71253526)
+bones/9/rotation = Quaternion(-0.60970646, 0.07955604, 0.62205255, 0.4847469)
+bones/10/rotation = Quaternion(1.791692e-08, 7.439684e-08, 0.5204687, 0.8538808)
+bones/12/rotation = Quaternion(-0.31756625, 0.31074056, -0.22387598, 0.86745125)
+bones/13/rotation = Quaternion(0.004463552, 0.0052574086, 0.70244855, 0.7117011)
+bones/15/rotation = Quaternion(0.9900093, 0.08357879, 0.07843193, 0.082126565)
+bones/16/rotation = Quaternion(0.38197327, 6.02937e-08, -2.6181078e-07, 0.92417336)
+bones/17/rotation = Quaternion(-0.6146536, -0.20161897, 0.07435433, 0.7589613)
+bones/19/rotation = Quaternion(0.9919531, -0.033060692, 0.029928146, 0.11849283)
+bones/20/rotation = Quaternion(0.42745814, -5.998881e-08, 2.9801734e-07, 0.90403515)
+bones/21/rotation = Quaternion(-0.6411676, 0.11269374, -0.022239361, 0.75875545)
+bones/38/position = Vector3(0.52084064, 0.7685812, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7685811, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2114707, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2069458, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1405,7 +1405,7 @@ directional_shadow_split_1 = 0.02
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(640, 360)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewport" instance=ExtResource("26_st3wf")]

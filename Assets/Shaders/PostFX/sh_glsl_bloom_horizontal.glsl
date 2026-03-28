@@ -33,8 +33,8 @@ float gaussian(float r, float o){
 void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
     vec2 imageSize = vec2(params.bloom_size_x, params.bloom_size_y);
-    vec2 uv = uv_pixel / imageSize;
-	vec4 base = texture(ping_sampler, uv);
+
+    vec2 uv = (uv_pixel + 0.5) / imageSize;
 
     int kernelSize = int(params.blurr_kernelsize);
     vec3 color = vec3(0.0);
@@ -46,7 +46,7 @@ void main() {
         color += col.xyz * g;
     }
 
-    base = vec4(color.xyz, 1.0);
+    vec4 base = vec4(color.xyz, 1.0);
 
     imageStore(pong_texture, uv_pixel, base);
 }
