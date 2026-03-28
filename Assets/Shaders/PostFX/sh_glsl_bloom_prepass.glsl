@@ -115,122 +115,29 @@ void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 	vec4 base = imageLoad(color_image, uv_pixel);
 
-	//none
-	if(params.draw_mode == 0.0){
-		// imageStore(color_image, uv_pixel, base);
-	}
-
     //srgb bloom
     if(params.draw_mode == 1.0){
-        int kernelSize = int(params.blurr_kernelsize);
-        vec3 color = vec3(0.0);
-        for(int i = -kernelSize; i <= kernelSize; i++){
-            for(int j = -kernelSize; j <= kernelSize; j++){
-
-
-                vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
-                vec3 colHSL = RGBToHSL(col).xyz;
-                if (colHSL.z < params.bloom_threshold){
-                    col = vec4(vec3(0.0), 1.0);
-                }
-                color += col.xyz;
-
-
-            }
-        }
-        color /= pow(kernelSize + kernelSize + 1, 2.0);
-
-        imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
-    }
-
-    //srgb bloom mask
-    if(params.draw_mode == 2.0){
         vec3 baseHSL = RGBToHSL(base).xyz;
-        if (baseHSL.z >=params.bloom_threshold){
-            imageStore(color_image, uv_pixel, base);
-        }else{
-            imageStore(color_image, uv_pixel, vec4(vec3(0.0), 1.0));
+        if (baseHSL.z < params.bloom_threshold){
+            base = vec4(vec3(0.0), 1.0);
         }
     }
 
     //oklab bloom
-    if(params.draw_mode == 3.0){
-        int kernelSize = int(params.blurr_kernelsize);
-        vec3 color = vec3(0.0);
-        for(int i = -kernelSize; i <= kernelSize; i++){
-            for(int j = -kernelSize; j <= kernelSize; j++){
-
-
-
-                vec4 col = imageLoad(color_image, uv_pixel + ivec2(i * params.blurr_kernelspacing, j * params.blurr_kernelspacing));
-                vec3 colLAB = linear_srgb_to_oklab(col.xyz);
-                if (colLAB.x < params.bloom_threshold){
-                    col = vec4(vec3(0.0), 1.0);
-                }
-                color += col.xyz;
-
-
-
-            }
-        }
-        color /= pow(kernelSize + kernelSize + 1, 2.0);
-
-        // vec3 colorLAB = linear_srgb_to_oklab(color.xyz);
-        // vec3 baseLAB = linear_srgb_to_oklab(base.xyz);
-
-        // vec3 blendLAB = colorLAB * params.bloom_strength + baseLAB;
-        // vec4 blend = vec4(oklab_to_linear_srgb(blendLAB),1.0);
-
-        imageStore(color_image, uv_pixel, base + vec4(color.xyz, 1.0) * params.bloom_strength);
-        // imageStore(color_image, uv_pixel, blend);
-    }
-
-    //oklab bloom mask
-    if(params.draw_mode == 4.0){
+    if(params.draw_mode == 2.0){
         vec3 baseLAB = linear_srgb_to_oklab(base.xyz);
-        if (baseLAB.x >=params.bloom_threshold){
-            imageStore(color_image, uv_pixel, base);
-        }else{
-            imageStore(color_image, uv_pixel, vec4(vec3(0.0), 1.0));
+        if (baseLAB.x < params.bloom_threshold){
+            base = vec4(vec3(0.0), 1.0);
         }
     }
 
     //srgb Y bloom
-    if(params.draw_mode == 5.0){
-        // int kernelSize = int(params.blurr_kernelsize);
-        // int kernelSize = 9;
-        vec3 color = vec3(0.0);
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 5; j++){
-
-
-
-                vec4 col = imageLoad(color_image, uv_pixel + ivec2(j, i));
-                float Y = 0.2126 * col.r + 0.7152 * col.g + 0.0722 * col.b;
-                if (Y < params.bloom_threshold){
-                    col = vec4(vec3(0.0), 1.0);
-                }
-                // color += col.xyz * gaussian(j, params.bloom_weight);
-                color += col.xyz;
-
-
-
-            }
-        }
-        // color /= pow(kernelSize + kernelSize + 1, 2.0);
-        vec4 test = imageLoad(texture, uv_pixel);
-
-        imageStore(color_image, uv_pixel, test);
-        // imageStore(color_image, uv_pixel, /*base + */ vec4(color.xyz, 1.0) * params.bloom_strength);
-    }
-
-    //srgb Y bloom mask
-    if(params.draw_mode == 6.0){
+    if(params.draw_mode == 3.0){
         float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
-        if (Y >=params.bloom_threshold){
-            imageStore(color_image, uv_pixel, base);
-        }else{
-            imageStore(color_image, uv_pixel, vec4(vec3(0.0), 1.0));
+        if (Y < params.bloom_threshold){
+            base = vec4(vec3(0.0), 1.0);
         }
     }
+
+    imageStore(texture, uv_pixel, base);
 }

@@ -573,9 +573,9 @@ material = SubResource("StandardMaterial3D_oqg80")
 
 [sub_resource type="Environment" id="Environment_oqg80"]
 background_mode = 1
-background_color = Color(0.15294118, 0.4392157, 0.74509805, 1)
+background_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.20784314, 0.2627451, 0.41960785, 1)
+ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
 tonemap_white = 0.25
 glow_intensity = 0.23
 glow_strength = 1.73
@@ -610,14 +610,13 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("31_km60j")
-shader_path = "res://Assets/Shaders/PostFX/sh_glsl_bloom_testing.glsl"
+enable_draw = true
 live_reload = true
 bloom_threshold = 0.5
-bloom_strength = 0.8
-bloom_weight = 0.85
-blurr_kernelsize = 9
-blurr_kernelspacing = 0
-draw_mode = 5
+bloom_weight = 3.0
+blurr_kernelsize = 7
+blurr_passes = 3
+draw_mode = 3
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -672,26 +671,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3703184, 0)
-bones/4/rotation = Quaternion(-0.5504505, -0.058668412, -0.64631546, 0.52520335)
-bones/5/rotation = Quaternion(3.0168096e-08, -3.515115e-08, -0.5004323, 0.86577576)
-bones/7/rotation = Quaternion(-0.31892952, -0.33637434, 0.14308015, 0.87445086)
-bones/8/rotation = Quaternion(0.0014548189, 0.0014548082, -0.7017454, 0.7124249)
-bones/9/rotation = Quaternion(-0.6095352, 0.07911017, 0.6208299, 0.4865992)
-bones/10/rotation = Quaternion(2.8760992e-08, 5.347711e-08, 0.5233727, 0.85210395)
-bones/12/rotation = Quaternion(-0.3179563, 0.3116685, -0.2250877, 0.8666614)
-bones/13/rotation = Quaternion(0.004354596, 0.0051290747, 0.7025631, 0.71158975)
-bones/15/rotation = Quaternion(0.9898131, 0.08364509, 0.07857299, 0.08426034)
-bones/16/rotation = Quaternion(0.3876146, 5.6876825e-08, -2.6489985e-07, 0.92182153)
-bones/17/rotation = Quaternion(-0.617615, -0.20128162, 0.075383365, 0.7565414)
-bones/19/rotation = Quaternion(0.99171627, -0.033197414, 0.02987274, 0.12043488)
-bones/20/rotation = Quaternion(0.43249762, -5.9194782e-08, 3.0090993e-07, 0.90163505)
-bones/21/rotation = Quaternion(-0.6438981, 0.11259899, -0.022723751, 0.7564393)
-bones/38/position = Vector3(0.52084064, 0.7689295, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7689294, 0.059736915)
+bones/1/position = Vector3(0, 0.38858685, 0)
+bones/4/rotation = Quaternion(-0.5571437, -0.06240102, -0.6510014, 0.51175594)
+bones/5/rotation = Quaternion(1.885748e-08, -5.5808812e-08, -0.48300824, 0.87561584)
+bones/7/rotation = Quaternion(-0.31888056, -0.32573068, 0.13951029, 0.8790629)
+bones/8/rotation = Quaternion(0.0009642694, 0.0009642461, -0.70355815, 0.71063656)
+bones/9/rotation = Quaternion(-0.61601454, 0.08228757, 0.62425697, 0.4733477)
+bones/10/rotation = Quaternion(1.979797e-08, 6.19325e-08, 0.50676227, 0.8620859)
+bones/12/rotation = Quaternion(-0.3171806, 0.3002133, -0.2210987, 0.872)
+bones/13/rotation = Quaternion(0.0018483577, 0.0021770906, 0.7051857, 0.709017)
+bones/15/rotation = Quaternion(0.9933471, 0.08333845, 0.07467857, 0.027188983)
+bones/16/rotation = Quaternion(0.23788811, 6.395146e-08, -1.6585712e-07, 0.9712927)
+bones/17/rotation = Quaternion(-0.5395401, -0.20818268, 0.050126057, 0.814275)
+bones/18/rotation = Quaternion(6.888623e-05, 0.92021936, -0.3914032, -1.5538348e-05)
+bones/19/rotation = Quaternion(0.9965075, -0.030122992, 0.031210363, 0.07135363)
+bones/20/rotation = Quaternion(0.30566195, -6.38443e-08, 2.1249157e-07, 0.95214015)
+bones/21/rotation = Quaternion(-0.57587105, 0.1142861, -0.011275897, 0.8094344)
+bones/38/position = Vector3(0.52084064, 0.780143, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7801429, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2060804, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2243489, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1381,6 +1381,7 @@ mesh = SubResource("BoxMesh_xxtuw")
 
 [node name="Daylight" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -1390,6 +1391,7 @@ directional_shadow_split_1 = 0.05
 
 [node name="DaylightShadows" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -1397,7 +1399,6 @@ directional_shadow_split_1 = 0.05
 
 [node name="NightShadows" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.70710677, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710677, -0.5, 0.5, -0.042895563, 2.593475, 0.042895563)
-visible = false
 light_energy = 0.03
 shadow_enabled = true
 shadow_reverse_cull_face = true
@@ -1438,7 +1439,6 @@ skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="CloudShadowsNight" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.9461555, 14.228361, 5.2018223)
-visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_sit86")
@@ -1446,7 +1446,6 @@ skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="stars" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(125.34626, 0, 0, 0, -4.364362e-06, -0.9999996, 0, 99.844955, -4.3711374e-08, 0, 19.38371, 0)
-visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_8qg5c")
 surface_material_override/0 = SubResource("ShaderMaterial_2xp7q")
@@ -1484,10 +1483,8 @@ draw_pass_1 = SubResource("QuadMesh_sit86")
 size = Vector3(20, 20, 20)
 heightfield_mask = 1048567
 
-[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
+[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
 script = ExtResource("54_sf7op")
-_env = NodePath("../PostTesting")
-_plotByOKLCh = false
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_oqg80")
