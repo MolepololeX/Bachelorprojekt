@@ -304,6 +304,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 # Run compute shader.
 				var compute_list
 				
+				
 				#bloom res
 				x_groups = (sizeBloom.x - 1) / 8 + 1
 				y_groups = (sizeBloom.y - 1) / 8 + 1
