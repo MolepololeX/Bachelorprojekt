@@ -70,11 +70,16 @@ var shader_data_postpass : ShaderData
 
 var frame_counter : int = 0
 
-
+var linear_sampler : RID
 
 func _init():
 	rd = RenderingServer.get_rendering_device()
 	_init_all_shaders()
+	
+	var sampler_state = RDSamplerState.new()
+	sampler_state.min_filter = RenderingDevice.SAMPLER_FILTER_LINEAR
+	sampler_state.mag_filter = RenderingDevice.SAMPLER_FILTER_LINEAR
+	linear_sampler = rd.sampler_create(sampler_state)
 	
 	var data := PackedFloat32Array()
 	data.resize(20)
@@ -167,6 +172,16 @@ func _init_shader(shader_path) -> ShaderData:
 	return sd
 
 
+func _get_sampler_uniform(image : RID, binding : int = 0) -> RDUniform:
+	var uniform : RDUniform = RDUniform.new()
+	uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
+	uniform.binding = binding
+	uniform.add_id(linear_sampler)
+	uniform.add_id(image)
+
+	return uniform
+
+
 
 # Called by the rendering thread every frame., partially from Godot Documentation
 func _render_callback(p_effect_callback_type, p_render_data):
@@ -184,6 +199,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		if render_scene_buffers:
 			# Get our render size, this is the 3D render resolution!
 			var size = render_scene_buffers.get_internal_size()
+			var sizeBloom = size;
 			if size.x == 0 and size.y == 0:
 				return
 
@@ -198,6 +214,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 
 			# Render our intermediate at half size
 			if half_size:
+				sizeBloom *= 0.5;
 				effect_size *= 0.5;
 			
 			# If we have buffers for this viewport, check if they are the right size
@@ -219,7 +236,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			for view in range(view_count):
 				
 # parameter unifroms
-				var parameters := PackedFloat32Array([bloom_threshold, bloom_strength, bloom_weight, blurr_kernelsize, blurr_kernelspacing, draw_mode])
+				var parameters := PackedFloat32Array([bloom_threshold, bloom_strength, bloom_weight, blurr_kernelsize, blurr_kernelspacing, draw_mode, size.x, size.y, sizeBloom.x, sizeBloom.y])
 				var parameter_data := parameters.to_byte_array()
 				rd.buffer_update(parameter_storage_buffer, 0, parameter_data.size(), parameter_data)
 				var uniform_parameter := RDUniform.new()
@@ -233,40 +250,53 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				uniform_color.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 				uniform_color.binding = 1
 				uniform_color.add_id(color_image)
+				#var uniform_color = _get_sampler_uniform(color_image, 1)
 				
 				var texture_image = render_scene_buffers.get_texture_slice(context, texture, view, 0, 1, 1)
-				var uniform_texture := RDUniform.new()
-				uniform_texture.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
-				uniform_texture.binding = 2
-				uniform_texture.add_id(texture_image)
+				var uniform_texture_sampler = _get_sampler_uniform(texture_image, 2)
 				
 				var pong_texture_image = render_scene_buffers.get_texture_slice(context, pong_texture, view, 0, 1, 1)
+				var uniform_pong_texture_sampler = _get_sampler_uniform(pong_texture_image, 3)
+
+				var uniform_texture := RDUniform.new()
+				uniform_texture.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
+				uniform_texture.binding = 4
+				uniform_texture.add_id(texture_image)
+				
 				var uniform_pong_texture := RDUniform.new()
 				uniform_pong_texture.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
-				uniform_pong_texture.binding = 3
+				uniform_pong_texture.binding = 5
 				uniform_pong_texture.add_id(pong_texture_image)
-
+				
 				var uniform_set_prepass := UniformSetCacheRD.get_cache(shader_data_prepass.shader, 0, [
 					uniform_parameter, 
 					uniform_color, 
+					uniform_texture_sampler,
+					uniform_pong_texture_sampler,
 					uniform_texture,
 					uniform_pong_texture
 					])
 				var uniform_set_horizontal := UniformSetCacheRD.get_cache(shader_data_horizontal.shader, 0, [
 					uniform_parameter, 
 					uniform_color, 
+					uniform_texture_sampler,
+					uniform_pong_texture_sampler,
 					uniform_texture,
 					uniform_pong_texture
 					])
 				var uniform_set_vertical := UniformSetCacheRD.get_cache(shader_data_vertical.shader, 0, [
 					uniform_parameter, 
 					uniform_color, 
+					uniform_texture_sampler,
+					uniform_pong_texture_sampler,
 					uniform_texture,
 					uniform_pong_texture
 					])
 				var uniform_set_postpass := UniformSetCacheRD.get_cache(shader_data_postpass.shader, 0, [
 					uniform_parameter, 
 					uniform_color, 
+					uniform_texture_sampler,
+					uniform_pong_texture_sampler,
 					uniform_texture,
 					uniform_pong_texture
 					])
@@ -274,14 +304,17 @@ func _render_callback(p_effect_callback_type, p_render_data):
 # Run compute shader.
 				var compute_list
 				
+				#bloom res
+				x_groups = (sizeBloom.x - 1) / 8 + 1
+				y_groups = (sizeBloom.y - 1) / 8 + 1
+				
 				compute_list = rd.compute_list_begin()
 				rd.compute_list_bind_compute_pipeline(compute_list, shader_data_prepass.pipeline)
 				rd.compute_list_bind_uniform_set(compute_list, uniform_set_prepass, 0)
 				rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 				rd.compute_list_end()
 				
-				
-				for i in range(0, blurr_kernelspacing):
+				for i in range(0, blurr_passes):
 					
 					compute_list = rd.compute_list_begin()
 					rd.compute_list_bind_compute_pipeline(compute_list, shader_data_horizontal.pipeline)
@@ -294,6 +327,10 @@ func _render_callback(p_effect_callback_type, p_render_data):
 					rd.compute_list_bind_uniform_set(compute_list, uniform_set_vertical, 0)
 					rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 					rd.compute_list_end()
+				
+				#full res 
+				x_groups = (size.x - 1) / 8 + 1
+				y_groups = (size.y - 1) / 8 + 1
 				
 				compute_list = rd.compute_list_begin()
 				rd.compute_list_bind_compute_pipeline(compute_list, shader_data_postpass.pipeline)

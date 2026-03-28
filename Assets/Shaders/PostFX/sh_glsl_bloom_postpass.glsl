@@ -10,11 +10,17 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 	float blurr_kernelsize;
     float blurr_kernelspacing;
 	float draw_mode;
+    float image_size_x;
+    float image_size_y;
+    float bloom_size_x;
+    float bloom_size_y;
 } params;
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
-layout(rgba16f, set = 0, binding = 2) uniform image2D texture;
-layout(rgba16f, set = 0, binding = 3) uniform image2D pong_texture;
+layout(set = 0, binding = 2) uniform sampler2D ping_sampler;
+layout(set = 0, binding = 3) uniform sampler2D pong_sampler;
+layout(rgba16f, set = 0, binding = 4) uniform image2D ping_texture;
+layout(rgba16f, set = 0, binding = 5) uniform image2D pong_texture;
 
 
 
@@ -113,11 +119,12 @@ float gaussian(float r, float o){
 
 void main() {
 
-
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
+    vec2 uv = uv_pixel / vec2(params.image_size_x, params.image_size_y);
 	vec4 base = imageLoad(color_image, uv_pixel);
-	vec4 bloom = imageLoad(texture, uv_pixel);
+	vec4 bloom = texture(ping_sampler, uv);
     base += bloom * params.bloom_strength;
+    
     imageStore(color_image, uv_pixel, base);
     return;
 }
