@@ -598,7 +598,6 @@ script = ExtResource("24_sit86")
 enable_draw = true
 live_reload = true
 reload_interval_frames = 30
-tonemapper_mode = 2
 draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
@@ -610,7 +609,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("31_km60j")
-enable_draw = true
 bloom_threshold = 0.9
 bloom_weight = 4.5
 blurr_kernelsize = 7
@@ -671,26 +669,26 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3691075, 0)
-bones/4/rotation = Quaternion(-0.55145204, -0.056453735, -0.63777155, 0.5347534)
-bones/5/rotation = Quaternion(3.6698143e-08, -7.0856615e-08, -0.5162233, 0.85645413)
-bones/7/rotation = Quaternion(-0.3214029, -0.3388174, 0.14996646, 0.87144315)
-bones/8/rotation = Quaternion(0.0009967815, 0.0009967812, -0.7034381, 0.71075517)
-bones/9/rotation = Quaternion(-0.61004204, 0.07699035, 0.6133706, 0.4956791)
-bones/10/rotation = Quaternion(1.3982902e-08, 4.9902553e-08, 0.53856254, 0.84258556)
-bones/12/rotation = Quaternion(-0.320492, 0.31503242, -0.23217271, 0.8626329)
-bones/13/rotation = Quaternion(0.003124538, 0.0036802446, 0.7038527, 0.7103295)
-bones/15/rotation = Quaternion(0.9895374, 0.08374609, 0.07876501, 0.08716951)
-bones/16/rotation = Quaternion(0.3953202, 6.374631e-08, -2.6510565e-07, 0.9185434)
-bones/17/rotation = Quaternion(-0.6216657, -0.20080791, 0.076802604, 0.75319934)
-bones/19/rotation = Quaternion(0.9913855, -0.033387735, 0.029796379, 0.12309435)
-bones/20/rotation = Quaternion(0.43940872, -5.743989e-08, 3.0591596e-07, 0.89828736)
-bones/21/rotation = Quaternion(-0.64764994, 0.112464234, -0.023393491, 0.75322914)
-bones/38/position = Vector3(0.52084064, 0.77447885, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.77447873, 0.059736915)
+bones/1/position = Vector3(0, 0.37226155, 0)
+bones/4/rotation = Quaternion(-0.55070466, -0.05975029, -0.6494412, 0.52094203)
+bones/5/rotation = Quaternion(3.8110347e-08, -5.0045962e-08, -0.4937377, 0.86961097)
+bones/7/rotation = Quaternion(-0.31818727, -0.33466634, 0.14050503, 0.87579316)
+bones/8/rotation = Quaternion(0.0015203096, 0.0015203019, -0.70150304, 0.7126633)
+bones/9/rotation = Quaternion(-0.6099281, 0.08009815, 0.62348336, 0.48253557)
+bones/10/rotation = Quaternion(1.0969628e-08, 7.8682355e-08, 0.5170021, 0.85598415)
+bones/12/rotation = Quaternion(-0.31711698, 0.30961573, -0.22244, 0.86838675)
+bones/13/rotation = Quaternion(0.0045180502, 0.0053215995, 0.7023913, 0.71175677)
+bones/15/rotation = Quaternion(0.9902504, 0.08350056, 0.078252904, 0.079424754)
+bones/16/rotation = Quaternion(0.37483117, 6.269738e-08, -2.5835183e-07, 0.92709315)
+bones/17/rotation = Quaternion(-0.6109065, -0.20203672, 0.07305997, 0.76199526)
+bones/19/rotation = Quaternion(0.99224657, -0.032889675, 0.029997835, 0.11603991)
+bones/20/rotation = Quaternion(0.42109266, -6.0417435e-08, 2.9361988e-07, 0.9070177)
+bones/21/rotation = Quaternion(-0.637722, 0.11280993, -0.021630986, 0.76165396)
+bones/38/position = Vector3(0.52084064, 0.76817757, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7681775, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2048695, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2080235, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1405,7 +1403,7 @@ directional_shadow_split_1 = 0.02
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(2560, 1440)
+size = Vector2i(640, 360)
 render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewport" instance=ExtResource("26_st3wf")]
@@ -1438,6 +1436,7 @@ skeleton = NodePath("../../../Level/TempRoot")
 
 [node name="CloudShadowsNight" type="MeshInstance3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.9461555, 14.228361, 5.2018223)
+visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_sit86")
@@ -1482,8 +1481,9 @@ draw_pass_1 = SubResource("QuadMesh_sit86")
 size = Vector3(20, 20, 20)
 heightfield_mask = 1048567
 
-[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport"]
+[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
 script = ExtResource("54_sf7op")
+_env = NodePath("../PostTesting")
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_oqg80")

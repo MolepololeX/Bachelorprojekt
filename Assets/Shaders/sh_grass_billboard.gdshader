@@ -83,7 +83,7 @@ void fragment() {
 	//vec3 col2 = mix(color, color2, smoothstep(0.6, 0.8, noiseLevel.r));
 	//ALBEDO = mix(col2, color2, clamp(UV.y, 0.0, 1.0));
 	
-	float n = texture(highLightNoise, (vec2(vertexWorldPos.x, -vertexWorldPos.z) - TIME * highlightTimeScale) * highlightScale * 0.01).r;
+	float n = texture(highLightNoise, (vec2(vertexWorldPos.x, -vertexWorldPos.z) - highlightTimeScale) * highlightScale * 0.01).r;
 	
 	float s = step(highlightThreshold, n);
 	vec3 highlight = mix(color, color2, step(highlightStep, UV.y));

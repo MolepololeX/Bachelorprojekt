@@ -220,6 +220,7 @@ float calculate_oklab_delta_h(vec3 c1, vec3 c2){
 	float hue_2 = atan(c2.z, c2.y);
 	float delta = hue_2 - hue_1;
 	return atan(sin(delta), cos(delta));
+	// return delta;
 }
 
 float calculate_oklab_delta_C(vec3 c1, vec3 c2){
@@ -350,18 +351,59 @@ void main() {
 	pre = color;
 
 
+	if(params.tonemapper_mode == 0.0){
+		// color = vec4(tonemap(color.x), tonemap(color.y), tonemap(color.z), 1.0);
+
+        // float Y = 0.333 * base.r + 0.333 * base.g + 0.333 * base.b;
+		// float Yt = tonemap(Y);
+		// if(Y == 0.0){
+		// 	color *= 0;
+		// }else{
+		// 	color *= Yt / Y;
+		// }
+	}
 
 	//tonemap srgb
 	if(params.tonemapper_mode == 1.0){
-		// color = RGBToHSL(color);
-		color = vec4(tonemap(color).xyz, 1.0);
-		// color = HSLToRGB(color);
+        float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
+		float Yt = tonemap(Y);
+		if(Y == 0.0){
+			color *= 0;
+		}else{
+			color *= Yt / Y;
+		}
 	}
 	//using oklab L
 	if(params.tonemapper_mode == 2.0){
-		color = vec4(linear_srgb_to_oklab(color.xyz),1.0);
-		color.x = tonemap(color.x);
-		color = vec4(oklab_to_linear_srgb(color.xyz),1.0);
+
+		vec3 lab = linear_srgb_to_oklab(color.xyz);
+
+		float L = lab.x;
+		float C = length(lab.yz);
+		float h = atan(lab.z, lab.y);
+
+		L = tonemap(L);
+
+		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma
+		C *= L / max(lab.x, 1e-5);
+
+		lab.x = L;
+		lab.y = C * cos(h);
+		lab.z = C * sin(h);
+
+		color = vec4(oklab_to_linear_srgb(lab), 1.0);
+
+		// color = vec4(linear_srgb_to_oklab(color.xyz),1.0);
+		// color.x = tonemap(color.x);
+		// color = vec4(oklab_to_linear_srgb(color.xyz),1.0);
+
+		// float L = vec4(linear_srgb_to_oklab(color.xyz),1.0).x;
+		// float Lt = tonemap(L);
+		// if(L == 0.0){
+		// 	color *= 0;
+		// }else{
+		// 	color *= Lt / L;
+		// }
 	}
 
 
@@ -379,8 +421,12 @@ void main() {
 	if(params.draw_mode == 2.0){
 
 		float hue_diff = calculate_oklab_delta_h(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
+		// hue_diff = linear_srgb_to_oklab(pre.xyz).z - linear_srgb_to_oklab(post.xyz).z;
+		// hue_diff = linear_srgb_to_oklab(pre.xyz).y - linear_srgb_to_oklab(post.xyz).y;
 
 		hue_diff /= 6.28318530718; //2PI
+		
+		// hue_diff = linear_srgb_to_oklab(pre.xyz).x - linear_srgb_to_oklab(post.xyz).x;
 		//correct normalization 1 ... -1
 		// hue_diff /= 3.14159265359; //PI
 
@@ -427,8 +473,15 @@ void main() {
 	if(params.draw_mode == 5.0){
 		vec3 c1 = linear_srgb_to_oklab(pre.xyz);
         vec3 c2 = linear_srgb_to_oklab(post.xyz);
-        c1 = oklab_to_xyz(c1);
-        c2 = oklab_to_xyz(c2);
+        // c1 = oklab_to_xyz(c1);
+        // c2 = oklab_to_xyz(c2);
+		mat3 rgb_to_xyz = mat3(
+			0.4124,	0.3576, 0.1805,
+			0.2126, 0.7152, 0.0722,
+			0.0193, 0.1192, 0.9505
+		);
+		c1 = c1 * rgb_to_xyz;
+		c2 = c2 * rgb_to_xyz;
         c1 = xyz_to_cielab(c1);
         c2 = xyz_to_cielab(c2);
 		float diff = calculate_cie_de_2000_H(c1, c2);
@@ -450,8 +503,15 @@ void main() {
 	if(params.draw_mode == 6.0){
 		vec3 c1 = linear_srgb_to_oklab(pre.xyz);
         vec3 c2 = linear_srgb_to_oklab(post.xyz);
-        c1 = oklab_to_xyz(c1);
-        c2 = oklab_to_xyz(c2);
+        // c1 = oklab_to_xyz(c1);
+        // c2 = oklab_to_xyz(c2);
+		mat3 rgb_to_xyz = mat3(
+			0.4124,	0.3576, 0.1805,
+			0.2126, 0.7152, 0.0722,
+			0.0193, 0.1192, 0.9505
+		);
+		c1 = c1 * rgb_to_xyz;
+		c2 = c2 * rgb_to_xyz;
         c1 = xyz_to_cielab(c1);
         c2 = xyz_to_cielab(c2);
 		float diff = calculate_cie_de_2000_C(c1, c2);
@@ -473,8 +533,15 @@ void main() {
 	if(params.draw_mode == 7.0){
         vec3 c1 = linear_srgb_to_oklab(pre.xyz);
         vec3 c2 = linear_srgb_to_oklab(post.xyz);
-        c1 = oklab_to_xyz(c1);
-        c2 = oklab_to_xyz(c2);
+		// c1 = oklab_to_xyz(c1);
+        // c2 = oklab_to_xyz(c2);
+		mat3 rgb_to_xyz = mat3(
+			0.4124,	0.3576, 0.1805,
+			0.2126, 0.7152, 0.0722,
+			0.0193, 0.1192, 0.9505
+		);
+		c1 = c1 * rgb_to_xyz;
+		c2 = c2 * rgb_to_xyz;
         c1 = xyz_to_cielab(c1);
         c2 = xyz_to_cielab(c2);
 		float diff = calculate_cie_de_2000(c1, c2);
