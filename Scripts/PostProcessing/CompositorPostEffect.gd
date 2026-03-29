@@ -13,10 +13,12 @@ enum DrawMode{
 	colorImage,	# 1
 	oklab_d_h,	# 2
 	oklab_d_C,	# 3
-	oklab_d_E,	# 4
-	cie_d_H,	# 5
-	cie_d_C,	# 6
-	cie_d_E		# 7
+	oklab_d_L,  # 4
+	oklab_d_E,	# 5
+	cie_d_H,	# 6
+	cie_d_C,	# 7
+	cie_d_L,    # 8
+	cie_d_E		# 9
 }
 
 @export

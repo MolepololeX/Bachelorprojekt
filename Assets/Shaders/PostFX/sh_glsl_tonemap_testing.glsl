@@ -285,6 +285,30 @@ float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 	return d_H;
 }
 
+float calculate_cie_de_2000_L(vec3 cs, vec3 cb){
+	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
+	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+
+	float Ls = cs.x;
+	float as = (1.0 + G)*cs.y;
+	float bs = cs.z;
+
+	float Lb = cb.x;
+	float ab = (1.0 + G)*cb.y;
+	float bb = cb.z;
+
+	float Cs = sqrt(as * as + bs * bs);
+	float Cb = sqrt(ab * ab + bb * bb);
+
+	float hs = atan(bs , as);
+	float hb = atan(bb , ab);
+
+	float d_h = hb - hs;
+	d_h = atan(sin(d_h), cos(d_h));
+	float d_L = Lb - Ls;
+	return d_L;
+}
+
 float calculate_cie_de_2000(vec3 cs, vec3 cb){
 	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
 	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
@@ -343,6 +367,7 @@ void main() {
 
 	vec4 base = imageLoad(color_image, uv_pixel);
 	base = base * params.base_exposure;
+	base = max(base, 0.0); //remove possible negative values, these might happen because of oklab colors from the test scene that are invalid rgb values/imaginary colors
 	vec4 color = base;
 
 	vec4 pre;
@@ -351,21 +376,46 @@ void main() {
 	pre = color;
 
 
-	if(params.tonemapper_mode == 0.0){
-		// color = vec4(tonemap(color.x), tonemap(color.y), tonemap(color.z), 1.0);
+	//testing
+	if(params.draw_mode == 0.0){
 
-        // float Y = 0.333 * base.r + 0.333 * base.g + 0.333 * base.b;
-		// float Yt = tonemap(Y);
-		// if(Y == 0.0){
-		// 	color *= 0;
-		// }else{
-		// 	color *= Yt / Y;
-		// }
+		//use either oklab l or Y for quantization
+		// float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
+		vec3 lab = linear_srgb_to_oklab(color.xyz);
+		float Y = lab.x;
+		if (Y > 1.0) Y = 1.0;
+
+		float steps = 16.0;
+		Y = floor(Y * (steps - 1)) / (steps - 1);
+
+		if(params.tonemapper_mode == 1.0){
+			float H = fract((Y * 0.33 - 0.35));
+			float S = 0.5;
+			float L = Y * 0.5 + 0.05;
+
+			vec4 colHSL = vec4(H, S, L, 1.0);
+			color = HSLToRGB(colHSL);
+		}
+
+		if(params.tonemapper_mode == 2.0){
+			float h = fract((Y * 0.33 - 0.35)) * 6.28318530718;//transform to radiants since oklab hue is -3.14...3.14
+			float C = 0.12;
+			float L = Y * 0.5 + 0.05;
+
+			lab.x = L;
+			lab.y = C * cos(h);
+			lab.z = C * sin(h);
+			color = vec4(oklab_to_linear_srgb(lab), 1.0);
+		}
+
+		imageStore(color_image, uv_pixel, color);
 	}
 
-	//tonemap srgb
+	//tonemap srgb Y
 	if(params.tonemapper_mode == 1.0){
         float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
+		// float gamma = 2.2;
+		// Y = pow(Y, 1.0/gamma);
 		float Yt = tonemap(Y);
 		if(Y == 0.0){
 			color *= 0;
@@ -373,7 +423,8 @@ void main() {
 			color *= Yt / Y;
 		}
 	}
-	//using oklab L
+
+	//tonemap oklab L
 	if(params.tonemapper_mode == 2.0){
 
 		vec3 lab = linear_srgb_to_oklab(color.xyz);
@@ -392,18 +443,6 @@ void main() {
 		lab.z = C * sin(h);
 
 		color = vec4(oklab_to_linear_srgb(lab), 1.0);
-
-		// color = vec4(linear_srgb_to_oklab(color.xyz),1.0);
-		// color.x = tonemap(color.x);
-		// color = vec4(oklab_to_linear_srgb(color.xyz),1.0);
-
-		// float L = vec4(linear_srgb_to_oklab(color.xyz),1.0).x;
-		// float Lt = tonemap(L);
-		// if(L == 0.0){
-		// 	color *= 0;
-		// }else{
-		// 	color *= Lt / L;
-		// }
 	}
 
 
@@ -454,8 +493,22 @@ void main() {
 		imageStore(color_image, uv_pixel, hue_diff_mask);
 	}
 
-	//oklab deltaE
+	//oklab delta_L
 	if(params.draw_mode == 4.0){
+		float hue_diff = tonemap(linear_srgb_to_oklab(pre.xyz).x) - linear_srgb_to_oklab(post.xyz).x;
+
+		vec4 hue_diff_mask = vec4(vec3(0.0), 1.0);
+		if(hue_diff < 0.0){
+			hue_diff_mask.r = abs(hue_diff);
+		}else{
+			hue_diff_mask.b = hue_diff;
+		}
+
+		imageStore(color_image, uv_pixel, hue_diff_mask);
+	}
+
+	//oklab deltaE
+	if(params.draw_mode == 5.0){
 
 		float diff = calculate_oklab_delta_E(linear_srgb_to_oklab(pre.xyz), linear_srgb_to_oklab(post.xyz));
 
@@ -470,11 +523,9 @@ void main() {
 	}
 
 	//cie delta_H
-	if(params.draw_mode == 5.0){
-		vec3 c1 = linear_srgb_to_oklab(pre.xyz);
-        vec3 c2 = linear_srgb_to_oklab(post.xyz);
-        // c1 = oklab_to_xyz(c1);
-        // c2 = oklab_to_xyz(c2);
+	if(params.draw_mode == 6.0){
+		vec3 c1 = pre.xyz;
+        vec3 c2 = post.xyz;
 		mat3 rgb_to_xyz = mat3(
 			0.4124,	0.3576, 0.1805,
 			0.2126, 0.7152, 0.0722,
@@ -500,11 +551,9 @@ void main() {
 	}
 
 	//cie delta_C
-	if(params.draw_mode == 6.0){
-		vec3 c1 = linear_srgb_to_oklab(pre.xyz);
-        vec3 c2 = linear_srgb_to_oklab(post.xyz);
-        // c1 = oklab_to_xyz(c1);
-        // c2 = oklab_to_xyz(c2);
+	if(params.draw_mode == 7.0){
+		vec3 c1 = pre.xyz;
+        vec3 c2 = post.xyz;
 		mat3 rgb_to_xyz = mat3(
 			0.4124,	0.3576, 0.1805,
 			0.2126, 0.7152, 0.0722,
@@ -529,12 +578,39 @@ void main() {
 		imageStore(color_image, uv_pixel, diff_mask);
 	}
 
+	//cie delta_L
+	if(params.draw_mode == 8.0){
+		vec3 c1 = pre.xyz;
+        vec3 c2 = post.xyz;
+		mat3 rgb_to_xyz = mat3(
+			0.4124,	0.3576, 0.1805,
+			0.2126, 0.7152, 0.0722,
+			0.0193, 0.1192, 0.9505
+		);
+		c1 = c1 * rgb_to_xyz;
+		c2 = c2 * rgb_to_xyz;
+        c1 = xyz_to_cielab(c1);
+        c2 = xyz_to_cielab(c2);
+		c1.x = tonemap(c1.x);
+		float diff = calculate_cie_de_2000_L(c1, c2);
+
+		//cielab normalisierung
+		diff/=100.0;
+
+		vec4 diff_mask = vec4(vec3(0.0), 1.0);
+		if(diff < 0.0){
+			diff_mask.r = abs(diff);
+		}else{
+			diff_mask.b = diff;
+		}
+
+		imageStore(color_image, uv_pixel, diff_mask);
+	}
+
     //ciede2000
-	if(params.draw_mode == 7.0){
-        vec3 c1 = linear_srgb_to_oklab(pre.xyz);
-        vec3 c2 = linear_srgb_to_oklab(post.xyz);
-		// c1 = oklab_to_xyz(c1);
-        // c2 = oklab_to_xyz(c2);
+	if(params.draw_mode == 9.0){
+		vec3 c1 = pre.xyz;
+        vec3 c2 = post.xyz;
 		mat3 rgb_to_xyz = mat3(
 			0.4124,	0.3576, 0.1805,
 			0.2126, 0.7152, 0.0722,

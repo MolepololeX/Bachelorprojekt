@@ -32,7 +32,7 @@ script = ExtResource("1_kx62c")
 enable_draw = true
 live_reload = true
 reload_interval_frames = 30
-tonemapper_mode = 2
+tonemapper_mode = 1
 draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
@@ -45,10 +45,10 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("3_k0f2q")
 live_reload = true
-bloom_threshold = 0.8
+bloom_threshold = 0.4
 bloom_strength = 0.5
 blurr_kernelsize = 5
-draw_mode = 2
+draw_mode = 3
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
@@ -207,10 +207,9 @@ size = 16.0
 [node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
 script = ExtResource("1_rgddx")
 _graphRes = 1024
-_pointRadius = 5
+_pointRadius = 15
 _env = NodePath("../PostTesting")
 _fileNameAtt = "rgb_plot"
-_plotByOKLCh = false
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_duult")

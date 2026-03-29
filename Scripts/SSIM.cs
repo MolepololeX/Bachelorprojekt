@@ -18,6 +18,8 @@ public partial class SSIM : Node
 	[Export] private WorldEnvironment _env = null;
 	[Export] private string _fileNameAtt = "";
 	[ExportToolButton("Create Chart Delta By Hue")] public Callable CreateDeltaHGraph => Callable.From(Create_Chart_Delta_By_Hue);
+	[ExportToolButton("Create Chart Chroma By Brightness")] public Callable CreateChromaBrightness => Callable.From(Create_Chart_Chroma_Brightness);
+	[ExportToolButton("Create Chart Hue By Brightness")] public Callable CreateHueBrightness => Callable.From(Create_Chart_Hue_Brightness);
 	// [ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
 
 
@@ -90,6 +92,184 @@ public partial class SSIM : Node
 	public async Task CreateAllGraphs()
 	{
 		// await Create_Histogram_Delta_Hue();
+	}
+
+	public void Create_Chart_Hue_Brightness()
+	{
+		_ = Create_Chart_Hue_Brightness_Task();
+	}
+
+	public async Task Create_Chart_Hue_Brightness_Task()
+	{
+		if (_autoCapturePrePost)
+		{
+			await CapturePrePost();
+		}
+
+		int M = comparisonImage.GetWidth();
+		int N = comparisonImage.GetHeight();
+
+		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+		chart.Fill(_backGroundColor);
+
+		//TODO: Draw Grid
+		for (int x = 0; x < _graphRes; x++)
+		{
+			for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
+			{
+				chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
+			}
+		}
+
+		(float, float)[] pairs = new (float, float)[M * N];
+
+
+		for (int x = 0; x < M; x++)
+		{
+			for (int y = 0; y < N; y++)
+			{
+				Color c = comparisonImage.GetPixel(x, y);
+				Lab c_oklab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+
+				double hue = Math.Atan2(c_oklab.b, c_oklab.a) / (Math.PI * 2.0);
+				float delta = (float)hue;
+
+				int ix = 0;
+				int iy = 0;
+
+				ix = (int)(c_oklab.L * (_graphRes - 1));
+
+				if (delta <= 0.0)
+				{
+					iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+					// c = Colors.Blue;
+				}
+				else
+				{
+					iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+					// c = Colors.Red;
+				}
+
+				if (ix >= _graphRes || ix < 0)
+				{
+					ix = 0;
+					// GD.PushWarning("Hue was greater than 1");
+				}
+				if (iy >= _graphRes || iy < 0)
+				{
+					iy = 0;
+					// GD.PushWarning("Delta value was greater than 1: " + delta);
+				}
+
+				for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+				{
+					for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+					{
+						if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+						if (rx + ix >= _graphRes || rx + ix < 0) continue;
+						if (ry + iy >= _graphRes || ry + iy < 0) continue;
+						chart.SetPixel(ix + rx, iy + ry, c);
+					}
+				}
+
+				pairs[x * N + y] = (c.H, delta);
+			}
+		}
+
+		// chart.FlipY();
+
+		string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "_" + _fileNameAtt + "_" + ".png";
+		GD.Print("Saved chart to: " + imagePath);
+		GD.Print(chart.SavePng(imagePath));
+	}
+
+
+	public void Create_Chart_Chroma_Brightness()
+	{
+		_ = Create_Chart_Chroma_Brightness_Task();
+	}
+
+	public async Task Create_Chart_Chroma_Brightness_Task()
+	{
+		if (_autoCapturePrePost)
+		{
+			await CapturePrePost();
+		}
+
+		int M = comparisonImage.GetWidth();
+		int N = comparisonImage.GetHeight();
+
+		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+		chart.Fill(_backGroundColor);
+
+		//TODO: Draw Grid
+		for (int x = 0; x < _graphRes; x++)
+		{
+			for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
+			{
+				chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
+			}
+		}
+
+		(float, float)[] pairs = new (float, float)[M * N];
+
+
+		for (int x = 0; x < M; x++)
+		{
+			for (int y = 0; y < N; y++)
+			{
+				Color c = comparisonImage.GetPixel(x, y);
+				Lab c_oklab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+
+				float delta = new Vector2(c_oklab.a, c_oklab.b).Length();
+
+				int ix = 0;
+				int iy = 0;
+
+				ix = (int)(c_oklab.L * (_graphRes - 1));
+
+				if (delta <= 0.0)
+				{
+					iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+					// c = Colors.Blue;
+				}
+				else
+				{
+					iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+					// c = Colors.Red;
+				}
+
+				if (ix >= _graphRes || ix < 0)
+				{
+					ix = 0;
+					// GD.PushWarning("Hue was greater than 1");
+				}
+				if (iy >= _graphRes || iy < 0)
+				{
+					iy = 0;
+					// GD.PushWarning("Delta value was greater than 1: " + delta);
+				}
+
+				for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+				{
+					for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+					{
+						if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+						if (rx + ix >= _graphRes || rx + ix < 0) continue;
+						if (ry + iy >= _graphRes || ry + iy < 0) continue;
+						chart.SetPixel(ix + rx, iy + ry, c);
+					}
+				}
+
+				pairs[x * N + y] = (c.H, delta);
+			}
+		}
+
+		// chart.FlipY();
+
+		string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "_" + _fileNameAtt + "_" + ".png";
+		GD.Print("Saved chart to: " + imagePath);
+		GD.Print(chart.SavePng(imagePath));
 	}
 
 	public void Create_Chart_Delta_By_Hue()
