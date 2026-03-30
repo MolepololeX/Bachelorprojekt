@@ -85,7 +85,7 @@ public partial class DataManager : Node
 			for (int y = 0; y < N; y++)
 			{
 				Color c = img.GetPixel(x, y);
-				c.SrgbToLinear();//propably not necessary
+				c = c.SrgbToLinear(); //highly necessary
 
 				float delta = 0.0f;
 

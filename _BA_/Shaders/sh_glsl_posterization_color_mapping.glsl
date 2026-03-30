@@ -67,27 +67,11 @@ void main() {
 
 	//apply palette
 	if(params.palette_type == 0.0){
-		// color = vec4(vec3(Y), 1.0);
 		color = imageLoad(palette_hsl_image, ivec2(steps * Y,0));
-		// float H = fract((Y * 0.33 - 0.35));
-		// float S = 0.5;
-		// float L = Y * 0.5 + 0.05;
-
-		// vec4 colHSL = vec4(H, S, L, 1.0);
-		// color = HSLToRGB(colHSL);
 	}
 
 	if(params.palette_type == 1.0){
-		// color = vec4(vec3(Y), 1.0);
 		color = imageLoad(palette_oklch_image, ivec2(steps * Y,0));
-		// float h = fract((Y * 0.33 - 0.35)) * 6.28318530718;//transform to radiants since oklab hue is -3.14...3.14
-		// float C = 0.12;
-		// float L = Y * 0.5 + 0.05;
-
-		// lab.x = L;
-		// lab.y = C * cos(h);
-		// lab.z = C * sin(h);
-		// color = vec4(oklab_to_linear_srgb(lab), 1.0);
 	}
 
 
