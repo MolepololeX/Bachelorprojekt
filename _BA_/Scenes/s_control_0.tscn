@@ -1,10 +1,10 @@
 [gd_scene load_steps=46 format=3 uid="uid://bck3bskcnoh8q"]
 
-[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="1_kx62c"]
-[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://Scripts/SSIM.cs" id="1_rgddx"]
-[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://Scripts/PostProcessing/BloomCompositorEffect.gd" id="3_k0f2q"]
-[ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://Scenes/Levels/GenerateColorGrid.cs" id="4_k0f2q"]
-[ext_resource type="Texture2D" uid="uid://dfps58dy8vwb0" path="res://color_palette_oklab.png" id="5_duult"]
+[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="1_xmvkv"]
+[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="2_1nhdg"]
+[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="3_yhjoh"]
+[ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://_BA_/Scripts/GenerateColorGrid.cs" id="4_gwmet"]
+[ext_resource type="Texture2D" uid="uid://dfps58dy8vwb0" path="res://color_palette_oklab.png" id="5_adlj3"]
 
 [sub_resource type="Environment" id="Environment_duult"]
 background_mode = 1
@@ -28,7 +28,7 @@ enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
-script = ExtResource("1_kx62c")
+script = ExtResource("2_1nhdg")
 enable_draw = true
 live_reload = true
 reload_interval_frames = 30
@@ -43,12 +43,13 @@ enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
-script = ExtResource("3_k0f2q")
+script = ExtResource("3_yhjoh")
+enable_draw = true
 live_reload = true
-bloom_threshold = 0.4
+bloom_threshold = 0.9
 bloom_strength = 0.5
 blurr_kernelsize = 5
-draw_mode = 3
+draw_mode = 2
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
@@ -191,7 +192,7 @@ size = Vector2(0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fb7it"]
 shading_mode = 0
-albedo_texture = ExtResource("5_duult")
+albedo_texture = ExtResource("5_adlj3")
 texture_filter = 0
 
 [node name="TonemappingTest0" type="Node3D"]
@@ -205,7 +206,7 @@ projection = 1
 size = 16.0
 
 [node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
-script = ExtResource("1_rgddx")
+script = ExtResource("1_xmvkv")
 _graphRes = 1024
 _pointRadius = 15
 _env = NodePath("../PostTesting")
@@ -423,7 +424,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_sfcqk")
 
 [node name="GridGenerator" type="Node" parent="." node_paths=PackedStringArray("_startPos")]
-script = ExtResource("4_k0f2q")
+script = ExtResource("4_gwmet")
 _startPos = NodePath("../GridStart")
 _nodeMesh = SubResource("PlaneMesh_k0f2q")
 _nodeSpacing = 0.1

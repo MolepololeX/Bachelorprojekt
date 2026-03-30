@@ -1,6 +1,6 @@
 @tool
 extends CompositorEffect
-class_name PostProcessShader
+class_name Tonemapping_Post
 
 enum TonemapperMode{
 	linear,
@@ -24,7 +24,7 @@ enum DrawMode{
 @export
 var enable_draw : bool = false
 @export
-var shader_path : String = "res://Assets/Shaders/PostFX/sh_glsl_tonemap_testing.glsl"
+var shader_path : String = "res://_BA_/Shaders/sh_glsl_tonemap_testing.glsl"
 @export
 var live_reload : bool = false
 @export

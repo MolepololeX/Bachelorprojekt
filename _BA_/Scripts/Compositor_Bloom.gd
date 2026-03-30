@@ -1,6 +1,6 @@
 @tool
 extends CompositorEffect
-class_name BloomPostProcessShader
+class_name Bloom_Post
 
 class ShaderData : 
 	var shader : RID
@@ -24,13 +24,13 @@ enum DrawMode{
 @export
 var enable_draw : bool = false
 @export
-var shader_path_prepass : String = "res://Assets/Shaders/PostFX/sh_glsl_bloom_prepass.glsl"
+var shader_path_prepass : String = "res://_BA_/Shaders/sh_glsl_bloom_prepass.glsl"
 @export
-var shader_path_horizontal : String = "res://Assets/Shaders/PostFX/sh_glsl_bloom_horizontal.glsl"
+var shader_path_horizontal : String = "res://_BA_/Shaders/sh_glsl_bloom_horizontal.glsl"
 @export
-var shader_path_vertical : String = "res://Assets/Shaders/PostFX/sh_glsl_bloom_vertical.glsl"
+var shader_path_vertical : String = "res://_BA_/Shaders/sh_glsl_bloom_vertical.glsl"
 @export
-var shader_path_postpass : String = "res://Assets/Shaders/PostFX/sh_glsl_bloom_postpass.glsl"
+var shader_path_postpass : String = "res://_BA_/Shaders/sh_glsl_bloom_postpass.glsl"
 @export
 var live_reload : bool = false
 @export

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cyf2yo5mt2imq"]
 
-[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="1_5eb0e"]
-[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://Scripts/PostProcessing/BloomCompositorEffect.gd" id="2_q1ytr"]
+[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="1_5eb0e"]
+[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="2_q1ytr"]
 
 [sub_resource type="Environment" id="Environment_oqg80"]
 background_mode = 1

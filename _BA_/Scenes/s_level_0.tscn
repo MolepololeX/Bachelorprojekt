@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=134 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_k6vpp"]
 [ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="2_al5aw"]
@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://ck6qon7rivb6u" path="res://Scenes/Environment/s_bush.tscn" id="23_al5aw"]
 [ext_resource type="Material" uid="uid://dx1kdlebm467m" path="res://Assets/Materials/Toon/sm_toon_dark_steel.tres" id="23_km60j"]
 [ext_resource type="Shader" uid="uid://ddtvr04n8rdjk" path="res://Assets/Shaders/sh_stars.gdshader" id="23_roplx"]
-[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://Scripts/PostProcessing/CompositorPostEffect.gd" id="24_sit86"]
+[ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="24_sit86"]
 [ext_resource type="Script" uid="uid://bh3mglv5tsnmk" path="res://Scripts/Testing/ObliqueReflectionCamera.cs" id="24_wmlk7"]
 [ext_resource type="PackedScene" uid="uid://bewxybksr5me8" path="res://Scenes/Levels/s_inventory_display.tscn" id="25_wiqqe"]
 [ext_resource type="PackedScene" uid="uid://bm7odeqtwcook" path="res://Scenes/Camera/s_camera_rig.tscn" id="26_st3wf"]
@@ -39,7 +39,7 @@
 [ext_resource type="Material" uid="uid://cnloy7ao6i21e" path="res://Assets/Materials/Foliage/sm_cloud_shadows_night.tres" id="28_tgo4h"]
 [ext_resource type="Script" uid="uid://c1rn8hsf4fqwy" path="res://Scripts/UI/ZoomDisplay.cs" id="29_81vew"]
 [ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/s_debug_inventory.tscn" id="30_6pq5l"]
-[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://Scripts/PostProcessing/BloomCompositorEffect.gd" id="31_km60j"]
+[ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="31_km60j"]
 [ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/s_debug_fps.tscn" id="31_yuh1v"]
 [ext_resource type="Script" uid="uid://c2mmo1cwktjs5" path="res://Scripts/Testing/TestButton.cs" id="32_6iawo"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="34_al5aw"]
@@ -49,12 +49,13 @@
 [ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="37_2cb14"]
 [ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/ItemsWorld/s_wood_plank.tscn" id="38_16jvh"]
 [ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="39_r6n5j"]
+[ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_7sabu"]
 [ext_resource type="PackedScene" uid="uid://ceb2yhmkluqi" path="res://Scenes/Structures/s_pier.tscn" id="41_2xp7q"]
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="43_3rm2s"]
 [ext_resource type="PackedScene" uid="uid://ctly6ohubsyv0" path="res://Scenes/Player/s_fishing_rod.tscn" id="44_v7n50"]
 [ext_resource type="Material" uid="uid://bfyloeklnnt1v" path="res://Assets/Materials/sm_rain_distorted.tres" id="45_oqg80"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="46_oqg80"]
-[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://Scripts/SSIM.cs" id="54_sf7op"]
+[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="54_sf7op"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
 render_priority = 0
@@ -614,14 +615,24 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("24_sit86")
 enable_draw = true
-live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 2
 draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
+[sub_resource type="CompositorEffect" id="CompositorEffect_8auip"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("40_7sabu")
+tonemapper_mode = 2
+metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
+
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_7sabu"), SubResource("CompositorEffect_sit86")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_7sabu"), SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_8auip")])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wmlk7"]
 frequency = 0.1
@@ -672,27 +683,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.3777643, 0)
-bones/4/rotation = Quaternion(-0.5517234, -0.06249646, -0.6563743, 0.51075274)
-bones/5/rotation = Quaternion(1.0855314e-08, -5.333247e-08, -0.4777638, 0.8784884)
-bones/7/rotation = Quaternion(-0.31672964, -0.3302005, 0.13454738, 0.87894654)
-bones/8/rotation = Quaternion(0.0016668226, 0.0016668217, -0.70096046, 0.71319634)
-bones/9/rotation = Quaternion(-0.6112095, 0.08263572, 0.6293335, 0.47279358)
-bones/10/rotation = Quaternion(3.6335216e-08, 4.8480096e-08, 0.5017645, 0.86500436)
-bones/12/rotation = Quaternion(-0.31538805, 0.3043788, -0.21628605, 0.8724129)
-bones/13/rotation = Quaternion(0.004312138, 0.0050790636, 0.7026077, 0.71154624)
-bones/15/rotation = Quaternion(0.9914321, 0.08320457, 0.07726117, 0.06457723)
-bones/16/rotation = Quaternion(0.33568865, 5.6984128e-08, -2.3750259e-07, 0.9419731)
-bones/17/rotation = Quaternion(-0.5904284, -0.2041373, 0.06615188, 0.77803993)
-bones/18/rotation = Quaternion(1.0453423e-05, 0.92016685, -0.39152643, -2.3205441e-06)
-bones/19/rotation = Quaternion(0.9937285, -0.032000594, 0.030369166, 0.10274862)
-bones/20/rotation = Quaternion(0.3866561, -6.092372e-08, 2.705709e-07, 0.922224)
-bones/21/rotation = Quaternion(-0.6191573, 0.11337025, -0.018412288, 0.776822)
-bones/38/position = Vector3(0.52084064, 0.76790327, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.76790315, 0.059736915)
+bones/1/position = Vector3(0, 0.38129792, 0)
+bones/4/rotation = Quaternion(-0.5562802, -0.058308918, -0.639386, 0.5275775)
+bones/5/rotation = Quaternion(3.410468e-08, -4.149472e-08, -0.5080565, 0.8613238)
+bones/7/rotation = Quaternion(-0.32172582, -0.33203685, 0.14922456, 0.8740573)
+bones/8/rotation = Quaternion(0.00036912356, 0.00036910744, -0.70575076, 0.70846015)
+bones/9/rotation = Quaternion(-0.61463356, 0.0784873, 0.6143743, 0.4884769)
+bones/10/rotation = Quaternion(3.0760305e-08, 5.9348963e-08, 0.5307441, 0.8475322)
+bones/12/rotation = Quaternion(-0.32036287, 0.30787656, -0.23116079, 0.86553127)
+bones/13/rotation = Quaternion(0.0011779354, 0.0013874308, 0.7058838, 0.7083253)
+bones/15/rotation = Quaternion(0.99213845, 0.08313001, 0.07653042, 0.05379389)
+bones/16/rotation = Quaternion(0.3073963, 6.364094e-08, -2.1302928e-07, 0.9515816)
+bones/17/rotation = Quaternion(-0.5756834, -0.20546786, 0.06135243, 0.7890548)
+bones/18/rotation = Quaternion(2.81919e-05, 0.92018276, -0.391489, -6.3335347e-06)
+bones/19/rotation = Quaternion(0.99466556, -0.031410225, 0.030625477, 0.09335932)
+bones/20/rotation = Quaternion(0.36240202, -6.171242e-08, 2.524036e-07, 0.93202186)
+bones/21/rotation = Quaternion(-0.6061302, 0.11369815, -0.01621619, 0.7870299)
+bones/38/position = Vector3(0.52084064, 0.7831221, -0.057637352)
+bones/40/position = Vector3(-0.5108437, 0.783122, 0.05973692)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2135264, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.21706, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("44_v7n50")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)

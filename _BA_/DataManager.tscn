@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmrgu6lnn2o2"]
 
-[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://Scripts/SSIM.cs" id="1_5npui"]
+[ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="1_5npui"]
 
 [node name="SSIM&Percentile Calculator" type="Node"]
 script = ExtResource("1_5npui")
