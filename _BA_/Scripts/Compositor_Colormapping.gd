@@ -26,6 +26,7 @@ var reload_interval_frames : int = 60
 @export_range(0, 128, 1) var steps : int = 8
 @export var palette_type : PaletteType = PaletteType.HSL
 @export var quantization_type : QuantizationType = QuantizationType.oklab_L
+@export_range(0.0, 0.3, 0.00001) var dither_spread : float = 0.05
 
 @export_group("Palettes")
 @export_range(0.0, 360.0, 0.1) var hue_start : float = 0.0
@@ -155,6 +156,7 @@ func _hsl_to_rgb(hsl : Vector3) -> Vector3:
 
 
 func _create_palettes() -> void:
+	
 	image_hsl = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
 	image_hsl.fill(Color(1, 0, 0)) # example
 	palette_preview_hsl = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
@@ -163,7 +165,14 @@ func _create_palettes() -> void:
 	image_oklch.fill(Color(0, 0, 1)) # example
 	palette_preview_oklch = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
 	
+	# not really performant but avoids memory leaks and does not matter since its only for debugging
+	if(rd.texture_is_valid(palette_hsl)):
+		rd.free_rid(palette_hsl)
+	if(rd.texture_is_valid(palette_oklch)):
+		rd.free_rid(palette_oklch)
+	
 	for i in range(steps) :
+		
 		var col := Color.WHITE
 		
 		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
@@ -201,7 +210,11 @@ func _create_palettes() -> void:
 		col.g = c.y
 		col.b = c.z
 		
-		image_oklch.set_pixel(i, 0, col)
+		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
+		var okhsl := Color.from_ok_hsl(H, hsl_saturation, L)
+		okhsl = okhsl.srgb_to_linear()
+		
+		image_oklch.set_pixel(i, 0, okhsl)
 	
 	palette_preview_hsl.copy_from(image_hsl)
 	palette_preview_oklch.copy_from(image_oklch)
@@ -307,7 +320,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				#texture_sampler.mip_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				#texture_sampler = rd.sampler_create(texture_sampler)
 
-				var parameters := PackedFloat32Array([steps, palette_type, quantization_type])
+				var parameters := PackedFloat32Array([steps, palette_type, quantization_type, dither_spread])
 				#var inv_proj_mat = p_render_data.get_render_scene_data().get_cam_projection().inverse()
 				#var inv_proj_mat_array := PackedVector4Array([inv_proj_mat.x, inv_proj_mat.y, inv_proj_mat.z, inv_proj_mat.w])
 

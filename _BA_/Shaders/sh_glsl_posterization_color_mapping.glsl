@@ -7,6 +7,7 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 	float steps; //== palette_size
 	float palette_type;
 	float quantization_type;
+	float dither_spread;
 } params;
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
@@ -44,8 +45,6 @@ void main() {
 	base = max(base, 0.0); //remove possible negative values, these might happen because of oklab colors from the test scene that are invalid rgb values/imaginary colors
 	vec4 color = base;
 
-
-
 	//use either oklab L or Y for quantization
 	float Y;
 	if(params.quantization_type == 0){
@@ -56,6 +55,19 @@ void main() {
 		Y = lab.x;
 	}
 	if (Y >= 1.0) Y = 0.999999;
+
+
+
+	float[][] bayerMatrix = float[4][4](
+		float[4](	0,	8,	2,	10	),
+		float[4](	12,	4,	14,	6	),
+		float[4](	3,	11,	1,	9	),
+		float[4](	15,	7,	13,	5	)
+	);
+	float M = bayerMatrix[int(mod(uv_pixel.x, 4))][int(mod(uv_pixel.y, 4))];
+	M *= 1.0 / pow(4, 2.0) - 0.5;
+
+	Y += M * params.dither_spread;
 
 
 
