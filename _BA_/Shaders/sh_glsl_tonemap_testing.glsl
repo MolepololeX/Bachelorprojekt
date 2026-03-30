@@ -27,6 +27,7 @@ float cie_f(float I){
     }
 }
 
+//Note: these are not normalized but in the range -100...100 for a and b and 0...100 for Luminance since deltaE2000 breaks if used with normalized cie values
 vec3 linear_srgb_to_cielab(vec3 rgb){
     vec3 d65 = vec3(95.014, 100, 108.827);
 
@@ -52,10 +53,6 @@ vec3 linear_srgb_to_cielab(vec3 rgb){
     float L = 116.0 * cie_f(Yy) - 16.0;
     float a = 500 * (cie_f(Xx) - cie_f(Yy));
     float b = 200 * (cie_f(Yy) - cie_f(Zz));
-
-	L /= 100.0;
-	a /= 100.0;
-	b /= 100.0;
 
     return vec3(L, a, b);
 }
@@ -141,40 +138,34 @@ float oklab_delta_E(vec3 c1, vec3 c2){
 	return length(c2 - c1);
 }
 
-float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
-	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
-	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	));
 
-	float Ls = cs.x;
+
+
+
+float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
+	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
+	float G = 0.5 * (1.0 - sqrt( 	pow(C_star, 7.0) / ( pow(C_star, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+
 	float as = (1.0 + G)*cs.y;
 	float bs = cs.z;
 
-	float Lb = cb.x;
 	float ab = (1.0 + G)*cb.y;
 	float bb = cb.z;
 
 	float Cs = sqrt(as * as + bs * bs);
 	float Cb = sqrt(ab * ab + bb * bb);
 
-	float hs = atan(bs / as);
-	float hb = atan(bb / ab);
-
-	float d_h = hb - hs;
-	float d_L = Lb - Ls;
 	float d_C = Cb - Cs;
-
 	return d_C;
 }
 
 float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
-	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
-	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	));
+	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
+	float G = 0.5 * (1.0 - sqrt( 	pow(C_star, 7.0) / ( pow(C_star, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
 
-	float Ls = cs.x;
 	float as = (1.0 + G)*cs.y;
 	float bs = cs.z;
 
-	float Lb = cb.x;
 	float ab = (1.0 + G)*cb.y;
 	float bb = cb.z;
 
@@ -186,40 +177,20 @@ float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 
 	float d_h = hb - hs;
 	d_h = atan(sin(d_h), cos(d_h));
-	float d_L = Lb - Ls;
-	float d_C = Cb - Cs;
 	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
-
 	return d_H;
 }
 
 float calculate_cie_de_2000_L(vec3 cs, vec3 cb){
-	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
-	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
-
 	float Ls = cs.x;
-	float as = (1.0 + G)*cs.y;
-	float bs = cs.z;
-
 	float Lb = cb.x;
-	float ab = (1.0 + G)*cb.y;
-	float bb = cb.z;
-
-	float Cs = sqrt(as * as + bs * bs);
-	float Cb = sqrt(ab * ab + bb * bb);
-
-	float hs = atan(bs , as);
-	float hb = atan(bb , ab);
-
-	float d_h = hb - hs;
-	d_h = atan(sin(d_h), cos(d_h));
 	float d_L = Lb - Ls;
 	return d_L;
 }
 
 float calculate_cie_de_2000(vec3 cs, vec3 cb){
-	float m_C_ = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;
-	float G = 0.5 * (1.0 - sqrt( 	pow(m_C_, 7.0) / ( pow(m_C_, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
+	float G = 0.5 * (1.0 - sqrt( 	pow(C_star, 7.0) / ( pow(C_star, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
 
 	float Ls = cs.x;
 	float as = (1.0 + G)*cs.y;
@@ -292,11 +263,7 @@ void main() {
 	if(params.tonemapper_mode == 1.0){
         float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
 		float Yt = tonemap(Y);
-		if(Y == 0.0){
-			color *= 0;
-		}else{
-			color *= Yt / Y;
-		}
+		color *= Yt / max(Y, 1e-5);
 	}
 
 	//tonemap oklab L
@@ -310,7 +277,7 @@ void main() {
 
 		L = tonemap(L);
 
-		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma
+		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably
 		C *= L / max(lab.x, 1e-5);
 
 		lab.x = L;
@@ -319,6 +286,7 @@ void main() {
 
 		color = vec4(oklab_to_linear_srgb(lab), 1.0);
 	}
+
 
 
 
@@ -391,6 +359,9 @@ void main() {
 			linear_srgb_to_cielab(pre.xyz), 
 			linear_srgb_to_cielab(post.xyz)
 		);
+
+		//normalization from CIE range to -1...1
+		delta /= 100.0;
 	}
 
 	//cie delta_C
@@ -400,30 +371,45 @@ void main() {
 			linear_srgb_to_cielab(pre.xyz), 
 			linear_srgb_to_cielab(post.xyz)
 		);
+
+		//normalization from CIE range to -1...1
+		delta /= 100.0;
 	}
 
 	//cie delta_L
 	if(params.draw_mode == 8.0){
 
 		vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
+		//normalize before adjusting the tonemapping
+		corrected_pre.x /= 100.0;
 		corrected_pre.x = tonemap(corrected_pre.x);
+		corrected_pre.x *= 100.0;
 
 		delta = calculate_cie_de_2000_L(
 			corrected_pre,
 			linear_srgb_to_cielab(post.xyz)
 		);
+
+		//normalization from CIE range to -1...1
+		delta /= 100.0;
 	}
 
     //ciede2000
 	if(params.draw_mode == 9.0){
 
 		vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
+		//normalize before adjusting the tonemapping
+		corrected_pre.x /= 100.0;
 		corrected_pre.x = tonemap(corrected_pre.x);
+		corrected_pre.x *= 100.0;
 
 		delta = calculate_cie_de_2000(
 			corrected_pre, 
 			linear_srgb_to_cielab(post.xyz)	
 		);
+
+		//normalization from CIE range to -1...1
+		delta /= 100.0;
 	}
 
 
