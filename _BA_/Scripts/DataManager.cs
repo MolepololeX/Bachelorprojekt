@@ -6,6 +6,19 @@ using static GenerateColorGrid;
 [Tool]
 public partial class DataManager : Node
 {
+	internal enum PalettePlotType
+	{
+		oklab_L,
+		oklab_C,
+		oklab_h,
+		oklab_E,
+		cie_L,
+		cie_C,
+		cie_H,
+		cie_E
+	}
+
+
 	[ExportToolButton("Calculate SSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
 	[ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);
 	[ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
@@ -34,8 +47,130 @@ public partial class DataManager : Node
 	// [Export] public Texture2D image_base;
 	// [Export] public Texture2D image_compare;
 
+	[ExportCategory("Palettes")]
+	[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GeneratePaletteDelta);
+	[Export] private PalettePlotType palettePlotType = PalettePlotType.oklab_L;
+	[Export] private Texture2D palette;
+
+
 	Image baseImage;
 	Image comparisonImage;
+
+
+	public void GeneratePaletteDelta()
+	{
+		if (palette == null)
+		{
+			GD.PushWarning("Missing Palette...");
+		}
+		var img = palette.GetImage();
+		img.Decompress();
+		int M = img.GetWidth();
+		int N = img.GetHeight();
+
+		Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+		chart.Fill(_backGroundColor);
+
+		//TODO: Draw Grid
+		for (int x = 0; x < _graphRes; x++)
+		{
+			for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
+			{
+				chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
+			}
+		}
+
+		for (int x = 0; x < M; x++)
+		{
+			for (int y = 0; y < N; y++)
+			{
+				Color c = img.GetPixel(x, y);
+				c.SrgbToLinear();//propably not necessary
+
+				float delta = 0.0f;
+
+				Lab c_lab;
+				switch (palettePlotType)
+				{
+					case PalettePlotType.oklab_L:
+
+						c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+						delta = c_lab.L;
+
+						break;
+					case PalettePlotType.oklab_C:
+
+						c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+						double C = new Vector2(c_lab.a, c_lab.b).Length();
+						delta = (float)C;
+
+						break;
+					case PalettePlotType.oklab_h:
+
+						c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+						double hue = Math.Atan2(c_lab.b, c_lab.a) / (Math.PI * 2.0);
+						delta = (float)hue;
+
+						break;
+					case PalettePlotType.oklab_E:
+
+						c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+						double e = new Vector3(c_lab.L, c_lab.a, c_lab.b).Length();
+						delta = (float)e;
+
+						break;
+
+				}
+
+				int ix = (int)(((float)x / (float)M) * _graphRes);
+				int iy = 0;
+
+				if (delta <= 0.0)
+				{
+					iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+					// c = Colors.Blue;
+				}
+				else
+				{
+					iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+					// c = Colors.Red;
+				}
+
+				if (ix >= _graphRes || ix < 0)
+				{
+					ix = 0;
+					GD.PushWarning("Hue was greater than 1");
+				}
+				if (iy >= _graphRes || iy < 0)
+				{
+					iy = 0;
+					GD.PushWarning("Delta value was greater than 1: " + delta);
+				}
+
+				for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+				{
+					for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+					{
+						if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+						if (rx + ix >= _graphRes || rx + ix < 0) continue;
+						if (ry + iy >= _graphRes || ry + iy < 0) continue;
+						chart.SetPixel(ix + rx, iy + ry, c);
+					}
+				}
+			}
+		}
+
+		// chart.FlipY();
+
+		string palette_name = "";
+		palette_name = palette.ResourcePath.Substring(palette.ResourcePath.LastIndexOf("/") + 1);
+		palette_name = palette_name.Remove(palette_name.LastIndexOf("."));
+		palette_name = "Palette_" + palette_name;
+
+		string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + palette_name + "_" + "_plot_" + palettePlotType.ToString() + ".png";
+		GD.Print("Saved chart to: " + imagePath);
+		GD.Print(chart.SavePng(imagePath));
+	}
 
 
 	public override void _Process(double delta)
