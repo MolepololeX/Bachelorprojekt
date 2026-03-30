@@ -2,23 +2,14 @@
 extends CompositorEffect
 class_name Colormapping_Post
 
-enum TonemapperMode{
-	linear,
-	srgb,
-	oklab
+enum PaletteType{
+	HSL,
+	OKLCh
 }
 
-enum DrawMode{
-	none,		# 0
-	colorImage,	# 1
-	oklab_d_h,	# 2
-	oklab_d_C,	# 3
-	oklab_d_L,  # 4
-	oklab_d_E,	# 5
-	cie_d_H,	# 6
-	cie_d_C,	# 7
-	cie_d_L,    # 8
-	cie_d_E		# 9
+enum QuantizationType{
+	srgb_Y,
+	oklab_L
 }
 
 @export
@@ -30,24 +21,24 @@ var live_reload : bool = false
 @export
 var reload_interval_frames : int = 60
 
-@export_category("Uniforms")
-@export_range(0.0, 10.0, 0.05)
-var base_exposure : float = 1.0
-@export
-var tonemapper_mode : TonemapperMode = TonemapperMode.linear
-@export_range(0.0, 10.0, 0.05)
-var tonemapper_exposure : float = 1.5
-@export
-var draw_mode : DrawMode = DrawMode.none
+@export_group("Uniforms")
+@export_range(0, 128, 1) var steps : int = 8
+@export var palette_type : PaletteType = PaletteType.HSL
+@export var quantization_type : QuantizationType = QuantizationType.oklab_L
 
 @export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
+@export_tool_button("Generate Palettes", "ColorTrackVu") var gen_palettes_action = _reinit_shader
 
+var palette_hsl: StringName = "palette_hsl"
+var palette_oklch: StringName = "palette_oklch"
+var context : StringName = "palettes"
 
 var rd: RenderingDevice
 var shader: RID
 var pipeline: RID
 var parameter_storage_buffer := RID()
 var shader_is_valid = false
+var is_palette_modified = false
 
 var frame_counter : int = 0
 
@@ -130,6 +121,19 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			var x_groups = (size.x - 1) / 8 + 1
 			var y_groups = (size.y - 1) / 8 + 1
 			var z_groups = 1
+			
+			# If we have buffers for this viewport, check if they are the right size
+			if render_scene_buffers.has_texture(context, palette_hsl):
+				var tf : RDTextureFormat = render_scene_buffers.get_texture_format(context, palette_hsl)
+				if is_palette_modified:
+					# This will clear all textures for this viewport under this context
+					render_scene_buffers.clear_context(context)
+
+			if !render_scene_buffers.has_texture(context, palette_hsl):
+				var usage_bits : int = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT | RenderingDevice.TEXTURE_USAGE_STORAGE_BIT
+				render_scene_buffers.create_texture(context, palette_hsl, RenderingDevice.DATA_FORMAT_R16G16B16A16_SFLOAT, usage_bits, RenderingDevice.TEXTURE_SAMPLES_1, Vector2(steps, 1.0), 1, 1, true, false)
+				render_scene_buffers.create_texture(context, palette_oklch, RenderingDevice.DATA_FORMAT_R16G16B16A16_SFLOAT, usage_bits, RenderingDevice.TEXTURE_SAMPLES_1, Vector2(steps, 1.0), 1, 1, true, false)
+			
 
 			# Loop through views just in case we're doing stereo rendering. No extra cost if this is mono.
 			var view_count = render_scene_buffers.get_view_count()
@@ -144,7 +148,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				#texture_sampler.mip_filter = RenderingDevice.SAMPLER_FILTER_NEAREST
 				#texture_sampler = rd.sampler_create(texture_sampler)
 
-				var parameters := PackedFloat32Array([base_exposure, tonemapper_mode, tonemapper_exposure, draw_mode])
+				var parameters := PackedFloat32Array([steps, palette_type, quantization_type])
 				#var inv_proj_mat = p_render_data.get_render_scene_data().get_cam_projection().inverse()
 				#var inv_proj_mat_array := PackedVector4Array([inv_proj_mat.x, inv_proj_mat.y, inv_proj_mat.z, inv_proj_mat.w])
 
