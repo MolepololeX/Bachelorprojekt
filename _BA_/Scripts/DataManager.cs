@@ -4,7 +4,7 @@ using Godot;
 using static GenerateColorGrid;
 
 [Tool]
-public partial class SSIM : Node
+public partial class DataManager : Node
 {
 	[ExportToolButton("Calculate SSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
 	[ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);

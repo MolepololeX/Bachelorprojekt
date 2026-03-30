@@ -10,8 +10,8 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 } params;
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
-layout(rgba16f, set = 0, binding = 2) uniform image2D palette_oklab_image;
-layout(rgba16f, set = 0, binding = 3) uniform image2D palette_hsl_image;
+layout(rgba16f, set = 0, binding = 2) uniform image2D palette_hsl_image;
+layout(rgba16f, set = 0, binding = 3) uniform image2D palette_oklch_image;
 
 
 
@@ -51,11 +51,11 @@ void main() {
 	if(params.quantization_type == 0){
 		Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
 	}
-	if(params.quantization_type == 0){
+	if(params.quantization_type == 1){
 		vec3 lab = linear_srgb_to_oklab(color.xyz);
 		Y = lab.x;
 	}
-	if (Y > 1.0) Y = 1.0;
+	if (Y >= 1.0) Y = 0.999999;
 
 
 
@@ -67,7 +67,8 @@ void main() {
 
 	//apply palette
 	if(params.palette_type == 0.0){
-		color = vec4(vec3(Y), 1.0);
+		// color = vec4(vec3(Y), 1.0);
+		color = imageLoad(palette_hsl_image, ivec2(steps * Y,0));
 		// float H = fract((Y * 0.33 - 0.35));
 		// float S = 0.5;
 		// float L = Y * 0.5 + 0.05;
@@ -77,7 +78,8 @@ void main() {
 	}
 
 	if(params.palette_type == 1.0){
-		color = vec4(vec3(Y), 1.0);
+		// color = vec4(vec3(Y), 1.0);
+		color = imageLoad(palette_oklch_image, ivec2(steps * Y,0));
 		// float h = fract((Y * 0.33 - 0.35)) * 6.28318530718;//transform to radiants since oklab hue is -3.14...3.14
 		// float C = 0.12;
 		// float L = Y * 0.5 + 0.05;

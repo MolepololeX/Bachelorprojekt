@@ -20,18 +20,32 @@ var shader_path : String = "res://_BA_/Shaders/sh_glsl_posterization_color_mappi
 var live_reload : bool = false
 @export
 var reload_interval_frames : int = 60
+@export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
 
 @export_group("Uniforms")
 @export_range(0, 128, 1) var steps : int = 8
 @export var palette_type : PaletteType = PaletteType.HSL
 @export var quantization_type : QuantizationType = QuantizationType.oklab_L
 
-@export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
-@export_tool_button("Generate Palettes", "ColorTrackVu") var gen_palettes_action = _reinit_shader
+@export_group("Palettes")
+@export_range(0.0, 360.0, 0.1) var hue_start : float = 0.0
+@export_range(-360.0, 360.0, 0.1) var hue_range : float = 120.0
+@export_range(0.0, 1.0, 0.01) var lightness_floor : float = 0.1
+@export_range(0.0, 1.0, 0.01) var lightness_ceiling : float = 0.9
+@export_range(0.0, 1.0, 0.01) var hsl_saturation : float = 0.5
+@export_range(0.0, 0.3, 0.001) var oklch_chroma : float = 0.1
+@export_range(0.0, 360.0, 0.1) var oklch_hue_offset : float = 0.0
+@export var apply_gamma : bool = false
+@export var auto_create_palette : bool = false
+@export_tool_button("Generate Palettes", "ColorTrackVu") var gen_palettes_action = _create_palette
 
-var palette_hsl: StringName = "palette_hsl"
-var palette_oklch: StringName = "palette_oklch"
-var context : StringName = "palettes"
+@export
+var image_hsl : Image
+@export
+var image_oklch : Image
+
+var palette_hsl: RID
+var palette_oklch: RID
 
 var rd: RenderingDevice
 var shader: RID
@@ -52,6 +66,9 @@ func _init():
 	var parameter_data := data.to_byte_array()
 	parameter_storage_buffer = rd.storage_buffer_create(parameter_data.size(), parameter_data)
 
+
+
+
 # System notifications, we want to react on the notification that
 # alerts us we are about to be destroyed.
 func _notification(what):
@@ -60,13 +77,142 @@ func _notification(what):
 			# Freeing our shader will also free any dependents such as the pipeline!
 			rd.free_rid(shader)
 
+
+func _linear_srgb_to_oklab(c : Vector3) -> Vector3:
+	var l = 0.4122214708 * c.x + 0.5363325363 * c.y + 0.0514459929 * c.z
+	var m = 0.2119034982 * c.x + 0.6806995451 * c.y + 0.1073969566 * c.z;
+	var s = 0.0883024619 * c.x + 0.2817188376 * c.y + 0.6299787005 * c.z;
+
+	var l_ := pow(l, 1.0/3.0);
+	var m_ := pow(m, 1.0/3.0);
+	var s_ := pow(s, 1.0/3.0);
+
+	return Vector3(
+		0.2104542553*l_ + 0.7936177850*m_ - 0.0040720468*s_,
+		1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_,
+		0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_
+	);
+
+func _oklab_to_linear_srgb(c : Vector3) -> Vector3:
+	var l_ := c.x + 0.3963377774 * c.y + 0.2158037573 * c.z;
+	var m_ := c.x - 0.1055613458 * c.y - 0.0638541728 * c.z;
+	var s_ := c.x - 0.0894841775 * c.y - 1.2914855480 * c.z;
+
+	var l := l_*l_*l_;
+	var m := m_*m_*m_;
+	var s := s_*s_*s_;
+
+	return Vector3(
+		+4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+		-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+		-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+	);
+
+#from https://github.com/flixel-gdx/flixel-gdx/blob/master/flixel-core/src/org/flixel/data/shaders/blend/luminosity.glsl
+func _hue_to_rgb(f1 : float, f2 : float, hue : float) -> float:
+	if (hue < 0.0):
+		hue += 1.0;
+	else : if (hue > 1.0):
+		hue -= 1.0;
+	var res : float;
+	if ((6.0 * hue) < 1.0):
+		res = f1 + (f2 - f1) * 6.0 * hue;
+	else : if ((2.0 * hue) < 1.0):
+		res = f2;
+	else : if ((3.0 * hue) < 2.0):
+		res = f1 + (f2 - f1) * ((2.0 / 3.0) - hue) * 6.0;
+	else:
+		res = f1;
+	return res;
+
+#from https://github.com/flixel-gdx/flixel-gdx/blob/master/flixel-core/src/org/flixel/data/shaders/blend/luminosity.glsl
+func _hsl_to_rgb(hsl : Vector3) -> Vector3:
+	var rgb : Vector3;
+	
+	if (hsl.y == 0.0):
+		rgb = Vector3(hsl.z, hsl.z, hsl.z); # Luminance
+	else:
+		var f2 : float;
+		
+		if (hsl.z < 0.5):
+			f2 = hsl.z * (1.0 + hsl.y);
+		else:
+			f2 = (hsl.z + hsl.y) - (hsl.y * hsl.z);
+			
+		var f1 := 2.0 * hsl.z - f2;
+		
+		rgb.x = _hue_to_rgb(f1, f2, hsl.x + (1.0/3.0));
+		rgb.y = _hue_to_rgb(f1, f2, hsl.x);
+		rgb.z = _hue_to_rgb(f1, f2, hsl.x - (1.0/3.0));
+	return rgb;
+
+func _create_palette() -> void:
+	image_hsl = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
+	image_hsl.fill(Color(1, 0, 0)) # example
+	
+	image_oklch = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
+	image_oklch.fill(Color(0, 0, 1)) # example
+	
+	for i in range(steps) :
+		var col := Color.WHITE
+		
+		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
+		var S := hsl_saturation
+		var L : float = lerp(lightness_floor, lightness_ceiling, float(i) / float(steps - 1))
+		
+		var hsl : Vector3
+		hsl.x = H
+		hsl.y = S
+		hsl.z = L
+		var c = _hsl_to_rgb(hsl)
+		
+		col.r = c.x
+		col.g = c.y
+		col.b = c.z
+		
+		image_hsl.set_pixel(i, 0, col)
+	
+	for i in range(steps) :
+		var col := Color.WHITE
+		
+		var h := (((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0)) + (oklch_hue_offset / 360.0)) * 6.28318530718 #transform to radiants since oklab hue is -3.14...3.14
+		var C := oklch_chroma
+		var L : float = lerp(lightness_floor, lightness_ceiling, float(i) / float(steps - 1))
+		
+		var lab : Vector3
+		lab.x = L
+		lab.y = C * cos(h)
+		lab.z = C * sin(h)
+		var c = _oklab_to_linear_srgb(lab)
+		
+		col.r = c.x
+		col.g = c.y
+		col.b = c.z
+		
+		image_oklch.set_pixel(i, 0, col)
+	
+	if(apply_gamma):
+		image_hsl.linear_to_srgb()
+		image_oklch.linear_to_srgb()
+	
+	var format := RDTextureFormat.new()
+	format.width = image_hsl.get_width()
+	format.height = image_hsl.get_height()
+	format.format = RenderingDevice.DATA_FORMAT_R8G8B8A8_UNORM
+	format.usage_bits = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT
+	format.usage_bits = RenderingDevice.TEXTURE_USAGE_STORAGE_BIT
+	palette_hsl = rd.texture_create(format, RDTextureView.new(), [image_hsl.get_data()])
+	palette_oklch = rd.texture_create(format, RDTextureView.new(), [image_oklch.get_data()])
+
+
+
 func _reinit_shader() -> void:
 	RenderingServer.call_on_render_thread(_init_shader);
 
+
+
 # load and compile the shader
 func _init_shader() -> void:
-	
-	
 	
 	if not rd:
 		return
@@ -98,10 +244,13 @@ func _init_shader() -> void:
 
 	pipeline = rd.compute_pipeline_create(shader)
 	shader_is_valid = true
-	
-	
+
+
+
 	# Called by the rendering thread every frame.
 func _render_callback(p_effect_callback_type, p_render_data):
+	if(auto_create_palette):
+		_create_palette()
 	
 	if not enable_draw:
 		return
@@ -121,18 +270,6 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			var x_groups = (size.x - 1) / 8 + 1
 			var y_groups = (size.y - 1) / 8 + 1
 			var z_groups = 1
-			
-			# If we have buffers for this viewport, check if they are the right size
-			if render_scene_buffers.has_texture(context, palette_hsl):
-				var tf : RDTextureFormat = render_scene_buffers.get_texture_format(context, palette_hsl)
-				if is_palette_modified:
-					# This will clear all textures for this viewport under this context
-					render_scene_buffers.clear_context(context)
-
-			if !render_scene_buffers.has_texture(context, palette_hsl):
-				var usage_bits : int = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT | RenderingDevice.TEXTURE_USAGE_STORAGE_BIT
-				render_scene_buffers.create_texture(context, palette_hsl, RenderingDevice.DATA_FORMAT_R16G16B16A16_SFLOAT, usage_bits, RenderingDevice.TEXTURE_SAMPLES_1, Vector2(steps, 1.0), 1, 1, true, false)
-				render_scene_buffers.create_texture(context, palette_oklch, RenderingDevice.DATA_FORMAT_R16G16B16A16_SFLOAT, usage_bits, RenderingDevice.TEXTURE_SAMPLES_1, Vector2(steps, 1.0), 1, 1, true, false)
 			
 
 			# Loop through views just in case we're doing stereo rendering. No extra cost if this is mono.
@@ -166,6 +303,16 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				uniform_color.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 				uniform_color.binding = 1
 				uniform_color.add_id(input_image)
+				
+				var uniform_palette_hsl := RDUniform.new()
+				uniform_palette_hsl.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
+				uniform_palette_hsl.binding = 2
+				uniform_palette_hsl.add_id(palette_hsl)
+				
+				var uniform_palette_oklch := RDUniform.new()
+				uniform_palette_oklch.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
+				uniform_palette_oklch.binding = 3
+				uniform_palette_oklch.add_id(palette_oklch)
 				#
 				#var uniform_depth := RDUniform.new()
 				#uniform_depth.uniform_type = RenderingDevice.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
@@ -182,8 +329,8 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				var uniform_set := UniformSetCacheRD.get_cache(shader, 0, [
 					uniform_parameter, 
 					uniform_color, 
-					#uniform_depth, 
-					#uniform_normal
+					uniform_palette_hsl,
+					uniform_palette_oklch
 					])
 
 				# Run our compute shader.

@@ -1,8 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://bck3bskcnoh8q"]
+[gd_scene load_steps=50 format=3 uid="uid://bck3bskcnoh8q"]
 
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="1_xmvkv"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="2_1nhdg"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="3_yhjoh"]
+[ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="4_1nhdg"]
 [ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://_BA_/Scripts/GenerateColorGrid.cs" id="4_gwmet"]
 [ext_resource type="Texture2D" uid="uid://dfps58dy8vwb0" path="res://color_palette_oklab.png" id="5_adlj3"]
 
@@ -29,7 +30,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("2_1nhdg")
-enable_draw = true
 live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 1
@@ -44,7 +44,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("3_yhjoh")
-enable_draw = true
 live_reload = true
 bloom_threshold = 0.9
 bloom_strength = 0.5
@@ -52,8 +51,49 @@ blurr_kernelsize = 5
 draw_mode = 2
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
+[sub_resource type="Image" id="Image_1nhdg"]
+data = {
+"data": PackedByteArray(12, 15, 38, 255, 26, 20, 62, 255, 51, 28, 86, 255, 83, 36, 109, 255, 124, 44, 133, 255, 157, 52, 143, 255, 181, 60, 135, 255, 196, 78, 121, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="Image" id="Image_yhjoh"]
+data = {
+"data": PackedByteArray(0, 8, 29, 255, 0, 12, 48, 255, 6, 17, 70, 255, 21, 23, 92, 255, 45, 31, 111, 255, 80, 40, 126, 255, 125, 51, 136, 255, 180, 66, 141, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 8
+}
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_yhjoh"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("4_1nhdg")
+enable_draw = true
+palette_type = 1
+hue_start = null
+hue_range = null
+lightness_floor = null
+lightness_ceiling = null
+hsl_saturation = null
+oklch_chroma = null
+oklch_hue_offset = null
+apply_gamma = null
+auto_create_palette = null
+image_hsl = SubResource("Image_1nhdg")
+image_oklch = SubResource("Image_yhjoh")
+metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
+
 [sub_resource type="Compositor" id="Compositor_bmgda"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_hijju")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_hijju"), SubResource("CompositorEffect_yhjoh")])
 
 [sub_resource type="SphereMesh" id="SphereMesh_ovrgn"]
 
