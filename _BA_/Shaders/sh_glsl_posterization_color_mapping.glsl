@@ -61,7 +61,7 @@ void main() {
 
 	//quantize by lightness
 	float steps = params.steps;
-	Y = floor(Y * (steps - 1)) / (steps - 1);
+	Y = floor(Y * (steps)) / (steps);
 
 
 

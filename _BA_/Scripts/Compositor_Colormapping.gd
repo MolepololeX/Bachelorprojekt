@@ -35,14 +35,19 @@ var reload_interval_frames : int = 60
 @export_range(0.0, 1.0, 0.01) var hsl_saturation : float = 0.5
 @export_range(0.0, 0.3, 0.001) var oklch_chroma : float = 0.1
 @export_range(0.0, 360.0, 0.1) var oklch_hue_offset : float = 0.0
-@export var apply_gamma : bool = false
 @export var auto_create_palette : bool = false
-@export_tool_button("Generate Palettes", "ColorTrackVu") var gen_palettes_action = _create_palette
+@export_tool_button("Generate Palettes", "ColorTrackVu") var gen_palettes_action = _create_palettes
 
-@export
 var image_hsl : Image
-@export
 var image_oklch : Image
+
+@export var gamma_correct_preview : bool = true
+@export var palette_preview_hsl : Image
+@export var palette_preview_oklch : Image
+@export_tool_button("Save Palette", "Save") var save_palettes_action = _save_palettes
+@export var save_path : String = "res://_BA_/Palettes"
+@export var palette_preview_res : int = 128
+
 
 var palette_hsl: RID
 var palette_oklch: RID
@@ -59,6 +64,7 @@ var frame_counter : int = 0
 func _init():
 	rd = RenderingServer.get_rendering_device()
 	RenderingServer.call_on_render_thread(_init_shader);
+	_create_palettes()
 	
 	var data := PackedFloat32Array()
 	data.resize(20)
@@ -146,12 +152,16 @@ func _hsl_to_rgb(hsl : Vector3) -> Vector3:
 		rgb.z = _hue_to_rgb(f1, f2, hsl.x - (1.0/3.0));
 	return rgb;
 
-func _create_palette() -> void:
+
+
+func _create_palettes() -> void:
 	image_hsl = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
 	image_hsl.fill(Color(1, 0, 0)) # example
+	palette_preview_hsl = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
 	
 	image_oklch = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
 	image_oklch.fill(Color(0, 0, 1)) # example
+	palette_preview_oklch = Image.create_empty(steps, 1, false, Image.FORMAT_RGBA8)
 	
 	for i in range(steps) :
 		var col := Color.WHITE
@@ -169,6 +179,8 @@ func _create_palette() -> void:
 		col.r = c.x
 		col.g = c.y
 		col.b = c.z
+		
+		col = col.srgb_to_linear()#?
 		
 		image_hsl.set_pixel(i, 0, col)
 	
@@ -191,9 +203,12 @@ func _create_palette() -> void:
 		
 		image_oklch.set_pixel(i, 0, col)
 	
-	if(apply_gamma):
-		image_hsl.linear_to_srgb()
-		image_oklch.linear_to_srgb()
+	palette_preview_hsl.copy_from(image_hsl)
+	palette_preview_oklch.copy_from(image_oklch)
+	# gamma correct so the preview is correctly displayed from the editor and in the saved png
+	if(gamma_correct_preview):
+		palette_preview_hsl.linear_to_srgb()
+		palette_preview_oklch.linear_to_srgb()
 	
 	var format := RDTextureFormat.new()
 	format.width = image_hsl.get_width()
@@ -204,6 +219,13 @@ func _create_palette() -> void:
 	palette_hsl = rd.texture_create(format, RDTextureView.new(), [image_hsl.get_data()])
 	palette_oklch = rd.texture_create(format, RDTextureView.new(), [image_oklch.get_data()])
 
+
+
+func _save_palettes() -> void:
+	palette_preview_hsl.resize(palette_preview_res * steps, palette_preview_res, Image.INTERPOLATE_NEAREST)
+	palette_preview_hsl.save_png(save_path + EditorInterface.get_edited_scene_root().name + "_HSL" + ".png")
+	palette_preview_oklch.resize(palette_preview_res * steps, palette_preview_res, Image.INTERPOLATE_NEAREST)
+	palette_preview_oklch.save_png(save_path + EditorInterface.get_edited_scene_root().name + "_OKLCh" + ".png")
 
 
 func _reinit_shader() -> void:
@@ -250,7 +272,7 @@ func _init_shader() -> void:
 	# Called by the rendering thread every frame.
 func _render_callback(p_effect_callback_type, p_render_data):
 	if(auto_create_palette):
-		_create_palette()
+		_create_palettes()
 	
 	if not enable_draw:
 		return

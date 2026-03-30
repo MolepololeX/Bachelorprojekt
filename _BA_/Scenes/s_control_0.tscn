@@ -53,20 +53,20 @@ metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="Image" id="Image_1nhdg"]
 data = {
-"data": PackedByteArray(12, 15, 38, 255, 26, 20, 62, 255, 51, 28, 86, 255, 83, 36, 109, 255, 124, 44, 133, 255, 157, 52, 143, 255, 181, 60, 135, 255, 196, 78, 121, 255),
+"data": PackedByteArray(33, 12, 12, 255, 58, 21, 12, 255, 77, 38, 21, 255, 99, 55, 28, 255, 118, 79, 38, 255, 140, 104, 46, 255, 160, 133, 52, 255, 180, 165, 58, 255, 194, 194, 73, 255, 187, 201, 93, 255, 184, 208, 114, 255, 184, 214, 134, 255, 188, 221, 155, 255, 195, 228, 175, 255, 205, 235, 196, 255, 219, 241, 216, 255),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 8
+"width": 16
 }
 
 [sub_resource type="Image" id="Image_yhjoh"]
 data = {
-"data": PackedByteArray(0, 8, 29, 255, 0, 12, 48, 255, 6, 17, 70, 255, 21, 23, 92, 255, 45, 31, 111, 255, 80, 40, 126, 255, 125, 51, 136, 255, 180, 66, 141, 255),
+"data": PackedByteArray(21, 0, 0, 255, 38, 0, 0, 255, 55, 0, 0, 255, 73, 0, 0, 255, 88, 21, 12, 255, 104, 38, 12, 255, 120, 55, 21, 255, 134, 73, 28, 255, 147, 89, 38, 255, 161, 109, 49, 255, 173, 127, 61, 255, 184, 147, 75, 255, 194, 168, 91, 255, 204, 187, 110, 255, 213, 208, 130, 255, 222, 229, 151, 255),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 8
+"width": 16
 }
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_yhjoh"]
@@ -78,18 +78,11 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("4_1nhdg")
 enable_draw = true
+steps = 16
 palette_type = 1
-hue_start = null
-hue_range = null
-lightness_floor = null
-lightness_ceiling = null
-hsl_saturation = null
-oklch_chroma = null
-oklch_hue_offset = null
-apply_gamma = null
-auto_create_palette = null
-image_hsl = SubResource("Image_1nhdg")
-image_oklch = SubResource("Image_yhjoh")
+auto_create_palette = true
+palette_preview_hsl = SubResource("Image_1nhdg")
+palette_preview_oklch = SubResource("Image_yhjoh")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
