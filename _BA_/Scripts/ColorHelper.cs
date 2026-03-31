@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Intrinsics.X86;
 using Godot;
 
 namespace BA
@@ -39,6 +40,29 @@ namespace BA
             rgb.g = -1.2684380046f * l + 2.6097574011f * m - 0.3413193965f * s;
             rgb.b = -0.0041960863f * l - 0.7034186147f * m + 1.7076147010f * s;
             return rgb;
+        }
+
+        public static float calculate_oklab_d_h(Lab c1, Lab c2)
+        {
+            double h1 = Math.Atan2(c1.b, c1.a);
+            double h2 = Math.Atan2(c2.b, c2.a);
+            if (h1 < 0) h1 += 2.0 * Math.PI;
+            if (h2 < 0) h2 += 2.0 * Math.PI;
+
+            double d_h = h2 - h1;
+            if (Math.Abs(d_h) <= Math.PI)
+            {
+                d_h = h2 - h1;
+            }
+            else if (d_h > Math.PI)
+            {
+                d_h = h2 - h1 - Math.PI * 2.0;
+            }
+            else // (d_h < Math.PI)
+            {
+                d_h = h2 - h1 + Math.PI * 2.0;
+            }
+            return (float)d_h;
         }
 
         public static float calculate_cie_d_L(Lab cs, Lab cb)
