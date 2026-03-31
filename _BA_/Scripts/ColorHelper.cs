@@ -65,7 +65,6 @@ namespace BA
             double Cb = Math.Sqrt(a_b * a_b + b_b * b_b);
 
             double d_C = Cb - Cs;
-
             return (float)d_C;
         }
 
@@ -86,10 +85,24 @@ namespace BA
             double hs = Math.Atan2(b_s, a_s);
             double hb = Math.Atan2(b_b, a_b);
 
-            double d_h = hb - hs;
-            d_h = Math.Atan2(Math.Sin(d_h), Math.Cos(d_h));
-            double d_H = 2.0 * Math.Sqrt(Cb * Cs) * Math.Sin(d_h / 2.0);
+            if (hs < 0) hs += 2.0 * Math.PI;
+            if (hb < 0) hb += 2.0 * Math.PI;
 
+            double d_h = hb - hs;
+            if (Math.Abs(d_h) <= Math.PI)
+            {
+                d_h = hb - hs;
+            }
+            else if (d_h > Math.PI)
+            {
+                d_h = hb - hs - Math.PI * 2.0;
+            }
+            else // (d_h < Math.PI)
+            {
+                d_h = hb - hs + Math.PI * 2.0;
+            }
+
+            double d_H = 2.0 * Math.Sqrt(Cb * Cs) * Math.Sin(d_h / 2.0);
             return (float)d_H;
         }
 
@@ -148,7 +161,7 @@ namespace BA
             double diff = Math.Abs(hs - hb);
             if (diff <= Math.PI)
             {
-                m_h = (hs + hb) / 2.0;
+                // m_h = (hs + hb) / 2.0;
             }
             else if ((hs + hb) < 2.0 * Math.PI)
             {
@@ -162,10 +175,10 @@ namespace BA
             double sL = 1.0 + (0.015 * Math.Pow(m_L - 50.0, 2.0)) / (Math.Sqrt(20.0 + Math.Pow(m_L - 50.0, 2.0)));
             double sC = 1.0 + 0.045 * m_C;
 
-            double T = 1.0 
-                - 0.17 * Math.Cos(m_h - DegToRad(30.0)) 
-                + 0.24 * Math.Cos(2.0 * m_h) 
-                + 0.32 * Math.Cos(3.0 * m_h + DegToRad(6.0)) 
+            double T = 1.0
+                - 0.17 * Math.Cos(m_h - DegToRad(30.0))
+                + 0.24 * Math.Cos(2.0 * m_h)
+                + 0.32 * Math.Cos(3.0 * m_h + DegToRad(6.0))
                 - 0.20 * Math.Cos(4.0 * m_h - DegToRad(63.0));
 
             double sH = 1.0 + 0.015 * m_C * T;

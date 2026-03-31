@@ -133,8 +133,9 @@ namespace BA
 							break;
 						case PalettePlotType.cie_H:
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_H = calculate_cie_d_C(new Lab { L = 53.2f, a = 80.1f, b = 67.2f }, c_lab);
-							delta = (float)(d_H / 100.0);
+							double d_H = calculate_cie_d_H(new Lab { L = 53.2f, a = 80.1f, b = 67.2f }, c_lab);
+							// delta = (float)(d_H / 100.0);
+							delta = (float)(d_H / 180.0 * Math.PI);
 							break;
 						case PalettePlotType.cie_E:
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
