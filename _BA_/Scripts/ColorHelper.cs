@@ -112,24 +112,25 @@ namespace BA
             if (hs < 0) hs += 2.0 * Math.PI;
             if (hb < 0) hb += 2.0 * Math.PI;
 
-            double d_h = hb - hs;
+            double d_h;
             if (Cs * Cb == 0.0)
             {
                 d_h = 0.0;
             }
             else
             {
-                if (Math.Abs(d_h) <= Math.PI)
+                double diff = hb - hs;
+                if (Math.Abs(diff) <= Math.PI)
                 {
-                    d_h = hb - hs;
+                    d_h = diff;
                 }
-                else if (d_h > Math.PI)
+                else if (diff > Math.PI)
                 {
-                    d_h = hb - hs - Math.PI * 2.0;
+                    d_h = diff - Math.PI * 2.0;
                 }
-                else // (d_h < Math.PI)
+                else // (d_h < -Math.PI)
                 {
-                    d_h = hb - hs + Math.PI * 2.0;
+                    d_h = diff + Math.PI * 2.0;
                 }
             }
             //cannot use d_H since it is the distance between the two points on the color wheel not their angle difference
@@ -164,7 +165,7 @@ namespace BA
             double d_L = L_b - L_s;
             double d_C = Cb - Cs;
 
-            double d_h = hb - hs;
+            double d_h;
             if (Cs * Cb == 0.0)
             {
                 d_h = 0.0;
@@ -176,11 +177,11 @@ namespace BA
                 {
                     d_h = diff;
                 }
-                else if (d_h > Math.PI)
+                else if (diff > Math.PI)
                 {
                     d_h = diff - Math.PI * 2.0;
                 }
-                else // (d_h < Math.PI)
+                else // (d_h < -Math.PI)
                 {
                     d_h = diff + Math.PI * 2.0;
                 }
