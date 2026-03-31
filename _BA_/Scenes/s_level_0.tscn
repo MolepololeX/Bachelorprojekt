@@ -617,9 +617,9 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("39_ko7dv")
 enable_draw = true
-reload_interval_frames = 30
-tonemapper_mode = 2
-draw_mode = 1
+live_reload = true
+tonemapper_mode = 1
+draw_mode = 7
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Image" id="Image_804ie"]
@@ -648,7 +648,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
-enable_draw = true
 live_reload = true
 palette_type = 1
 dither_spread = 0.01
@@ -717,27 +716,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37688145, 0)
-bones/4/rotation = Quaternion(-0.5515435, -0.06207457, -0.6553773, 0.51227635)
-bones/5/rotation = Quaternion(2.086353e-08, -5.7173988e-08, -0.48015144, 0.87718576)
-bones/7/rotation = Quaternion(-0.3169399, -0.3308848, 0.13543789, 0.8784765)
-bones/8/rotation = Quaternion(0.0016449067, 0.0016449051, -0.7010416, 0.71311665)
-bones/9/rotation = Quaternion(-0.61099494, 0.082245864, 0.6284966, 0.47425002)
-bones/10/rotation = Quaternion(1.9562263e-08, 4.5756007e-08, 0.50403976, 0.86368054)
-bones/12/rotation = Quaternion(-0.3156282, 0.30518416, -0.21719198, 0.8718195)
-bones/13/rotation = Quaternion(0.004342939, 0.005115343, 0.7025753, 0.7115778)
-bones/15/rotation = Quaternion(0.991251, 0.08324276, 0.077428095, 0.06706024)
-bones/16/rotation = Quaternion(0.34223434, 6.074318e-08, -2.4393563e-07, 0.93961465)
-bones/17/rotation = Quaternion(-0.5938501, -0.20380533, 0.06728993, 0.7754209)
-bones/18/rotation = Quaternion(5.207393e-06, 0.9201623, -0.39153704, -1.1175897e-06)
-bones/19/rotation = Quaternion(0.99349546, -0.032144878, 0.030308237, 0.10495261)
-bones/20/rotation = Quaternion(0.39236984, -6.059244e-08, 2.743674e-07, 0.91980755)
-bones/21/rotation = Quaternion(-0.62223256, 0.113284364, -0.018939402, 0.77436084)
-bones/38/position = Vector3(0.52084064, 0.76786643, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.7678663, 0.059736915)
+bones/1/position = Vector3(0, 0.3904926, 0)
+bones/4/rotation = Quaternion(-0.5593983, -0.06046775, -0.6432195, 0.5193129)
+bones/5/rotation = Quaternion(2.4941196e-08, -4.1749345e-08, -0.49686557, 0.86782753)
+bones/7/rotation = Quaternion(-0.3212016, -0.32647383, 0.1464238, 0.876815)
+bones/8/rotation = Quaternion(0.00010083526, 0.00010083284, -0.7067367, 0.70747674)
+bones/9/rotation = Quaternion(-0.6177349, 0.08036958, 0.6174097, 0.48036426)
+bones/10/rotation = Quaternion(3.338914e-08, 5.150626e-08, 0.5199842, 0.854176)
+bones/12/rotation = Quaternion(-0.31947383, 0.3016222, -0.2279999, 0.8688939)
+bones/13/rotation = Quaternion(0.0002832008, 0.000333566, 0.7068133, 0.70740014)
+bones/15/rotation = Quaternion(0.9935748, 0.08351548, 0.074067436, 0.018664813)
+bones/16/rotation = Quaternion(0.21571836, 6.573792e-08, -1.4371346e-07, 0.9764557)
+bones/17/rotation = Quaternion(-0.52802175, -0.20890003, 0.046703845, 0.8218105)
+bones/18/rotation = Quaternion(8.4213934e-05, 0.92023313, -0.39137086, -1.9005378e-05)
+bones/19/rotation = Quaternion(0.99696183, -0.02976333, 0.03138134, 0.064781226)
+bones/20/rotation = Quaternion(0.2887518, -6.4012134e-08, 2.009349e-07, 0.9574041)
+bones/21/rotation = Quaternion(-0.56687635, 0.114415444, -0.009852548, 0.8157594)
+bones/38/position = Vector3(0.52084064, 0.787277, -0.05763735)
+bones/40/position = Vector3(-0.5108437, 0.78727686, 0.059736922)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2126435, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2262546, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("2_rxqsg")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)

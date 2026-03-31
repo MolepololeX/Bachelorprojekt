@@ -114,16 +114,32 @@ vec4 tonemap(vec4 l){
 //==========Measurement Functions==========================================================
 //=========================================================================================
 
+const float PI = 3.141592653589793;
+const float TwoPI = 6.283185307179586;
+
 float oklab_delta_h(vec3 c1, vec3 c2){
-	float hue_1 = atan(c1.z, c1.y);
-	float hue_2 = atan(c2.z, c2.y);
-	float delta = hue_2 - hue_1;
-	return atan(sin(delta), cos(delta));
+	float h1 = atan(c1.z, c1.y);
+	float h2 = atan(c2.z, c2.y);
+	if (h1 < 0) h1 += 2.0 * PI;
+	if (h2 < 0) h2 += 2.0 * PI;
+
+	float d_h = h2 - h1;
+	if (abs(d_h) <= PI)
+	{
+		d_h = h2 - h1;
+	}
+	else if (d_h > PI)
+	{
+		d_h = h2 - h1 - PI * 2.0;
+	}
+	else // (d_h < PI)
+	{
+		d_h = h2 - h1 + PI * 2.0;
+	}
+	return d_h;
 }
 
 float oklab_delta_C(vec3 c1, vec3 c2){
-	// float chroma_1 = sqrt(pow(c1.y, 2.0) + pow(c1.z, 2.0));
-	// float chroma_2 = sqrt(pow(c2.y, 2.0) + pow(c2.z, 2.0));
 	float chroma_1 = length(vec2(c1.y, c1.z));
 	float chroma_2 = length(vec2(c2.y, c2.z));
 	return chroma_2 - chroma_1;
@@ -134,7 +150,6 @@ float oklab_delta_L(vec3 c1, vec3 c2){
 }
 
 float oklab_delta_E(vec3 c1, vec3 c2){
-	// return sqrt(pow((c2.x - c1.x), 2.0) + pow((c2.y - c1.y), 2.0) + pow((c2.z - c1.z), 2.0));
 	return length(c2 - c1);
 }
 
@@ -144,16 +159,16 @@ float oklab_delta_E(vec3 c1, vec3 c2){
 
 float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
 	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
-	float G = 0.5 * (1.0 - sqrt( 	pow(C_star, 7.0) / ( pow(C_star, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); //TODO fehler in der formel fixen
 
-	float as = (1.0 + G)*cs.y;
-	float bs = cs.z;
+	float a_s = (1.0 + G) * cs.y;
+	float b_s = cs.z;
 
-	float ab = (1.0 + G)*cb.y;
-	float bb = cb.z;
+	float a_b = (1.0 + G) * cb.y;
+	float b_b = cb.z;
 
-	float Cs = sqrt(as * as + bs * bs);
-	float Cb = sqrt(ab * ab + bb * bb);
+	float Cs = sqrt(a_s * a_s + b_s * b_s);
+	float Cb = sqrt(a_b * a_b + b_b * b_b);
 
 	float d_C = Cb - Cs;
 	return d_C;
@@ -161,75 +176,132 @@ float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
 
 float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
-	float G = 0.5 * (1.0 - sqrt( 	pow(C_star, 7.0) / ( pow(C_star, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); //TODO fehler in der formel fixen
 
-	float as = (1.0 + G)*cs.y;
-	float bs = cs.z;
+	float a_s = (1.0 + G) * cs.y;
+	float b_s = cs.z;
 
-	float ab = (1.0 + G)*cb.y;
-	float bb = cb.z;
+	float a_b = (1.0 + G) * cb.y;
+	float b_b = cb.z;
 
-	float Cs = sqrt(as * as + bs * bs);
-	float Cb = sqrt(ab * ab + bb * bb);
+	float Cs = sqrt(a_s * a_s + b_s * b_s);
+	float Cb = sqrt(a_b * a_b + b_b * b_b);
 
-	float hs = atan(bs , as);
-	float hb = atan(bb , ab);
+	float hs = atan(b_s, a_s);
+	float hb = atan(b_b, a_b);
+
+	if (hs < 0) hs += 2.0 * PI;
+	if (hb < 0) hb += 2.0 * PI;
 
 	float d_h = hb - hs;
-	d_h = atan(sin(d_h), cos(d_h));
-	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
-	return d_H;
+	if (abs(d_h) <= PI)
+	{
+		d_h = hb - hs;
+	}
+	else if (d_h > PI)
+	{
+		d_h = hb - hs - PI * 2.0;
+	}
+	else // (d_h < Math.PI)
+	{
+		d_h = hb - hs + PI * 2.0;
+	}
+
+	// float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
+	return d_h;
 }
 
 float calculate_cie_de_2000_L(vec3 cs, vec3 cb){
-	float Ls = cs.x;
-	float Lb = cb.x;
-	float d_L = Lb - Ls;
+	float L_s = cs.x;
+	float L_b = cb.x;
+	float d_L = L_b - L_s;
 	return d_L;
 }
 
-float calculate_cie_de_2000(vec3 cs, vec3 cb){
+float DegToRad(float deg) {
+	return deg * PI / 180.0;
+}
+
+float calculate_cie_de_2000(vec3 cs, vec3 cb)
+{
 	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
-	float G = 0.5 * (1.0 - sqrt( 	pow(C_star, 7.0) / ( pow(C_star, 7.0) + pow(25.0, 7.0) )	)); //TODO fehler in der formel fixen
+	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); //TODO fehler in der formel fixen
 
-	float Ls = cs.x;
-	float as = (1.0 + G)*cs.y;
-	float bs = cs.z;
+	float L_s = cs.x;
+	float a_s = (1.0 + G) * cs.y;
+	float b_s = cs.z;
 
-	float Lb = cb.x;
-	float ab = (1.0 + G)*cb.y;
-	float bb = cb.z;
+	float L_b = cb.x;
+	float a_b = (1.0 + G) * cb.y;
+	float b_b = cb.z;
 
-	float Cs = sqrt(as * as + bs * bs);
-	float Cb = sqrt(ab * ab + bb * bb);
+	float Cs = sqrt(a_s * a_s + b_s * b_s);
+	float Cb = sqrt(a_b * a_b + b_b * b_b);
 
-	float hs = atan(bs , as);
-	float hb = atan(bb , ab);
+	float hs = atan(b_s, a_s);
+	float hb = atan(b_b, a_b);
+
+	if (hs < 0) hs += 2.0 * PI;
+	if (hb < 0) hb += 2.0 * PI;
+
+	float d_L = L_b - L_s;
+	float d_C = Cb - Cs;
 
 	float d_h = hb - hs;
-	d_h = atan(sin(d_h), cos(d_h));
-	float d_L = Lb - Ls;
-	float d_C = Cb - Cs;
+	if (abs(d_h) <= PI)
+	{
+		d_h = hb - hs;
+	}
+	else if (d_h > PI)
+	{
+		d_h = hb - hs - PI * 2.0;
+	}
+	else // (d_h < Math.PI)
+	{
+		d_h = hb - hs + PI * 2.0;
+	}
+
 	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
 
 	float kL = 1.0;
 	float kC = 1.0;
 	float kH = 1.0;
 
-	float m_L = (Lb + Ls) / 2.0;
+	float m_L = (L_b + L_s) / 2.0;
 	float m_C = (Cb + Cs) / 2.0;
+
 	float m_h = (hs + hb) / 2.0;
+
+	float diff = abs(hs - hb);
+	if (diff <= PI)
+	{
+		// m_h = (hs + hb) / 2.0;
+	}
+	else if ((hs + hb) < 2.0 * PI)
+	{
+		m_h = (hs + hb + 2.0 * PI) / 2.0;
+	}
+	else //((hs+hb) < 2.0 * Math.PI)
+	{
+		m_h = (hs + hb - 2.0 * PI) / 2.0;
+	}
 
 	float sL = 1.0 + (0.015 * pow(m_L - 50.0, 2.0)) / (sqrt(20.0 + pow(m_L - 50.0, 2.0)));
 	float sC = 1.0 + 0.045 * m_C;
-	float T = 1.0 - 0.17 * cos(m_h - 30.0) + 0.24 * cos(2.0 * m_h) + 0.32 * cos(3.0 * m_h + 6.0) - 0.20 * cos(4.0 * m_h - 63);
+
+	float T = 1.0
+		- 0.17 * cos(m_h - DegToRad(30.0))
+		+ 0.24 * cos(2.0 * m_h)
+		+ 0.32 * cos(3.0 * m_h + DegToRad(6.0))
+		- 0.20 * cos(4.0 * m_h - DegToRad(63.0));
+
 	float sH = 1.0 + 0.015 * m_C * T;
 
-	float d_0 = 30.0 * exp(-pow((m_h - 275.0) / 25.0, 2.0));
+	float d_0 = DegToRad(30.0) * exp(-pow((m_h - DegToRad(275.0)) / DegToRad(25.0), 2.0));
 	float Rc = 2.0 * sqrt(pow(m_C, 7.0) / (pow(m_C, 7.0) + pow(25.0, 7.0)));
 	float Rt = -sin(2.0 * d_0) * Rc;
 
-	float d_E_00 = sqrt(pow(d_L / (kL * sL), 2.0) + pow(d_C / (kC * sC), 2.0) + pow(d_H / (kH * sH), 2.0) +		( Rt * (d_C / (kC * sC)) * (d_H / (kH * sH)) )		);
+	float d_E_00 = sqrt(pow(d_L / (kL * sL), 2.0) + pow(d_C / (kC * sC), 2.0) + pow(d_H / (kH * sH), 2.0) + (Rt * (d_C / (kC * sC)) * (d_H / (kH * sH))));
 	return d_E_00;
 }
 

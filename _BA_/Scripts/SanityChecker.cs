@@ -76,6 +76,8 @@ namespace BA
             // }
 
             // GD.Print("Delta Hue: " + d_h);
+            GD.Print(Math.PI);
+            GD.Print(Math.PI * 2.0);
         }
     }
 }
