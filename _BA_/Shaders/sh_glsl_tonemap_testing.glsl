@@ -193,23 +193,24 @@ float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 	if (hs < 0) hs += 2.0 * PI;
 	if (hb < 0) hb += 2.0 * PI;
 
-	float d_h = hb - hs;
+	float d_h;
 	if(Cs * Cb == 0.0){
 		d_h = 0.0;
 	}
 	else
 	{
-		if (abs(d_h) <= PI)
+		float diff = hb - hs;
+		if (abs(diff) <= PI)
 		{
-			d_h = hb - hs;
+			d_h = diff;
 		}
-		else if (d_h > PI)
+		else if (diff > PI)
 		{
-			d_h = hb - hs - PI * 2.0;
+			d_h = diff - PI * 2.0;
 		}
-		else // (d_h < Math.PI)
+		else // (d_h < -Math.PI)
 		{
-			d_h = hb - hs + PI * 2.0;
+			d_h = diff + PI * 2.0;
 		}
 	}
 
@@ -253,23 +254,24 @@ float calculate_cie_de_2000(vec3 cs, vec3 cb)
 	float d_L = L_b - L_s;
 	float d_C = Cb - Cs;
 
-	float d_h = hb - hs;
+	float d_h;
 	if(Cs * Cb == 0.0){
 		d_h = 0.0;
 	}
 	else
 	{
-		if (abs(d_h) <= PI)
+		float diff = hb - hs;
+		if (abs(diff) <= PI)
 		{
-			d_h = hb - hs;
+			d_h = diff;
 		}
-		else if (d_h > PI)
+		else if (diff > PI)
 		{
-			d_h = hb - hs - PI * 2.0;
+			d_h = diff - PI * 2.0;
 		}
-		else // (d_h < Math.PI)
+		else // (d_h < -Math.PI)
 		{
-			d_h = hb - hs + PI * 2.0;
+			d_h = diff + PI * 2.0;
 		}
 	}
 
