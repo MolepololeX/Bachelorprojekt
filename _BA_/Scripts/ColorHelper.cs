@@ -113,17 +113,24 @@ namespace BA
             if (hb < 0) hb += 2.0 * Math.PI;
 
             double d_h = hb - hs;
-            if (Math.Abs(d_h) <= Math.PI)
+            if (Cs * Cb == 0.0)
             {
-                d_h = hb - hs;
+                d_h = 0.0;
             }
-            else if (d_h > Math.PI)
+            else
             {
-                d_h = hb - hs - Math.PI * 2.0;
-            }
-            else // (d_h < Math.PI)
-            {
-                d_h = hb - hs + Math.PI * 2.0;
+                if (Math.Abs(d_h) <= Math.PI)
+                {
+                    d_h = hb - hs;
+                }
+                else if (d_h > Math.PI)
+                {
+                    d_h = hb - hs - Math.PI * 2.0;
+                }
+                else // (d_h < Math.PI)
+                {
+                    d_h = hb - hs + Math.PI * 2.0;
+                }
             }
             //cannot use d_H since it is the distance between the two points on the color wheel not their angle difference
             // double d_H = 2.0 * Math.Sqrt(Cb * Cs) * Math.Sin(d_h / 2.0);
@@ -158,17 +165,24 @@ namespace BA
             double d_C = Cb - Cs;
 
             double d_h = hb - hs;
-            if (Math.Abs(d_h) <= Math.PI)
+            if (Cs * Cb == 0.0)
             {
-                d_h = hb - hs;
+                d_h = 0.0;
             }
-            else if (d_h > Math.PI)
+            else
             {
-                d_h = hb - hs - Math.PI * 2.0;
-            }
-            else // (d_h < Math.PI)
-            {
-                d_h = hb - hs + Math.PI * 2.0;
+                if (Math.Abs(d_h) <= Math.PI)
+                {
+                    d_h = hb - hs;
+                }
+                else if (d_h > Math.PI)
+                {
+                    d_h = hb - hs - Math.PI * 2.0;
+                }
+                else // (d_h < Math.PI)
+                {
+                    d_h = hb - hs + Math.PI * 2.0;
+                }
             }
 
             double d_H = 2.0 * Math.Sqrt(Cb * Cs) * Math.Sin(d_h / 2.0);
@@ -183,17 +197,24 @@ namespace BA
             double m_h = (hs + hb) / 2.0;
 
             double diff = Math.Abs(hs - hb);
-            if (diff <= Math.PI)
+            if (Cs * Cb == 0.0)
             {
-                // m_h = (hs + hb) / 2.0;
+                m_h = hs + hb;
             }
-            else if ((hs + hb) < 2.0 * Math.PI)
+            else
             {
-                m_h = (hs + hb + 2.0 * Math.PI) / 2.0;
-            }
-            else //((hs+hb) < 2.0 * Math.PI)
-            {
-                m_h = (hs + hb - 2.0 * Math.PI) / 2.0;
+                if (diff <= Math.PI)
+                {
+                    // m_h = (hs + hb) / 2.0;
+                }
+                else if ((hs + hb) < 2.0 * Math.PI)
+                {
+                    m_h = (hs + hb + 2.0 * Math.PI) / 2.0;
+                }
+                else //((hs+hb) < 2.0 * Math.PI)
+                {
+                    m_h = (hs + hb - 2.0 * Math.PI) / 2.0;
+                }
             }
 
             double sL = 1.0 + (0.015 * Math.Pow(m_L - 50.0, 2.0)) / (Math.Sqrt(20.0 + Math.Pow(m_L - 50.0, 2.0)));

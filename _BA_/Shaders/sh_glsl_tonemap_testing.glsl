@@ -194,17 +194,23 @@ float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 	if (hb < 0) hb += 2.0 * PI;
 
 	float d_h = hb - hs;
-	if (abs(d_h) <= PI)
-	{
-		d_h = hb - hs;
+	if(Cs * Cb == 0.0){
+		d_h = 0.0;
 	}
-	else if (d_h > PI)
+	else
 	{
-		d_h = hb - hs - PI * 2.0;
-	}
-	else // (d_h < Math.PI)
-	{
-		d_h = hb - hs + PI * 2.0;
+		if (abs(d_h) <= PI)
+		{
+			d_h = hb - hs;
+		}
+		else if (d_h > PI)
+		{
+			d_h = hb - hs - PI * 2.0;
+		}
+		else // (d_h < Math.PI)
+		{
+			d_h = hb - hs + PI * 2.0;
+		}
 	}
 
 	// float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
@@ -225,7 +231,7 @@ float DegToRad(float deg) {
 float calculate_cie_de_2000(vec3 cs, vec3 cb)
 {
 	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
-	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); //TODO fehler in der formel fixen
+	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); 
 
 	float L_s = cs.x;
 	float a_s = (1.0 + G) * cs.y;
@@ -248,17 +254,23 @@ float calculate_cie_de_2000(vec3 cs, vec3 cb)
 	float d_C = Cb - Cs;
 
 	float d_h = hb - hs;
-	if (abs(d_h) <= PI)
-	{
-		d_h = hb - hs;
+	if(Cs * Cb == 0.0){
+		d_h = 0.0;
 	}
-	else if (d_h > PI)
+	else
 	{
-		d_h = hb - hs - PI * 2.0;
-	}
-	else // (d_h < Math.PI)
-	{
-		d_h = hb - hs + PI * 2.0;
+		if (abs(d_h) <= PI)
+		{
+			d_h = hb - hs;
+		}
+		else if (d_h > PI)
+		{
+			d_h = hb - hs - PI * 2.0;
+		}
+		else // (d_h < Math.PI)
+		{
+			d_h = hb - hs + PI * 2.0;
+		}
 	}
 
 	float d_H = 2.0 * sqrt(Cb * Cs) * sin(d_h / 2.0);
@@ -272,18 +284,24 @@ float calculate_cie_de_2000(vec3 cs, vec3 cb)
 
 	float m_h = (hs + hb) / 2.0;
 
-	float diff = abs(hs - hb);
-	if (diff <= PI)
-	{
-		// m_h = (hs + hb) / 2.0;
+	if(Cs * Cb == 0.0){
+		m_h = hs + hb;
 	}
-	else if ((hs + hb) < 2.0 * PI)
+	else
 	{
-		m_h = (hs + hb + 2.0 * PI) / 2.0;
-	}
-	else //((hs+hb) < 2.0 * Math.PI)
-	{
-		m_h = (hs + hb - 2.0 * PI) / 2.0;
+		float diff = abs(hs - hb);
+		if (diff <= PI)
+		{
+			// m_h = (hs + hb) / 2.0;
+		}
+		else if ((hs + hb) < 2.0 * PI)
+		{
+			m_h = (hs + hb + 2.0 * PI) / 2.0;
+		}
+		else //((hs+hb) < 2.0 * Math.PI)
+		{
+			m_h = (hs + hb - 2.0 * PI) / 2.0;
+		}
 	}
 
 	float sL = 1.0 + (0.015 * pow(m_L - 50.0, 2.0)) / (sqrt(20.0 + pow(m_L - 50.0, 2.0)));
@@ -385,9 +403,8 @@ void main() {
 			linear_srgb_to_oklab(pre.xyz), 
 			linear_srgb_to_oklab(post.xyz)
 		);
-		// hue_diff /= 6.28318530718; //2PI normalized radiants
 		//correct normalization 1 ... -1
-		delta /= 3.14159265359; //PI
+		delta /= PI;
 	}
 
 	//oklab delta_C
