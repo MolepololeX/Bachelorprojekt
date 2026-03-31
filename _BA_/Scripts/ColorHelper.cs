@@ -171,17 +171,18 @@ namespace BA
             }
             else
             {
-                if (Math.Abs(d_h) <= Math.PI)
+                double diff = hb - hs;
+                if (Math.Abs(diff) <= Math.PI)
                 {
-                    d_h = hb - hs;
+                    d_h = diff;
                 }
                 else if (d_h > Math.PI)
                 {
-                    d_h = hb - hs - Math.PI * 2.0;
+                    d_h = diff - Math.PI * 2.0;
                 }
                 else // (d_h < Math.PI)
                 {
-                    d_h = hb - hs + Math.PI * 2.0;
+                    d_h = diff + Math.PI * 2.0;
                 }
             }
 
@@ -196,13 +197,13 @@ namespace BA
 
             double m_h = (hs + hb) / 2.0;
 
-            double diff = Math.Abs(hs - hb);
             if (Cs * Cb == 0.0)
             {
                 m_h = hs + hb;
             }
             else
             {
+                double diff = Math.Abs(hs - hb);
                 if (diff <= Math.PI)
                 {
                     // m_h = (hs + hb) / 2.0;
