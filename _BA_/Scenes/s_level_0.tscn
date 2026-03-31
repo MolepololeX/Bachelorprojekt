@@ -38,7 +38,7 @@
 [ext_resource type="Material" uid="uid://bfyloeklnnt1v" path="res://Assets/Materials/sm_rain_distorted.tres" id="36_lxfnq"]
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="37_duxdj"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="38_0qx0j"]
-[ext_resource type="Texture2D" uid="uid://cyafjfmvn1yk3" path="res://_BA_/Palettes/TestScene_OKLCh.png" id="38_rxqsg"]
+[ext_resource type="Texture2D" uid="uid://vsy4nujjbkt7" path="res://_BA_/Palettes/TestScene_HSL.png" id="38_804ie"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="PackedScene" uid="uid://bewxybksr5me8" path="res://Scenes/Levels/s_inventory_display.tscn" id="41_lwqye"]
@@ -717,26 +717,27 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.37122253, 0)
-bones/4/rotation = Quaternion(-0.5524553, -0.056597263, -0.6372722, 0.53429776)
-bones/5/rotation = Quaternion(3.7390777e-08, -5.828074e-08, -0.516163, 0.8564904)
-bones/7/rotation = Quaternion(-0.3217085, -0.33777472, 0.15047707, 0.871647)
-bones/8/rotation = Quaternion(0.00083514163, 0.0008351357, -0.70403445, 0.7101649)
-bones/9/rotation = Quaternion(-0.6109566, 0.07707868, 0.6128585, 0.49517208)
-bones/10/rotation = Quaternion(2.7966871e-08, 4.385345e-08, 0.5385049, 0.8426224)
-bones/12/rotation = Quaternion(-0.32071865, 0.31400385, -0.23264922, 0.86279523)
-bones/13/rotation = Quaternion(0.0026454097, 0.0031159013, 0.70435387, 0.7098374)
-bones/15/rotation = Quaternion(0.990018, 0.08357581, 0.07842559, 0.08203092)
-bones/16/rotation = Quaternion(0.38172007, 6.044682e-08, -2.6167214e-07, 0.92427796)
-bones/17/rotation = Quaternion(-0.61452055, -0.201634, 0.07430819, 0.7590695)
-bones/19/rotation = Quaternion(0.99196357, -0.03305456, 0.02993063, 0.11840577)
-bones/20/rotation = Quaternion(0.427232, -6.0024355e-08, 2.978875e-07, 0.90414214)
-bones/21/rotation = Quaternion(-0.641045, 0.112697944, -0.022217637, 0.7588589)
-bones/38/position = Vector3(0.52084064, 0.77663106, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.77663094, 0.059736915)
+bones/1/position = Vector3(0, 0.37688145, 0)
+bones/4/rotation = Quaternion(-0.5515435, -0.06207457, -0.6553773, 0.51227635)
+bones/5/rotation = Quaternion(2.086353e-08, -5.7173988e-08, -0.48015144, 0.87718576)
+bones/7/rotation = Quaternion(-0.3169399, -0.3308848, 0.13543789, 0.8784765)
+bones/8/rotation = Quaternion(0.0016449067, 0.0016449051, -0.7010416, 0.71311665)
+bones/9/rotation = Quaternion(-0.61099494, 0.082245864, 0.6284966, 0.47425002)
+bones/10/rotation = Quaternion(1.9562263e-08, 4.5756007e-08, 0.50403976, 0.86368054)
+bones/12/rotation = Quaternion(-0.3156282, 0.30518416, -0.21719198, 0.8718195)
+bones/13/rotation = Quaternion(0.004342939, 0.005115343, 0.7025753, 0.7115778)
+bones/15/rotation = Quaternion(0.991251, 0.08324276, 0.077428095, 0.06706024)
+bones/16/rotation = Quaternion(0.34223434, 6.074318e-08, -2.4393563e-07, 0.93961465)
+bones/17/rotation = Quaternion(-0.5938501, -0.20380533, 0.06728993, 0.7754209)
+bones/18/rotation = Quaternion(5.207393e-06, 0.9201623, -0.39153704, -1.1175897e-06)
+bones/19/rotation = Quaternion(0.99349546, -0.032144878, 0.030308237, 0.10495261)
+bones/20/rotation = Quaternion(0.39236984, -6.059244e-08, 2.743674e-07, 0.91980755)
+bones/21/rotation = Quaternion(-0.62223256, 0.113284364, -0.018939402, 0.77436084)
+bones/38/position = Vector3(0.52084064, 0.76786643, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7678663, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2069845, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2126435, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("2_rxqsg")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1535,8 +1536,8 @@ _backGroundColor = Color(0.83889705, 0.83889705, 0.838897, 1)
 _graphRes = 1024
 _pointRadius = 8
 _env = NodePath("../PostTesting")
-palettePlotType = 4
-palette = ExtResource("38_rxqsg")
+palettePlotType = 7
+palette = ExtResource("38_804ie")
 
 [node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_oqg80")
@@ -1544,7 +1545,6 @@ compositor = SubResource("Compositor_jqdjy")
 
 [node name="SanityCheck" type="Node" parent="SubViewport"]
 script = ExtResource("42_804ie")
-color2 = Color(1, 0, 0.8808251, 1)
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 own_world_3d = true

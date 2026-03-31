@@ -125,9 +125,9 @@ namespace BA
             {
                 d_h = hb - hs + Math.PI * 2.0;
             }
-
-            double d_H = 2.0 * Math.Sqrt(Cb * Cs) * Math.Sin(d_h / 2.0);
-            return (float)d_H;
+            //cannot use d_H since it is the distance between the two points on the color wheel not their angle difference
+            // double d_H = 2.0 * Math.Sqrt(Cb * Cs) * Math.Sin(d_h / 2.0);
+            return (float)d_h;
         }
 
         private static double DegToRad(double deg) => deg * Math.PI / 180.0;

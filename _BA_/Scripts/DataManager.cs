@@ -51,6 +51,7 @@ namespace BA
 
 		[ExportCategory("Palettes")]
 		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GeneratePaletteDelta);
+		[ExportToolButton("Plot All Palette Delta")] public Callable PlotAllPaletteDelta => Callable.From(GenerateAllPaletteDelta);
 		[Export] private PalettePlotType palettePlotType = PalettePlotType.oklab_L;
 		[Export] private Texture2D palette;
 
@@ -58,7 +59,16 @@ namespace BA
 		Image baseImage;
 		Image comparisonImage;
 
-
+		public void GenerateAllPaletteDelta()
+		{
+			PalettePlotType prev = palettePlotType;
+			foreach (PalettePlotType x in Enum.GetValues(typeof(PalettePlotType)))
+			{
+				palettePlotType = x;
+				GeneratePaletteDelta();
+			}
+			palettePlotType = prev;
+		}
 		public void GeneratePaletteDelta()
 		{
 			if (palette == null)
@@ -92,26 +102,27 @@ namespace BA
 					float delta = 0.0f;
 
 					Lab c_lab;
+					RGB hue_base = new RGB { r = 1.0f, g = 0, b = 0 };
+
 					switch (palettePlotType)
 					{
 						case PalettePlotType.oklab_L:
 
 							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							delta = c_lab.L;
+							delta = c_lab.L - 0.0f;
 
 							break;
 						case PalettePlotType.oklab_C:
 
 							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
 							double C = new Vector2(c_lab.a, c_lab.b).Length();
-							delta = (float)C;
+							delta = (float)C - 0.0f;
 
 							break;
 						case PalettePlotType.oklab_h:
 
 							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							double hue = Math.Atan2(c_lab.b, c_lab.a) / (Math.PI * 2.0);
-							delta = (float)hue;
+							delta = (float)(calculate_oklab_d_h(linear_srgb_to_oklab(hue_base), c_lab) / Math.PI);
 
 							break;
 						case PalettePlotType.oklab_E:
@@ -122,26 +133,33 @@ namespace BA
 
 							break;
 						case PalettePlotType.cie_L:
+
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
 							double d_L = calculate_cie_d_L(new Lab { L = 0, a = 0, b = 0 }, c_lab);
 							delta = (float)(d_L / 100.0);
 							break;
+
 						case PalettePlotType.cie_C:
+
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
 							double d_C = calculate_cie_d_C(new Lab { L = 0, a = 0, b = 0 }, c_lab);
 							delta = (float)(d_C / 100.0);
 							break;
+
 						case PalettePlotType.cie_H:
+
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_H = calculate_cie_d_H(new Lab { L = 53.2f, a = 80.1f, b = 67.2f }, c_lab);
-							// delta = (float)(d_H / 100.0);
-							delta = (float)(d_H / 180.0 * Math.PI);
+							double d_H = calculate_cie_d_H(linear_srgb_to_cielab(hue_base), c_lab);
+							delta = (float)(d_H / Math.PI);
 							break;
+
 						case PalettePlotType.cie_E:
+
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_E = calculate_cie_de_2000(new Lab { L = 53.2f, a = 80.1f, b = 67.2f }, c_lab);
+							double d_E = calculate_cie_de_2000(linear_srgb_to_cielab(new RGB { r = 0, g = 0, b = 0 }), c_lab);
 							delta = (float)(d_E / 100.0);
 							break;
+
 					}
 
 					int ix = (int)(((float)x / (float)M) * _graphRes);
@@ -161,12 +179,12 @@ namespace BA
 					if (ix >= _graphRes || ix < 0)
 					{
 						ix = 0;
-						GD.PushWarning("Hue was greater than 1");
+						// GD.PushWarning("Hue was greater than 1");
 					}
 					if (iy >= _graphRes || iy < 0)
 					{
 						iy = 0;
-						GD.PushWarning("Delta value was greater than 1: " + delta);
+						// GD.PushWarning("Delta value was greater than 1: " + delta);
 					}
 
 					for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
