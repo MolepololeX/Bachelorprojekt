@@ -88,7 +88,7 @@ namespace BA
 			{
 				for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
 				{
-					chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
+					chart.SetPixel(x, y + _graphRes / 2, Colors.DarkGray);
 				}
 			}
 
@@ -109,14 +109,14 @@ namespace BA
 						case PalettePlotType.oklab_L:
 
 							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							delta = c_lab.L - 0.0f;
+							delta = c_lab.L;
 
 							break;
 						case PalettePlotType.oklab_C:
 
 							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
 							double C = new Vector2(c_lab.a, c_lab.b).Length();
-							delta = (float)C - 0.0f;
+							delta = (float)C;
 
 							break;
 						case PalettePlotType.oklab_h:
