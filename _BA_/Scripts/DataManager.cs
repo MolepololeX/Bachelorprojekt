@@ -40,7 +40,7 @@ namespace BA
 		[ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
 
 
-		[ExportCategory("Graphs")]
+		[ExportCategory("Manual Graph Settings")]
 		[Export] private Texture2D _digitImage09;
 		[Export] private Texture2D _characterImageAZ;
 		[Export] private int _digitScale = 2;
@@ -84,7 +84,7 @@ namespace BA
 		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraphSelected);
 		[ExportToolButton("Plot All Palette Delta")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
 		[Export] private PalettePlotType _palettePlotType = PalettePlotType.oklab_L;
-		[Export] private Texture2D palette;
+		[Export] private Godot.Collections.Array<Texture2D> palettes;
 
 		//cannot export to godot sadly
 		private readonly PaletteData[] paletteDataSet =
@@ -100,7 +100,10 @@ namespace BA
 			{
 				plotType = PalettePlotType.oklab_C,
 				labelX = "original oklab lightness",
-				labelY = "palette oklab chroma"
+				labelY = "palette oklab chroma",
+				yMin = -0.25f,
+				yMax = 0.25f,
+				decimalsY = 3
 			},
 
 			new PaletteData
@@ -157,9 +160,12 @@ namespace BA
 
 		public void GenAllPaletteGraphs()
 		{
-			foreach (PaletteData data in paletteDataSet)
+			foreach (Texture2D palette in palettes)
 			{
-				GenPaletteGraph(data.plotType, data.labelX, data.decimalsX, data.xMin, data.xMax, data.labelY, data.decimalsY, data.yMin, data.yMax);
+				foreach (PaletteData data in paletteDataSet)
+				{
+					GenPaletteGraph(palette, data.plotType, data.labelX, data.decimalsX, data.xMin, data.xMax, data.labelY, data.decimalsY, data.yMin, data.yMax);
+				}
 			}
 		}
 
@@ -168,7 +174,7 @@ namespace BA
 			// GenPaletteGraph(_palettePlotType);
 		}
 
-		private void GenPaletteGraph(PalettePlotType palettePlotType, string _labelX, int _numDecimalsX, float _scaleXRangeBottom, float _scaleXRangeTop, string _labelY, int _numDecimalsY, float _scaleYRangeBottom, float _scaleYRangeTop)
+		private void GenPaletteGraph(Texture2D palette, PalettePlotType palettePlotType, string _labelX, int _numDecimalsX, float _scaleXRangeBottom, float _scaleXRangeTop, string _labelY, int _numDecimalsY, float _scaleYRangeBottom, float _scaleYRangeTop)
 		{
 			if (palette == null)
 			{
@@ -232,7 +238,7 @@ namespace BA
 
 							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
 							double C = new Vector2(c_lab.a, c_lab.b).Length();
-							delta = (float)C;
+							delta = (float)C * 4.0f;
 
 							break;
 						case PalettePlotType.oklab_h:
