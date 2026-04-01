@@ -42,7 +42,9 @@ var draw_mode : DrawMode = DrawMode.none
 
 @export_tool_button("Reload Shader", "Redo") var reload_shader_action = _reinit_shader
 
+@export_tool_button("Capture before and after", "CameraTexture") var enable_capture_action = _enable_capture
 
+var enable_capture = false
 var rd: RenderingDevice
 var shader: RID
 var pipeline: RID
@@ -50,6 +52,9 @@ var parameter_storage_buffer := RID()
 var shader_is_valid = false
 
 var frame_counter : int = 0
+
+func _enable_capture() -> void:
+	enable_capture = true
 
 func _init():
 	rd = RenderingServer.get_rendering_device()
@@ -137,6 +142,10 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				
 				# Get the RID for our color image, we will be reading from and writing to it.
 				var input_image : RID = render_scene_buffers.get_color_layer(view)
+				
+				#if(enable_capture):
+					
+					
 				#var input_depth : RID = render_scene_buffers.get_depth_layer(view)
 				#var input_normal : RID = render_scene_buffers.get_texture("forward_clustered", "normal_roughness")
 
@@ -189,6 +198,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				rd.compute_list_dispatch(compute_list, x_groups, y_groups, z_groups)
 				rd.compute_list_end()
 	
+	if(enable_capture): enable_capture = false
 	
 	frame_counter += 1
 	if frame_counter > reload_interval_frames and live_reload:

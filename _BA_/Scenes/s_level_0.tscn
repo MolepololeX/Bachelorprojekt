@@ -1,9 +1,5 @@
-[gd_scene load_steps=141 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=124 format=4 uid="uid://ba60303q6ii63"]
 
-[ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_s51nc"]
-[ext_resource type="PackedScene" uid="uid://ctly6ohubsyv0" path="res://Scenes/Player/s_fishing_rod.tscn" id="2_rxqsg"]
-[ext_resource type="PackedScene" uid="uid://t5s5fvyf8bjv" path="res://Scenes/Player/s_axe.tscn" id="3_804ie"]
-[ext_resource type="Shader" uid="uid://ot0bv71kcr4g" path="res://Assets/Shaders/sh_toon_material.gdshader" id="4_py68e"]
 [ext_resource type="PackedScene" uid="uid://bwic0egi0ejsk" path="res://Scenes/Environment/s_floor_tile.tscn" id="5_l7jgw"]
 [ext_resource type="PackedScene" uid="uid://b24shvq54jb53" path="res://Assets/Meshes/pond_floor.glb" id="6_3stlt"]
 [ext_resource type="Material" uid="uid://c7ucxh3ki20ld" path="res://Assets/Materials/Toon/sm_toon_grass.tres" id="7_gs24r"]
@@ -29,8 +25,7 @@
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="27_6yxrc"]
 [ext_resource type="Material" uid="uid://cp7iai08xfa03" path="res://Assets/Materials/Foliage/sm_grass_light.tres" id="28_u1c6q"]
 [ext_resource type="Material" uid="uid://67fuhybtuskr" path="res://Assets/Materials/Foliage/sm_grass_dark.tres" id="29_cms6a"]
-[ext_resource type="PackedScene" uid="uid://bm7odeqtwcook" path="res://Scenes/Camera/s_camera_rig.tscn" id="30_wfa8o"]
-[ext_resource type="Script" uid="uid://r4408rocgvq7" path="res://Scripts/Camera/CameraPixelSnapping.cs" id="31_mo11r"]
+[ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/m_outline_post.tres" id="30_l7jgw"]
 [ext_resource type="Material" uid="uid://blaixftpi6web" path="res://Assets/Materials/Foliage/sm_cloud_shadows_day.tres" id="32_anho7"]
 [ext_resource type="Material" uid="uid://cnloy7ao6i21e" path="res://Assets/Materials/Foliage/sm_cloud_shadows_night.tres" id="33_mac0w"]
 [ext_resource type="Shader" uid="uid://ddtvr04n8rdjk" path="res://Assets/Shaders/sh_stars.gdshader" id="34_14jh6"]
@@ -44,53 +39,12 @@
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/characters.png" id="39_l7jgw"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Texture2D" uid="uid://vsy4nujjbkt7" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
-[ext_resource type="PackedScene" uid="uid://bewxybksr5me8" path="res://Scenes/Levels/s_inventory_display.tscn" id="41_lwqye"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
 [ext_resource type="Script" uid="uid://bh3mglv5tsnmk" path="res://Scripts/Testing/ObliqueReflectionCamera.cs" id="43_4unsq"]
-[ext_resource type="Material" uid="uid://ct5q54aaaueht" path="res://Assets/Materials/PostFX/m_pixel_desnap_post.tres" id="44_5bccq"]
-[ext_resource type="Script" uid="uid://c1rn8hsf4fqwy" path="res://Scripts/UI/ZoomDisplay.cs" id="45_r7mwg"]
-[ext_resource type="PackedScene" uid="uid://cydmnutcsoykg" path="res://Scenes/UI/s_debug_inventory.tscn" id="46_iypyb"]
-[ext_resource type="PackedScene" uid="uid://dl2typk0t7avi" path="res://Scenes/UI/s_debug_fps.tscn" id="47_uc48j"]
-[ext_resource type="Script" uid="uid://c2mmo1cwktjs5" path="res://Scripts/Testing/TestButton.cs" id="48_l2pqu"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="49_ow6iq"]
 [ext_resource type="Script" uid="uid://cchta2hcc0oal" path="res://Scripts/Audio/AudioFade.cs" id="50_77m7r"]
-[ext_resource type="Script" uid="uid://1qwb5jd360t1" path="res://Scripts/Managers/GameManager.cs" id="51_2xyx1"]
-[ext_resource type="PackedScene" uid="uid://dqtnikfstlns1" path="res://Scenes/ItemsWorld/s_copper_nugget.tscn" id="52_qu5ao"]
-[ext_resource type="PackedScene" uid="uid://c1qdxfmogmenf" path="res://Scenes/ItemsWorld/s_wood_log.tscn" id="53_twxn4"]
-[ext_resource type="PackedScene" uid="uid://p1b6hvdrgefu" path="res://Scenes/ItemsWorld/s_wood_plank.tscn" id="54_etnhu"]
-[ext_resource type="PackedScene" uid="uid://chmw4cno5r0ub" path="res://Scenes/ItemsWorld/s_quicksilverII.tscn" id="55_hsr48"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="56_5s3d3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkhpk"]
-render_priority = 0
-shader = ExtResource("4_py68e")
-shader_parameter/albedo = Color(0.86262906, 0.72269565, 0.6311879, 1)
-shader_parameter/clamp_diffuse_to_max = false
-shader_parameter/cuts = 3
-shader_parameter/wrap = 0.0
-shader_parameter/steepness = 1.0
-shader_parameter/use_attenuation = true
-shader_parameter/use_specular = true
-shader_parameter/specular_strength = 1.0
-shader_parameter/specular_shininess = 16.0
-shader_parameter/use_rim = false
-shader_parameter/rim_width = 8.0
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/use_ramp = false
-shader_parameter/use_borders = false
-shader_parameter/border_width = 0.01
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qhxvw"]
-material = SubResource("ShaderMaterial_jkhpk")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_877y0"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0.2627451, 0.30588236, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jxkj0"]
-material = SubResource("StandardMaterial3D_877y0")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2u58p"]
 
@@ -326,8 +280,9 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_letut")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sabu"]
+transparency = 1
 shading_mode = 0
-albedo_color = Color(4.415934, 3.8806427, 2.7094176, 1)
+albedo_color = Color(2.117, 1.221, 0.284, 0.529)
 
 [sub_resource type="Curve" id="Curve_2exb5"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2544643, 1), 0.0, 0.0, 0, 0, Vector2(0.4977679, 0.47802198), 0.0, 0.0, 0, 0, Vector2(0.7522322, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -358,7 +313,7 @@ alpha_curve = SubResource("CurveTexture_a5w0y")
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(2.708, 2.446, 1.881, 1)
+albedo_color = Color(2.117, 1.224, 0.281, 1)
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -367,6 +322,27 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_5yjbh"]
 material = SubResource("StandardMaterial3D_8auip")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_folns"]
+resource_name = "lantern_pole_Cube_022"
+_surfaces = [{
+"aabb": AABB(-0.73030376, 2.9077182, -0.10636033, 0.21272159, 0.33903646, 0.21272153),
+"attribute_data": PackedByteArray("VHX/P6qKAACqiv8/VHUAAFR1/3+qiv8/qor/f1R1/z9Udf+/qor/f6qK/79Udf9/VHX//6qK/7+qiv//VHX/vw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_s2umi"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/v8AAAAAVNX//////v9U1f7///8AAFTV//8AAP7/VNUAAAAAAAD///7///8AAP//AAD//wAA///+/wAAAAD//wAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTV//8AAP7//78AAP//////v//////+//+/AAAAAP///7+qKqoqqiqqKqoqqiqqKqoq/7//v/+//7//v/+//7//v1TVVNVU1VTVVNVU1VTVVNX/////////////////////")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_letut")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxdsv"]
+shading_mode = 0
+albedo_color = Color(6.125, 4.839, 3.851, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rlyl2"]
 
@@ -510,6 +486,10 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_xxtuw"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_r60an"]
+flip_faces = true
+size = Vector2(2, 2)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_lcmyg"]
 material = ExtResource("32_anho7")
 size = Vector2(20, 20)
@@ -589,7 +569,14 @@ glow_bloom = 0.17
 glow_hdr_threshold = 0.35
 glow_hdr_scale = 0.16
 glow_hdr_luminance_cap = 52.49
-volumetric_fog_density = 0.0049
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
+fog_density = 1.0
+fog_depth_curve = 0.70710796
+fog_depth_begin = 0.0
+fog_depth_end = 60.0
+volumetric_fog_density = 0.005
 volumetric_fog_emission = Color(1, 1, 1, 1)
 volumetric_fog_emission_energy = 0.1
 
@@ -604,7 +591,6 @@ script = ExtResource("38_0qx0j")
 enable_draw = true
 bloom_threshold = 0.9
 bloom_strength = 0.05
-bloom_weight = 5.65
 blurr_kernelsize = 7
 blurr_passes = 3
 draw_mode = 2
@@ -624,22 +610,22 @@ tonemapper_mode = 2
 draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_3stlt"]
+[sub_resource type="Image" id="Image_folns"]
 data = {
-"data": PackedByteArray("AAAA/xwVLv9dMVv/jktY/7KUcP++y5//z+XQ//////8="),
+"data": PackedByteArray("AAAA/wAAFf8VDDH/OhVL/2QhYf9+Kln/mDFG/7JPOv/CjUv/y8Rk/7rUfv+u3Jj/suW0/8vt2v/l9vL//////w=="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 8
+"width": 16
 }
 
-[sub_resource type="Image" id="Image_gs24r"]
+[sub_resource type="Image" id="Image_lxdsv"]
 data = {
-"data": PackedByteArray("AAAA/xUcLv9GOlb/fVZq/6l8cv/Aq4z/0drB//////8="),
+"data": PackedByteArray("AAAA/wAMFf8MHDH/JiZP/0YuYP9mN2j/hkJn/6BSXv+yZ1j/u4JZ/7+cZP+/tXX/u9CS/77lv//X8+f//////w=="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 8
+"width": 16
 }
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_8auip"]
@@ -651,18 +637,17 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
 enable_draw = true
-live_reload = true
+steps = 16
 palette_type = 1
-dither_spread = 0.01
+dither_spread = 0.00508
 hue_start = 213.0
 hue_range = 360.0
 lightness_floor = 0.0
 lightness_ceiling = 1.0
-hsl_saturation = 0.3
 oklch_chroma = 0.0
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_3stlt")
-palette_preview_oklch = SubResource("Image_gs24r")
+palette_preview_hsl = SubResource("Image_folns")
+palette_preview_oklch = SubResource("Image_lxdsv")
 save_path = "res://_BA_/Palettes/"
 palette_preview_res = 64
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
@@ -710,57 +695,6 @@ size = Vector2(20, 20)
 size = Vector3(20, 0.1, 20)
 
 [node name="TestScene" type="Node3D"]
-
-[node name="Player" parent="." groups=["Snap"] instance=ExtResource("1_s51nc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10495067, 0, 15.131481)
-visible = false
-collision_layer = 10
-Speed = 2.03
-DragMult = 10.0
-
-[node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.39150244, 0)
-bones/4/rotation = Quaternion(-0.55972564, -0.060731605, -0.6437017, 0.5183311)
-bones/5/rotation = Quaternion(5.579728e-09, -4.5511754e-08, -0.49518707, 0.86878645)
-bones/7/rotation = Quaternion(-0.32112578, -0.32583037, 0.14603508, 0.8771469)
-bones/8/rotation = Quaternion(4.4657183e-05, 4.4661978e-05, -0.7069429, 0.7072706)
-bones/9/rotation = Quaternion(-0.6180627, 0.080598526, 0.6177935, 0.47940966)
-bones/10/rotation = Quaternion(2.9673043e-08, 4.7522043e-08, 0.51838624, 0.8551466)
-bones/12/rotation = Quaternion(-0.31935716, 0.30091774, -0.22758609, 0.8692895)
-bones/13/rotation = Quaternion(0.00012542708, 0.00014773164, 0.70697683, 0.7072367)
-bones/15/rotation = Quaternion(0.9936894, 0.083666585, 0.073630475, 0.012649043)
-bones/16/rotation = Quaternion(0.2000922, 6.338403e-08, -1.3275022e-07, 0.9797771)
-bones/17/rotation = Quaternion(-0.5198987, -0.20936802, 0.044330403, 0.82698566)
-bones/18/rotation = Quaternion(9.957363e-05, 0.9202469, -0.39133847, -2.2479653e-05)
-bones/19/rotation = Quaternion(0.997246, -0.029523723, 0.031496942, 0.060304645)
-bones/20/rotation = Quaternion(0.27723774, -6.327934e-08, 1.9502173e-07, 0.96080136)
-bones/21/rotation = Quaternion(-0.5607557, 0.1144927, -0.008894554, 0.81997895)
-bones/38/position = Vector3(0.52084064, 0.7878537, -0.05763735)
-bones/40/position = Vector3(-0.5108437, 0.7878536, 0.059736922)
-
-[node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2272644, 1.5739471e-15)
-
-[node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("2_rxqsg")]
-transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
-
-[node name="right foot" parent="Player/Pivot/playermodel" index="1"]
-transform = Transform3D(0.3, 0, 0, 0, 0.29999998, 0, 0, 0, 0.49999997, 0.25, 0.15, 0)
-
-[node name="left foot" parent="Player/Pivot/playermodel" index="2"]
-transform = Transform3D(0.29999998, 0, 0, 0, 0.30000004, 0, 0, 0, 0.49999997, -0.25, 0.15, 0)
-
-[node name="Axe" parent="Player" instance=ExtResource("3_804ie")]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" groups=["Snap"]]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 1, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_qhxvw")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player" groups=["Snap"]]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 1.5, 0)
-visible = false
-mesh = SubResource("BoxMesh_jxkj0")
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -837,7 +771,7 @@ skeleton = NodePath("../../../SubViewport")
 transform = Transform3D(0.9161179, 0, -0.4009086, 0, 1, 0, 0.4009086, 0, 0.9161179, 6.328688, 9.536743e-07, 0.10814953)
 
 [node name="ChoppableTree57" parent="Level/Env/ChoppableTrees" instance=ExtResource("9_li56j")]
-transform = Transform3D(-0.4193305, 0, -0.27232695, 0, 0.5, 0, 0.27232695, 0, -0.4193305, 2.0206308, -0.26247054, 9.358919)
+transform = Transform3D(-0.4193305, 0, -0.27232695, 0, 0.5, 0, 0.27232695, 0, -0.4193305, 3.2853336, -0.2624715, -7.3694344)
 
 [node name="ChoppableTree58" parent="Level/Env/ChoppableTrees" instance=ExtResource("9_li56j")]
 transform = Transform3D(-0.42294058, 0, 0.67905915, 0, 0.8, 0, -0.67905915, 0, -0.42294058, -17.914413, -0.2624696, 10.911804)
@@ -1150,14 +1084,14 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("22_gfxtu")
 
 [node name="lanterncase" type="MeshInstance3D" parent="Level/Env/lantern_pole"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, -0.16137697, 0.3688565, -6.4580706e-07)
 layers = 8
 mesh = SubResource("ArrayMesh_yib5w")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("23_picfs")
 
 [node name="lanternlight" type="MeshInstance3D" parent="Level/Env/lantern_pole"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, -0.16137697, 0.3688565, -6.4580706e-07)
 layers = 8
 mesh = SubResource("ArrayMesh_dw2gv")
 skeleton = NodePath("")
@@ -1168,6 +1102,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6215353, 3.0803933, 0)
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_2exb5")
 draw_pass_1 = SubResource("QuadMesh_5yjbh")
+
+[node name="lanternlight2" type="MeshInstance3D" parent="Level/Env/lantern_pole"]
+transform = Transform3D(0.475, 0, 0, 0, 0.475, 0, 0, 0, 0.475, -0.32843772, 1.1900938, -7.7469116e-07)
+layers = 8
+mesh = SubResource("ArrayMesh_folns")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_lxdsv")
 
 [node name="lanternchain_002" type="MeshInstance3D" parent="Level/Env/lantern_pole"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
@@ -1452,57 +1393,71 @@ shadow_enabled = true
 shadow_reverse_cull_face = true
 directional_shadow_split_1 = 0.02
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport2" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(640, 360)
+size = Vector2i(384, 216)
 render_target_update_mode = 4
 
-[node name="CameraRig" parent="SubViewport" instance=ExtResource("30_wfa8o")]
-_rotationSpeed = 100.0
-_lerpSpeed = 5.0
-_zoomIncrement = 5.0
-_maxZoom = 10.0
+[node name="CameraRig" type="Node3D" parent="Control/SubViewportContainer/SubViewport2"]
 
-[node name="Camera3D" parent="SubViewport/CameraRig" index="0" node_paths=PackedStringArray("rect")]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 11.520227, 18.972857)
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+transform = Transform3D(0.9954502, -0.003547246, 0.09521741, -0.0011474328, 0.9987881, 0.049204867, -0.09527654, -0.049090248, 0.99423975, 0.9121766, 1.7517893, 18.586367)
+fov = 35.5
 size = 10.0
 far = 1000.0
-script = ExtResource("31_mo11r")
-rect = NodePath("../../../PostPixelDeSnap")
-_debugInfo = false
-_debugMovement = false
-_camSpeed = 3.0
 
-[node name="POSTFX" parent="SubViewport/CameraRig/Camera3D" index="0"]
+[node name="POSTFX" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.8303528, -0.55723804, 0, 0.55723804, 0.8303528, -4.193416, 0.7713766, -28.380829)
 visible = false
 cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_r60an")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("30_l7jgw")
 
-[node name="CloudShadows" type="MeshInstance3D" parent="SubViewport/CameraRig"]
+[node name="CloudShadows" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.91362, 14.314774, 5.2585087)
+visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_lcmyg")
-skeleton = NodePath("../../../Level/TempRoot")
+skeleton = NodePath("../../../../../Level/TempRoot")
 
-[node name="CloudShadowsNight" type="MeshInstance3D" parent="SubViewport/CameraRig"]
+[node name="CloudShadowsNight" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.9461555, 14.228361, 5.2018223)
 visible = false
 layers = 2
 transparency = 0.4
 mesh = SubResource("PlaneMesh_sit86")
-skeleton = NodePath("../../../Level/TempRoot")
+skeleton = NodePath("../../../../../Level/TempRoot")
 
-[node name="stars" type="MeshInstance3D" parent="SubViewport/CameraRig"]
-transform = Transform3D(125.34626, 0, 0, 0, -4.364362e-06, -0.9999996, 0, 99.844955, -4.3711374e-08, 0, 19.38371, 0)
+[node name="stars" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+transform = Transform3D(125.34625, 0, 0, 0, 52.07966, -0.8531864, 0, 85.18639, 0.52160496, 0, 19.110115, 0)
+visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_8qg5c")
 surface_material_override/0 = SubResource("ShaderMaterial_2xp7q")
 
-[node name="Rain" type="Node3D" parent="SubViewport/CameraRig"]
-visible = false
+[node name="Rain" type="Node3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
 
-[node name="raindrops" type="GPUParticles3D" parent="SubViewport/CameraRig/Rain"]
+[node name="raindrops" type="GPUParticles3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Rain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 layers = 4
 amount = 5000
@@ -1517,7 +1472,7 @@ trail_lifetime = 0.15000000000000002
 process_material = SubResource("ParticleProcessMaterial_oqg80")
 draw_pass_1 = SubResource("RibbonTrailMesh_oqg80")
 
-[node name="Splashes" type="GPUParticles3D" parent="SubViewport/CameraRig/Rain"]
+[node name="Splashes" type="GPUParticles3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Rain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 emitting = false
 amount = 12000
@@ -1528,11 +1483,11 @@ visibility_aabb = AABB(-30, -30, -30, 60, 60, 60)
 process_material = SubResource("ParticleProcessMaterial_tgo4h")
 draw_pass_1 = SubResource("QuadMesh_sit86")
 
-[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="SubViewport/CameraRig/Rain"]
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Rain"]
 size = Vector3(20, 20, 20)
 heightfield_mask = 1048567
 
-[node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
+[node name="SSIM&Percentile Calculator" type="Node" parent="." node_paths=PackedStringArray("_env")]
 script = ExtResource("37_duxdj")
 _digitImage09 = ExtResource("38_py68e")
 _characterImageAZ = ExtResource("39_l7jgw")
@@ -1549,21 +1504,17 @@ _env = NodePath("../PostTesting")
 _palettePlotType = 2
 _palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])
 
-[node name="PostTesting" type="WorldEnvironment" parent="SubViewport"]
+[node name="PostTesting" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oqg80")
 compositor = SubResource("Compositor_jqdjy")
 
-[node name="SanityCheck" type="Node" parent="SubViewport"]
+[node name="SanityCheck" type="Node" parent="."]
 script = ExtResource("42_804ie")
 
-[node name="SubViewport2" type="SubViewport" parent="."]
-own_world_3d = true
+[node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(640, 360)
+size = Vector2i(40, 40)
 render_target_update_mode = 4
-
-[node name="ItemDisplayTest" parent="SubViewport2" instance=ExtResource("41_lwqye")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14184332, -9.536743e-07, -0.0030822754)
 
 [node name="ReflectionViewPortTest" type="SubViewport" parent="."]
 size = Vector2i(640, 360)
@@ -1587,66 +1538,8 @@ cull_mask = 1048571
 projection = 1
 size = 10.0
 script = ExtResource("43_4unsq")
-mainCam = NodePath("../../SubViewport/CameraRig/Camera3D")
+mainCam = NodePath("../../Control/SubViewportContainer/SubViewport2/CameraRig/Camera3D")
 reflector = NodePath("../MeshInstance3D")
-
-[node name="PostPixelDeSnap" type="ColorRect" parent="."]
-material = ExtResource("44_5bccq")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ZoomDisplay" type="Control" parent="UI" node_paths=PackedStringArray("_camRig", "_label")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("45_r7mwg")
-_camRig = NodePath("../../SubViewport/CameraRig")
-_label = NodePath("Label")
-
-[node name="Label" type="Label" parent="UI/ZoomDisplay"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Control" parent="UI" instance=ExtResource("46_iypyb")]
-visible = false
-layout_mode = 1
-
-[node name="FPSCounter" parent="UI" instance=ExtResource("47_uc48j")]
-visible = false
-layout_mode = 1
-
-[node name="Button" type="Button" parent="UI"]
-visible = false
-modulate = Color(1, 1, 1, 0.3647059)
-layout_mode = 0
-offset_left = 28.0
-offset_top = 33.0
-offset_right = 109.0
-offset_bottom = 112.0
-script = ExtResource("48_l2pqu")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("49_ow6iq")
@@ -1655,39 +1548,20 @@ _targetDB = -10.0
 _minDB = -35.0
 _fadeInScale = 5.0
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("TempSceneRoot", "Player", "Camera", "CameraRig", "ZoomShaderColorRect", "InventoryDebugLabel")]
-script = ExtResource("51_2xyx1")
-TempSceneRoot = NodePath("../Level/TempRoot")
-Player = NodePath("../Player")
-Camera = NodePath("../SubViewport/CameraRig/Camera3D")
-CameraRig = NodePath("../SubViewport/CameraRig")
-WorldItems = Dictionary[int, PackedScene]({
-1: ExtResource("52_qu5ao"),
-3: ExtResource("53_twxn4"),
-4: ExtResource("54_etnhu"),
-5: ExtResource("55_hsr48")
-})
-ZoomShaderColorRect = NodePath("../PostPixelDeSnap")
-InventoryDebugLabel = NodePath("../UI/Control/Label")
-
 [node name="DayNightToggler" type="Node" parent="." node_paths=PackedStringArray("_dayObjects", "_nightObjects", "_rainObjects", "_clearSkyObjects", "_worldEnvironment")]
 script = ExtResource("56_5s3d3")
-_dayObjects = [NodePath("../Lighting/Daylight"), NodePath("../Lighting/DaylightShadows"), NodePath("../SubViewport/CameraRig/CloudShadows")]
-_nightObjects = [NodePath("../Lighting/NightShadows"), NodePath("../SubViewport/CameraRig/CloudShadowsNight"), NodePath("../SubViewport/CameraRig/stars")]
-_rainObjects = [NodePath("../SubViewport/CameraRig/Rain")]
-_clearSkyObjects = [NodePath("../SubViewport/CameraRig/CloudShadowsNight"), NodePath("../SubViewport/CameraRig/CloudShadows")]
+_dayObjects = [NodePath("../Lighting/Daylight"), NodePath("../Lighting/DaylightShadows"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadows")]
+_nightObjects = [NodePath("../Lighting/NightShadows"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadowsNight"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/stars")]
+_rainObjects = [NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/Rain")]
+_clearSkyObjects = [NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadowsNight"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadows")]
 _nightSkyColor = Color(0.050980393, 0.07450981, 0.14117648, 1)
 _daySkyColor = Color(0.15294118, 0.4392157, 0.74509805, 1)
 _nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
 _dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
-_worldEnvironment = NodePath("../SubViewport/PostTesting")
+_worldEnvironment = NodePath("../PostTesting")
 
-[editable path="Player"]
-[editable path="Player/Pivot/Skeleton_Mage"]
 [editable path="Level/Env/Floor/pond_floor"]
 [editable path="Level/Env/WindEffect"]
 [editable path="Level/Env/CampFire/FireOmni"]
 [editable path="Level/Env/pier"]
 [editable path="Level/TempRoot/pond_floor_hp"]
-[editable path="SubViewport/CameraRig"]
-[editable path="UI/Control"]

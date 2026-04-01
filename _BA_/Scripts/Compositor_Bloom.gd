@@ -37,11 +37,11 @@ var live_reload : bool = false
 var reload_interval_frames : int = 60
 
 @export_category("Uniforms")
-@export_range(0.0, 10.0, 0.05)
+@export_range(0.0, 10.0, 0.01)
 var bloom_threshold : float = 1.0
-@export_range(0.0, 1.0, 0.05)
+@export_range(0.0, 1.0, 0.01)
 var bloom_strength : float = 1.0
-@export_range(0.0, 100.0, 0.05)
+@export_range(0.0, 100.0, 0.01)
 var bloom_weight : float = 0.5
 @export_range(0, 50, 1)
 var blurr_kernelsize : int = 1
