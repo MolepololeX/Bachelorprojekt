@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Godot;
 using static BA.ColorHelper;
@@ -9,6 +8,20 @@ namespace BA
 	[Tool]
 	public partial class DataManager : Node
 	{
+		internal class PaletteData
+		{
+			public PaletteData() { }
+			public PalettePlotType plotType;
+			public string labelX = "x axis";
+			public int decimalsX = 1;
+			public float xMin = 0.0f;
+			public float xMax = 1.0f;
+			public string labelY = "y axis";
+			public int decimalsY = 2;
+			public float yMin = -1.0f;
+			public float yMax = 1.0f;
+		}
+
 		internal enum PalettePlotType
 		{
 			oklab_L,
@@ -17,7 +30,7 @@ namespace BA
 			oklab_E,
 			cie_L,
 			cie_C,
-			cie_H,
+			cie_h,
 			cie_E
 		}
 
@@ -28,14 +41,17 @@ namespace BA
 
 
 		[ExportCategory("Graphs")]
-		[Export] private Texture2D digitImage09;
+		[Export] private Texture2D _digitImage09;
+		[Export] private Texture2D _characterImageAZ;
 		[Export] private int _digitScale = 2;
-		[Export] private float _scaleYRangeBottom = -1.0f;
-		[Export] private float _scaleYRangeTop = 1.0f;
-		[Export] private float _scaleXRangeBottom = 0.0f;
-		[Export] private float _scaleXRangeTop = 1.0f;
-		[Export] private int _numDecimalsX = 1;
-		[Export] private int _numDecimalsY = 0;
+		// [Export] private float _scaleYRangeBottom = -1.0f;
+		// [Export] private float _scaleYRangeTop = 1.0f;
+		// [Export] private float _scaleXRangeBottom = 0.0f;
+		// [Export] private float _scaleXRangeTop = 1.0f;
+		// [Export] private string _labelX = "L";
+		// [Export] private string _labelY = "L";
+		// [Export] private int _numDecimalsX = 1;
+		// [Export] private int _numDecimalsY = 0;
 		[Export] private Color _backGroundColor = Colors.Black;
 		[Export] private int _gridThickness = 2;
 		[Export] private Color _gridColor = Colors.DarkGray;
@@ -47,9 +63,9 @@ namespace BA
 		[Export] private int _pointRadius = 9;
 		[Export] private WorldEnvironment _env = null;
 		[Export] private string _fileNameAtt = "";
-		[ExportToolButton("Create Chart Delta By Hue")] public Callable CreateDeltaHGraph => Callable.From(Create_Chart_Delta_By_Hue);
-		[ExportToolButton("Create Chart Chroma By Brightness")] public Callable CreateChromaBrightness => Callable.From(Create_Chart_Chroma_Brightness);
-		[ExportToolButton("Create Chart Hue By Brightness")] public Callable CreateHueBrightness => Callable.From(Create_Chart_Hue_Brightness);
+		// [ExportToolButton("Create Chart Delta By Hue")] public Callable CreateDeltaHGraph => Callable.From(Create_Chart_Delta_By_Hue);
+		// [ExportToolButton("Create Chart Chroma By Brightness")] public Callable CreateChromaBrightness => Callable.From(Create_Chart_Chroma_Brightness);
+		// [ExportToolButton("Create Chart Hue By Brightness")] public Callable CreateHueBrightness => Callable.From(Create_Chart_Hue_Brightness);
 		// [ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
 
 
@@ -65,27 +81,94 @@ namespace BA
 		// [Export] public Texture2D image_compare;
 
 		[ExportCategory("Palettes")]
-		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraph);
+		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraphSelected);
 		[ExportToolButton("Plot All Palette Delta")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
-		[Export] private PalettePlotType palettePlotType = PalettePlotType.oklab_L;
+		[Export] private PalettePlotType _palettePlotType = PalettePlotType.oklab_L;
 		[Export] private Texture2D palette;
 
+		//cannot export to godot sadly
+		private readonly PaletteData[] paletteDataSet =
+		{
+			new PaletteData
+			{
+				plotType = PalettePlotType.oklab_L,
+				labelX = "original oklab lightness",
+				labelY = "palette oklab lightness"
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.oklab_C,
+				labelX = "original oklab lightness",
+				labelY = "palette oklab chroma"
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.oklab_h,
+				labelX = "original oklab lightness",
+				labelY = "palette oklab hue",
+				yMin = -180,
+				yMax = 180,
+				decimalsY = 0
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.oklab_E,
+				labelX = "original oklab lightness",
+				labelY = "palette oklab delta e from zero"
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.cie_L,
+				labelX = "original oklab lightness",
+				labelY = "palette cielab lightness"
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.cie_C,
+				labelX = "original oklab lightness",
+				labelY = "palette cielab Chroma"
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.cie_h,
+				labelX = "original oklab lightness",
+				labelY = "palette cielab hue",
+				yMin = -180,
+				yMax = 180,
+				decimalsY = 0
+			},
+
+			new PaletteData
+			{
+				plotType = PalettePlotType.cie_E,
+				labelX = "original oklab lightness",
+				labelY = "palette cielab delta e from zero"
+			},
+		};
 
 		Image baseImage;
 		Image comparisonImage;
 
 		public void GenAllPaletteGraphs()
 		{
-			PalettePlotType prev = palettePlotType;
-			foreach (PalettePlotType x in Enum.GetValues(typeof(PalettePlotType)))
+			foreach (PaletteData data in paletteDataSet)
 			{
-				palettePlotType = x;
-				GenPaletteGraph();
+				GenPaletteGraph(data.plotType, data.labelX, data.decimalsX, data.xMin, data.xMax, data.labelY, data.decimalsY, data.yMin, data.yMax);
 			}
-			palettePlotType = prev;
 		}
 
-		public void GenPaletteGraph()
+		public void GenPaletteGraphSelected()
+		{
+			// GenPaletteGraph(_palettePlotType);
+		}
+
+		private void GenPaletteGraph(PalettePlotType palettePlotType, string _labelX, int _numDecimalsX, float _scaleXRangeBottom, float _scaleXRangeTop, string _labelY, int _numDecimalsY, float _scaleYRangeBottom, float _scaleYRangeTop)
 		{
 			if (palette == null)
 			{
@@ -101,9 +184,10 @@ namespace BA
 
 
 
-			DrawHelper.DrawGridWithDigits(
+			DrawHelper.DrawGridDigitsLabel(
 				graph,
-				digitImage09,
+				_digitImage09,
+				_characterImageAZ,
 				_graphRes,
 				_gridLines_X,
 				_gridLines_Y,
@@ -117,7 +201,9 @@ namespace BA
 				_gridCenterColor,
 				_digitScale,
 				_numDecimalsX,
-				_numDecimalsY
+				_numDecimalsY,
+				_labelX,
+				_labelY
 				);
 
 
@@ -176,7 +262,7 @@ namespace BA
 							delta = (float)(d_C / 100.0);
 							break;
 
-						case PalettePlotType.cie_H:
+						case PalettePlotType.cie_h:
 
 							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
 							double d_H = calculate_cie_d_H(linear_srgb_to_cielab(hue_base), c_lab);

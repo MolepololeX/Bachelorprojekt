@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=140 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://biris8lihnwq3" path="res://Scenes/Player/s_player.tscn" id="1_s51nc"]
 [ext_resource type="PackedScene" uid="uid://ctly6ohubsyv0" path="res://Scenes/Player/s_fishing_rod.tscn" id="2_rxqsg"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/digits.png" id="38_py68e"]
 [ext_resource type="Texture2D" uid="uid://cyafjfmvn1yk3" path="res://_BA_/Palettes/TestScene_OKLCh.png" id="38_rxqsg"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
+[ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/characters.png" id="39_l7jgw"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="PackedScene" uid="uid://bewxybksr5me8" path="res://Scenes/Levels/s_inventory_display.tscn" id="41_lwqye"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
@@ -622,22 +623,22 @@ tonemapper_mode = 2
 draw_mode = 1
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_py68e"]
-data = {
-"data": PackedByteArray("AAAA/wAAAP8AAAD/AAAM/wAADP8MDBX/DAwc/xUMIf8cFSb/IRUu/yYcMf8uHDf/NCE9/zohQv9EJkn/TSpN/1IqUf9YLlL/XTFS/2M0Uv9oN1L/bjpS/3M9Uv94P1H/fUJP/4NETf+ISUn/jlFL/5JZT/+XZFH/nW5U/6J5Vv+mhVv/qY9g/6yZZv+vo2r/sq1w/7O1df+wt3r/rrp//6y9hf+rwIv/qsKP/6nFlf+pyZr/qsuf/6vOpf+r0ar/r9Sx/7XWuf+62sH/v9zJ/8Tf0P/K4tb/z+Xc/9To4v/a6+f/3u3s/+Tw8P/p8vP/7vX2//T3+f/5+/v//////w=="),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 64
-}
-
 [sub_resource type="Image" id="Image_l7jgw"]
 data = {
-"data": PackedByteArray("AAAA/wAAAP8AAAD/AAAA/wAMDP8ADBX/DBUc/wwVIf8MHCb/FRwu/xwhMf8hJjf/JiY9/yoqQv8xLkb/NzFJ/z00Tf9EN1H/SzpS/1E9Vv9YP1j/XUJZ/2REW/9qSV3/cEte/3VPXv97Ul7/gVZg/4ZZYP+LXmD/j2Ng/5RnYf+Xa2H/m3Bj/551ZP+he2b/o4Fo/6WGa/+oi27/qZBy/6uWdf+tm3n/rqF9/7Cmgv+xq4f/srGM/7O3kf+0vJf/tcGe/7fGpf+4zK7/utC1/73Vvf/A2cX/xN3N/8nh1P/O5dv/1Oni/9vs6P/i8O3/6fPy//D39//3+/v//////w=="),
+"data": PackedByteArray("AAAA/xwVLv9dMVv/jktY/7KUcP++y5//z+XQ//////8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 64
+"width": 8
+}
+
+[sub_resource type="Image" id="Image_3stlt"]
+data = {
+"data": PackedByteArray("AAAA/xUcLv9GOlb/fVZq/6l8cv/Aq4z/0drB//////8="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 8
 }
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_8auip"]
@@ -650,7 +651,6 @@ needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
 enable_draw = true
 live_reload = true
-steps = 64
 palette_type = 1
 dither_spread = 0.01
 hue_start = 213.0
@@ -660,8 +660,8 @@ lightness_ceiling = 1.0
 hsl_saturation = 0.3
 oklch_chroma = 0.0
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_py68e")
-palette_preview_oklch = SubResource("Image_l7jgw")
+palette_preview_hsl = SubResource("Image_l7jgw")
+palette_preview_oklch = SubResource("Image_3stlt")
 save_path = "res://_BA_/Palettes/"
 palette_preview_res = 64
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
@@ -718,27 +718,26 @@ Speed = 2.03
 DragMult = 10.0
 
 [node name="Skeleton3D" parent="Player/Pivot/Skeleton_Mage/Rig" index="0"]
-bones/1/position = Vector3(0, 0.38521108, 0)
-bones/4/rotation = Quaternion(-0.5549185, -0.063293345, -0.65552145, 0.5082824)
-bones/5/rotation = Quaternion(1.8156811e-08, -6.139059e-08, -0.47578496, 0.8795617)
-bones/7/rotation = Quaternion(-0.31745854, -0.32645127, 0.13538723, 0.8799546)
-bones/8/rotation = Quaternion(0.0015143037, 0.0015142953, -0.7015252, 0.71264136)
-bones/9/rotation = Quaternion(-0.6141523, 0.08323727, 0.62831604, 0.47022054)
-bones/10/rotation = Quaternion(-4.1134296e-09, 5.1631083e-08, 0.4998802, 0.86609465)
-bones/12/rotation = Quaternion(-0.3158492, 0.3006028, -0.21700309, 0.8733768)
-bones/13/rotation = Quaternion(0.0032469162, 0.0038243877, 0.70372456, 0.7104551)
-bones/15/rotation = Quaternion(0.9928402, 0.08316805, 0.07560977, 0.040429816)
-bones/16/rotation = Quaternion(0.27240896, 6.4974294e-08, -1.9051717e-07, 0.96218157)
-bones/17/rotation = Quaternion(-0.55749375, -0.20692036, 0.05562202, 0.8020541)
-bones/18/rotation = Quaternion(4.8545942e-05, 0.920201, -0.39144608, -1.0937497e-05)
-bones/19/rotation = Quaternion(0.9956704, -0.030738706, 0.03092737, 0.082093105)
-bones/20/rotation = Quaternion(0.33326566, -6.2453836e-08, 2.3134318e-07, 0.942833)
-bones/21/rotation = Quaternion(-0.5905813, 0.11403097, -0.013647246, 0.79876435)
-bones/38/position = Vector3(0.52084064, 0.7739617, -0.057637356)
-bones/40/position = Vector3(-0.5108437, 0.77396166, 0.059736915)
+bones/1/position = Vector3(0, 0.36837366, 0)
+bones/4/rotation = Quaternion(-0.55047923, -0.057123605, -0.6411303, 0.53165907)
+bones/5/rotation = Quaternion(3.5117946e-08, -3.705723e-08, -0.5107185, 0.85974795)
+bones/7/rotation = Quaternion(-0.3203092, -0.33859572, 0.14723845, 0.8723966)
+bones/8/rotation = Quaternion(0.0012549509, 0.0012549481, -0.7024844, 0.7116968)
+bones/9/rotation = Quaternion(-0.6093037, 0.07764663, 0.6163426, 0.49278983)
+bones/10/rotation = Quaternion(4.4884306e-08, 4.0111733e-08, 0.5332915, 0.84593153)
+bones/12/rotation = Quaternion(-0.3194242, 0.31447488, -0.22940505, 0.86397165)
+bones/13/rotation = Quaternion(0.003874627, 0.00456374, 0.7030669, 0.7110986)
+bones/15/rotation = Quaternion(0.9893496, 0.08381843, 0.078891896, 0.08909485)
+bones/16/rotation = Quaternion(0.40042466, 5.5801962e-08, -2.7099688e-07, 0.9163297)
+bones/17/rotation = Quaternion(-0.6243519, -0.20048644, 0.07775024, 0.7509627)
+bones/19/rotation = Quaternion(0.9911618, -0.033515707, 0.029745415, 0.12486053)
+bones/20/rotation = Quaternion(0.4440011, -5.8676818e-08, 3.123518e-07, 0.89602625)
+bones/21/rotation = Quaternion(-0.6501463, 0.112371884, -0.023841552, 0.75107527)
+bones/38/position = Vector3(0.52084064, 0.77117264, -0.057637356)
+bones/40/position = Vector3(-0.5108437, 0.7711725, 0.059736915)
 
 [node name="head" parent="Player/Pivot/Skeleton_Mage/Rig/Skeleton3D" index="0"]
-transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2209731, 1.5739471e-15)
+transform = Transform3D(0.99972045, -1.4014349e-09, 0.023646593, 1.3934147e-09, 0.9999998, 3.5568637e-10, -0.023646593, -3.2263736e-10, 0.99972045, -4.3038546e-09, 1.2041357, 1.5739471e-15)
 
 [node name="FishingRod" parent="Player/Pivot" index="2" instance=ExtResource("2_rxqsg")]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.5398096, 0.59244484, -0.299654)
@@ -1533,16 +1532,19 @@ heightfield_mask = 1048567
 
 [node name="SSIM&Percentile Calculator" type="Node" parent="SubViewport" node_paths=PackedStringArray("_env")]
 script = ExtResource("37_duxdj")
-digitImage09 = ExtResource("38_py68e")
+_digitImage09 = ExtResource("38_py68e")
+_characterImageAZ = ExtResource("39_l7jgw")
 _digitScale = 1
 _scaleYRangeBottom = -180.0
 _scaleYRangeTop = 180.0
+_labelX = "Original Image OK L"
+_labelY = "OK L"
 _backGroundColor = Color(0.80049086, 0.80049074, 0.80049074, 1)
 _gridThickness = 1
 _gridCenterLineThickness = 2
 _gridLines_Y = 8
-_graphRes = 512
-_pointRadius = 4
+_graphRes = 256
+_pointRadius = 10
 _env = NodePath("../PostTesting")
 palettePlotType = 2
 palette = ExtResource("38_rxqsg")
