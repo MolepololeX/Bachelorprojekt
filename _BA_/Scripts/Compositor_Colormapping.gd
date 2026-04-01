@@ -183,32 +183,32 @@ func _create_palettes() -> void:
 		hsl.x = H
 		hsl.y = S
 		hsl.z = L
-		var c = _hsl_to_rgb(hsl)
+		var c = _hsl_to_rgb(hsl)# dooes not output linear rgb!!!
 		
 		col.r = c.x
 		col.g = c.y
 		col.b = c.z
 		
-		col = col.srgb_to_linear()#?
+		col = col.srgb_to_linear()# convert to linear before sending to shader
 		
 		image_hsl.set_pixel(i, 0, col)
 	
 	for i in range(steps) :
 		var col := Color.WHITE
 		
-		var h := (((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0)) + (oklch_hue_offset / 360.0)) * 6.28318530718 #transform to radiants since oklab hue is -3.14...3.14
-		var C := oklch_chroma
+		#var h := (((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0)) + (oklch_hue_offset / 360.0)) * 6.28318530718 #transform to radiants since oklab hue is -3.14...3.14
+		#var C := oklch_chroma
 		var L : float = lerp(lightness_floor, lightness_ceiling, float(i) / float(steps - 1))
-		
-		var lab : Vector3
-		lab.x = L
-		lab.y = C * cos(h)
-		lab.z = C * sin(h)
-		var c = _oklab_to_linear_srgb(lab)
-		
-		col.r = c.x
-		col.g = c.y
-		col.b = c.z
+		#
+		#var lab : Vector3
+		#lab.x = L
+		#lab.y = C * cos(h)
+		#lab.z = C * sin(h)
+		#var c = _oklab_to_linear_srgb(lab)
+		#
+		#col.r = c.x
+		#col.g = c.y
+		#col.b = c.z
 		
 		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
 		var okhsl := Color.from_ok_hsl(H, hsl_saturation, L)

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Godot;
 using static BA.ColorHelper;
@@ -27,7 +28,21 @@ namespace BA
 
 
 		[ExportCategory("Graphs")]
+		[Export] private Texture2D digitImage09;
+		[Export] private int _digitScale = 2;
+		[Export] private float _scaleYRangeBottom = -1.0f;
+		[Export] private float _scaleYRangeTop = 1.0f;
+		[Export] private float _scaleXRangeBottom = 0.0f;
+		[Export] private float _scaleXRangeTop = 1.0f;
+		[Export] private int _numDecimalsX = 1;
+		[Export] private int _numDecimalsY = 0;
 		[Export] private Color _backGroundColor = Colors.Black;
+		[Export] private int _gridThickness = 2;
+		[Export] private Color _gridColor = Colors.DarkGray;
+		[Export] private int _gridCenterLineThickness = 3;
+		[Export] private Color _gridCenterColor = Colors.Black;
+		[Export] private int _gridLines_X = 10;
+		[Export] private int _gridLines_Y = 20;
 		[Export] private int _graphRes = 2048;
 		[Export] private int _pointRadius = 9;
 		[Export] private WorldEnvironment _env = null;
@@ -50,8 +65,8 @@ namespace BA
 		// [Export] public Texture2D image_compare;
 
 		[ExportCategory("Palettes")]
-		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GeneratePaletteDelta);
-		[ExportToolButton("Plot All Palette Delta")] public Callable PlotAllPaletteDelta => Callable.From(GenerateAllPaletteDelta);
+		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraph);
+		[ExportToolButton("Plot All Palette Delta")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
 		[Export] private PalettePlotType palettePlotType = PalettePlotType.oklab_L;
 		[Export] private Texture2D palette;
 
@@ -59,17 +74,18 @@ namespace BA
 		Image baseImage;
 		Image comparisonImage;
 
-		public void GenerateAllPaletteDelta()
+		public void GenAllPaletteGraphs()
 		{
 			PalettePlotType prev = palettePlotType;
 			foreach (PalettePlotType x in Enum.GetValues(typeof(PalettePlotType)))
 			{
 				palettePlotType = x;
-				GeneratePaletteDelta();
+				GenPaletteGraph();
 			}
 			palettePlotType = prev;
 		}
-		public void GeneratePaletteDelta()
+
+		public void GenPaletteGraph()
 		{
 			if (palette == null)
 			{
@@ -80,17 +96,31 @@ namespace BA
 			int M = img.GetWidth();
 			int N = img.GetHeight();
 
-			Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-			chart.Fill(_backGroundColor);
+			Image graph = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+			graph.Fill(_backGroundColor);
 
-			//TODO: Draw Grid
-			for (int x = 0; x < _graphRes; x++)
-			{
-				for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
-				{
-					chart.SetPixel(x, y + _graphRes / 2, Colors.DarkGray);
-				}
-			}
+
+
+			DrawHelper.DrawGridWithDigits(
+				graph,
+				digitImage09,
+				_graphRes,
+				_gridLines_X,
+				_gridLines_Y,
+				_scaleXRangeBottom,
+				_scaleXRangeTop,
+				_scaleYRangeBottom,
+				_scaleYRangeTop,
+				_gridThickness,
+				_gridCenterLineThickness,
+				_gridColor,
+				_gridCenterColor,
+				_digitScale,
+				_numDecimalsX,
+				_numDecimalsY
+				);
+
+
 
 			for (int x = 0; x < M; x++)
 			{
@@ -159,7 +189,6 @@ namespace BA
 							double d_E = calculate_cie_de_2000(linear_srgb_to_cielab(new RGB { r = 0, g = 0, b = 0 }), c_lab);
 							delta = (float)(d_E / 100.0);
 							break;
-
 					}
 
 					int ix = (int)(((float)x / (float)M) * _graphRes);
@@ -168,24 +197,16 @@ namespace BA
 					if (delta <= 0.0)
 					{
 						iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-						// c = Colors.Blue;
 					}
 					else
 					{
 						iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
-						// c = Colors.Red;
 					}
 
-					if (ix >= _graphRes || ix < 0)
-					{
-						ix = 0;
-						// GD.PushWarning("Hue was greater than 1");
-					}
-					if (iy >= _graphRes || iy < 0)
-					{
-						iy = 0;
-						// GD.PushWarning("Delta value was greater than 1: " + delta);
-					}
+					if (ix >= _graphRes) ix = _graphRes - 1;
+					if (ix < 0) ix = 0;
+					if (iy >= _graphRes) iy = _graphRes - 1;
+					if (iy < 0) iy = 0;
 
 					for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
 					{
@@ -194,13 +215,16 @@ namespace BA
 							if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
 							if (rx + ix >= _graphRes || rx + ix < 0) continue;
 							if (ry + iy >= _graphRes || ry + iy < 0) continue;
-							chart.SetPixel(ix + rx, iy + ry, c);
+							graph.SetPixel(ix + rx, iy + ry, c);
 						}
 					}
 				}
 			}
 
-			// chart.FlipY();
+
+
+			//linear to srgb so the colors in the chart look correct
+			graph.LinearToSrgb();
 
 			string palette_name = "";
 			palette_name = palette.ResourcePath.Substring(palette.ResourcePath.LastIndexOf("/") + 1);
@@ -208,14 +232,16 @@ namespace BA
 			palette_name = "Palette_" + palette_name;
 
 			string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + palette_name + "_" + "_plot_" + palettePlotType.ToString() + ".png";
-			GD.Print("Saved chart to: " + imagePath);
-			GD.Print(chart.SavePng(imagePath));
+			GD.Print("Saving chart to: " + imagePath);
+			GD.Print(graph.SavePng(imagePath));
 		}
 
 
 		public override void _Process(double delta)
 		{
 		}
+
+
 
 		public async Task CapturePrePost()
 		{

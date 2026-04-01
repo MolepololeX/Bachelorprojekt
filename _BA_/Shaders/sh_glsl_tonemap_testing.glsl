@@ -369,7 +369,7 @@ void main() {
 
 		L = tonemap(L);
 
-		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably
+		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably, would need correct gamut mapping
 		C *= L / max(lab.x, 1e-5);
 
 		lab.x = L;
@@ -421,22 +421,24 @@ void main() {
 	//oklab delta_L
 	if(params.draw_mode == 4.0){
 		//corrected delta L for tonemapping
-		vec3 corrected_pre = linear_srgb_to_oklab(pre.xyz);
-		corrected_pre.x = tonemap(corrected_pre.x);
+		// vec3 corrected_pre = linear_srgb_to_oklab(pre.xyz);
+		// corrected_pre.x = tonemap(corrected_pre.x);
 
 		delta = oklab_delta_L(
-			corrected_pre, 
+			// corrected_pre, 
+			linear_srgb_to_oklab(pre.xyz),
 			linear_srgb_to_oklab(post.xyz)
 		);
 	}
 
 	//oklab deltaE
 	if(params.draw_mode == 5.0){
-		vec3 corrected_pre = linear_srgb_to_oklab(pre.xyz);
-		corrected_pre.x = tonemap(corrected_pre.x);
+		// vec3 corrected_pre = linear_srgb_to_oklab(pre.xyz);
+		// corrected_pre.x = tonemap(corrected_pre.x);
 
 		delta = oklab_delta_E(
-			corrected_pre,
+			// corrected_pre,
+			linear_srgb_to_oklab(pre.xyz),
 			linear_srgb_to_oklab(post.xyz)
 		);
 	}
@@ -470,14 +472,15 @@ void main() {
 	//cie delta_L
 	if(params.draw_mode == 8.0){
 
-		vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
-		//normalize before adjusting the tonemapping
-		corrected_pre.x /= 100.0;
-		corrected_pre.x = tonemap(corrected_pre.x);
-		corrected_pre.x *= 100.0;
+		// vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
+		// // normalize before adjusting the tonemapping
+		// corrected_pre.x /= 100.0;
+		// corrected_pre.x = tonemap(corrected_pre.x);
+		// corrected_pre.x *= 100.0;
 
 		delta = calculate_cie_de_2000_L(
-			corrected_pre,
+			// corrected_pre,
+			linear_srgb_to_cielab(pre.xyz),
 			linear_srgb_to_cielab(post.xyz)
 		);
 
@@ -488,14 +491,15 @@ void main() {
     //ciede2000
 	if(params.draw_mode == 9.0){
 
-		vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
-		//normalize before adjusting the tonemapping
-		corrected_pre.x /= 100.0;
-		corrected_pre.x = tonemap(corrected_pre.x);
-		corrected_pre.x *= 100.0;
+		// vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
+		// //normalize before adjusting the tonemapping
+		// corrected_pre.x /= 100.0;
+		// corrected_pre.x = tonemap(corrected_pre.x);
+		// corrected_pre.x *= 100.0;
 
 		delta = calculate_cie_de_2000(
-			corrected_pre, 
+			// corrected_pre, 
+			linear_srgb_to_cielab(pre.xyz),
 			linear_srgb_to_cielab(post.xyz)	
 		);
 
