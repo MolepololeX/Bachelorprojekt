@@ -44,14 +44,14 @@ namespace BA
 		[Export] private Texture2D _digitImage09;
 		[Export] private Texture2D _characterImageAZ;
 		[Export] private int _digitScale = 2;
-		// [Export] private float _scaleYRangeBottom = -1.0f;
-		// [Export] private float _scaleYRangeTop = 1.0f;
-		// [Export] private float _scaleXRangeBottom = 0.0f;
-		// [Export] private float _scaleXRangeTop = 1.0f;
-		// [Export] private string _labelX = "L";
-		// [Export] private string _labelY = "L";
-		// [Export] private int _numDecimalsX = 1;
-		// [Export] private int _numDecimalsY = 0;
+		[Export] private float _scaleYRangeBottom = -1.0f;
+		[Export] private float _scaleYRangeTop = 1.0f;
+		[Export] private float _scaleXRangeBottom = 0.0f;
+		[Export] private float _scaleXRangeTop = 1.0f;
+		[Export] private string _labelX = "L";
+		[Export] private string _labelY = "L";
+		[Export] private int _numDecimalsX = 1;
+		[Export] private int _numDecimalsY = 0;
 		[Export] private Color _backGroundColor = Colors.Black;
 		[Export] private int _gridThickness = 2;
 		[Export] private Color _gridColor = Colors.DarkGray;
@@ -81,13 +81,13 @@ namespace BA
 		// [Export] public Texture2D image_compare;
 
 		[ExportCategory("Palettes")]
-		[ExportToolButton("Plot Palette Delta")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraphSelected);
-		[ExportToolButton("Plot All Palette Delta")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
+		[ExportToolButton("Plot Palette Delta Selected")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraphSelected);
+		[ExportToolButton("Plot All Palettes")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
 		[Export] private PalettePlotType _palettePlotType = PalettePlotType.oklab_L;
-		[Export] private Godot.Collections.Array<Texture2D> palettes;
+		[Export] private Godot.Collections.Array<Texture2D> _palettes;
 
 		//cannot export to godot sadly
-		private readonly PaletteData[] paletteDataSet =
+		private readonly PaletteData[] PALETTE_DATASET =
 		{
 			new PaletteData
 			{
@@ -160,9 +160,9 @@ namespace BA
 
 		public void GenAllPaletteGraphs()
 		{
-			foreach (Texture2D palette in palettes)
+			foreach (Texture2D palette in _palettes)
 			{
-				foreach (PaletteData data in paletteDataSet)
+				foreach (PaletteData data in PALETTE_DATASET)
 				{
 					GenPaletteGraph(palette, data.plotType, data.labelX, data.decimalsX, data.xMin, data.xMax, data.labelY, data.decimalsY, data.yMin, data.yMax);
 				}
@@ -171,10 +171,13 @@ namespace BA
 
 		public void GenPaletteGraphSelected()
 		{
-			// GenPaletteGraph(_palettePlotType);
+			foreach (Texture2D palette in _palettes)
+			{
+				GenPaletteGraph(palette, _palettePlotType, _labelX, _numDecimalsX, _scaleXRangeBottom, _scaleXRangeTop, _labelY, _numDecimalsY, _scaleYRangeBottom, _scaleYRangeTop);
+			}
 		}
 
-		private void GenPaletteGraph(Texture2D palette, PalettePlotType palettePlotType, string _labelX, int _numDecimalsX, float _scaleXRangeBottom, float _scaleXRangeTop, string _labelY, int _numDecimalsY, float _scaleYRangeBottom, float _scaleYRangeTop)
+		private void GenPaletteGraph(Texture2D palette, PalettePlotType palettePlotType, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop)
 		{
 			if (palette == null)
 			{
@@ -189,7 +192,6 @@ namespace BA
 			graph.Fill(_backGroundColor);
 
 
-
 			DrawHelper.DrawGridDigitsLabel(
 				graph,
 				_digitImage09,
@@ -197,137 +199,145 @@ namespace BA
 				_graphRes,
 				_gridLines_X,
 				_gridLines_Y,
-				_scaleXRangeBottom,
-				_scaleXRangeTop,
-				_scaleYRangeBottom,
-				_scaleYRangeTop,
+				scaleXRangeBottom,
+				scaleXRangeTop,
+				scaleYRangeBottom,
+				scaleYRangeTop,
 				_gridThickness,
 				_gridCenterLineThickness,
 				_gridColor,
 				_gridCenterColor,
 				_digitScale,
-				_numDecimalsX,
-				_numDecimalsY,
-				_labelX,
-				_labelY
+				numDecimalsX,
+				numDecimalsY,
+				labelX,
+				labelY
 				);
-
 
 
 			for (int x = 0; x < M; x++)
 			{
-				for (int y = 0; y < N; y++)
-				{
-					Color c = img.GetPixel(x, y);
-					c = c.SrgbToLinear(); //highly necessary
+				// can only use x axis since the color palette is one dimensional
+				// for (int y = 0; y < N; y++)
+				// {
+				Color c = img.GetPixel(x, 0);
+				c = c.SrgbToLinear(); //highly necessary
 
-					float delta = 0.0f;
-
-					Lab c_lab;
-					RGB hue_base = new RGB { r = 1.0f, g = 0, b = 0 };
-
-					switch (palettePlotType)
-					{
-						case PalettePlotType.oklab_L:
-
-							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							delta = c_lab.L;
-
-							break;
-						case PalettePlotType.oklab_C:
-
-							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							double C = new Vector2(c_lab.a, c_lab.b).Length();
-							delta = (float)C * 4.0f;
-
-							break;
-						case PalettePlotType.oklab_h:
-
-							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							delta = (float)(calculate_oklab_d_h(linear_srgb_to_oklab(hue_base), c_lab) / Math.PI);
-
-							break;
-						case PalettePlotType.oklab_E:
-
-							c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-							double e = new Vector3(c_lab.L, c_lab.a, c_lab.b).Length();
-							delta = (float)e;
-
-							break;
-						case PalettePlotType.cie_L:
-
-							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_L = calculate_cie_d_L(new Lab { L = 0, a = 0, b = 0 }, c_lab);
-							delta = (float)(d_L / 100.0);
-							break;
-
-						case PalettePlotType.cie_C:
-
-							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_C = calculate_cie_d_C(new Lab { L = 0, a = 0, b = 0 }, c_lab);
-							delta = (float)(d_C / 100.0);
-							break;
-
-						case PalettePlotType.cie_h:
-
-							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_H = calculate_cie_d_H(linear_srgb_to_cielab(hue_base), c_lab);
-							delta = (float)(d_H / Math.PI);
-							break;
-
-						case PalettePlotType.cie_E:
-
-							c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
-							double d_E = calculate_cie_de_2000(linear_srgb_to_cielab(new RGB { r = 0, g = 0, b = 0 }), c_lab);
-							delta = (float)(d_E / 100.0);
-							break;
-					}
-
-					int ix = (int)(((float)x / (float)M) * _graphRes);
-					int iy = 0;
-
-					if (delta <= 0.0)
-					{
-						iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-					}
-					else
-					{
-						iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
-					}
-
-					if (ix >= _graphRes) ix = _graphRes - 1;
-					if (ix < 0) ix = 0;
-					if (iy >= _graphRes) iy = _graphRes - 1;
-					if (iy < 0) iy = 0;
-
-					for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
-					{
-						for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
-						{
-							if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
-							if (rx + ix >= _graphRes || rx + ix < 0) continue;
-							if (ry + iy >= _graphRes || ry + iy < 0) continue;
-							graph.SetPixel(ix + rx, iy + ry, c);
-						}
-					}
-				}
+				float delta = GetPlotDelta(palettePlotType, c);
+				DrawColorPointOnGraph(M, graph, x, c, delta);
+				// }
 			}
-
 
 
 			//linear to srgb so the colors in the chart look correct
 			graph.LinearToSrgb();
 
+
 			string palette_name = "";
 			palette_name = palette.ResourcePath.Substring(palette.ResourcePath.LastIndexOf("/") + 1);
 			palette_name = palette_name.Remove(palette_name.LastIndexOf("."));
 			palette_name = "Palette_" + palette_name;
-
 			string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + palette_name + "_" + "_plot_" + palettePlotType.ToString() + ".png";
 			GD.Print("Saving chart to: " + imagePath);
 			GD.Print(graph.SavePng(imagePath));
 		}
 
+		private static float GetPlotDelta(PalettePlotType palettePlotType, Color c)
+		{
+			float delta = 0.0f;
+			Lab c_lab;
+			RGB hue_base = new RGB { r = 1.0f, g = 0, b = 0 };
+
+			switch (palettePlotType)
+			{
+				case PalettePlotType.oklab_L:
+
+					c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+					delta = c_lab.L;
+
+					break;
+				case PalettePlotType.oklab_C:
+
+					c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+					double C = new Vector2(c_lab.a, c_lab.b).Length();
+					delta = (float)C * 4.0f;
+
+					break;
+				case PalettePlotType.oklab_h:
+
+					c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+					delta = (float)(calculate_oklab_d_h(linear_srgb_to_oklab(hue_base), c_lab) / Math.PI);
+
+					break;
+				case PalettePlotType.oklab_E:
+
+					c_lab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
+					double e = new Vector3(c_lab.L, c_lab.a, c_lab.b).Length();
+					delta = (float)e;
+
+					break;
+				case PalettePlotType.cie_L:
+
+					c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
+					double d_L = calculate_cie_d_L(new Lab { L = 0, a = 0, b = 0 }, c_lab);
+					delta = (float)(d_L / 100.0);
+					break;
+
+				case PalettePlotType.cie_C:
+
+					c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
+					double d_C = calculate_cie_d_C(new Lab { L = 0, a = 0, b = 0 }, c_lab);
+					delta = (float)(d_C / 100.0);
+					break;
+
+				case PalettePlotType.cie_h:
+
+					c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
+					double d_H = calculate_cie_d_H(linear_srgb_to_cielab(hue_base), c_lab);
+					delta = (float)(d_H / Math.PI);
+					break;
+
+				case PalettePlotType.cie_E:
+
+					c_lab = linear_srgb_to_cielab(new RGB { r = c.R, g = c.G, b = c.B });
+					double d_E = calculate_cie_de_2000(linear_srgb_to_cielab(new RGB { r = 0, g = 0, b = 0 }), c_lab);
+					delta = (float)(d_E / 100.0);
+					break;
+			}
+
+			return delta;
+		}
+
+		private void DrawColorPointOnGraph(int M, Image graph, int x, Color c, float delta)
+		{
+			int ix = (int)(((float)x / (float)M) * _graphRes);
+			int iy = 0;
+
+			if (delta <= 0.0)
+			{
+				iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+			}
+			else
+			{
+				iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+			}
+
+			if (ix >= _graphRes) ix = _graphRes - 1;
+			if (ix < 0) ix = 0;
+			if (iy >= _graphRes) iy = _graphRes - 1;
+			if (iy < 0) iy = 0;
+
+			for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+			{
+				for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+				{
+					if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
+					if (rx + ix >= _graphRes || rx + ix < 0) continue;
+					if (ry + iy >= _graphRes || ry + iy < 0) continue;
+					graph.SetPixel(ix + rx, iy + ry, c);
+				}
+			}
+		}
 
 		public override void _Process(double delta)
 		{
