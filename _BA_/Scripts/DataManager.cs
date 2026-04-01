@@ -148,7 +148,7 @@ namespace BA
 			{
 				plotType = PalettePlotType.cie_E,
 				labelX = "original oklab lightness",
-				labelY = "palette cielab delta e from zero"
+				labelY = "palette cielab e"
 			},
 		};
 
