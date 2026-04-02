@@ -35,12 +35,16 @@ namespace BA
 		}
 
 
+		[ExportCategory("Image Analysis")]
+		[ExportGroup("SSIM")]
 		[ExportToolButton("Calculate SSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
+		[ExportGroup("Percentiles")]
 		[ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);
-		[ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
+		// [ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
 
 
-		[ExportCategory("Manual Graph Settings")]
+		[ExportCategory("Graphs")]
+		[ExportGroup("Manual Graph Settings")]
 		[Export] private Texture2D _digitImage09;
 		[Export] private Texture2D _characterImageAZ;
 		[Export] private int _digitScale = 2;
@@ -69,22 +73,23 @@ namespace BA
 		// [ExportToolButton("Create All Graphs")] public Callable CreateGraphs => Callable.From(CreateAllGraphs);
 
 
-		[ExportCategory("Images")]
-		[ExportToolButton("CapturePrePost")] public Callable CaptureBoth => Callable.From(CapturePrePost);
-		[ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewportPre);
-		[ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportPost);
+		[ExportGroup("Palettes")]
+		[Export] private PalettePlotType _palettePlotType = PalettePlotType.oklab_L;
+		[ExportToolButton("Plot Palette Delta Selected")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraphSelected);
+		[ExportToolButton("Plot All Palettes")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
+		[Export] private Godot.Collections.Array<Texture2D> _palettes;
+
+
+		// [ExportCategory("Images")]
+		// [ExportToolButton("CapturePrePost")] public Callable CaptureBoth => Callable.From(CapturePrePost);
+		// [ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewportPre);
+		// [ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportPost);
 		[ExportCategory("Test")]
 		[ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
 		[Export] private bool _autoCapturePrePost = true;
 		[Export] private bool _plotByOKLCh = true;
 		// [Export] public Texture2D image_base;
 		// [Export] public Texture2D image_compare;
-
-		[ExportCategory("Palettes")]
-		[ExportToolButton("Plot Palette Delta Selected")] public Callable PlotPaletteDelta => Callable.From(GenPaletteGraphSelected);
-		[ExportToolButton("Plot All Palettes")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
-		[Export] private PalettePlotType _palettePlotType = PalettePlotType.oklab_L;
-		[Export] private Godot.Collections.Array<Texture2D> _palettes;
 
 		//cannot export to godot sadly
 		private readonly PaletteData[] PALETTE_DATASET =
@@ -344,332 +349,19 @@ namespace BA
 		}
 
 
-
-		public async Task CapturePrePost()
+		public void Calculate_All_Percentile(Image img)
 		{
-			if (_env == null)
-			{
-				GD.PushError("No World Environment");
-				return;
-			}
-			Compositor comp = _env.Compositor;
-			if (comp == null)
-			{
-				GD.PushError("No Compositor in World Environment");
-				return;
-			}
-
-			comp.CompositorEffects[0].Enabled = false;
-			await Task.Delay(100);
-
-			CaptureViewportPre();
-			await Task.Delay(100);
-
-			comp.CompositorEffects[0].Enabled = true;
-			await Task.Delay(100);
-
-			CaptureViewportPost();
-			await Task.Delay(100);
-		}
-
-		public async void SetEffectDrawType()
-		{
-
-		}
-
-		public async void SetEffectColorSpace()
-		{
-
-		}
-
-		public void Calculate_All_Percentile()
-		{
-			Calculate_Percentile(0.01f);
-			Calculate_Percentile(0.1f);
-			Calculate_Percentile(0.5f);
-			Calculate_Percentile(0.9f);
-			Calculate_Percentile(0.99f);
-			Calculate_Percentile(0.999f);
-		}
-
-		public async Task CreateAllGraphs()
-		{
-			// await Create_Histogram_Delta_Hue();
-		}
-
-		public void Create_Chart_Hue_Brightness()
-		{
-			_ = Create_Chart_Hue_Brightness_Task();
-		}
-
-		public async Task Create_Chart_Hue_Brightness_Task()
-		{
-			if (_autoCapturePrePost)
-			{
-				await CapturePrePost();
-			}
-
-			int M = comparisonImage.GetWidth();
-			int N = comparisonImage.GetHeight();
-
-			Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-			chart.Fill(_backGroundColor);
-
-			//TODO: Draw Grid
-			for (int x = 0; x < _graphRes; x++)
-			{
-				for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
-				{
-					chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
-				}
-			}
-
-			(float, float)[] pairs = new (float, float)[M * N];
-
-
-			for (int x = 0; x < M; x++)
-			{
-				for (int y = 0; y < N; y++)
-				{
-					Color c = comparisonImage.GetPixel(x, y);
-					Lab c_oklab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-
-					double hue = Math.Atan2(c_oklab.b, c_oklab.a) / (Math.PI * 2.0);
-					float delta = (float)hue;
-
-					int ix = 0;
-					int iy = 0;
-
-					ix = (int)(c_oklab.L * (_graphRes - 1));
-
-					if (delta <= 0.0)
-					{
-						iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-						// c = Colors.Blue;
-					}
-					else
-					{
-						iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
-						// c = Colors.Red;
-					}
-
-					if (ix >= _graphRes || ix < 0)
-					{
-						ix = 0;
-						// GD.PushWarning("Hue was greater than 1");
-					}
-					if (iy >= _graphRes || iy < 0)
-					{
-						iy = 0;
-						// GD.PushWarning("Delta value was greater than 1: " + delta);
-					}
-
-					for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
-					{
-						for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
-						{
-							if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
-							if (rx + ix >= _graphRes || rx + ix < 0) continue;
-							if (ry + iy >= _graphRes || ry + iy < 0) continue;
-							chart.SetPixel(ix + rx, iy + ry, c);
-						}
-					}
-
-					pairs[x * N + y] = (c.H, delta);
-				}
-			}
-
-			// chart.FlipY();
-
-			string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "_" + _fileNameAtt + "_" + ".png";
-			GD.Print("Saved chart to: " + imagePath);
-			GD.Print(chart.SavePng(imagePath));
+			Calculate_Percentile(img, 0.01f);
+			Calculate_Percentile(img, 0.1f);
+			Calculate_Percentile(img, 0.5f);
+			Calculate_Percentile(img, 0.9f);
+			Calculate_Percentile(img, 0.99f);
+			Calculate_Percentile(img, 0.999f);
 		}
 
 
-		public void Create_Chart_Chroma_Brightness()
+		public void Calculate_Percentile(Image img, float p)
 		{
-			_ = Create_Chart_Chroma_Brightness_Task();
-		}
-
-		public async Task Create_Chart_Chroma_Brightness_Task()
-		{
-			if (_autoCapturePrePost)
-			{
-				await CapturePrePost();
-			}
-
-			int M = comparisonImage.GetWidth();
-			int N = comparisonImage.GetHeight();
-
-			Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-			chart.Fill(_backGroundColor);
-
-			//TODO: Draw Grid
-			for (int x = 0; x < _graphRes; x++)
-			{
-				for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
-				{
-					chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
-				}
-			}
-
-			(float, float)[] pairs = new (float, float)[M * N];
-
-
-			for (int x = 0; x < M; x++)
-			{
-				for (int y = 0; y < N; y++)
-				{
-					Color c = comparisonImage.GetPixel(x, y);
-					Lab c_oklab = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-
-					float delta = new Vector2(c_oklab.a, c_oklab.b).Length();
-
-					int ix = 0;
-					int iy = 0;
-
-					ix = (int)(c_oklab.L * (_graphRes - 1));
-
-					if (delta <= 0.0)
-					{
-						iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-						// c = Colors.Blue;
-					}
-					else
-					{
-						iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
-						// c = Colors.Red;
-					}
-
-					if (ix >= _graphRes || ix < 0)
-					{
-						ix = 0;
-						// GD.PushWarning("Hue was greater than 1");
-					}
-					if (iy >= _graphRes || iy < 0)
-					{
-						iy = 0;
-						// GD.PushWarning("Delta value was greater than 1: " + delta);
-					}
-
-					for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
-					{
-						for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
-						{
-							if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
-							if (rx + ix >= _graphRes || rx + ix < 0) continue;
-							if (ry + iy >= _graphRes || ry + iy < 0) continue;
-							chart.SetPixel(ix + rx, iy + ry, c);
-						}
-					}
-
-					pairs[x * N + y] = (c.H, delta);
-				}
-			}
-
-			// chart.FlipY();
-
-			string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "_" + _fileNameAtt + "_" + ".png";
-			GD.Print("Saved chart to: " + imagePath);
-			GD.Print(chart.SavePng(imagePath));
-		}
-
-		public void Create_Chart_Delta_By_Hue()
-		{
-			_ = Create_Histogram_Delta_Hue_Task();
-		}
-
-		public async Task Create_Histogram_Delta_Hue_Task()
-		{
-			if (_autoCapturePrePost)
-			{
-				await CapturePrePost();
-			}
-
-			int M = baseImage.GetWidth();
-			int N = baseImage.GetHeight();
-
-			Image chart = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
-			chart.Fill(_backGroundColor);
-
-			//TODO: Draw Grid
-			for (int x = 0; x < _graphRes; x++)
-			{
-				for (int y = -(_pointRadius / 3); y <= (_pointRadius / 3); y++)
-				{
-					chart.SetPixel(x, y + (_graphRes - 1) / 2, Colors.DarkGray);
-				}
-			}
-
-			(float, float)[] pairs = new (float, float)[M * N];
-
-
-			for (int x = 0; x < M; x++)
-			{
-				for (int y = 0; y < N; y++)
-				{
-					Color c = baseImage.GetPixel(x, y);
-
-					float delta = comparisonImage.GetPixel(x, y).R - comparisonImage.GetPixel(x, y).B;
-
-					int ix = 0;
-					int iy = 0;
-
-					Lab cl = linear_srgb_to_oklab(new RGB { r = c.R, g = c.G, b = c.B });
-					double hue_l = (Math.Atan2(cl.a, cl.b) + Math.PI) / (Math.PI * 2.0);
-
-					ix = (int)(c.H * (_graphRes - 1));
-					if (_plotByOKLCh)
-						ix = (int)(hue_l * (_graphRes - 1));
-
-					if (delta <= 0.0)
-					{
-						iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
-						// c = Colors.Blue;
-					}
-					else
-					{
-						iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
-						// c = Colors.Red;
-					}
-
-					if (ix >= _graphRes || ix < 0)
-					{
-						ix = 0;
-						// GD.PushWarning("Hue was greater than 1");
-					}
-					if (iy >= _graphRes || iy < 0)
-					{
-						iy = 0;
-						// GD.PushWarning("Delta value was greater than 1: " + delta);
-					}
-
-					for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
-					{
-						for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
-						{
-							if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
-							if (rx + ix >= _graphRes || rx + ix < 0) continue;
-							if (ry + iy >= _graphRes || ry + iy < 0) continue;
-							chart.SetPixel(ix + rx, iy + ry, c);
-						}
-					}
-
-					pairs[x * N + y] = (c.H, delta);
-				}
-			}
-
-			// chart.FlipY();
-
-			string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "_" + _fileNameAtt + "_" + ".png";
-			GD.Print("Saved chart to: " + imagePath);
-			GD.Print(chart.SavePng(imagePath));
-		}
-
-		public void Calculate_Percentile(float p)
-		{
-			var img = GetViewport().GetTexture().GetImage();
 			int M = img.GetWidth();
 			int N = img.GetHeight();
 
@@ -719,20 +411,7 @@ namespace BA
 			GD.Print("y: " + y);
 		}
 
-		public void CaptureViewportPre()
-		{
-			var img = GetViewport().GetTexture().GetImage();
-			string imagePath = "res://screenshot_base.png";
-			img.SavePng(imagePath);
-			baseImage = img;
-		}
-		public void CaptureViewportPost()
-		{
-			var img = GetViewport().GetTexture().GetImage();
-			string imagePath = "res://screenshot_comp.png";
-			img.SavePng(imagePath);
-			comparisonImage = img;
-		}
+		
 
 		public void Calculate_Average()
 		{

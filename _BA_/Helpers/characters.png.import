@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c35o3einvuchf"
-path.s3tc="res://.godot/imported/digits.png-79a928048b313e0d8186c2fc3f9eb24d.s3tc.ctex"
+uid="uid://gf07m8bms0om"
+path.s3tc="res://.godot/imported/characters.png-896554c52455f4a5956c8f6f4d2e9d69.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://_BA_/digits.png"
-dest_files=["res://.godot/imported/digits.png-79a928048b313e0d8186c2fc3f9eb24d.s3tc.ctex"]
+source_file="res://_BA_/Helpers/characters.png"
+dest_files=["res://.godot/imported/characters.png-896554c52455f4a5956c8f6f4d2e9d69.s3tc.ctex"]
 
 [params]
 
