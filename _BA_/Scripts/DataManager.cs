@@ -79,6 +79,11 @@ namespace BA
 		[ExportToolButton("Plot All Palettes")] public Callable PlotAllPaletteDelta => Callable.From(GenAllPaletteGraphs);
 		[Export] private Godot.Collections.Array<Texture2D> _palettes;
 
+		[ExportGroup("Tonemapping")]
+		[Export] private string _raw_image_path;
+		[Export] private Texture2D _delta_tex;
+		[ExportToolButton("Plot Test Delta")] public Callable PlotTestDelta => Callable.From(GenTestDeltaGraph);
+
 
 		// [ExportCategory("Images")]
 		// [ExportToolButton("CapturePrePost")] public Callable CaptureBoth => Callable.From(CapturePrePost);
@@ -242,7 +247,102 @@ namespace BA
 			palette_name = palette.ResourcePath.Substring(palette.ResourcePath.LastIndexOf("/") + 1);
 			palette_name = palette_name.Remove(palette_name.LastIndexOf("."));
 			palette_name = "Palette_" + palette_name;
-			string imagePath = "res://_Messdaten/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + palette_name + "_" + "_plot_" + palettePlotType.ToString() + ".png";
+			string imagePath = "res://_BA_/_Messdaten_/Palettes/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + palette_name + "_" + "_plot_" + palettePlotType.ToString() + ".png";
+			GD.Print("Saving chart to: " + imagePath);
+			GD.Print(graph.SavePng(imagePath));
+		}
+
+
+
+		private void GenTestDeltaGraph()
+		{
+			var raw_image = _delta_tex.GetImage();
+			var size = raw_image.GetSize();
+			var data_file = FileAccess.Open(_raw_image_path, FileAccess.ModeFlags.Read);
+			if (data_file == null)
+			{
+				GD.PushError("Failed to open raw image data file\nPlease verify path: " + _raw_image_path);
+				return;
+			}
+			raw_image.SetData(
+				size.X,
+				size.Y,
+				false,
+				Image.Format.Rgbah,
+				data_file.GetBuffer((long)data_file.GetLength()));
+			data_file.Close();
+		}
+
+		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop)
+		{
+			if (deltaMask == null)
+			{
+				GD.PushWarning("Missing Palette...");
+			}
+			var img = deltaMask.GetImage();
+			img.Decompress();
+			int M = img.GetWidth();
+			int N = img.GetHeight();
+
+			Image graph = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
+			graph.Fill(_backGroundColor);
+
+
+			DrawHelper.DrawGridDigitsLabel(
+				graph,
+				_digitImage09,
+				_characterImageAZ,
+				_graphRes,
+				_gridLines_X,
+				_gridLines_Y,
+				scaleXRangeBottom,
+				scaleXRangeTop,
+				scaleYRangeBottom,
+				scaleYRangeTop,
+				_gridThickness,
+				_gridCenterLineThickness,
+				_gridColor,
+				_gridCenterColor,
+				_digitScale,
+				numDecimalsX,
+				numDecimalsY,
+				labelX,
+				labelY
+				);
+
+
+			for (int x = 0; x < M; x++)
+			{
+				// can only use x axis since the color palette is one dimensional
+				for (int y = 0; y < N; y++)
+				{
+					Color deltaColor = img.GetPixel(x, y);
+					Color rawColor = original_raw_image.GetPixel(x, y);
+					Lab rawLab = linear_srgb_to_oklab(new RGB { r = rawColor.R, g = rawColor.G, b = rawColor.B });
+
+					float L = rawLab.L;
+					float delta = deltaColor.R - deltaColor.B;
+
+					delta = (float)Math.Clamp(delta, -1.0, 1.0);
+
+					//bring L from 0..inf to 0..1
+					L = (float)Math.Clamp(L, 0.0, 3.0);
+					L = L / 3.0f;
+
+					DrawColorPointOnGraph(M, graph, (int)(L * M), rawColor, delta);
+				}
+			}
+
+
+			//linear to srgb so the colors in the chart look correct
+			graph.LinearToSrgb();
+
+
+			string delta_mask_name = "";
+			delta_mask_name = deltaMask.ResourcePath.Substring(deltaMask.ResourcePath.LastIndexOf("/") + 1);
+			delta_mask_name = delta_mask_name.Remove(delta_mask_name.LastIndexOf("."));
+			delta_mask_name = "Palette_" + delta_mask_name;
+			string imagePath = "res://_BA_/_Messdaten_/Tonemapping/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + delta_mask_name + "_" + "_plot_" + ".png";
 			GD.Print("Saving chart to: " + imagePath);
 			GD.Print(graph.SavePng(imagePath));
 		}
@@ -411,7 +511,7 @@ namespace BA
 			GD.Print("y: " + y);
 		}
 
-		
+
 
 		public void Calculate_Average()
 		{
