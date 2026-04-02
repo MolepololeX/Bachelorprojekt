@@ -41,7 +41,7 @@
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Texture2D" uid="uid://vsy4nujjbkt7" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
-[ext_resource type="Texture2D" uid="uid://oxmx37k0blmp" path="res://_BA_/PostImages/TestScene_oklab_cie_d_H_lin.png" id="42_d3byi"]
+[ext_resource type="Texture2D" uid="uid://d3wbevemj2d7e" path="res://_BA_/PostImages/TestScene_srgb_oklab_d_L_lin.png" id="42_d3byi"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
 [ext_resource type="Script" uid="uid://dqijqq8tvjlqp" path="res://_BA_/Scripts/ScreenshotUtil.cs" id="42_lxdsv"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="49_ow6iq"]
@@ -540,13 +540,12 @@ enable_draw = true
 live_reload = true
 tonemapper_mode = 2
 tonemapper_exposure = 1.2
-save_as_srgb = null
 capture_frame_delay = 500
 resize_image = true
 raw_texture = ExtResource("27_folns")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_h6ckk"]
+[sub_resource type="Image" id="Image_d3byi"]
 data = {
 "data": PackedByteArray("AAAA/xUAOv9SDHX/sAyq/+Yck//sWXn/86WV//nn0P8="),
 "format": "RGBA8",
@@ -555,7 +554,7 @@ data = {
 "width": 8
 }
 
-[sub_resource type="Image" id="Image_osprd"]
+[sub_resource type="Image" id="Image_h6ckk"]
 data = {
 "data": PackedByteArray("AAAA/wAcOv8xJoT/cC6w/7U6vv/qY7D/+KKv//vZ0v8="),
 "format": "RGBA8",
@@ -579,8 +578,8 @@ hue_range = 180.0
 lightness_floor = 0.0
 hsl_saturation = 0.8
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_h6ckk")
-palette_preview_oklch = SubResource("Image_osprd")
+palette_preview_hsl = SubResource("Image_d3byi")
+palette_preview_oklch = SubResource("Image_h6ckk")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -1509,7 +1508,7 @@ _gridThickness = 1
 _gridCenterLineThickness = 2
 _gridLines_Y = 8
 _graphRes = 512
-_pointRadius = 4
+_pointRadius = 3
 _env = NodePath("../Env")
 _palettePlotType = 2
 _palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])

@@ -83,6 +83,9 @@ namespace BA
 		[Export] private string _raw_image_path;
 		[Export] private Texture2D _delta_tex;
 		[ExportToolButton("Plot Test Delta")] public Callable PlotTestDelta => Callable.From(GenTestDeltaGraph);
+		[Export] private bool _drawTonemapperReference = false;
+		[Export] private float _tonemapperReferenceExposure = 1.2f;
+		[Export] private int _referenceLineWidth = 1;
 
 
 		// [ExportCategory("Images")]
@@ -234,7 +237,7 @@ namespace BA
 				c = c.SrgbToLinear(); //highly necessary
 
 				float delta = GetPlotDelta(palettePlotType, c);
-				DrawColorPointOnGraph(M, graph, x, c, delta);
+				DrawColorPointOnGraph(M, graph, x, c, delta, _pointRadius);
 				// }
 			}
 
@@ -288,11 +291,12 @@ namespace BA
 				"delta something",
 				2,
 				-1.0f,
-				1.0f
+				1.0f,
+				true
 				);
 		}
 
-		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop)
+		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop, bool drawTonemapperReference = false)
 		{
 			if (deltaMask == null)
 			{
@@ -350,7 +354,16 @@ namespace BA
 					L = (float)Math.Clamp(L, 0.0, 3.0);
 					L = L / 3.0f;
 
-					DrawColorPointOnGraph(M, graph, (int)(L * M), rawColor, delta);
+					DrawColorPointOnGraph(M, graph, (int)(L * M), rawColor, delta, _pointRadius);
+				}
+
+				if (drawTonemapperReference)
+				{
+					// draw tmo delta as reference
+					float fx = x / (float)M;
+					fx *= 3.0f;
+					float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1) - fx;
+					DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
 				}
 			}
 
@@ -434,7 +447,7 @@ namespace BA
 			return delta;
 		}
 
-		private void DrawColorPointOnGraph(int M, Image graph, int x, Color c, float delta)
+		private void DrawColorPointOnGraph(int M, Image graph, int x, Color c, float delta, int pointRadius)
 		{
 			int ix = (int)(((float)x / (float)M) * _graphRes);
 			int iy = 0;
@@ -455,9 +468,9 @@ namespace BA
 			if (iy >= _graphRes) iy = _graphRes - 1;
 			if (iy < 0) iy = 0;
 
-			for (int rx = -_pointRadius; rx <= _pointRadius; rx++)
+			for (int rx = -pointRadius; rx <= pointRadius; rx++)
 			{
-				for (int ry = -_pointRadius; ry <= _pointRadius; ry++)
+				for (int ry = -pointRadius; ry <= pointRadius; ry++)
 				{
 					if (new Vector2(rx, ry).Length() >= _pointRadius) continue;
 					if (rx + ix >= _graphRes || rx + ix < 0) continue;
