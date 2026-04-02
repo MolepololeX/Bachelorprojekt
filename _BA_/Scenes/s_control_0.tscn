@@ -35,7 +35,6 @@ live_reload = true
 reload_interval_frames = 30
 tonemapper_mode = 2
 tonemapper_exposure = 1.2
-auto_capture_at_game_launch = null
 capture_frame_delay = 300
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 

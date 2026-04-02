@@ -38,9 +38,11 @@ enum DrawMode{
 @export_group("Post Measurements")
 @export_tool_button("Generate Post Image", "ColorRect") var generate_post_image_action = _generate_post_image
 @export_tool_button("Generate All delta masks", "InputEventMagnifyGesture") var generate_all_delta_image_action = _generate_delta_images
-@export var auto_capture_at_game_launch : bool = false
+@export var enable_concurrent_capture : bool = false
 @export var capture_frame_delay : int = 1000 
-@export var raw_texture_data_path : String
+@export var images_path : String = "res://_BA_/PostImages/"
+@export var resize_image : bool = false
+@export var raw_texture_data_name : String = "data_raw"
 @export var raw_texture : Texture2D
 
 var enable_capture_pre = false
@@ -57,17 +59,15 @@ var context : StringName = "capture_textures"
 
 
 
-func _generate_delta_images()->void:
-	return#TODO
-
-
-func _generate_post_image()->void:
-	###----------------------TODO: alles generalisieren---------------------------------------------
-	###----------------------compile shader---------------------------------------------------------
-	var local_shader : RID
-	var local_pipeline : RID
-	# Create RenderingDevice
+func _generate_delta_images() -> void:
+	###----------------------TODO: alles generalisieren, braucht dringend optimierung---------------
 	var local_rd := RenderingServer.create_local_rendering_device()
+	var local_pipeline : RID
+	var local_shader : RID
+	
+	
+	###----------------------compile shader---------------------------------------------------------
+	# Create RenderingDevice
 	# need to create another instance of the shader
 	# TODO: Highly illegal, fix later
 	#var shader_file := ResourceLoader.load(shader_path, "" , ResourceLoader.CACHE_MODE_REPLACE)
@@ -91,12 +91,30 @@ func _generate_post_image()->void:
 	local_pipeline = local_rd.compute_pipeline_create(local_shader)
 	
 	
+	for t_m : TonemapperMode in TonemapperMode.values():
+		if(t_m == TonemapperMode.linear): continue
+		for d_m : DrawMode in DrawMode.values():
+			_generate_post_image(local_shader, local_pipeline, local_rd, t_m, d_m)
+			#counter+=1
+			#if(counter == 10):
+				#return
+	
+	
+	local_rd.free_rid(local_pipeline)
+	local_rd.free_rid(local_shader)
+	local_rd.free()
+
+
+func _generate_post_image( local_shader : RID, local_pipeline : RID, local_rd : RenderingDevice, tm_mode : TonemapperMode = tonemapper_mode, dr_mode : DrawMode = draw_mode)->void:
+	###----------------------TODO: alles generalisieren, braucht dringend optimierung---------------
+	
 	###----------------------reconstruct image from raw data----------------------------------------
 	var raw_image = raw_texture.get_image()
 	var size = raw_image.get_size()
-	var data_file = FileAccess.open(raw_texture_data_path, FileAccess.READ)
+	var raw_path = images_path + "/" + "_" + raw_texture_data_name
+	var data_file = FileAccess.open(raw_path, FileAccess.READ)
 	if data_file == null:
-		push_error("Failed to open file")
+		push_error("Failed to open raw image data file\nPlease verify path: " + images_path + "/" + raw_texture_data_name)
 		return
 	raw_image.set_data(
 		size.x,
@@ -116,7 +134,7 @@ func _generate_post_image()->void:
 	var tex_in : RID = local_rd.texture_create(format, RDTextureView.new(), [raw_image.get_data()])
 	var dummy_tex : RID =  local_rd.texture_create(format, RDTextureView.new(), [raw_image.get_data()])
 	
-	var parameters := PackedFloat32Array([base_exposure, tonemapper_mode, tonemapper_exposure, draw_mode])
+	var parameters := PackedFloat32Array([base_exposure, tm_mode, tonemapper_exposure, dr_mode])
 	var parameter_data := parameters.to_byte_array()
 	var param_storage_buffer = local_rd.storage_buffer_create(parameter_data.size(), parameter_data)
 	var uniform_parameter := RDUniform.new()
@@ -165,13 +183,20 @@ func _generate_post_image()->void:
 		Image.FORMAT_RGBAH,
 		texData 
 		)
-	img.save_png("res://_after_lin.png")
+	var save_path = images_path + "/" + EditorInterface.get_edited_scene_root().name + "_" + TonemapperMode.keys()[tm_mode] + "_" + DrawMode.keys()[dr_mode]
+	img.save_png(save_path + "_lin" + ".png")
 	img.convert(Image.FORMAT_RGB8)
-	img.resize(size.x*2, size.y*2, Image.INTERPOLATE_NEAREST)
+	if(resize_image):
+		img.resize(size.x*4, size.y*4, Image.INTERPOLATE_NEAREST)
 	img.linear_to_srgb()
-	img.save_png("res://_after_srgb.png")	
+	img.save_png(save_path + "_srgb" + ".png")	
 	
-	print("processed image")
+	print("processed image for tonemapping mode " + TonemapperMode.keys()[tm_mode] + " using " + DrawMode.keys()[dr_mode])
+	
+	local_rd.free_rid(uniform_set)
+	local_rd.free_rid(param_storage_buffer)
+	local_rd.free_rid(tex_in)
+	local_rd.free_rid(dummy_tex)
 
 
 
@@ -286,17 +311,19 @@ func _render_callback(_p_effect_callback_type, p_render_data):
 				Image.FORMAT_RGBAH,
 				texData 
 				)
-			var file = FileAccess.open("res://_before_data", FileAccess.WRITE)
+			var path = images_path + "/" + "_" + raw_texture_data_name
+			var file = FileAccess.open(path, FileAccess.WRITE)
 			if file == null:
-				push_error("Failed to open file")
+				push_error("Failed to open file: " + images_path + "/" + raw_texture_data_name)
 				return
 			file.store_buffer(texData)
 			file.close()
-			img.save_png("res://_before_lin.png")
+			img.save_png(path + "_lin" + ".png")
 			img.convert(Image.FORMAT_RGB8)
-			img.resize(size.x*2, size.y*2, Image.INTERPOLATE_NEAREST)
+			if(resize_image):
+				img.resize(size.x*4, size.y*4, Image.INTERPOLATE_NEAREST)
 			img.linear_to_srgb()
-			img.save_png("res://_before_srgb.png")
+			img.save_png(path + "_srgb" + ".png")
 		
 		# Get the RID for our color image, we will be reading from and writing to it.
 		var input_image : RID = render_scene_buffers.get_color_layer(view)
@@ -338,9 +365,9 @@ func _render_callback(_p_effect_callback_type, p_render_data):
 	
 	
 	frame_counter += 1
-	if frame_counter > reload_interval_frames and live_reload:
+	if frame_counter > max(reload_interval_frames, capture_frame_delay) and live_reload:
 		frame_counter = 0
 		_reinit_shader();
-		return
-	if (frame_counter == capture_frame_delay):
+	if (enable_concurrent_capture and frame_counter == capture_frame_delay):
 		enable_capture_pre = true
+		#auto_capture_at_game_launch = false
