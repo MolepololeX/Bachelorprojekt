@@ -11,6 +11,7 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 } params;
 
 layout(rgba16f, set = 0, binding = 1) uniform image2D color_image;
+layout(rgba16f, set = 0, binding = 2) uniform image2D image_before;
 
 
 
@@ -337,6 +338,7 @@ void main() {
 	ivec2 uv_pixel = ivec2(gl_GlobalInvocationID.xy);
 
 	vec4 base = imageLoad(color_image, uv_pixel);
+	imageStore(image_before, uv_pixel, base);
 	base = base * params.base_exposure;
 	base = max(base, 0.0); //remove possible negative values, these might happen because of oklab colors from the test scene that are invalid rgb values/imaginary colors
 	vec4 color = base;

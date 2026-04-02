@@ -23,6 +23,7 @@
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="25_d7lxg"]
 [ext_resource type="PackedScene" uid="uid://cw6s8r7vkg73m" path="res://Assets/Meshes/pond_floor_hp.glb" id="26_ay53u"]
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="27_6yxrc"]
+[ext_resource type="Texture2D" uid="uid://daivcb3lt8e0u" path="res://_before.png" id="27_folns"]
 [ext_resource type="Material" uid="uid://cp7iai08xfa03" path="res://Assets/Materials/Foliage/sm_grass_light.tres" id="28_u1c6q"]
 [ext_resource type="Material" uid="uid://67fuhybtuskr" path="res://Assets/Materials/Foliage/sm_grass_dark.tres" id="29_cms6a"]
 [ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/m_outline_post.tres" id="30_l7jgw"]
@@ -41,7 +42,6 @@
 [ext_resource type="Texture2D" uid="uid://vsy4nujjbkt7" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
-[ext_resource type="Script" uid="uid://bh3mglv5tsnmk" path="res://Scripts/Testing/ObliqueReflectionCamera.cs" id="43_4unsq"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="49_ow6iq"]
 [ext_resource type="Script" uid="uid://cchta2hcc0oal" path="res://Scripts/Audio/AudioFade.cs" id="50_77m7r"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="56_5s3d3"]
@@ -486,6 +486,105 @@ buffer = PackedFloat32Array(-0.46560273, 0, 0, -8.247071, 0, 0.46560273, 0, -0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_xxtuw"]
 
+[sub_resource type="Environment" id="Environment_oqg80"]
+background_mode = 1
+background_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
+tonemap_white = 0.25
+glow_intensity = 0.23
+glow_strength = 1.73
+glow_bloom = 0.17
+glow_hdr_threshold = 0.35
+glow_hdr_scale = 0.16
+glow_hdr_luminance_cap = 52.49
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
+fog_density = 1.0
+fog_depth_curve = 0.70710796
+fog_depth_begin = 0.0
+fog_depth_end = 60.0
+volumetric_fog_density = 0.005
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_emission_energy = 0.1
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("38_0qx0j")
+enable_draw = true
+bloom_threshold = 0.9
+bloom_strength = 0.05
+blurr_kernelsize = 7
+blurr_passes = 3
+draw_mode = 2
+half_size = true
+metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_sit86"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("39_ko7dv")
+enable_draw = true
+tonemapper_mode = 2
+draw_mode = 1
+raw_texture_data_path = "res://_before_data"
+raw_texture = ExtResource("27_folns")
+metadata/_custom_type_script = "uid://dj2paefo16n4y"
+
+[sub_resource type="Image" id="Image_folns"]
+data = {
+"data": PackedByteArray("AAAA/wAAFf8VDDH/OhVL/2QhYf9+Kln/mDFG/7JPOv/CjUv/y8Rk/7rUfv+u3Jj/suW0/8vt2v/l9vL//////w=="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="Image" id="Image_lxdsv"]
+data = {
+"data": PackedByteArray("AAAA/wAMFf8MHDH/JiZP/0YuYP9mN2j/hkJn/6BSXv+yZ1j/u4JZ/7+cZP+/tXX/u9CS/77lv//X8+f//////w=="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_8auip"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("40_tn4cv")
+steps = 16
+palette_type = 1
+dither_spread = 0.00508
+hue_start = 213.0
+hue_range = 360.0
+lightness_floor = 0.0
+lightness_ceiling = 1.0
+oklch_chroma = 0.0
+auto_create_palette = true
+palette_preview_hsl = SubResource("Image_folns")
+palette_preview_oklch = SubResource("Image_lxdsv")
+save_path = "res://_BA_/Palettes/"
+palette_preview_res = 64
+metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
+
+[sub_resource type="Compositor" id="Compositor_jqdjy"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_7sabu"), SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_8auip")])
+
 [sub_resource type="QuadMesh" id="QuadMesh_r60an"]
 flip_faces = true
 size = Vector2(2, 2)
@@ -557,104 +656,6 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_sit86"]
 material = SubResource("StandardMaterial3D_oqg80")
 
-[sub_resource type="Environment" id="Environment_oqg80"]
-background_mode = 1
-background_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
-tonemap_white = 0.25
-glow_intensity = 0.23
-glow_strength = 1.73
-glow_bloom = 0.17
-glow_hdr_threshold = 0.35
-glow_hdr_scale = 0.16
-glow_hdr_luminance_cap = 52.49
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
-fog_density = 1.0
-fog_depth_curve = 0.70710796
-fog_depth_begin = 0.0
-fog_depth_end = 60.0
-volumetric_fog_density = 0.005
-volumetric_fog_emission = Color(1, 1, 1, 1)
-volumetric_fog_emission_energy = 0.1
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_7sabu"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("38_0qx0j")
-enable_draw = true
-bloom_threshold = 0.9
-bloom_strength = 0.05
-blurr_kernelsize = 7
-blurr_passes = 3
-draw_mode = 2
-half_size = true
-metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_sit86"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("39_ko7dv")
-enable_draw = true
-tonemapper_mode = 2
-draw_mode = 1
-metadata/_custom_type_script = "uid://dj2paefo16n4y"
-
-[sub_resource type="Image" id="Image_folns"]
-data = {
-"data": PackedByteArray("AAAA/wAAFf8VDDH/OhVL/2QhYf9+Kln/mDFG/7JPOv/CjUv/y8Rk/7rUfv+u3Jj/suW0/8vt2v/l9vL//////w=="),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="Image" id="Image_lxdsv"]
-data = {
-"data": PackedByteArray("AAAA/wAMFf8MHDH/JiZP/0YuYP9mN2j/hkJn/6BSXv+yZ1j/u4JZ/7+cZP+/tXX/u9CS/77lv//X8+f//////w=="),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="CompositorEffect" id="CompositorEffect_8auip"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("40_tn4cv")
-enable_draw = true
-steps = 16
-palette_type = 1
-dither_spread = 0.00508
-hue_start = 213.0
-hue_range = 360.0
-lightness_floor = 0.0
-lightness_ceiling = 1.0
-oklch_chroma = 0.0
-auto_create_palette = true
-palette_preview_hsl = SubResource("Image_folns")
-palette_preview_oklch = SubResource("Image_lxdsv")
-save_path = "res://_BA_/Palettes/"
-palette_preview_res = 64
-metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
-
-[sub_resource type="Compositor" id="Compositor_jqdjy"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_7sabu"), SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_8auip")])
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wmlk7"]
 frequency = 0.1
 
@@ -664,15 +665,15 @@ height = 1024
 noise = SubResource("FastNoiseLite_wmlk7")
 seamless = true
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8qg5c"]
-viewport_path = NodePath("ReflectionViewPortTest")
+[sub_resource type="ViewportTexture" id="ViewportTexture_lxdsv"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_roplx"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("42_gncmg")
-shader_parameter/tint = Color(0.5882353, 0.7529412, 0.7176471, 1)
-shader_parameter/viewport_texture = SubResource("ViewportTexture_8qg5c")
+shader_parameter/tint = Color(0, 0.23702434, 0.3995876, 1)
+shader_parameter/viewport_texture = SubResource("ViewportTexture_lxdsv")
 shader_parameter/alpha = 1.0
 shader_parameter/rimThreshold0 = Vector2(0, 0.028)
 shader_parameter/rimThreshold1 = Vector2(0, 0.0277)
@@ -763,7 +764,7 @@ shape = SubResource("WorldBoundaryShape3D_2u58p")
 [node name="Water" type="MeshInstance3D" parent="Level/Env"]
 transform = Transform3D(2.6595688, 0, 0, 0, 1, 0, 0, 0, 12.311973, 10.100565, -6.3460975, 16.186829)
 mesh = SubResource("PlaneMesh_hpgqd")
-skeleton = NodePath("../../../SubViewport")
+skeleton = NodePath("")
 
 [node name="ChoppableTrees" type="Node3D" parent="Level/Env"]
 
@@ -1415,15 +1416,20 @@ handle_input_locally = false
 size = Vector2i(384, 216)
 render_target_update_mode = 4
 
+[node name="PostTesting" type="WorldEnvironment" parent="Control/SubViewportContainer/SubViewport2"]
+environment = SubResource("Environment_oqg80")
+compositor = SubResource("Compositor_jqdjy")
+
 [node name="CameraRig" type="Node3D" parent="Control/SubViewportContainer/SubViewport2"]
 
-[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+[node name="MainCamera" type="Camera3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
 transform = Transform3D(0.9954502, -0.003547246, 0.09521741, -0.0011474328, 0.9987881, 0.049204867, -0.09527654, -0.049090248, 0.99423975, 0.9121766, 1.7517893, 18.586367)
+current = true
 fov = 35.5
 size = 10.0
 far = 1000.0
 
-[node name="POSTFX" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Camera3D"]
+[node name="POSTFX" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/MainCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.8303528, -0.55723804, 0, 0.55723804, 0.8303528, -4.193416, 0.7713766, -28.380829)
 visible = false
 cast_shadow = 0
@@ -1500,46 +1506,27 @@ _gridCenterLineThickness = 2
 _gridLines_Y = 8
 _graphRes = 512
 _pointRadius = 4
-_env = NodePath("../PostTesting")
+_env = NodePath("../Control/SubViewportContainer/SubViewport2/PostTesting")
 _palettePlotType = 2
 _palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])
-
-[node name="PostTesting" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_oqg80")
-compositor = SubResource("Compositor_jqdjy")
 
 [node name="SanityCheck" type="Node" parent="."]
 script = ExtResource("42_804ie")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-handle_input_locally = false
-size = Vector2i(40, 40)
-render_target_update_mode = 4
 
-[node name="ReflectionViewPortTest" type="SubViewport" parent="."]
-size = Vector2i(640, 360)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ReflectionViewPortTest"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45869026, 20)
 mesh = SubResource("PlaneMesh_xxtuw")
 skeleton = NodePath("../../Level/TempRoot/pond_floor_hp")
 
-[node name="Area3D" type="Area3D" parent="ReflectionViewPortTest/MeshInstance3D"]
+[node name="Area3D" type="Area3D" parent="SubViewport/MeshInstance3D"]
 collision_layer = 32
 collision_mask = 32
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ReflectionViewPortTest/MeshInstance3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/MeshInstance3D/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06768802, 0)
 shape = SubResource("BoxShape3D_ey2wc")
-
-[node name="Camera3D" type="Camera3D" parent="ReflectionViewPortTest" node_paths=PackedStringArray("mainCam", "reflector")]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, -7.021361, 32.161354)
-cull_mask = 1048571
-projection = 1
-size = 10.0
-script = ExtResource("43_4unsq")
-mainCam = NodePath("../../Control/SubViewportContainer/SubViewport2/CameraRig/Camera3D")
-reflector = NodePath("../MeshInstance3D")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("49_ow6iq")
@@ -1558,7 +1545,7 @@ _nightSkyColor = Color(0.050980393, 0.07450981, 0.14117648, 1)
 _daySkyColor = Color(0.15294118, 0.4392157, 0.74509805, 1)
 _nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
 _dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
-_worldEnvironment = NodePath("../PostTesting")
+_worldEnvironment = NodePath("../Control/SubViewportContainer/SubViewport2/PostTesting")
 
 [editable path="Level/Env/Floor/pond_floor"]
 [editable path="Level/Env/WindEffect"]
