@@ -465,7 +465,37 @@ vec4 tonemap(vec4 l){
 }
 
 
+vec3 Tonemap_Aces(vec3 color) {
 
+	// ACES filmic tonemapper with highlight desaturation ("crosstalk").
+	// Based on the curve fit by Krzysztof Narkowicz.
+	// https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/
+
+	const float slope = 12.0f; // higher values = slower rise.
+
+	// Store grayscale as an extra channel.
+	vec4 x = vec4(
+		// RGB
+		color.r, color.g, color.b,
+		// Luminosity
+		(color.r * 0.299) + (color.g * 0.587) + (color.b * 0.114)
+	);
+	
+	// ACES Tonemapper
+	const float a = 2.51f;
+	const float b = 0.03f;
+	const float c = 2.43f;
+	const float d = 0.59f;
+	const float e = 0.14f;
+
+	vec4 tonemap = clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
+	float t = x.a;
+	
+	t = t * t / (slope + t);
+
+	// Return after desaturation step.
+	return mix(tonemap.rgb, tonemap.aaa, t);
+}
 
 
 //=========================================================================================
@@ -712,11 +742,21 @@ void main() {
 
 	//tonemap srgb Y
 	if(params.tonemapper_mode == 1.0){
+		// // ==== old approach of only tonemapping the luminance ====
+		// -> has clipping
         // float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
 		// float Yt = tonemap(Y);
 		// color *= Yt / max(Y, 1e-5);
+
+		// rheinhard basic curve -> hue distortions but elimintates clippping
 		color = color / (1.0 + color);
+
+		// aces unused since it has the same problems as rheinhard but is more complex
+		// color = vec4(Tonemap_Aces(color.xyz),1.0);
+
+		// my curve, same ups and downs as rheinhard
 		// color = tonemap(color);
+
 	}
 
 	//tonemap oklab L
