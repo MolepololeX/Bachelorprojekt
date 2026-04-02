@@ -14,6 +14,10 @@ namespace BA
 
         public void SanityCheck()
         {
+            var image = GetViewport().GetTexture().GetImage();
+            image.SavePng("res://comp.png");
+
+
             Color lin_c0 = colorSRGB_0.SrgbToLinear();
             Color lin_c1 = colorSRGB_1.SrgbToLinear();
             RGB rgb_0 = new RGB { r = lin_c0.R, g = lin_c0.G, b = lin_c0.B };

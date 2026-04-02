@@ -38,6 +38,7 @@ enum DrawMode{
 @export_group("Post Measurements")
 @export_tool_button("Generate Post Image", "ColorRect") var generate_post_image_action = _generate_post_image
 @export_tool_button("Generate All delta masks", "InputEventMagnifyGesture") var generate_all_delta_image_action = _generate_delta_images
+@export var save_as_srgb : bool = false
 @export var enable_concurrent_capture : bool = false
 @export var capture_frame_delay : int = 1000 
 @export var images_path : String = "res://_BA_/PostImages/"
@@ -185,11 +186,12 @@ func _generate_post_image( local_shader : RID, local_pipeline : RID, local_rd : 
 		)
 	var save_path = images_path + "/" + EditorInterface.get_edited_scene_root().name + "_" + TonemapperMode.keys()[tm_mode] + "_" + DrawMode.keys()[dr_mode]
 	img.save_png(save_path + "_lin" + ".png")
-	img.convert(Image.FORMAT_RGB8)
-	if(resize_image):
-		img.resize(size.x*4, size.y*4, Image.INTERPOLATE_NEAREST)
-	img.linear_to_srgb()
-	img.save_png(save_path + "_srgb" + ".png")	
+	if(save_as_srgb):
+		img.convert(Image.FORMAT_RGB8)
+		if(resize_image):
+			img.resize(size.x*4, size.y*4, Image.INTERPOLATE_NEAREST)
+		img.linear_to_srgb()
+		img.save_png(save_path + "_srgb" + ".png")	
 	
 	print("processed image for tonemapping mode " + TonemapperMode.keys()[tm_mode] + " using " + DrawMode.keys()[dr_mode])
 	

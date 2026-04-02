@@ -23,7 +23,7 @@
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="25_d7lxg"]
 [ext_resource type="PackedScene" uid="uid://cw6s8r7vkg73m" path="res://Assets/Meshes/pond_floor_hp.glb" id="26_ay53u"]
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="27_6yxrc"]
-[ext_resource type="Texture2D" path="res://_before.png" id="27_folns"]
+[ext_resource type="Texture2D" uid="uid://daivcb3lt8e0u" path="res://_before.png" id="27_folns"]
 [ext_resource type="Material" uid="uid://cp7iai08xfa03" path="res://Assets/Materials/Foliage/sm_grass_light.tres" id="28_u1c6q"]
 [ext_resource type="Material" uid="uid://67fuhybtuskr" path="res://Assets/Materials/Foliage/sm_grass_dark.tres" id="29_cms6a"]
 [ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/m_outline_post.tres" id="30_l7jgw"]
@@ -498,7 +498,6 @@ glow_bloom = 0.17
 glow_hdr_threshold = 0.35
 glow_hdr_scale = 0.16
 glow_hdr_luminance_cap = 52.49
-fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.050980393, 0.07450981, 0.14117648, 1)
 fog_density = 1.0
@@ -536,9 +535,9 @@ needs_normal_roughness = false
 script = ExtResource("39_ko7dv")
 enable_draw = true
 live_reload = true
-tonemapper_mode = 1
+tonemapper_mode = 2
 tonemapper_exposure = 1.2
-draw_mode = 9
+save_as_srgb = null
 capture_frame_delay = 500
 resize_image = true
 raw_texture = ExtResource("27_folns")
@@ -546,7 +545,7 @@ metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Image" id="Image_folns"]
 data = {
-"data": PackedByteArray("ABUq/wwVW/86FY7/jCG//9w91f/lb7P/7qGw//bZ0/8="),
+"data": PackedByteArray("AAAA/wwAPf9UAHv/ugCz//IMlf/1UXP/+KGP//znzv8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
@@ -555,7 +554,7 @@ data = {
 
 [sub_resource type="Image" id="Image_lxdsv"]
 data = {
-"data": PackedByteArray("ABUc/ww0Sf8hS4b/WVbB/5pm1//Sftb/76rN//nZ3P8="),
+"data": PackedByteArray("AAAA/wAVP/8xHJH/dBy9/70mx//0VLP//KCu//3Z0P8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
@@ -570,10 +569,13 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
-dither_spread = 0.01525
-hue_start = 213.0
+palette_type = 1
+dither_spread = 0.01158
+hue_start = 235.0
 hue_range = 180.0
-hsl_saturation = 0.7
+lightness_floor = 0.0
+hsl_saturation = 0.9
+auto_create_palette = true
 palette_preview_hsl = SubResource("Image_folns")
 palette_preview_oklch = SubResource("Image_lxdsv")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
@@ -1410,7 +1412,10 @@ stretch_shrink = 3
 [node name="SubViewport2" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(384, 216)
-render_target_update_mode = 4
+render_target_update_mode = 0
+
+[node name="SanityCheck" type="Node" parent="Control/SubViewportContainer/SubViewport2"]
+script = ExtResource("42_804ie")
 
 [node name="Env" type="WorldEnvironment" parent="Control/SubViewportContainer/SubViewport2"]
 environment = SubResource("Environment_oqg80")
@@ -1505,9 +1510,6 @@ _pointRadius = 4
 _env = NodePath("../Control/SubViewportContainer/SubViewport2/Env")
 _palettePlotType = 2
 _palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])
-
-[node name="SanityCheck" type="Node" parent="."]
-script = ExtResource("42_804ie")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 
