@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=126 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://bwic0egi0ejsk" path="res://Scenes/Environment/s_floor_tile.tscn" id="5_l7jgw"]
 [ext_resource type="PackedScene" uid="uid://b24shvq54jb53" path="res://Assets/Meshes/pond_floor.glb" id="6_3stlt"]
@@ -41,6 +41,7 @@
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Texture2D" uid="uid://vsy4nujjbkt7" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
+[ext_resource type="Texture2D" uid="uid://oxmx37k0blmp" path="res://_BA_/PostImages/TestScene_oklab_cie_d_H_lin.png" id="42_d3byi"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
 [ext_resource type="Script" uid="uid://dqijqq8tvjlqp" path="res://_BA_/Scripts/ScreenshotUtil.cs" id="42_lxdsv"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="49_ow6iq"]
@@ -545,7 +546,7 @@ resize_image = true
 raw_texture = ExtResource("27_folns")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_lxdsv"]
+[sub_resource type="Image" id="Image_h6ckk"]
 data = {
 "data": PackedByteArray("AAAA/xUAOv9SDHX/sAyq/+Yck//sWXn/86WV//nn0P8="),
 "format": "RGBA8",
@@ -554,7 +555,7 @@ data = {
 "width": 8
 }
 
-[sub_resource type="Image" id="Image_d3byi"]
+[sub_resource type="Image" id="Image_osprd"]
 data = {
 "data": PackedByteArray("AAAA/wAcOv8xJoT/cC6w/7U6vv/qY7D/+KKv//vZ0v8="),
 "format": "RGBA8",
@@ -578,8 +579,8 @@ hue_range = 180.0
 lightness_floor = 0.0
 hsl_saturation = 0.8
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_lxdsv")
-palette_preview_oklch = SubResource("Image_d3byi")
+palette_preview_hsl = SubResource("Image_h6ckk")
+palette_preview_oklch = SubResource("Image_osprd")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -1512,6 +1513,8 @@ _pointRadius = 4
 _env = NodePath("../Env")
 _palettePlotType = 2
 _palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])
+_raw_image_path = "res://_BA_/PostImages/_data_raw"
+_delta_tex = ExtResource("42_d3byi")
 
 [node name="ScreenshotUtil" type="Node" parent="Control/SubViewportContainer/SubViewport2"]
 script = ExtResource("42_lxdsv")

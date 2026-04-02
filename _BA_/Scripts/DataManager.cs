@@ -256,28 +256,48 @@ namespace BA
 
 		private void GenTestDeltaGraph()
 		{
-			var raw_image = _delta_tex.GetImage();
-			var size = raw_image.GetSize();
+			if (_delta_tex == null)
+			{
+				GD.PushWarning("Missing delta image...");
+				return;
+			}
+			var size_ref = _delta_tex.GetImage();
+			var size = size_ref.GetSize();
+
 			var data_file = FileAccess.Open(_raw_image_path, FileAccess.ModeFlags.Read);
 			if (data_file == null)
 			{
 				GD.PushError("Failed to open raw image data file\nPlease verify path: " + _raw_image_path);
 				return;
 			}
-			raw_image.SetData(
+			var raw_image = Image.CreateFromData(
 				size.X,
 				size.Y,
 				false,
 				Image.Format.Rgbah,
 				data_file.GetBuffer((long)data_file.GetLength()));
 			data_file.Close();
+
+			GenDeltaGraph(
+				raw_image,
+				_delta_tex,
+				"original oklab L",
+				1,
+				0.0f,
+				3.0f,
+				"delta something",
+				2,
+				-1.0f,
+				1.0f
+				);
 		}
 
 		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop)
 		{
 			if (deltaMask == null)
 			{
-				GD.PushWarning("Missing Palette...");
+				GD.PushWarning("Missing delta image...");
+				return;
 			}
 			var img = deltaMask.GetImage();
 			img.Decompress();
@@ -317,15 +337,16 @@ namespace BA
 				for (int y = 0; y < N; y++)
 				{
 					Color deltaColor = img.GetPixel(x, y);
-					Color rawColor = original_raw_image.GetPixel(x, y);
-					Lab rawLab = linear_srgb_to_oklab(new RGB { r = rawColor.R, g = rawColor.G, b = rawColor.B });
-
-					float L = rawLab.L;
-					float delta = deltaColor.R - deltaColor.B;
-
+					float delta = deltaColor.B - deltaColor.R;
 					delta = (float)Math.Clamp(delta, -1.0, 1.0);
 
-					//bring L from 0..inf to 0..1
+
+					Color rawColor = original_raw_image.GetPixel(x, y);
+					Lab rawLab = linear_srgb_to_oklab(new RGB { r = rawColor.R, g = rawColor.G, b = rawColor.B });
+					float L = rawLab.L;
+
+
+					// bring L from 0..inf to 0..1
 					L = (float)Math.Clamp(L, 0.0, 3.0);
 					L = L / 3.0f;
 
@@ -420,11 +441,13 @@ namespace BA
 
 			if (delta <= 0.0)
 			{
-				iy = _graphRes - ((int)(delta * ((_graphRes - 1) / 2)) + ((_graphRes - 1) / 2));
+				// iy = _graphRes - (int)(delta * (_graphRes / 2) + (_graphRes / 2));
+				iy = (int)(Math.Abs(delta) * (_graphRes / 2) + ((_graphRes - 1) / 2));
 			}
 			else
 			{
-				iy = _graphRes - (int)(delta * ((_graphRes - 1) / 2)) - ((_graphRes - 1) / 2);
+				// iy = _graphRes - (int)(delta * (_graphRes / 2) - (_graphRes / 2));
+				iy = -(int)(Math.Abs(delta) * (_graphRes / 2)) + ((_graphRes - 1) / 2);
 			}
 
 			if (ix >= _graphRes) ix = _graphRes - 1;
