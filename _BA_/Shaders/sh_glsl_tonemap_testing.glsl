@@ -7,6 +7,7 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 	float base_exposure;
 	float tonemapper_mode;
 	float tonemapper_exposure;
+	float tonemapper_saturation;
 	float draw_mode;
 } params;
 
@@ -28,7 +29,7 @@ float cie_f(float I){
     }
 }
 
-//Note: these are not normalized but in the range -100...100 for a and b and 0...100 for Luminance since deltaE2000 breaks if used with normalized cie values
+//Note: these are not normalized but ~ in the range -128...128 for a and b and 0...100 for Luminance since deltaE2000 breaks if used with normalized cie values
 vec3 linear_srgb_to_cielab(vec3 rgb){
     vec3 d65 = vec3(95.014, 100, 108.827);
 
@@ -160,7 +161,7 @@ float oklab_delta_E(vec3 c1, vec3 c2){
 
 float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
 	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
-	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); //TODO fehler in der formel fixen
+	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0))));
 
 	float a_s = (1.0 + G) * cs.y;
 	float b_s = cs.z;
@@ -177,7 +178,7 @@ float calculate_cie_de_2000_C(vec3 cs, vec3 cb){
 
 float calculate_cie_de_2000_H(vec3 cs, vec3 cb){
 	float C_star = (sqrt(cs.y * cs.y + cs.z * cs.z) + sqrt(cb.y * cb.y + cb.z * cb.z)) / 2.0;//original Chroma
-	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0)))); //TODO fehler in der formel fixen
+	float G = 0.5 * (1.0 - sqrt(pow(C_star, 7.0) / (pow(C_star, 7.0) + pow(25.0, 7.0))));
 
 	float a_s = (1.0 + G) * cs.y;
 	float b_s = cs.z;
@@ -355,9 +356,11 @@ void main() {
 
 	//tonemap srgb Y
 	if(params.tonemapper_mode == 1.0){
-        float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
-		float Yt = tonemap(Y);
-		color *= Yt / max(Y, 1e-5);
+        // float Y = 0.2126 * base.r + 0.7152 * base.g + 0.0722 * base.b;
+		// float Yt = tonemap(Y);
+		// color *= Yt / max(Y, 1e-5);
+		color = color / (1.0 + color);
+		// color = tonemap(color);
 	}
 
 	//tonemap oklab L
@@ -372,7 +375,9 @@ void main() {
 		L = tonemap(L);
 
 		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably, would need correct gamut mapping
-		C *= L / max(lab.x, 1e-5);
+		// C *= (L / max(lab.x, 1e-5));
+		// better scaling
+		C *= (-exp(params.tonemapper_saturation * L - params.tonemapper_saturation) + 1);
 
 		lab.x = L;
 		lab.y = C * cos(h);
@@ -383,14 +388,27 @@ void main() {
 
 
 
+	if(params.draw_mode == 0.0){
+		if((color.r > 1.0) || (color.g > 1.0) || (color.b > 1.0))
+		{
+			post = vec4(color.r - 1,color.g - 1,color.b - 1,1.0);
+		}else{
+			post = vec4(0.0,0.0,0.0,1.0);
+		// post = color;
+		}
+		imageStore(color_image, uv_pixel, post);
+		return;
+	}
 
-	post = color;
+
+	//clamp color here so measurement functions can measure it
+	post = clamp(color, 0.0, 1.0);
 
 
 
 	//color image
 	if(params.draw_mode == 1.0){
-		imageStore(color_image, uv_pixel, color);
+		imageStore(color_image, uv_pixel, post);
 		return;
 	}
 
@@ -403,17 +421,15 @@ void main() {
 	//oklab delta_h
 	if(params.draw_mode == 2.0){
 
-		float hue_diff = oklab_delta_h(
+		delta = oklab_delta_h(
 			linear_srgb_to_oklab(pre.xyz), 
 			linear_srgb_to_oklab(post.xyz)
 		);
-		//correct normalization 1 ... -1
 		delta /= PI;
 	}
 
 	//oklab delta_C
 	if(params.draw_mode == 3.0){
-
 		delta = oklab_delta_C(
 			linear_srgb_to_oklab(pre.xyz), 
 			linear_srgb_to_oklab(post.xyz)
@@ -422,12 +438,7 @@ void main() {
 
 	//oklab delta_L
 	if(params.draw_mode == 4.0){
-		//corrected delta L for tonemapping
-		// vec3 corrected_pre = linear_srgb_to_oklab(pre.xyz);
-		// corrected_pre.x = tonemap(corrected_pre.x);
-
 		delta = oklab_delta_L(
-			// corrected_pre, 
 			linear_srgb_to_oklab(pre.xyz),
 			linear_srgb_to_oklab(post.xyz)
 		);
@@ -435,11 +446,7 @@ void main() {
 
 	//oklab deltaE
 	if(params.draw_mode == 5.0){
-		// vec3 corrected_pre = linear_srgb_to_oklab(pre.xyz);
-		// corrected_pre.x = tonemap(corrected_pre.x);
-
 		delta = oklab_delta_E(
-			// corrected_pre,
 			linear_srgb_to_oklab(pre.xyz),
 			linear_srgb_to_oklab(post.xyz)
 		);
@@ -447,65 +454,39 @@ void main() {
 
 
 
-	//cie delta_H
+	//cie delta_h
 	if(params.draw_mode == 6.0){
-
 		delta = calculate_cie_de_2000_H(
 			linear_srgb_to_cielab(pre.xyz), 
 			linear_srgb_to_cielab(post.xyz)
 		);
-
-		//normalization from CIE range to -1...1
-		delta /= 100.0;
+		delta /= PI;
 	}
 
 	//cie delta_C
 	if(params.draw_mode == 7.0){
-		
 		delta = calculate_cie_de_2000_C(
 			linear_srgb_to_cielab(pre.xyz), 
 			linear_srgb_to_cielab(post.xyz)
 		);
-
-		//normalization from CIE range to -1...1
 		delta /= 100.0;
 	}
 
 	//cie delta_L
 	if(params.draw_mode == 8.0){
-
-		// vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
-		// // normalize before adjusting the tonemapping
-		// corrected_pre.x /= 100.0;
-		// corrected_pre.x = tonemap(corrected_pre.x);
-		// corrected_pre.x *= 100.0;
-
 		delta = calculate_cie_de_2000_L(
-			// corrected_pre,
 			linear_srgb_to_cielab(pre.xyz),
 			linear_srgb_to_cielab(post.xyz)
 		);
-
-		//normalization from CIE range to -1...1
 		delta /= 100.0;
 	}
 
     //ciede2000
 	if(params.draw_mode == 9.0){
-
-		// vec3 corrected_pre = linear_srgb_to_cielab(pre.xyz);
-		// //normalize before adjusting the tonemapping
-		// corrected_pre.x /= 100.0;
-		// corrected_pre.x = tonemap(corrected_pre.x);
-		// corrected_pre.x *= 100.0;
-
 		delta = calculate_cie_de_2000(
-			// corrected_pre, 
 			linear_srgb_to_cielab(pre.xyz),
 			linear_srgb_to_cielab(post.xyz)	
 		);
-
-		//normalization from CIE range to -1...1
 		delta /= 100.0;
 	}
 
