@@ -765,8 +765,8 @@ void main() {
 		vec3 lab = linear_srgb_to_oklab(color.xyz);
 
 		float L = lab.x;
-		float C = length(lab.yz);
-		float h = atan(lab.z, lab.y);
+		// float C = length(lab.yz);
+		// float h = atan(lab.z, lab.y);
 
 		L = tonemap(L);
 
@@ -776,10 +776,13 @@ void main() {
 		// C *= (-exp(params.tonemapper_saturation * L - params.tonemapper_saturation) + 1);
 
 		lab.x = L;
-		lab.y = C * cos(h);
-		lab.z = C * sin(h);
+		// lab.y = C * cos(h);
+		// lab.z = C * sin(h);
 
 		color = vec4(oklab_to_linear_srgb(lab), 1.0);
+
+		// clip chroma to the nearest valid value
+		// using the pure chroma clipping version since lightness can be perfectly preserved since its already tonemapped
 		RGB colClipped = gamut_clip_preserve_chroma(RGB(color.r, color.g, color.b));
 		color = vec4(colClipped.r, colClipped.g, colClipped.b, 1.0);
 	}

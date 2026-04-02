@@ -546,23 +546,23 @@ metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Image" id="Image_folns"]
 data = {
-"data": PackedByteArray("ACoh/wA6Qv8MMVv/DBxz/yoMi/9mFaP/rxW7/9Icn//gKmv/5EJC/+eMWf/qx3L/5+2K/9Dxov/H9br/0vjX/w=="),
+"data": PackedByteArray("ABUq/wwVW/86FY7/jCG//9w91f/lb7P/7qGw//bZ0/8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 16
+"width": 8
 }
 
 [sub_resource type="Image" id="Image_lxdsv"]
 data = {
-"data": PackedByteArray("ABUM/wAmJv8ANDr/DD9W/xVJff89Rqv/bkK8/5o/t//BQqP/3VGH/+dub//rimH/7KRd/+m+Xv/d2Wr/y/KZ/w=="),
+"data": PackedByteArray("ABUc/ww0Sf8hS4b/WVbB/5pm1//Sftb/76rN//nZ3P8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 16
+"width": 8
 }
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_8auip"]
+[sub_resource type="CompositorEffect" id="CompositorEffect_d3byi"]
 resource_local_to_scene = false
 resource_name = ""
 enabled = true
@@ -570,22 +570,16 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
-steps = 16
-palette_type = 1
-dither_spread = 0.00508
-hue_start = 167.5
-hue_range = 341.79999999999995
-hsl_saturation = 0.75
-oklch_chroma = 0.0
-auto_create_palette = true
+dither_spread = 0.01525
+hue_start = 213.0
+hue_range = 180.0
+hsl_saturation = 0.7
 palette_preview_hsl = SubResource("Image_folns")
 palette_preview_oklch = SubResource("Image_lxdsv")
-save_path = "res://_BA_/Palettes/"
-palette_preview_res = 64
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_7sabu"), SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_8auip")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_7sabu"), SubResource("CompositorEffect_sit86"), SubResource("CompositorEffect_d3byi")])
 
 [sub_resource type="QuadMesh" id="QuadMesh_r60an"]
 flip_faces = true
