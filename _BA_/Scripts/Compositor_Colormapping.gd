@@ -33,9 +33,9 @@ var reload_interval_frames : int = 60
 @export_range(-360.0, 360.0, 0.1) var hue_range : float = 120.0
 @export_range(0.0, 1.0, 0.01) var lightness_floor : float = 0.1
 @export_range(0.0, 1.0, 0.01) var lightness_ceiling : float = 0.9
-@export_range(0.0, 1.0, 0.01) var hsl_saturation : float = 0.5
-@export_range(0.0, 0.3, 0.001) var oklch_chroma : float = 0.1
-@export_range(0.0, 360.0, 0.1) var oklch_hue_offset : float = 0.0
+@export_range(0.0, 1.0, 0.01) var saturation : float = 0.5
+#@export_range(0.0, 0.3, 0.001) var oklch_chroma : float = 0.1
+#@export_range(0.0, 360.0, 0.1) var oklch_hue_offset : float = 0.0
 @export var auto_create_palette : bool = false
 @export_tool_button("Generate Palettes", "ColorTrackVu") var gen_palettes_action = _create_palettes
 
@@ -176,7 +176,7 @@ func _create_palettes() -> void:
 		var col := Color.WHITE
 		
 		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
-		var S := hsl_saturation
+		var S := saturation
 		var L : float = lerp(lightness_floor, lightness_ceiling, float(i) / float(steps - 1))
 		
 		var hsl : Vector3
@@ -211,7 +211,7 @@ func _create_palettes() -> void:
 		#col.b = c.z
 		
 		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
-		var okhsl := Color.from_ok_hsl(H, hsl_saturation, L)
+		var okhsl := Color.from_ok_hsl(H, saturation, L)
 		okhsl = okhsl.srgb_to_linear()
 		
 		image_oklch.set_pixel(i, 0, okhsl)
@@ -236,9 +236,16 @@ func _create_palettes() -> void:
 
 func _save_palettes() -> void:
 	palette_preview_hsl.resize(palette_preview_res * steps, palette_preview_res, Image.INTERPOLATE_NEAREST)
-	palette_preview_hsl.save_png(save_path + EditorInterface.get_edited_scene_root().name + "_HSL" + ".png")
+	if palette_preview_hsl.save_png(save_path + "/" + EditorInterface.get_edited_scene_root().name + "_HSL" + ".png") == 0:
+		print("Saved Palette to path: " + save_path + "/" + EditorInterface.get_edited_scene_root().name + "_HSL" + ".png")
+	else:
+		print("Error Saving Palette to path: " + save_path)
+	
 	palette_preview_oklch.resize(palette_preview_res * steps, palette_preview_res, Image.INTERPOLATE_NEAREST)
-	palette_preview_oklch.save_png(save_path + EditorInterface.get_edited_scene_root().name + "_OKLCh" + ".png")
+	if palette_preview_oklch.save_png(save_path + "/" + EditorInterface.get_edited_scene_root().name + "_OKHSL" + ".png") == 0:
+		print("Saved Palette to path: " + save_path + "/" + EditorInterface.get_edited_scene_root().name + "_OKHSL" + ".png")
+	else:
+		print("Error Saving Palette to path: " + save_path)
 
 
 func _reinit_shader() -> void:

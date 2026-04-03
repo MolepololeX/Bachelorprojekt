@@ -769,6 +769,7 @@ void main() {
 		// float h = atan(lab.z, lab.y);
 
 		L = tonemap(L);
+		// L = L / (1.0 + L);
 
 		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably, would need correct gamut mapping
 		// C *= (L / max(lab.x, 1e-5));

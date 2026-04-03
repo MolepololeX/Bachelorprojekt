@@ -34,12 +34,22 @@ namespace BA
 			cie_E
 		}
 
+		internal struct SSIM
+		{
+			public double luminance;
+			public double contrast;
+			public double structure;
+			public double ssim;
+		}
+
 
 		[ExportCategory("Image Analysis")]
 		[ExportGroup("SSIM")]
 		[ExportToolButton("Calculate SSIM")] public Callable CalcSSIM => Callable.From(Calculate_SSIM);
-		[ExportGroup("Percentiles")]
-		[ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);
+		[Export] private Texture2D _image_before_linear;
+		[Export] private Texture2D[] _images_after_linear;
+		// [ExportGroup("Percentiles")]
+		// [ExportToolButton("Calculate Average")] public Callable CalcAverage => Callable.From(Calculate_Average);
 		// [ExportToolButton("Calculate Percentiles")] public Callable CalcPercentile => Callable.From(Calculate_All_Percentile);
 
 
@@ -80,8 +90,8 @@ namespace BA
 		[Export] private Godot.Collections.Array<Texture2D> _palettes;
 
 		[ExportGroup("Tonemapping")]
-		[Export] private string _raw_image_path;
-		[Export] private Texture2D _delta_tex;
+		[Export] private string _path_to_raw_image_linear_data;
+		[Export] private Texture2D _delta_texture_linear;
 		[ExportToolButton("Plot Test Delta")] public Callable PlotTestDelta => Callable.From(GenTestDeltaGraph);
 		[Export] private bool _drawTonemapperReference = false;
 		[Export] private float _tonemapperReferenceExposure = 1.2f;
@@ -92,10 +102,10 @@ namespace BA
 		// [ExportToolButton("CapturePrePost")] public Callable CaptureBoth => Callable.From(CapturePrePost);
 		// [ExportToolButton("CaptureBaseImage")] public Callable CaptureIngameImage => Callable.From(CaptureViewportPre);
 		// [ExportToolButton("CaptureComparisonImage")] public Callable CaptureIngameImageComparison => Callable.From(CaptureViewportPost);
-		[ExportCategory("Test")]
-		[ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
-		[Export] private bool _autoCapturePrePost = true;
-		[Export] private bool _plotByOKLCh = true;
+		// [ExportCategory("Test")]
+		// [ExportToolButton("Test_Calc_D65")] public Callable CalcD65 => Callable.From(Test_CalcD65);
+		// [Export] private bool _autoCapturePrePost = true;
+		// [Export] private bool _plotByOKLCh = true;
 		// [Export] public Texture2D image_base;
 		// [Export] public Texture2D image_compare;
 
@@ -168,8 +178,6 @@ namespace BA
 			},
 		};
 
-		Image baseImage;
-		Image comparisonImage;
 
 		public void GenAllPaletteGraphs()
 		{
@@ -259,18 +267,18 @@ namespace BA
 
 		private void GenTestDeltaGraph()
 		{
-			if (_delta_tex == null)
+			if (_delta_texture_linear == null)
 			{
 				GD.PushWarning("Missing delta image...");
 				return;
 			}
-			var size_ref = _delta_tex.GetImage();
+			var size_ref = _delta_texture_linear.GetImage();
 			var size = size_ref.GetSize();
 
-			var data_file = FileAccess.Open(_raw_image_path, FileAccess.ModeFlags.Read);
+			var data_file = FileAccess.Open(_path_to_raw_image_linear_data, FileAccess.ModeFlags.Read);
 			if (data_file == null)
 			{
-				GD.PushError("Failed to open raw image data file\nPlease verify path: " + _raw_image_path);
+				GD.PushError("Failed to open raw image data file\nPlease verify path: " + _path_to_raw_image_linear_data);
 				return;
 			}
 			var raw_image = Image.CreateFromData(
@@ -283,7 +291,7 @@ namespace BA
 
 			GenDeltaGraph(
 				raw_image,
-				_delta_tex,
+				_delta_texture_linear,
 				"original oklab L",
 				1,
 				0.0f,
@@ -575,20 +583,35 @@ namespace BA
 			GD.Print("Image Average B: " + average_B);
 		}
 
-		//nutzt rgb 0...255
-		public double Calculate_SSIM()
+
+		public void Calculate_SSIM()
 		{
-			// Image i = image_base.GetImage();
-			// Image I = image_compare.GetImage();
-			baseImage.Decompress();
-			comparisonImage.Decompress();
+			foreach (Texture2D after in _images_after_linear)
+			{
+				SSIM ssim = Get_SSIM(_image_before_linear, after);
+				GD.Print("luminance: " + ssim.luminance);
+				GD.Print("contrast: " + ssim.contrast);
+				GD.Print("structure: " + ssim.structure);
+				GD.Print("SSIM: " + ssim.ssim);
+			}
+		}
+
+		//nutzt rgb 0...255
+		private SSIM Get_SSIM(Texture2D beforeTex, Texture2D afterTex)
+		{
+			Image before = beforeTex.GetImage();
+			Image after = afterTex.GetImage();
+			before.Decompress();
+			after.Decompress();
+
 
 			double C1 = Math.Pow(0.01 * 255.0, 2.0);
 			double C2 = Math.Pow(0.03 * 255.0, 2.0);
 			double C3 = C2 / 2.0;
 
-			int M = baseImage.GetWidth();
-			int N = baseImage.GetHeight();
+
+			int M = before.GetWidth();
+			int N = before.GetHeight();
 			int O = 3;
 
 			double mue_i = 0.0;
@@ -599,9 +622,8 @@ namespace BA
 				{
 					for (int z = 0; z < O; z++)
 					{
-						// if((x + y + z) % 10000 == 0) GD.Print(x + "/" + M + ", " + y + "/" + N + ", " + z + "/" + O);
-						mue_i += baseImage.GetPixel(x, y)[z] * 255.0; //check if format correct
-						mue_I += comparisonImage.GetPixel(x, y)[z] * 255.0; //check if format correct
+						mue_i += before.GetPixel(x, y)[z] * 255.0;
+						mue_I += after.GetPixel(x, y)[z] * 255.0;
 					}
 				}
 			}
@@ -617,10 +639,10 @@ namespace BA
 				{
 					for (int z = 0; z < O; z++)
 					{
-						sig_i2 += Math.Pow(baseImage.GetPixel(x, y)[z] * 255.0 - mue_i, 2.0); //check if format correct
-						sig_I2 += Math.Pow(comparisonImage.GetPixel(x, y)[z] * 255.0 - mue_I, 2.0); //check if format correct
+						sig_i2 += Math.Pow(before.GetPixel(x, y)[z] * 255.0 - mue_i, 2.0);
+						sig_I2 += Math.Pow(after.GetPixel(x, y)[z] * 255.0 - mue_I, 2.0);
 
-						sig_iI += (baseImage.GetPixel(x, y)[z] * 255.0 - mue_i) * (comparisonImage.GetPixel(x, y)[z] * 255.0 - mue_I); //check if format correct
+						sig_iI += (before.GetPixel(x, y)[z] * 255.0 - mue_i) * (after.GetPixel(x, y)[z] * 255.0 - mue_I);
 					}
 				}
 			}
@@ -632,13 +654,9 @@ namespace BA
 			double c = (2.0 * Math.Sqrt(sig_i2) * Math.Sqrt(sig_I2) + C2) / (sig_i2 + sig_I2 + C2);
 			double s = (sig_iI + C3) / (Math.Sqrt(sig_i2) * Math.Sqrt(sig_I2) + C3);
 
-			double SSIM = l * c * s;
+			double ssim = l * c * s;
 
-			GD.Print("SSIM: " + SSIM);
-			GD.Print("luminance: " + l);
-			GD.Print("contrast: " + c);
-			GD.Print("structure: " + s);
-			return SSIM;
+			return new SSIM { luminance = l, contrast = c, structure = s, ssim = ssim };
 		}
 	}
 }

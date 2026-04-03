@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=129 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://bwic0egi0ejsk" path="res://Scenes/Environment/s_floor_tile.tscn" id="5_l7jgw"]
 [ext_resource type="PackedScene" uid="uid://b24shvq54jb53" path="res://Assets/Meshes/pond_floor.glb" id="6_3stlt"]
@@ -33,17 +33,20 @@
 [ext_resource type="Texture2D" uid="uid://djx0rsbayemo4" path="res://Assets/Textures/Procedural/t_cloud_shadow_noise.tres" id="35_v6liu"]
 [ext_resource type="Material" uid="uid://bfyloeklnnt1v" path="res://Assets/Materials/sm_rain_distorted.tres" id="36_lxfnq"]
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="37_duxdj"]
+[ext_resource type="Texture2D" uid="uid://cq7pjcog0i7j4" path="res://_BA_/PostImages/_data_raw_lin.png" id="37_osprd"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="38_0qx0j"]
+[ext_resource type="Texture2D" uid="uid://b40x6ybodbgjr" path="res://_BA_/PostImages/TestScene_srgb_colorImage_lin.png" id="38_dpfs0"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="38_py68e"]
-[ext_resource type="Texture2D" uid="uid://cyafjfmvn1yk3" path="res://_BA_/Palettes/TestScene_OKLCh.png" id="38_rxqsg"]
+[ext_resource type="Texture2D" uid="uid://ck11e1xvurj8x" path="res://_BA_/Palettes/TestScene_OKHSL.png" id="39_d3byi"]
+[ext_resource type="Texture2D" uid="uid://bikglhsiyljfg" path="res://_BA_/PostImages/TestScene_oklab_colorImage_lin.png" id="39_diqjr"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
-[ext_resource type="Texture2D" uid="uid://vsy4nujjbkt7" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
+[ext_resource type="Texture2D" uid="uid://cnj6ycbliwndg" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
-[ext_resource type="Texture2D" uid="uid://d3wbevemj2d7e" path="res://_BA_/PostImages/TestScene_srgb_oklab_d_L_lin.png" id="42_d3byi"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
 [ext_resource type="Script" uid="uid://dqijqq8tvjlqp" path="res://_BA_/Scripts/ScreenshotUtil.cs" id="42_lxdsv"]
+[ext_resource type="Texture2D" uid="uid://gmgjndwk343o" path="res://_BA_/PostImages/TestScene_oklab_oklab_d_L_lin.png" id="44_dpfs0"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="49_ow6iq"]
 [ext_resource type="Script" uid="uid://cchta2hcc0oal" path="res://Scripts/Audio/AudioFade.cs" id="50_77m7r"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="56_5s3d3"]
@@ -495,8 +498,7 @@ ambient_light_source = 2
 ambient_light_color = Color(0.14117648, 0.18431373, 0.30588236, 1)
 tonemap_white = 0.25
 glow_intensity = 0.23
-glow_strength = 1.73
-glow_bloom = 0.17
+glow_strength = 2.0
 glow_hdr_threshold = 0.35
 glow_hdr_scale = 0.16
 glow_hdr_luminance_cap = 52.49
@@ -545,22 +547,22 @@ resize_image = true
 raw_texture = ExtResource("27_folns")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_d3byi"]
+[sub_resource type="Image" id="Image_dpfs0"]
 data = {
-"data": PackedByteArray("AAAA/xUAOv9SDHX/sAyq/+Yck//sWXn/86WV//nn0P8="),
+"data": PackedByteArray("AAAA/wAADP8AABX/AAAm/xUANP8mDET/OgxR/1QMXv9tFWj/exVj/4kVWf+XHEv/pBw6/7IhIf+/PyH/zWMm/9WLLv/YsD3/29BL/8/eWf+84Gf/ruN0/6Pmg/+d6ZD/nuui/6vuu/+58dH/x/Pi/9X27//j+fn/8Pr7//////8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 8
+"width": 32
 }
 
-[sub_resource type="Image" id="Image_h6ckk"]
+[sub_resource type="Image" id="Image_diqjr"]
 data = {
-"data": PackedByteArray("AAAA/wAcOv8xJoT/cC6w/7U6vv/qY7D/+KKv//vZ0v8="),
+"data": PackedByteArray("AAAA/wAAAP8ADBX/ABUm/wAcN/8VHEv/ISFb/zQhZv9GJm3/WSZw/20qcP9+Km7/jjFn/543YP+rP1b/tUtN/7xYRP+/Zz//wXY//8GFQv/Bk0b/wKFN/72vUv+4vV3/r81q/6Tbgv+d5qD/ou6//7Pz2v/L9+3/5vr4//////8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 8
+"width": 32
 }
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_d3byi"]
@@ -571,15 +573,17 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
+steps = 32
 palette_type = 1
 dither_spread = 0.01158
-hue_start = 235.0
-hue_range = 180.0
+hue_start = 213.0
+hue_range = 360.0
 lightness_floor = 0.0
-hsl_saturation = 0.8
+lightness_ceiling = 1.0
+saturation = 0.67
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_d3byi")
-palette_preview_oklch = SubResource("Image_h6ckk")
+palette_preview_hsl = SubResource("Image_dpfs0")
+palette_preview_oklch = SubResource("Image_diqjr")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -1414,7 +1418,7 @@ stretch_shrink = 3
 [node name="MainSubVIewPort" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(384, 216)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Env" type="WorldEnvironment" parent="Control/SubViewportContainer/MainSubVIewPort"]
 environment = SubResource("Environment_oqg80")
@@ -1495,6 +1499,8 @@ heightfield_mask = 1048567
 
 [node name="DataManager" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort" node_paths=PackedStringArray("_env")]
 script = ExtResource("37_duxdj")
+_image_before_linear = ExtResource("37_osprd")
+_images_after_linear = [ExtResource("38_dpfs0"), ExtResource("39_diqjr")]
 _digitImage09 = ExtResource("38_py68e")
 _characterImageAZ = ExtResource("39_l7jgw")
 _digitScale = 1
@@ -1507,10 +1513,9 @@ _gridLines_Y = 8
 _graphRes = 512
 _pointRadius = 3
 _env = NodePath("../Env")
-_palettePlotType = 2
-_palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])
-_raw_image_path = "res://_BA_/PostImages/_data_raw"
-_delta_tex = ExtResource("42_d3byi")
+_palettes = Array[Texture2D]([ExtResource("39_d3byi"), ExtResource("41_3stlt")])
+_path_to_raw_image_linear_data = "res://_BA_/PostImages/_data_raw"
+_delta_texture_linear = ExtResource("44_dpfs0")
 
 [node name="ScreenshotUtil" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort"]
 script = ExtResource("42_lxdsv")
@@ -1518,8 +1523,6 @@ _viewportSceenshotPath = "res://_BA_/Screenshots/"
 
 [node name="SanityCheck" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort"]
 script = ExtResource("42_804ie")
-colorSRGB_0 = Color(0.8235294, 0.078431375, 0.078431375, 1)
-colorSRGB_1 = Color(0.39215687, 0.19607843, 0.078431375, 1)
 
 [node name="ReflectionViewport" type="SubViewport" parent="."]
 
