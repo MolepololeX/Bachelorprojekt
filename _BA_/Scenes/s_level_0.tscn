@@ -23,7 +23,6 @@
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="25_d7lxg"]
 [ext_resource type="PackedScene" uid="uid://cw6s8r7vkg73m" path="res://Assets/Meshes/pond_floor_hp.glb" id="26_ay53u"]
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="27_6yxrc"]
-[ext_resource type="Texture2D" uid="uid://daivcb3lt8e0u" path="res://_before.png" id="27_folns"]
 [ext_resource type="Material" uid="uid://cp7iai08xfa03" path="res://Assets/Materials/Foliage/sm_grass_light.tres" id="28_u1c6q"]
 [ext_resource type="Material" uid="uid://67fuhybtuskr" path="res://Assets/Materials/Foliage/sm_grass_dark.tres" id="29_cms6a"]
 [ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/m_outline_post.tres" id="30_l7jgw"]
@@ -33,20 +32,18 @@
 [ext_resource type="Texture2D" uid="uid://djx0rsbayemo4" path="res://Assets/Textures/Procedural/t_cloud_shadow_noise.tres" id="35_v6liu"]
 [ext_resource type="Material" uid="uid://bfyloeklnnt1v" path="res://Assets/Materials/sm_rain_distorted.tres" id="36_lxfnq"]
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="37_duxdj"]
-[ext_resource type="Texture2D" uid="uid://cq7pjcog0i7j4" path="res://_BA_/PostImages/_data_raw_lin.png" id="37_osprd"]
+[ext_resource type="Texture2D" uid="uid://nkjx0otis35c" path="res://_BA_/PostImages/_data_raw_lin.png" id="37_osprd"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="38_0qx0j"]
-[ext_resource type="Texture2D" uid="uid://b40x6ybodbgjr" path="res://_BA_/PostImages/TestScene_srgb_colorImage_lin.png" id="38_dpfs0"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="38_py68e"]
 [ext_resource type="Texture2D" uid="uid://ck11e1xvurj8x" path="res://_BA_/Palettes/TestScene_OKHSL.png" id="39_d3byi"]
-[ext_resource type="Texture2D" uid="uid://bikglhsiyljfg" path="res://_BA_/PostImages/TestScene_oklab_colorImage_lin.png" id="39_diqjr"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Texture2D" uid="uid://cnj6ycbliwndg" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
+[ext_resource type="Texture2D" uid="uid://b0ykco7blfs7h" path="res://_BA_/PostImages/TestScene_oklab_oklab_d_C_lin.png" id="41_d3byi"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
 [ext_resource type="Script" uid="uid://dqijqq8tvjlqp" path="res://_BA_/Scripts/ScreenshotUtil.cs" id="42_lxdsv"]
-[ext_resource type="Texture2D" uid="uid://gmgjndwk343o" path="res://_BA_/PostImages/TestScene_oklab_oklab_d_L_lin.png" id="44_dpfs0"]
 [ext_resource type="AudioStream" uid="uid://chtuk5bdfro7m" path="res://Assets/Sounds/midnight-sound-effect-199863.mp3" id="49_ow6iq"]
 [ext_resource type="Script" uid="uid://cchta2hcc0oal" path="res://Scripts/Audio/AudioFade.cs" id="50_77m7r"]
 [ext_resource type="Script" uid="uid://6ykryce01m1j" path="res://Scripts/Testing/DayNightToggler.cs" id="56_5s3d3"]
@@ -544,10 +541,10 @@ tonemapper_mode = 2
 tonemapper_exposure = 1.2
 capture_frame_delay = 500
 resize_image = true
-raw_texture = ExtResource("27_folns")
+raw_texture = ExtResource("37_osprd")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_dpfs0"]
+[sub_resource type="Image" id="Image_folns"]
 data = {
 "data": PackedByteArray("AAAA/wAADP8AABX/AAAm/xUANP8mDET/OgxR/1QMXv9tFWj/exVj/4kVWf+XHEv/pBw6/7IhIf+/PyH/zWMm/9WLLv/YsD3/29BL/8/eWf+84Gf/ruN0/6Pmg/+d6ZD/nuui/6vuu/+58dH/x/Pi/9X27//j+fn/8Pr7//////8="),
 "format": "RGBA8",
@@ -556,7 +553,7 @@ data = {
 "width": 32
 }
 
-[sub_resource type="Image" id="Image_diqjr"]
+[sub_resource type="Image" id="Image_lxdsv"]
 data = {
 "data": PackedByteArray("AAAA/wAAAP8ADBX/ABUm/wAcN/8VHEv/ISFb/zQhZv9GJm3/WSZw/20qcP9+Km7/jjFn/543YP+rP1b/tUtN/7xYRP+/Zz//wXY//8GFQv/Bk0b/wKFN/72vUv+4vV3/r81q/6Tbgv+d5qD/ou6//7Pz2v/L9+3/5vr4//////8="),
 "format": "RGBA8",
@@ -582,8 +579,8 @@ lightness_floor = 0.0
 lightness_ceiling = 1.0
 saturation = 0.67
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_dpfs0")
-palette_preview_oklch = SubResource("Image_diqjr")
+palette_preview_hsl = SubResource("Image_folns")
+palette_preview_oklch = SubResource("Image_lxdsv")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -659,6 +656,15 @@ billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_sit86"]
 material = SubResource("StandardMaterial3D_oqg80")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h6ckk"]
+load_path = "res://.godot/imported/_data_raw_lin.png-c5c7c55b88e44f4ba011a1b02a185627.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_osprd"]
+load_path = "res://.godot/imported/TestScene_srgb_colorImage_lin.png-37a2c6f11beab93c599e9babb4fabafa.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpfs0"]
+load_path = "res://.godot/imported/TestScene_oklab_colorImage_lin.png-69ba5eaf51cb6092cbfb1d95fec03c10.s3tc.ctex"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wmlk7"]
 frequency = 0.1
@@ -1499,8 +1505,8 @@ heightfield_mask = 1048567
 
 [node name="DataManager" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort" node_paths=PackedStringArray("_env")]
 script = ExtResource("37_duxdj")
-_image_before_linear = ExtResource("37_osprd")
-_images_after_linear = [ExtResource("38_dpfs0"), ExtResource("39_diqjr")]
+_image_before_linear = SubResource("CompressedTexture2D_h6ckk")
+_images_after_linear = [SubResource("CompressedTexture2D_osprd"), SubResource("CompressedTexture2D_dpfs0")]
 _digitImage09 = ExtResource("38_py68e")
 _characterImageAZ = ExtResource("39_l7jgw")
 _digitScale = 1
@@ -1515,7 +1521,8 @@ _pointRadius = 3
 _env = NodePath("../Env")
 _palettes = Array[Texture2D]([ExtResource("39_d3byi"), ExtResource("41_3stlt")])
 _path_to_raw_image_linear_data = "res://_BA_/PostImages/_data_raw"
-_delta_texture_linear = ExtResource("44_dpfs0")
+_delta_texture_linear = ExtResource("41_d3byi")
+_drawTonemapperReference = true
 
 [node name="ScreenshotUtil" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort"]
 script = ExtResource("42_lxdsv")
