@@ -91,6 +91,7 @@ namespace BA
 		[ExportGroup("Tonemapping")]
 		[Export] private string _path_to_raw_image_linear_data;
 		[Export] private Texture2D _delta_texture_linear;
+		[Export(PropertyHint.None, "if true will plot by cie lightness, otherwise plots by oklab lightness")] private bool _plot_by_cie_L = false;
 		[Export] private bool _generate_percentile_data = true;
 		[ExportToolButton("Plot Test Delta")] public Callable PlotTestDelta => Callable.From(GenTestDeltaGraph);
 		[Export] private bool _drawTonemapperReference = false;
@@ -298,11 +299,12 @@ namespace BA
 				2,
 				-1.0f,
 				1.0f,
-				_drawTonemapperReference
+				_drawTonemapperReference,
+				_plot_by_cie_L
 				);
 		}
 
-		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop, bool drawTonemapperReference = false)
+		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop, bool drawTonemapperReference = false, bool plotByCieL = false)
 		{
 			if (deltaMask == null)
 			{
@@ -360,8 +362,18 @@ namespace BA
 
 
 					Color rawColor = original_raw_image.GetPixel(x, y);
-					Lab rawLab = linear_srgb_to_oklab(new RGB { r = rawColor.R, g = rawColor.G, b = rawColor.B });
-					float L = rawLab.L;
+					Lab rawLab;
+					float L;
+					if (plotByCieL)
+					{
+						rawLab = linear_srgb_to_cielab(new RGB { r = rawColor.R, g = rawColor.G, b = rawColor.B });
+						L = rawLab.L / 100.0f;
+					}
+					else
+					{
+						rawLab = linear_srgb_to_oklab(new RGB { r = rawColor.R, g = rawColor.G, b = rawColor.B });
+						L = rawLab.L;
+					}
 
 
 					// bring L from 0..inf to 0..1
@@ -559,7 +571,7 @@ namespace BA
 			delta_mask_name = "Palette_" + delta_mask_name;
 			string path = "res://_BA_/_Messdaten_/Tonemapping/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + delta_mask_name + "_" + "_plot_" + ".txt";
 			var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-			if(file == null)
+			if (file == null)
 			{
 				GD.PushWarning("Could not open file for writing percentile data at: " + path);
 				return;

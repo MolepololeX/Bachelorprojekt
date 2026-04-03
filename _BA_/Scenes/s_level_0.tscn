@@ -40,7 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Texture2D" uid="uid://cnj6ycbliwndg" path="res://_BA_/Palettes/TestScene_HSL.png" id="41_3stlt"]
-[ext_resource type="Texture2D" uid="uid://b0ykco7blfs7h" path="res://_BA_/PostImages/TestScene_oklab_oklab_d_C_lin.png" id="41_d3byi"]
+[ext_resource type="Texture2D" uid="uid://crvrr7g7m7r3o" path="res://_BA_/PostImages/TestScene_srgb_cie_d_L_lin.png" id="41_d3byi"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
 [ext_resource type="Script" uid="uid://dqijqq8tvjlqp" path="res://_BA_/Scripts/ScreenshotUtil.cs" id="42_lxdsv"]
@@ -544,7 +544,7 @@ resize_image = true
 raw_texture = ExtResource("37_osprd")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_folns"]
+[sub_resource type="Image" id="Image_d3byi"]
 data = {
 "data": PackedByteArray("AAAA/wAADP8AABX/AAAm/xUANP8mDET/OgxR/1QMXv9tFWj/exVj/4kVWf+XHEv/pBw6/7IhIf+/PyH/zWMm/9WLLv/YsD3/29BL/8/eWf+84Gf/ruN0/6Pmg/+d6ZD/nuui/6vuu/+58dH/x/Pi/9X27//j+fn/8Pr7//////8="),
 "format": "RGBA8",
@@ -553,7 +553,7 @@ data = {
 "width": 32
 }
 
-[sub_resource type="Image" id="Image_lxdsv"]
+[sub_resource type="Image" id="Image_h6ckk"]
 data = {
 "data": PackedByteArray("AAAA/wAAAP8ADBX/ABUm/wAcN/8VHEv/ISFb/zQhZv9GJm3/WSZw/20qcP9+Km7/jjFn/543YP+rP1b/tUtN/7xYRP+/Zz//wXY//8GFQv/Bk0b/wKFN/72vUv+4vV3/r81q/6Tbgv+d5qD/ou6//7Pz2v/L9+3/5vr4//////8="),
 "format": "RGBA8",
@@ -579,8 +579,8 @@ lightness_floor = 0.0
 lightness_ceiling = 1.0
 saturation = 0.67
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_folns")
-palette_preview_oklch = SubResource("Image_lxdsv")
+palette_preview_hsl = SubResource("Image_d3byi")
+palette_preview_oklch = SubResource("Image_h6ckk")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -1522,6 +1522,7 @@ _env = NodePath("../Env")
 _palettes = Array[Texture2D]([ExtResource("39_d3byi"), ExtResource("41_3stlt")])
 _path_to_raw_image_linear_data = "res://_BA_/PostImages/_data_raw"
 _delta_texture_linear = ExtResource("41_d3byi")
+_plot_by_cie_L = true
 _drawTonemapperReference = true
 
 [node name="ScreenshotUtil" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort"]
