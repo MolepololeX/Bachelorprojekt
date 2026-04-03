@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Godot;
 using static BA.ColorHelper;
 
@@ -92,6 +91,7 @@ namespace BA
 		[ExportGroup("Tonemapping")]
 		[Export] private string _path_to_raw_image_linear_data;
 		[Export] private Texture2D _delta_texture_linear;
+		[Export] private bool _generate_percentile_data = true;
 		[ExportToolButton("Plot Test Delta")] public Callable PlotTestDelta => Callable.From(GenTestDeltaGraph);
 		[Export] private bool _drawTonemapperReference = false;
 		[Export] private float _tonemapperReferenceExposure = 1.2f;
@@ -263,8 +263,6 @@ namespace BA
 			GD.Print(graph.SavePng(imagePath));
 		}
 
-
-
 		private void GenTestDeltaGraph()
 		{
 			if (_delta_texture_linear == null)
@@ -313,6 +311,14 @@ namespace BA
 			}
 			var img = deltaMask.GetImage();
 			img.Decompress();
+
+
+			if (_generate_percentile_data)
+			{
+				GeneratePercentiles(img, deltaMask.ResourcePath);
+			}
+
+
 			int M = img.GetWidth();
 			int N = img.GetHeight();
 
@@ -488,55 +494,81 @@ namespace BA
 			}
 		}
 
-		public override void _Process(double delta)
-		{
-		}
-
-
-		public void Calculate_All_Percentile(Image img)
-		{
-			Calculate_Percentile(img, 0.01f);
-			Calculate_Percentile(img, 0.1f);
-			Calculate_Percentile(img, 0.5f);
-			Calculate_Percentile(img, 0.9f);
-			Calculate_Percentile(img, 0.99f);
-			Calculate_Percentile(img, 0.999f);
-		}
-
-
-		public void Calculate_Percentile(Image img, float p)
+		public void GeneratePercentiles(Image img, string imgResourcePath)
 		{
 			int M = img.GetWidth();
 			int N = img.GetHeight();
 
-			float[] data_R = new float[M * N];
-			float[] data_G = new float[M * N];
-			float[] data_B = new float[M * N];
+			float[] data_delta = new float[M * N];
 
 			for (int x = 0; x < M; x++)
 			{
 				for (int y = 0; y < N; y++)
 				{
-					data_R[x * N + y] = img.GetPixel(x, y).R;
-					data_G[x * N + y] = img.GetPixel(x, y).G;
-					data_B[x * N + y] = img.GetPixel(x, y).B;
-					// data[x + y + (M * N)] = -img.GetPixel(x, y).B;
-					//g channel is unused
+					data_delta[x * N + y] = img.GetPixel(x, y).B - img.GetPixel(x, y).R;
 				}
 			}
 
-			Array.Sort(data_R);
-			Array.Sort(data_G);
-			Array.Sort(data_B);
+			Array.Sort(data_delta);
 
-			double percentile_R = data_R[(int)Math.Round(data_R.Length * p)];
-			double percentile_G = data_G[(int)Math.Round(data_G.Length * p)];
-			double percentile_B = data_B[(int)Math.Round(data_B.Length * p)];
+			string data_string = "";
 
-			GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile R: " + percentile_R);
-			// GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile G: " + percentile_G);
-			GD.Print("Image " + (int)Math.Round(p * 100.0) + "th Percentile B: " + percentile_B);
+			float min = data_delta[0];
+			data_string += "Minimum:	" + min + "\n";
+
+			float max = data_delta[data_delta.Length - 1];
+			data_string += "Maximum:	" + max + "\n";
+
+			double average = 0.0;
+			for (int i = 0; i < data_delta.Length; i++)
+			{
+				average += data_delta[i];
+			}
+			average /= data_delta.Length;
+			data_string += "Average:	" + average + "\n";
+
+			float p_001 = CalculatePercentile(data_delta, 0.001f);
+			data_string += "0.1 %:	" + p_001 + "\n";
+
+			float p_010 = CalculatePercentile(data_delta, 0.01f);
+			data_string += "1 %:		" + p_010 + "\n";
+
+			float p_100 = CalculatePercentile(data_delta, 0.1f);
+			data_string += "10 %:		" + p_100 + "\n";
+
+			float p_median = CalculatePercentile(data_delta, 0.5f);
+			data_string += "Median:	" + p_median + "\n";
+
+			float p_900 = CalculatePercentile(data_delta, 0.9f);
+			data_string += "90%:		" + p_900 + "\n";
+
+			float p_990 = CalculatePercentile(data_delta, 0.99f);
+			data_string += "99%:		" + p_990 + "\n";
+
+			float p_999 = CalculatePercentile(data_delta, 0.999f);
+			data_string += "99.9%:	" + p_999 + "\n";
+
+			float CalculatePercentile(float[] data, float p)
+			{
+				return data[(int)Math.Round(data.Length * p)];
+			}
+
+			string delta_mask_name = "";
+			delta_mask_name = imgResourcePath.Substring(imgResourcePath.LastIndexOf("/") + 1);
+			delta_mask_name = delta_mask_name.Remove(delta_mask_name.LastIndexOf("."));
+			delta_mask_name = "Palette_" + delta_mask_name;
+			string path = "res://_BA_/_Messdaten_/Tonemapping/" + Time.GetDatetimeStringFromSystem().Replace(":", "_").Replace("T", "__") + "__" + delta_mask_name + "_" + "_plot_" + ".txt";
+			var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+			if(file == null)
+			{
+				GD.PushWarning("Could not open file for writing percentile data at: " + path);
+				return;
+			}
+			file.StoreString(data_string);
+			file.Close();
+			GD.Print("Saving percentile data to: " + path);
 		}
+
 
 		public void Test_CalcD65()
 		{
@@ -555,35 +587,6 @@ namespace BA
 			GD.Print("y: " + y);
 		}
 
-
-
-		public void Calculate_Average()
-		{
-			var img = GetViewport().GetTexture().GetImage();
-			int M = img.GetWidth();
-			int N = img.GetHeight();
-
-			double total_R = 0.0;
-			double total_G = 0.0;
-			double total_B = 0.0;
-			for (int x = 0; x < M; x++)
-			{
-				for (int y = 0; y < N; y++)
-				{
-					total_R += img.GetPixel(x, y).R;
-					total_G += img.GetPixel(x, y).G;
-					total_B += img.GetPixel(x, y).B;
-				}
-			}
-			double average_R = total_R / (M * N);
-			double average_G = total_G / (M * N);
-			double average_B = total_B / (M * N);
-			GD.Print("Image Average R: " + average_R);
-			// GD.Print("Image Average G: " + average_G);
-			GD.Print("Image Average B: " + average_B);
-		}
-
-
 		public void Calculate_SSIM()
 		{
 			foreach (Texture2D after in _images_after_linear)
@@ -596,7 +599,6 @@ namespace BA
 			}
 		}
 
-		//nutzt rgb 0...255
 		private SSIM Get_SSIM(Texture2D beforeTex, Texture2D afterTex)
 		{
 			Image before = beforeTex.GetImage();
