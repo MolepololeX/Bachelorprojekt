@@ -7,7 +7,7 @@ layout(set = 0, binding = 0, std430) readonly buffer Params {
 	float base_exposure;
 	float tonemapper_mode;
 	float tonemapper_exposure;
-	// float tonemapper_saturation;
+	float tonemapper_saturation;
 	float draw_mode;
 } params;
 
@@ -765,8 +765,8 @@ void main() {
 		vec3 lab = linear_srgb_to_oklab(color.xyz);
 
 		float L = lab.x;
-		// float C = length(lab.yz);
-		// float h = atan(lab.z, lab.y);
+		float C = length(lab.yz);
+		float h = atan(lab.z, lab.y);
 
 		L = tonemap(L);
 		// L = L / (1.0 + L);
@@ -774,11 +774,11 @@ void main() {
 		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably, would need correct gamut mapping
 		// C *= (L / max(lab.x, 1e-5));
 		// better scaling
-		// C *= (-exp(params.tonemapper_saturation * L - params.tonemapper_saturation) + 1);
+		C *= (-exp(params.tonemapper_saturation * L - params.tonemapper_saturation) + 1);
 
 		lab.x = L;
-		// lab.y = C * cos(h);
-		// lab.z = C * sin(h);
+		lab.y = C * cos(h);
+		lab.z = C * sin(h);
 
 		color = vec4(oklab_to_linear_srgb(lab), 1.0);
 

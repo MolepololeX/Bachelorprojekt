@@ -1,11 +1,10 @@
-[gd_scene load_steps=50 format=3 uid="uid://bck3bskcnoh8q"]
+[gd_scene load_steps=49 format=3 uid="uid://bck3bskcnoh8q"]
 
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="1_xmvkv"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="2_1nhdg"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="3_yhjoh"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="4_1nhdg"]
 [ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://_BA_/Scripts/GenerateColorGrid.cs" id="4_gwmet"]
-[ext_resource type="Texture2D" uid="uid://dfps58dy8vwb0" path="res://color_palette_oklab.png" id="5_adlj3"]
 
 [sub_resource type="Environment" id="Environment_duult"]
 background_mode = 1
@@ -21,6 +20,21 @@ glow_hdr_luminance_cap = 52.49
 volumetric_fog_density = 0.0049
 volumetric_fog_emission = Color(1, 1, 1, 1)
 volumetric_fog_emission_energy = 0.1
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_hijju"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("3_yhjoh")
+live_reload = true
+bloom_threshold = 0.9
+bloom_strength = 0.5
+blurr_kernelsize = 5
+draw_mode = 2
+metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_rgddx"]
 resource_local_to_scene = false
@@ -38,22 +52,7 @@ tonemapper_exposure = 1.2
 capture_frame_delay = 300
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_hijju"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("3_yhjoh")
-live_reload = true
-bloom_threshold = 0.9
-bloom_strength = 0.5
-blurr_kernelsize = 5
-draw_mode = 2
-metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
-
-[sub_resource type="Image" id="Image_1nhdg"]
+[sub_resource type="Image" id="Image_xmvkv"]
 data = {
 "data": PackedByteArray(33, 12, 12, 255, 58, 21, 12, 255, 77, 38, 21, 255, 99, 55, 28, 255, 118, 79, 38, 255, 140, 104, 46, 255, 160, 133, 52, 255, 180, 165, 58, 255, 194, 194, 73, 255, 187, 201, 93, 255, 184, 208, 114, 255, 184, 214, 134, 255, 188, 221, 155, 255, 195, 228, 175, 255, 205, 235, 196, 255, 219, 241, 216, 255),
 "format": "RGBA8",
@@ -62,7 +61,7 @@ data = {
 "width": 16
 }
 
-[sub_resource type="Image" id="Image_yhjoh"]
+[sub_resource type="Image" id="Image_1nhdg"]
 data = {
 "data": PackedByteArray(33, 12, 12, 255, 55, 21, 28, 255, 73, 28, 33, 255, 91, 42, 42, 255, 107, 55, 46, 255, 122, 68, 52, 255, 137, 82, 55, 255, 150, 97, 63, 255, 161, 112, 73, 255, 173, 129, 81, 255, 183, 145, 91, 255, 193, 162, 104, 255, 202, 180, 120, 255, 210, 197, 138, 255, 217, 214, 161, 255, 226, 230, 190, 255),
 "format": "RGBA8",
@@ -82,12 +81,12 @@ script = ExtResource("4_1nhdg")
 steps = 16
 palette_type = 1
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_1nhdg")
-palette_preview_oklch = SubResource("Image_yhjoh")
+palette_preview_hsl = SubResource("Image_xmvkv")
+palette_preview_oklch = SubResource("Image_1nhdg")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_hijju"), SubResource("CompositorEffect_yhjoh")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_hijju"), SubResource("CompositorEffect_rgddx"), SubResource("CompositorEffect_yhjoh")])
 
 [sub_resource type="SphereMesh" id="SphereMesh_ovrgn"]
 
@@ -226,7 +225,6 @@ size = Vector2(0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fb7it"]
 shading_mode = 0
-albedo_texture = ExtResource("5_adlj3")
 texture_filter = 0
 
 [node name="TonemappingTest0" type="Node3D"]

@@ -32,7 +32,7 @@ enum DrawMode{
 @export_range(0.0, 10.0, 0.05) var base_exposure : float = 1.0
 @export var tonemapper_mode : TonemapperMode = TonemapperMode.linear
 @export_range(0.0, 10.0, 0.05) var tonemapper_exposure : float = 1.5
-#@export_range(0.0, 10.0, 0.05) var tonemapper_saturation : float = 3
+@export_range(0.0, 10.0, 0.05) var tonemapper_saturation : float = 3
 @export var draw_mode : DrawMode = DrawMode.colorImage
 
 @export_group("Post Measurements")
@@ -330,7 +330,7 @@ func _render_callback(_p_effect_callback_type, p_render_data):
 		# Get the RID for our color image, we will be reading from and writing to it.
 		var input_image : RID = render_scene_buffers.get_color_layer(view)
 		
-		var parameters := PackedFloat32Array([base_exposure, tonemapper_mode, tonemapper_exposure, draw_mode])
+		var parameters := PackedFloat32Array([base_exposure, tonemapper_mode, tonemapper_exposure, tonemapper_saturation, draw_mode])
 		var parameter_data := parameters.to_byte_array()
 		rd.buffer_update(parameter_storage_buffer, 0, parameter_data.size(), parameter_data)
 		
