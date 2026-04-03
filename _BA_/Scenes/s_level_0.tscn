@@ -666,7 +666,7 @@ noise = SubResource("FastNoiseLite_wmlk7")
 seamless = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lxdsv"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("ReflectionViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_roplx"]
 resource_local_to_scene = true
@@ -1411,28 +1411,25 @@ offset_bottom = 648.0
 stretch = true
 stretch_shrink = 3
 
-[node name="SubViewport2" type="SubViewport" parent="Control/SubViewportContainer"]
+[node name="MainSubVIewPort" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(384, 216)
 render_target_update_mode = 4
 
-[node name="SanityCheck" type="Node" parent="Control/SubViewportContainer/SubViewport2"]
-script = ExtResource("42_804ie")
-
-[node name="Env" type="WorldEnvironment" parent="Control/SubViewportContainer/SubViewport2"]
+[node name="Env" type="WorldEnvironment" parent="Control/SubViewportContainer/MainSubVIewPort"]
 environment = SubResource("Environment_oqg80")
 compositor = SubResource("Compositor_jqdjy")
 
-[node name="CameraRig" type="Node3D" parent="Control/SubViewportContainer/SubViewport2"]
+[node name="CameraRig" type="Node3D" parent="Control/SubViewportContainer/MainSubVIewPort"]
 
-[node name="MainCamera" type="Camera3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+[node name="MainCamera" type="Camera3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig"]
 transform = Transform3D(0.9954502, -0.003547246, 0.09521741, -0.0011474328, 0.9987881, 0.049204867, -0.09527654, -0.049090248, 0.99423975, 0.9121766, 1.7517893, 18.586367)
 current = true
 fov = 35.5
 size = 10.0
 far = 1000.0
 
-[node name="POSTFX" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/MainCamera"]
+[node name="POSTFX" type="MeshInstance3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig/MainCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.8303528, -0.55723804, 0, 0.55723804, 0.8303528, -4.193416, 0.7713766, -28.380829)
 visible = false
 cast_shadow = 0
@@ -1441,7 +1438,7 @@ mesh = SubResource("QuadMesh_r60an")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("30_l7jgw")
 
-[node name="CloudShadows" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+[node name="CloudShadows" type="MeshInstance3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.91362, 14.314774, 5.2585087)
 visible = false
 layers = 2
@@ -1449,7 +1446,7 @@ transparency = 0.4
 mesh = SubResource("PlaneMesh_lcmyg")
 skeleton = NodePath("../../../../../Level/TempRoot")
 
-[node name="CloudShadowsNight" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+[node name="CloudShadowsNight" type="MeshInstance3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig"]
 transform = Transform3D(-5.27973, 8.742278e-08, 0, -4.615686e-07, -1, 0, 0, 0, 5.36713, 6.9461555, 14.228361, 5.2018223)
 visible = false
 layers = 2
@@ -1457,16 +1454,16 @@ transparency = 0.4
 mesh = SubResource("PlaneMesh_sit86")
 skeleton = NodePath("../../../../../Level/TempRoot")
 
-[node name="stars" type="MeshInstance3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+[node name="stars" type="MeshInstance3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig"]
 transform = Transform3D(125.34625, 0, 0, 0, 52.07966, -0.8531864, 0, 85.18639, 0.52160496, 0, 19.110115, 0)
 visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_8qg5c")
 surface_material_override/0 = SubResource("ShaderMaterial_2xp7q")
 
-[node name="Rain" type="Node3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig"]
+[node name="Rain" type="Node3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig"]
 
-[node name="raindrops" type="GPUParticles3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Rain"]
+[node name="raindrops" type="GPUParticles3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig/Rain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 layers = 4
 amount = 5000
@@ -1481,7 +1478,7 @@ trail_lifetime = 0.15000000000000002
 process_material = SubResource("ParticleProcessMaterial_oqg80")
 draw_pass_1 = SubResource("RibbonTrailMesh_oqg80")
 
-[node name="Splashes" type="GPUParticles3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Rain"]
+[node name="Splashes" type="GPUParticles3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig/Rain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 emitting = false
 amount = 12000
@@ -1492,11 +1489,11 @@ visibility_aabb = AABB(-30, -30, -30, 60, 60, 60)
 process_material = SubResource("ParticleProcessMaterial_tgo4h")
 draw_pass_1 = SubResource("QuadMesh_sit86")
 
-[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="Control/SubViewportContainer/SubViewport2/CameraRig/Rain"]
+[node name="GPUParticlesCollisionHeightField3D" type="GPUParticlesCollisionHeightField3D" parent="Control/SubViewportContainer/MainSubVIewPort/CameraRig/Rain"]
 size = Vector3(20, 20, 20)
 heightfield_mask = 1048567
 
-[node name="SSIM&Percentile Calculator" type="Node" parent="Control/SubViewportContainer/SubViewport2" node_paths=PackedStringArray("_env")]
+[node name="DataManager" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort" node_paths=PackedStringArray("_env")]
 script = ExtResource("37_duxdj")
 _digitImage09 = ExtResource("38_py68e")
 _characterImageAZ = ExtResource("39_l7jgw")
@@ -1515,22 +1512,27 @@ _palettes = Array[Texture2D]([ExtResource("41_3stlt"), ExtResource("38_rxqsg")])
 _raw_image_path = "res://_BA_/PostImages/_data_raw"
 _delta_tex = ExtResource("42_d3byi")
 
-[node name="ScreenshotUtil" type="Node" parent="Control/SubViewportContainer/SubViewport2"]
+[node name="ScreenshotUtil" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort"]
 script = ExtResource("42_lxdsv")
 _viewportSceenshotPath = "res://_BA_/Screenshots/"
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SanityCheck" type="Node" parent="Control/SubViewportContainer/MainSubVIewPort"]
+script = ExtResource("42_804ie")
+colorSRGB_0 = Color(0.8235294, 0.078431375, 0.078431375, 1)
+colorSRGB_1 = Color(0.39215687, 0.19607843, 0.078431375, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
+[node name="ReflectionViewport" type="SubViewport" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ReflectionViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45869026, 20)
 mesh = SubResource("PlaneMesh_xxtuw")
 skeleton = NodePath("../../Level/TempRoot/pond_floor_hp")
 
-[node name="Area3D" type="Area3D" parent="SubViewport/MeshInstance3D"]
+[node name="Area3D" type="Area3D" parent="ReflectionViewport/MeshInstance3D"]
 collision_layer = 32
 collision_mask = 32
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/MeshInstance3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReflectionViewport/MeshInstance3D/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06768802, 0)
 shape = SubResource("BoxShape3D_ey2wc")
 
@@ -1543,15 +1545,15 @@ _fadeInScale = 5.0
 
 [node name="DayNightToggler" type="Node" parent="." node_paths=PackedStringArray("_dayObjects", "_nightObjects", "_rainObjects", "_clearSkyObjects", "_worldEnvironment")]
 script = ExtResource("56_5s3d3")
-_dayObjects = [NodePath("../Lighting/Daylight"), NodePath("../Lighting/DaylightShadows"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadows")]
-_nightObjects = [NodePath("../Lighting/NightShadows"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadowsNight"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/stars")]
-_rainObjects = [NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/Rain")]
-_clearSkyObjects = [NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadowsNight"), NodePath("../Control/SubViewportContainer/SubViewport2/CameraRig/CloudShadows")]
+_dayObjects = [NodePath("../Lighting/Daylight"), NodePath("../Lighting/DaylightShadows"), NodePath("../Control/SubViewportContainer/MainSubVIewPort/CameraRig/CloudShadows")]
+_nightObjects = [NodePath("../Lighting/NightShadows"), NodePath("../Control/SubViewportContainer/MainSubVIewPort/CameraRig/CloudShadowsNight"), NodePath("../Control/SubViewportContainer/MainSubVIewPort/CameraRig/stars")]
+_rainObjects = [NodePath("../Control/SubViewportContainer/MainSubVIewPort/CameraRig/Rain")]
+_clearSkyObjects = [NodePath("../Control/SubViewportContainer/MainSubVIewPort/CameraRig/CloudShadowsNight"), NodePath("../Control/SubViewportContainer/MainSubVIewPort/CameraRig/CloudShadows")]
 _nightSkyColor = Color(0.050980393, 0.07450981, 0.14117648, 1)
 _daySkyColor = Color(0.15294118, 0.4392157, 0.74509805, 1)
 _nightAmbientColor = Color(0.14117648, 0.18431373, 0.30588236, 1)
 _dayAmbientColor = Color(0.20784314, 0.2627451, 0.41960785, 1)
-_worldEnvironment = NodePath("../Control/SubViewportContainer/SubViewport2/Env")
+_worldEnvironment = NodePath("../Control/SubViewportContainer/MainSubVIewPort/Env")
 
 [editable path="Level/Env/Floor/pond_floor"]
 [editable path="Level/Env/WindEffect"]

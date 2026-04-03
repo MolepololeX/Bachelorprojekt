@@ -5,6 +5,7 @@ using static BA.ColorHelper;
 
 namespace BA
 {
+    //used for debugging cie functions
     [Tool]
     public partial class SanityChecker : Node
     {
@@ -14,8 +15,8 @@ namespace BA
 
         public void SanityCheck()
         {
-            var image = GetViewport().GetTexture().GetImage();
-            image.SavePng("res://comp.png");
+            // var image = GetViewport().GetTexture().GetImage();
+            // image.SavePng("res://comp.png");
 
 
             Color lin_c0 = colorSRGB_0.SrgbToLinear();
@@ -80,8 +81,8 @@ namespace BA
             // }
 
             // GD.Print("Delta Hue: " + d_h);
-            GD.Print(Math.PI);
-            GD.Print(Math.PI * 2.0);
+            // GD.Print(Math.PI);
+            // GD.Print(Math.PI * 2.0);
         }
     }
 }
