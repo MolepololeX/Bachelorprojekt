@@ -774,7 +774,9 @@ void main() {
 		// scale chroma slightly by new/old L to avoid clipping out of valid OKLAB or sRGB Chroma, will still happen but reduces it noticably, would need correct gamut mapping
 		// C *= (L / max(lab.x, 1e-5));
 		// better scaling
-		C *= (-exp(params.tonemapper_saturation * L - params.tonemapper_saturation) + 1);
+		if(params.tonemapper_saturation >= 0.0000001){
+			C *= (-exp(params.tonemapper_saturation * L - params.tonemapper_saturation) + 1);
+		}
 
 		lab.x = L;
 		lab.y = C * cos(h);

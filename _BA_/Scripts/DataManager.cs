@@ -94,6 +94,7 @@ namespace BA
 		[Export(PropertyHint.None, "if true will plot by cie lightness, otherwise plots by oklab lightness")] private bool _plot_by_cie_L = false;
 		[Export] private bool _generate_percentile_data = true;
 		[ExportToolButton("Plot Test Delta")] public Callable PlotTestDelta => Callable.From(GenTestDeltaGraph);
+		[ExportToolButton("Auto Name Graph")] public Callable AutoNameGraph => Callable.From(AutoGenDeltaGraph);
 		[Export] private bool _drawTonemapperReference = false;
 		[Export] private float _tonemapperReferenceExposure = 1.2f;
 		[Export] private int _referenceLineWidth = 1;
@@ -264,6 +265,84 @@ namespace BA
 			GD.Print(graph.SavePng(imagePath));
 		}
 
+
+		private void AutoGenDeltaGraph()
+		{
+			if (_delta_texture_linear == null)
+			{
+				GD.PushWarning("Missing delta image...");
+				return;
+			}
+			var size_ref = _delta_texture_linear.GetImage();
+			var size = size_ref.GetSize();
+
+			var data_file = FileAccess.Open(_path_to_raw_image_linear_data, FileAccess.ModeFlags.Read);
+			if (data_file == null)
+			{
+				GD.PushError("Failed to open raw image data file\nPlease verify path: " + _path_to_raw_image_linear_data);
+				return;
+			}
+			var raw_image = Image.CreateFromData(
+				size.X,
+				size.Y,
+				false,
+				Image.Format.Rgbah,
+				data_file.GetBuffer((long)data_file.GetLength()));
+			data_file.Close();
+
+			//scuffed
+			string maskName = _delta_texture_linear.ResourcePath;
+			char[] maskNameChars = maskName.ToCharArray();
+			string deltaType = "" + maskNameChars[maskName.LastIndexOf("_") - 1];
+			string measurementName = "";
+			string xLabel = "";
+			bool plotCieL = false;
+			float yMin = -1.0f;
+			float yMax = 1.0f;
+			bool plotTMO = false;
+			int decimalsY = 2;
+			if (maskName.Contains("cie"))
+			{
+				measurementName = "cie delta";
+				xLabel = "original cie l";
+				plotCieL = true;
+			}
+			else
+			{
+				measurementName = "oklab delta";
+				xLabel = "original oklab l";
+				plotCieL = false;
+			}
+			string yLabel = measurementName + " " + deltaType;
+
+			if(deltaType.ToLower() == "h")
+			{
+				yMin = 180.0f;
+				yMax = -180.0f;
+				decimalsY = 0;
+			}
+			if(deltaType.ToLower() == "l")
+			{
+				plotTMO = true;
+			}
+
+
+			GenDeltaGraph(
+				raw_image,
+				_delta_texture_linear,
+				xLabel,
+				1,
+				0.0f,
+				3.0f,
+				yLabel,
+				decimalsY,
+				yMin,
+				yMax,
+				plotTMO,
+				plotCieL
+				);
+		}
+
 		private void GenTestDeltaGraph()
 		{
 			if (_delta_texture_linear == null)
@@ -291,11 +370,11 @@ namespace BA
 			GenDeltaGraph(
 				raw_image,
 				_delta_texture_linear,
-				"original oklab L",
+				_labelX,
 				1,
 				0.0f,
 				3.0f,
-				"delta something",
+				_labelY,
 				2,
 				-1.0f,
 				1.0f,
