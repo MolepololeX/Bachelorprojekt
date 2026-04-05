@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://ba60303q6ii63"]
+[gd_scene load_steps=127 format=4 uid="uid://ba60303q6ii63"]
 
 [ext_resource type="PackedScene" uid="uid://bwic0egi0ejsk" path="res://Scenes/Environment/s_floor_tile.tscn" id="5_l7jgw"]
 [ext_resource type="PackedScene" uid="uid://b24shvq54jb53" path="res://Assets/Meshes/pond_floor.glb" id="6_3stlt"]
@@ -23,6 +23,7 @@
 [ext_resource type="Material" uid="uid://be2na1k0jan5" path="res://Assets/Materials/Foliage/sm_grass_tall.tres" id="25_d7lxg"]
 [ext_resource type="PackedScene" uid="uid://cw6s8r7vkg73m" path="res://Assets/Meshes/pond_floor_hp.glb" id="26_ay53u"]
 [ext_resource type="Material" uid="uid://bpxoi7sm5me1b" path="res://Assets/Materials/Foliage/sm_grass.tres" id="27_6yxrc"]
+[ext_resource type="Texture2D" path="res://_BA_/PostImages/data_raw_lin.png" id="27_qrvq0"]
 [ext_resource type="Material" uid="uid://cp7iai08xfa03" path="res://Assets/Materials/Foliage/sm_grass_light.tres" id="28_u1c6q"]
 [ext_resource type="Material" uid="uid://67fuhybtuskr" path="res://Assets/Materials/Foliage/sm_grass_dark.tres" id="29_cms6a"]
 [ext_resource type="Material" uid="uid://drr87bgyumilw" path="res://Assets/Materials/PostFX/m_outline_post.tres" id="30_l7jgw"]
@@ -35,7 +36,7 @@
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="38_0qx0j"]
 [ext_resource type="PackedScene" uid="uid://nnq1o5exa8xr" path="res://_BA_/Helpers/screenshot_util.tscn" id="38_346y0"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="38_py68e"]
-[ext_resource type="Texture2D" uid="uid://cphindcyk0dia" path="res://_BA_/PostImages/Campfire/TestScene_oklab_cie_d_L_lin.png" id="38_qrvq0"]
+[ext_resource type="Texture2D" uid="uid://cqdod5b12edtc" path="res://_BA_/PostImages/FPSDemo/Level_srgb_oklab_d_L_lin.png" id="39_folns"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
@@ -537,6 +538,7 @@ live_reload = true
 tonemapper_mode = 2
 enable_concurrent_capture = true
 capture_frame_delay = 500
+raw_texture = ExtResource("27_qrvq0")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Image" id="Image_folns"]
@@ -1513,9 +1515,8 @@ _graphRes = 512
 _pointRadius = 3
 _env = NodePath("../Env")
 _palettes = Array[Texture2D]([])
-_path_to_raw_image_linear_data = "res://_BA_/PostImages/data_raw"
-_delta_texture_linear = ExtResource("38_qrvq0")
-_generate_percentile_data = false
+_path_to_raw_image_linear_data = "res://_BA_/PostImages/FPSDemo/data_raw"
+_delta_texture_linear = ExtResource("39_folns")
 _tonemapperReferenceExposure = 1.25
 
 [node name="ScreenshotUtil" parent="Control/SubViewportContainer/MainSubVIewPort" instance=ExtResource("38_346y0")]
