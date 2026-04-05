@@ -31,7 +31,7 @@ enum DrawMode{
 @export_group("Uniforms")
 @export_range(0.0, 10.0, 0.05) var base_exposure : float = 1.0
 @export var tonemapper_mode : TonemapperMode = TonemapperMode.linear
-@export_range(0.0, 10.0, 0.05) var tonemapper_exposure : float = 1.5
+@export_range(0.0, 10.0, 0.05) var tonemapper_exposure : float = 1.25
 @export_range(0.0, 10.0, 0.05) var tonemapper_saturation : float = 3
 @export var draw_mode : DrawMode = DrawMode.colorImage
 
@@ -135,7 +135,7 @@ func _generate_post_image( local_shader : RID, local_pipeline : RID, local_rd : 
 	var tex_in : RID = local_rd.texture_create(format, RDTextureView.new(), [raw_image.get_data()])
 	var dummy_tex : RID =  local_rd.texture_create(format, RDTextureView.new(), [raw_image.get_data()])
 	
-	var parameters := PackedFloat32Array([base_exposure, tm_mode, tonemapper_exposure, dr_mode])
+	var parameters := PackedFloat32Array([base_exposure, tm_mode, tonemapper_exposure, tonemapper_saturation, dr_mode])
 	var parameter_data := parameters.to_byte_array()
 	var param_storage_buffer = local_rd.storage_buffer_create(parameter_data.size(), parameter_data)
 	var uniform_parameter := RDUniform.new()

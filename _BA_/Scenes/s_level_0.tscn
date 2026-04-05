@@ -534,7 +534,6 @@ needs_normal_roughness = false
 script = ExtResource("39_ko7dv")
 live_reload = true
 tonemapper_mode = 2
-tonemapper_exposure = 1.25
 capture_frame_delay = 500
 raw_texture = ExtResource("27_qrvq0")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
@@ -1416,7 +1415,7 @@ stretch_shrink = 3
 [node name="MainSubVIewPort" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(384, 216)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Env" type="WorldEnvironment" parent="Control/SubViewportContainer/MainSubVIewPort"]
 environment = SubResource("Environment_oqg80")
