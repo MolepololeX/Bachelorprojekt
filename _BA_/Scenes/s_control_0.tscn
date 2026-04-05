@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="2_1nhdg"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="2_5oo5g"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="3_2ullf"]
-[ext_resource type="Texture2D" uid="uid://dprpnpm88gdue" path="res://_BA_/PostImages/ControlScene/data_raw_lin.png" id="3_gwmet"]
+[ext_resource type="Texture2D" uid="uid://cvt62hljvosk0" path="res://_BA_/PostImages/ControlScene/data_raw_lin.png" id="3_gwmet"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="3_yhjoh"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="4_1nhdg"]
 [ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://_BA_/Scripts/GenerateColorGrid.cs" id="4_gwmet"]
-[ext_resource type="Texture2D" uid="uid://mpuud157y6ti" path="res://_BA_/PostImages/ControlScene/TonemappingTest0_srgb_oklab_d_h_lin.png" id="4_ny24a"]
+[ext_resource type="Texture2D" uid="uid://rowtu7by682m" path="res://_BA_/PostImages/ControlScene/TonemappingTest0_srgb_oklab_d_h_lin.png" id="4_ny24a"]
 [ext_resource type="PackedScene" uid="uid://nnq1o5exa8xr" path="res://_BA_/Helpers/screenshot_util.tscn" id="6_1nhdg"]
 
 [sub_resource type="Environment" id="Environment_duult"]
@@ -51,15 +51,13 @@ needs_normal_roughness = false
 script = ExtResource("2_1nhdg")
 enable_draw = true
 reload_interval_frames = 30
-tonemapper_mode = 1
-tonemapper_exposure = 1.25
-draw_mode = 2
+tonemapper_mode = 2
 capture_frame_delay = 300
 images_path = "res://_BA_/PostImages/ControlScene/"
 raw_texture = ExtResource("3_gwmet")
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_hnhh7"]
+[sub_resource type="Image" id="Image_5oo5g"]
 data = {
 "data": PackedByteArray(33, 12, 12, 255, 58, 21, 12, 255, 77, 38, 21, 255, 99, 55, 28, 255, 118, 79, 38, 255, 140, 104, 46, 255, 160, 133, 52, 255, 180, 165, 58, 255, 194, 194, 73, 255, 187, 201, 93, 255, 184, 208, 114, 255, 184, 214, 134, 255, 188, 221, 155, 255, 195, 228, 175, 255, 205, 235, 196, 255, 219, 241, 216, 255),
 "format": "RGBA8",
@@ -68,7 +66,7 @@ data = {
 "width": 16
 }
 
-[sub_resource type="Image" id="Image_u787i"]
+[sub_resource type="Image" id="Image_2ullf"]
 data = {
 "data": PackedByteArray(33, 12, 12, 255, 55, 21, 28, 255, 73, 28, 33, 255, 91, 42, 42, 255, 107, 55, 46, 255, 122, 68, 52, 255, 137, 82, 55, 255, 150, 97, 63, 255, 161, 112, 73, 255, 173, 129, 81, 255, 183, 145, 91, 255, 193, 162, 104, 255, 202, 180, 120, 255, 210, 197, 138, 255, 217, 214, 161, 255, 226, 230, 190, 255),
 "format": "RGBA8",
@@ -88,8 +86,8 @@ script = ExtResource("4_1nhdg")
 steps = 16
 palette_type = 1
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_hnhh7")
-palette_preview_oklch = SubResource("Image_u787i")
+palette_preview_hsl = SubResource("Image_5oo5g")
+palette_preview_oklch = SubResource("Image_2ullf")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_bmgda"]
@@ -256,7 +254,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(1152, 648)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -2.9802319e-08, 1, 0, -1, -2.9802319e-08, 6.35, 4, 6.35)
