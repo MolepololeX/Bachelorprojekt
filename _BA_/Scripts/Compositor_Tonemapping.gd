@@ -112,7 +112,7 @@ func _generate_post_image( local_shader : RID, local_pipeline : RID, local_rd : 
 	###----------------------reconstruct image from raw data----------------------------------------
 	var raw_image = raw_texture.get_image()
 	var size = raw_image.get_size()
-	var raw_path = images_path + "/" + "_" + raw_texture_data_name
+	var raw_path = images_path + "/" + raw_texture_data_name
 	var data_file = FileAccess.open(raw_path, FileAccess.READ)
 	if data_file == null:
 		push_error("Failed to open raw image data file\nPlease verify path: " + images_path + "/" + raw_texture_data_name)
@@ -313,7 +313,7 @@ func _render_callback(_p_effect_callback_type, p_render_data):
 				Image.FORMAT_RGBAH,
 				texData 
 				)
-			var path = images_path + "/" + "_" + raw_texture_data_name
+			var path = images_path + "/" + raw_texture_data_name
 			var file = FileAccess.open(path, FileAccess.WRITE)
 			if file == null:
 				push_error("Failed to open file: " + images_path + "/" + raw_texture_data_name)
