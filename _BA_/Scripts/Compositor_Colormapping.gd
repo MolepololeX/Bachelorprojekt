@@ -26,7 +26,7 @@ var reload_interval_frames : int = 60
 @export_range(0, 128, 1) var steps : int = 8
 @export var palette_type : PaletteType = PaletteType.HSL
 @export var quantization_type : QuantizationType = QuantizationType.oklab_L
-@export_range(0.0, 0.3, 0.00001) var dither_spread : float = 0.05
+@export_range(0.0, 0.1, 0.00001) var dither_spread : float = 0.05
 
 @export_group("Palettes")
 @export_range(0.0, 360.0, 0.1) var hue_start : float = 0.0
@@ -34,6 +34,7 @@ var reload_interval_frames : int = 60
 @export_range(0.0, 1.0, 0.01) var lightness_floor : float = 0.1
 @export_range(0.0, 1.0, 0.01) var lightness_ceiling : float = 0.9
 @export_range(0.0, 1.0, 0.01) var saturation : float = 0.5
+@export_range(0.0, 360.0, 0.01) var okhsl_hue_offset : float = 25
 #@export_range(0.0, 0.3, 0.001) var oklch_chroma : float = 0.1
 #@export_range(0.0, 360.0, 0.1) var oklch_hue_offset : float = 0.0
 @export var auto_create_palette : bool = false
@@ -183,7 +184,7 @@ func _create_palettes() -> void:
 		hsl.x = H
 		hsl.y = S
 		hsl.z = L
-		var c = _hsl_to_rgb(hsl)# dooes not output linear rgb!!!
+		var c = _hsl_to_rgb(hsl)
 		
 		col.r = c.x
 		col.g = c.y
@@ -194,7 +195,7 @@ func _create_palettes() -> void:
 		image_hsl.set_pixel(i, 0, col)
 	
 	for i in range(steps) :
-		var col := Color.WHITE
+		#var col := Color.WHITE
 		
 		#var h := (((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0)) + (oklch_hue_offset / 360.0)) * 6.28318530718 #transform to radiants since oklab hue is -3.14...3.14
 		#var C := oklch_chroma
@@ -210,7 +211,7 @@ func _create_palettes() -> void:
 		#col.g = c.y
 		#col.b = c.z
 		
-		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0))# needs fract()
+		var H := ((float(i) / float(steps)) * (hue_range / 360.0) + (hue_start / 360.0) + (okhsl_hue_offset / 360.0))# needs fract()
 		var okhsl := Color.from_ok_hsl(H, saturation, L)
 		okhsl = okhsl.srgb_to_linear()
 		
@@ -290,7 +291,7 @@ func _init_shader() -> void:
 
 
 	# Called by the rendering thread every frame.
-func _render_callback(p_effect_callback_type, p_render_data):
+func _render_callback(_p_effect_callback_type, p_render_data):
 	if(auto_create_palette):
 		_create_palettes()
 	

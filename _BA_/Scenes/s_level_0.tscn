@@ -533,13 +533,13 @@ needs_normal_roughness = false
 script = ExtResource("39_ko7dv")
 enable_draw = true
 live_reload = true
-tonemapper_mode = 2
+tonemapper_mode = 1
 capture_frame_delay = 500
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Image" id="Image_346y0"]
 data = {
-"data": PackedByteArray("AAAA/wAADP8AABX/AAAm/xUANP8mDET/OgxR/1QMXv9tFWj/exVj/4kVWf+XHEv/pBw6/7IhIf+/PyH/zWMm/9WLLv/YsD3/29BL/8/eWf+84Gf/ruN0/6Pmg/+d6ZD/nuui/6vuu/+58dH/x/Pi/9X27//j+fn/8Pr7//////8="),
+"data": PackedByteArray("AAAA/wAMDP8AFRz/ABwq/wAcOv8AHEn/ABxY/wAVZ/8MDHX/HAyF/y4Mk/9GDKL/YQyx/38MwP+hFc7/xRXd/+Yc5v/nLtD/6T2+/+tNr//sW6T/7mqc/+95l//xiJX/85eX//Wvpf/2xbT/+NfD//nm0v/78eD//fnv//////8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
@@ -548,7 +548,7 @@ data = {
 
 [sub_resource type="Image" id="Image_qrvq0"]
 data = {
-"data": PackedByteArray("AAAA/wAAAP8ADBX/ABUm/wAcN/8VHEv/ISFb/zQhZv9GJm3/WSZw/20qcP9+Km7/jjFn/543YP+rP1b/tUtN/7xYRP+/Zz//wXY//8GFQv/Bk0b/wKFN/72vUv+4vV3/r81q/6Tbgv+d5qD/ou6//7Pz2v/L9+3/5vr4//////8="),
+"data": PackedByteArray("AAAA/wAAAP8ADAz/ABUh/wAcLv8AJj//ACpS/wwuaP8hMX7/MS6S/0Yuof9ZMav/bTGz/4Ext/+VNLn/qDS5/7s3tf/NP6//3Ean/+hUn//uZpf/83iT//WJkv/1mJX/9qib//i1of/6wqv/+9C2//vcxP/86NT//fTn//////8="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
@@ -563,14 +563,16 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
+enable_draw = true
 steps = 32
 palette_type = 1
-dither_spread = 0.01158
-hue_start = 213.0
-hue_range = 360.0
+dither_spread = 0.00124
+hue_start = 180.0
+hue_range = 240.0
 lightness_floor = 0.0
 lightness_ceiling = 1.0
-saturation = 0.67
+saturation = 0.8
+okhsl_hue_offset = 30.0
 auto_create_palette = true
 palette_preview_hsl = SubResource("Image_346y0")
 palette_preview_oklch = SubResource("Image_qrvq0")

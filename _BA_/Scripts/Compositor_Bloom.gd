@@ -184,7 +184,7 @@ func _get_sampler_uniform(image : RID, binding : int = 0) -> RDUniform:
 
 
 # Called by the rendering thread every frame., partially from Godot Documentation
-func _render_callback(p_effect_callback_type, p_render_data):
+func _render_callback(_p_effect_callback_type, p_render_data):
 	
 	if not enable_draw:
 		return
