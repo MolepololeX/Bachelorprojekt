@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3dg6bbfx4q6"
-path="res://.godot/imported/TestScene_OKHSL.png-f1ceb0c22fd46726bdb9882d2dc31a84.ctex"
+uid="uid://dxrn1yutsfh64"
+path="res://.godot/imported/Bistro_OKHSL.png-bc4748ba71b4f821c396ffaf464c8268.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_BA_/Palettes/TestScene_OKHSL.png"
-dest_files=["res://.godot/imported/TestScene_OKHSL.png-f1ceb0c22fd46726bdb9882d2dc31a84.ctex"]
+source_file="res://_BA_/Palettes/Bistro_OKHSL.png"
+dest_files=["res://.godot/imported/Bistro_OKHSL.png-bc4748ba71b4f821c396ffaf464c8268.ctex"]
 
 [params]
 

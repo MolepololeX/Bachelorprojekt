@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1xf113872y5s"
-path="res://.godot/imported/TestScene_HSL.png-1b0fe71ef1dffa6d4fe0974aaf481896.ctex"
+path="res://.godot/imported/TestScene_HSL.png-8b84aa1982fedf27348b95aee8ce5c4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_BA_/Palettes/Campfire/TestScene_HSL.png"
-dest_files=["res://.godot/imported/TestScene_HSL.png-1b0fe71ef1dffa6d4fe0974aaf481896.ctex"]
+source_file="res://_BA_/Palettes/TestScene_HSL.png"
+dest_files=["res://.godot/imported/TestScene_HSL.png-8b84aa1982fedf27348b95aee8ce5c4d.ctex"]
 
 [params]
 

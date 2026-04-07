@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3dg6bbfx4q6"
-path="res://.godot/imported/TestScene_OKHSL.png-f1ceb0c22fd46726bdb9882d2dc31a84.ctex"
+uid="uid://dqs7xeco2ifwk"
+path="res://.godot/imported/fps_hsl.png-189a9b1cc954cd932c6fbb6fa84af277.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_BA_/Palettes/TestScene_OKHSL.png"
-dest_files=["res://.godot/imported/TestScene_OKHSL.png-f1ceb0c22fd46726bdb9882d2dc31a84.ctex"]
+source_file="res://_BA_/PostImages/PaletteSwaps/fps_hsl.png"
+dest_files=["res://.godot/imported/fps_hsl.png-189a9b1cc954cd932c6fbb6fa84af277.ctex"]
 
 [params]
 

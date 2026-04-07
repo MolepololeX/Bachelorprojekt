@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3dg6bbfx4q6"
-path="res://.godot/imported/TestScene_OKHSL.png-f1ceb0c22fd46726bdb9882d2dc31a84.ctex"
+uid="uid://bid7ne5cnxy0"
+path="res://.godot/imported/desert_hsl.png-7a2d99e8ffaf865e6dc02c8130bcf497.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_BA_/Palettes/TestScene_OKHSL.png"
-dest_files=["res://.godot/imported/TestScene_OKHSL.png-f1ceb0c22fd46726bdb9882d2dc31a84.ctex"]
+source_file="res://_BA_/PostImages/PaletteSwaps/desert_hsl.png"
+dest_files=["res://.godot/imported/desert_hsl.png-7a2d99e8ffaf865e6dc02c8130bcf497.ctex"]
 
 [params]
 
