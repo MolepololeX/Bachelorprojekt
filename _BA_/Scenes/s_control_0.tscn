@@ -1,14 +1,14 @@
-[gd_scene load_steps=54 format=3 uid="uid://bck3bskcnoh8q"]
+[gd_scene load_steps=54 format=4 uid="uid://bck3bskcnoh8q"]
 
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="1_xmvkv"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="2_1nhdg"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="2_5oo5g"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="3_2ullf"]
-[ext_resource type="Texture2D" uid="uid://cvt62hljvosk0" path="res://_BA_/PostImages/ControlScene/data_raw_lin.png" id="3_gwmet"]
+[ext_resource type="Texture2D" uid="uid://dprpnpm88gdue" path="res://_BA_/PostImages/ControlScene/data_raw_lin.png" id="3_gwmet"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="3_yhjoh"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="4_1nhdg"]
 [ext_resource type="Script" uid="uid://bajkybusb3gg0" path="res://_BA_/Scripts/GenerateColorGrid.cs" id="4_gwmet"]
-[ext_resource type="Texture2D" uid="uid://rowtu7by682m" path="res://_BA_/PostImages/ControlScene/TonemappingTest0_srgb_oklab_d_h_lin.png" id="4_ny24a"]
+[ext_resource type="Texture2D" uid="uid://d1ekbfjf68r8n" path="res://_BA_/PostImages/ControlScene/TonemappingTest0_srgb_oklab_d_h_lin.png" id="4_ny24a"]
 [ext_resource type="PackedScene" uid="uid://nnq1o5exa8xr" path="res://_BA_/Helpers/screenshot_util.tscn" id="6_1nhdg"]
 
 [sub_resource type="Environment" id="Environment_duult"]
@@ -34,11 +34,12 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("3_yhjoh")
+enable_draw = true
 live_reload = true
 bloom_threshold = 0.65
 bloom_weight = 3.0
 blurr_passes = 0
-draw_mode = 3
+draw_mode = 2
 metadata/_custom_type_script = "uid://bwkfhdgbjsh2i"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_rgddx"]
@@ -49,7 +50,6 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("2_1nhdg")
-enable_draw = true
 reload_interval_frames = 30
 tonemapper_mode = 2
 capture_frame_delay = 300
@@ -59,20 +59,20 @@ metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
 [sub_resource type="Image" id="Image_5oo5g"]
 data = {
-"data": PackedByteArray(33, 12, 12, 255, 58, 21, 12, 255, 77, 38, 21, 255, 99, 55, 28, 255, 118, 79, 38, 255, 140, 104, 46, 255, 160, 133, 52, 255, 180, 165, 58, 255, 194, 194, 73, 255, 187, 201, 93, 255, 184, 208, 114, 255, 184, 214, 134, 255, 188, 221, 155, 255, 195, 228, 175, 255, 205, 235, 196, 255, 219, 241, 216, 255),
+"data": PackedByteArray("AAAA/wAAAP8AAAz/AAwM/wAMHP8ADCH/ABUq/wAVMf8ADDf/AAw9/wAMRP8MAE3/DABU/xwMW/8mDGH/MQxo/z8McP9NDHj/XQx+/20Mhv99DI3/jwyU/5sVkv+iFY3/qRWF/7AVfP+3FXL/vxVn/8UcW//NHE3/1Bw//9scLv/fISH/4Doq/+FRMf/iZzf/43w9/+SQRP/lok3/5rRU/+fEW//o02H/6eFo/+bqcP/d63j/1Ox+/83thv/H7o3/wu+U/73wm/+78aL/ufKp/7nzsP+59Lf/v/XC/8X2zf/N99f/1Pjg/9v56P/i+u//6fv1//D8+f/3/fz//////w=="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 16
+"width": 64
 }
 
 [sub_resource type="Image" id="Image_2ullf"]
 data = {
-"data": PackedByteArray(33, 12, 12, 255, 55, 21, 28, 255, 73, 28, 33, 255, 91, 42, 42, 255, 107, 55, 46, 255, 122, 68, 52, 255, 137, 82, 55, 255, 150, 97, 63, 255, 161, 112, 73, 255, 173, 129, 81, 255, 183, 145, 91, 255, 193, 162, 104, 255, 202, 180, 120, 255, 210, 197, 138, 255, 217, 214, 161, 255, 226, 230, 190, 255),
+"data": PackedByteArray("AAAA/wAAAP8AAAD/AAAM/wAMFf8ADBz/ABUh/wAVLv8AHDf/ABxC/wwcTf8VHFb/HBxg/yocZ/8xHG3/PRxy/0YhdP9PIXb/WSF4/2Mhef9tIXj/diF2/4EhdP+KIXD/kiZt/5omZ/+hKmP/qS5d/7AxVv+2N1H/uz1L/79ERP/CTT3/xFY3/8VeNP/FZzH/xW8x/8V2Mf/FfjT/xYY0/8SON//ElTr/w5w6/8KjPf/Aqj//vbJE/7q5Rv+1wUv/sMlR/6jRWf+f2Wb/l+B2/4/miP+M65v/jO+t/5Hzv/+a9c7/pvfb/7X45v/F+e//1fr1/+X7+v/x/P3//////w=="),
 "format": "RGBA8",
 "height": 1,
 "mipmaps": false,
-"width": 16
+"width": 64
 }
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_yhjoh"]
@@ -83,8 +83,14 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("4_1nhdg")
-steps = 16
+steps = 64
 palette_type = 1
+dither_spread = 0.00311
+hue_start = 180.0
+hue_range = 360.0
+lightness_floor = 0.0
+lightness_ceiling = 1.0
+saturation = 0.75
 auto_create_palette = true
 palette_preview_hsl = SubResource("Image_5oo5g")
 palette_preview_oklch = SubResource("Image_2ullf")
@@ -254,7 +260,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(1152, 648)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -2.9802319e-08, 1, 0, -1, -2.9802319e-08, 6.35, 4, 6.35)

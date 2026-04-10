@@ -34,9 +34,9 @@
 [ext_resource type="Script" uid="uid://itlrkdv8urox" path="res://_BA_/Scripts/DataManager.cs" id="37_duxdj"]
 [ext_resource type="Script" uid="uid://bwkfhdgbjsh2i" path="res://_BA_/Scripts/Compositor_Bloom.gd" id="38_0qx0j"]
 [ext_resource type="PackedScene" uid="uid://nnq1o5exa8xr" path="res://_BA_/Helpers/screenshot_util.tscn" id="38_346y0"]
-[ext_resource type="Texture2D" uid="uid://b2p03ubnoeqaj" path="res://_BA_/Palettes/FPSLevel_HSL.png" id="38_lxdsv"]
+[ext_resource type="Texture2D" uid="uid://bhwom85dweo2k" path="res://_BA_/Palettes/Bistro_HSL.png" id="38_lxdsv"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="38_py68e"]
-[ext_resource type="Texture2D" uid="uid://bknwrbut0s6dl" path="res://_BA_/Palettes/FPSLevel_OKHSL.png" id="39_d3byi"]
+[ext_resource type="Texture2D" uid="uid://dxrn1yutsfh64" path="res://_BA_/Palettes/Bistro_OKHSL.png" id="39_d3byi"]
 [ext_resource type="Texture2D" uid="uid://cqdod5b12edtc" path="res://_BA_/PostImages/FPSDemo/Level_srgb_oklab_d_L_lin.png" id="39_folns"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
@@ -566,6 +566,7 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("40_tn4cv")
+enable_draw = true
 steps = 32
 palette_type = 1
 dither_spread = 0.00124
