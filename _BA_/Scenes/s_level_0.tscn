@@ -540,7 +540,7 @@ tonemapper_mode = 2
 capture_frame_delay = 500
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_h6ckk"]
+[sub_resource type="Image" id="Image_lxdsv"]
 data = {
 "data": PackedByteArray("AAAA/wAMDP8AFRz/ABwq/wAcOv8AHEn/ABxY/wAVZ/8MDHX/HAyF/y4Mk/9GDKL/YQyx/38MwP+hFc7/xRXd/+Yc5v/nLtD/6T2+/+tNr//sW6T/7mqc/+95l//xiJX/85eX//Wvpf/2xbT/+NfD//nm0v/78eD//fnv//////8="),
 "format": "RGBA8",
@@ -549,7 +549,7 @@ data = {
 "width": 32
 }
 
-[sub_resource type="Image" id="Image_osprd"]
+[sub_resource type="Image" id="Image_d3byi"]
 data = {
 "data": PackedByteArray("AAAA/wAAAP8ADAz/ABUh/wAcLv8AJj//ACpS/wwuaP8hMX7/MS6S/0Yuof9ZMav/bTGz/4Ext/+VNLn/qDS5/7s3tf/NP6//3Ean/+hUn//uZpf/83iT//WJkv/1mJX/9qib//i1of/6wqv/+9C2//vcxP/86NT//fTn//////8="),
 "format": "RGBA8",
@@ -576,8 +576,8 @@ lightness_floor = 0.0
 lightness_ceiling = 1.0
 saturation = 0.8
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_h6ckk")
-palette_preview_oklch = SubResource("Image_osprd")
+palette_preview_hsl = SubResource("Image_lxdsv")
+palette_preview_oklch = SubResource("Image_d3byi")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]

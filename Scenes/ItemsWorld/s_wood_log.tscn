@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1qdxfmogmenf"]
+[gd_scene load_steps=5 format=3 uid="uid://c1qdxfmogmenf"]
 
 [ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_pep2k"]
-[ext_resource type="PackedScene" uid="uid://dxvfkk0ujo78v" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/gltf/Wood_Log_A.gltf" id="2_iyu6f"]
 [ext_resource type="PackedScene" uid="uid://c50fjp1r550mr" path="res://Scenes/Clutter/s_clutter_wood_log.tscn" id="3_5tbjp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
@@ -26,10 +25,7 @@ shape = SubResource("CapsuleShape3D_iyu6f")
 [node name="Model" parent="RigidBody3D" index="2"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Wood_Log_A2" parent="RigidBody3D/Model" index="0" instance=ExtResource("2_iyu6f")]
-visible = false
-
-[node name="WoodLog" parent="RigidBody3D/Model" index="1" instance=ExtResource("3_5tbjp")]
+[node name="WoodLog" parent="RigidBody3D/Model" index="0" instance=ExtResource("3_5tbjp")]
 
 [node name="MeshInstance3D" parent="RigidBody3D/Model/WoodLog" index="0"]
 cast_shadow = 0
