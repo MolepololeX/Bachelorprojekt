@@ -59,6 +59,9 @@ namespace BA
 						B = colRGB.b
 					};
 
+					h = j / (float)_hueSteps;
+					matColor = Color.FromHsv(h, 1.0f, 1.0f);
+
 					mat.AlbedoColor = matColor;
 					mat.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
 					mesh.SetSurfaceOverrideMaterial(0, mat);
