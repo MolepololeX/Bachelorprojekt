@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="AlchemyGame"
+config/name="Bachelorprojekt"
 run/main_scene="uid://ba60303q6ii63"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 
