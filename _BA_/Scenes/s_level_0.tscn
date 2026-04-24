@@ -575,6 +575,7 @@ hue_range = 240.0
 lightness_floor = 0.0
 lightness_ceiling = 1.0
 saturation = 0.8
+auto_create_palette = true
 palette_preview_hsl = SubResource("Image_lxdsv")
 palette_preview_oklch = SubResource("Image_d3byi")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
