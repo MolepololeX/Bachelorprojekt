@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://bk2n3p7qb518k"]
+
+[sub_resource type="Curve" id="Curve_31ao3"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.18611987, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bn6be"]
+curve = SubResource("Curve_31ao3")
+
+[sub_resource type="Gradient" id="Gradient_31ao3"]
+offsets = PackedFloat32Array(0, 0.13745704, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bn6be"]
+gradient = SubResource("Gradient_31ao3")
+
+[sub_resource type="Curve" id="Curve_bn6be"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 68.73419), 161.09651, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7pvd7"]
+curve = SubResource("Curve_bn6be")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_31ao3"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 5, 5)
+spread = 10.0
+gravity = Vector3(10, 0, 0)
+tangential_accel_min = -5.000002
+tangential_accel_max = 4.9999976
+damping_min = 1.0
+damping_max = 1.0
+damping_curve = SubResource("CurveTexture_7pvd7")
+color = Color(1, 1, 1, 0.05882353)
+color_ramp = SubResource("GradientTexture1D_bn6be")
+alpha_curve = SubResource("CurveTexture_bn6be")
+turbulence_noise_scale = 10.0
+turbulence_influence_min = 0.010000001
+turbulence_influence_max = 0.010000001
+
+[sub_resource type="Curve" id="Curve_7pvd7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.38541663, 0.5273651), 0.0, 0.0, 0, 0, Vector2(0.53541666, 0.45621574), 0.0, 0.0, 0, 0, Vector2(0.6875, 0.5172009), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_31ao3"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_keep_scale = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_bn6be"]
+material = SubResource("StandardMaterial3D_31ao3")
+size = 0.25
+sections = 16
+section_segments = 1
+curve = SubResource("Curve_7pvd7")
+
+[node name="WindEffect" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.011431664, -0.9999347, 0, 0.9999347, -0.011431664, 0, 0, 0)
+cast_shadow = 0
+lifetime = 5.0
+preprocess = 2.0
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_31ao3")
+draw_pass_1 = SubResource("RibbonTrailMesh_bn6be")

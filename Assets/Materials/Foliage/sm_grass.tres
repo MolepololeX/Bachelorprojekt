@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bpxoi7sm5me1b"]
+
+[ext_resource type="Shader" uid="uid://dsy06qqcvu1c2" path="res://Assets/Shaders/sh_grass_billboard.gdshader" id="1_klg18"]
+[ext_resource type="Texture2D" uid="uid://b1ktcl0fvtf7w" path="res://Assets/Textures/t_grass_quad.png" id="2_0mxab"]
+[ext_resource type="Texture2D" uid="uid://dd0qlknpe4lbr" path="res://Assets/Textures/Procedural/t_grass_noise.tres" id="3_325gy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_klg18")
+shader_parameter/color = Color(0.41568628, 0.6, 0.30588236, 1)
+shader_parameter/color2 = Color(0.41568628, 0.6, 0.30588236, 1)
+shader_parameter/grassTexture = ExtResource("2_0mxab")
+shader_parameter/noise = ExtResource("3_325gy")
+shader_parameter/timeScale = 0.0
+shader_parameter/maxAngle = 1.0
+shader_parameter/directionBias = 0.0
+shader_parameter/highLightNoise = ExtResource("3_325gy")
+shader_parameter/highlightScale = Vector2(3, 1)
+shader_parameter/highlightThreshold = 0.0
+shader_parameter/highlightTimeScale = 0.0
+shader_parameter/highlightStep = 0.35
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/use_attenuation = true

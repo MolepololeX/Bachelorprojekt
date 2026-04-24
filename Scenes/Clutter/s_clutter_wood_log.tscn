@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c50fjp1r550mr"]
+
+[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/Toon/sm_toon_bark.tres" id="1_7wrq2"]
+[ext_resource type="Material" uid="uid://ctcn2okmh8ool" path="res://Assets/Materials/Toon/sm_toon_wood.tres" id="2_rbbde"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ukpke"]
+material = ExtResource("1_7wrq2")
+radial_segments = 6
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tuwnr"]
+material = ExtResource("2_rbbde")
+radial_segments = 6
+rings = 0
+
+[node name="WoodLog" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.54999995, 0, 0, 0, -3.1997736e-08, -0.54999995, 0, 0.7320229, -2.4041261e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ukpke")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.42897728, 0, 0, 0, -3.351468e-08, -0.42897728, 0, 0.76672655, -1.8751193e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_tuwnr")

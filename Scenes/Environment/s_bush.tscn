@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck6qon7rivb6u"]
+
+[ext_resource type="PackedScene" uid="uid://cvsqh6pw8i0n7" path="res://Scenes/Environment/s_leaf_bushel.tscn" id="1_83xaj"]
+
+[node name="Bush" type="Node3D"]
+
+[node name="LeafBushel" parent="." instance=ExtResource("1_83xaj")]

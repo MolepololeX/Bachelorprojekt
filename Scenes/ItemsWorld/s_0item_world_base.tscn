@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dap3lhtvaqmm0"]
+
+[ext_resource type="Script" uid="uid://b1mbkal63yt36" path="res://Scripts/Items/WorldItem.cs" id="1_qd48u"]
+[ext_resource type="PackedScene" uid="uid://6whst0kphmpv" path="res://Scenes/VFX/s_poof_effect_small.tscn" id="2_o4v1a"]
+[ext_resource type="PackedScene" uid="uid://b5und13f1wc7f" path="res://Scenes/VFX/s_poof_effect_small_continous.tscn" id="3_6wsj1"]
+[ext_resource type="AudioStream" uid="uid://b7d2qmvmf11i0" path="res://Assets/Sounds/Bubble 1.wav" id="3_u77vp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tchc3"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_28aqb"]
+
+[node name="WorldItem" type="Node3D" node_paths=PackedStringArray("area", "rb", "model", "pickupSound", "_speedParticles")]
+script = ExtResource("1_qd48u")
+area = NodePath("RigidBody3D/Area3D")
+rb = NodePath("RigidBody3D")
+model = NodePath("RigidBody3D/Model")
+pickupEffect = ExtResource("2_o4v1a")
+spawnEffect = ExtResource("2_o4v1a")
+pickupSound = NodePath("PickupSound")
+_speedParticles = NodePath("RigidBody3D/speed_particles")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+collision_layer = 16
+collision_mask = 17
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_tchc3")
+
+[node name="Area3D" type="Area3D" parent="RigidBody3D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_28aqb")
+
+[node name="Model" type="Node3D" parent="RigidBody3D"]
+
+[node name="speed_particles" parent="RigidBody3D" instance=ExtResource("3_6wsj1")]
+one_shot = false
+explosiveness = 0.0
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u77vp")
+volume_db = -15.0
+pitch_scale = 1.5

@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm481hpb2qu05"]
+
+[sub_resource type="Curve" id="Curve_0dhyd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0044642836, 1), 0.0, 0.0, 0, 0, Vector2(0.68973213, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_woamy"]
+curve = SubResource("Curve_0dhyd")
+
+[sub_resource type="Gradient" id="Gradient_g5egk"]
+offsets = PackedFloat32Array(0, 0.6706161, 1)
+colors = PackedColorArray(1.1453815, 0.083432615, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7wp6y"]
+gradient = SubResource("Gradient_g5egk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7wp6y"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+radial_velocity_min = -1.0000223
+radial_velocity_max = 0.99997765
+gravity = Vector3(0, 0, 0)
+scale_min = 0.03
+scale_max = 0.099999994
+color = Color(3.2944162, 3.2944162, 3.2944162, 1)
+color_ramp = SubResource("GradientTexture1D_7wp6y")
+alpha_curve = SubResource("CurveTexture_woamy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dhyd"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_keep_scale = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_woamy"]
+material = SubResource("StandardMaterial3D_0dhyd")
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+amount = 512
+preprocess = 0.5
+fixed_fps = 6
+interpolate = false
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_7wp6y")
+draw_pass_1 = SubResource("RibbonTrailMesh_woamy")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1754494, 0)
+strength = 5.5
+attenuation = 0.26794335
+cull_mask = 4294967293
+radius = 2.0

@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://88fra0se8rwl"]
+
+[ext_resource type="PackedScene" uid="uid://dr2dug3l1wi7m" path="res://Assets/Meshes/lantern_pole.glb" id="1_2exb5"]
+[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/Toon/sm_toon_bark.tres" id="2_a5w0y"]
+[ext_resource type="Material" uid="uid://ctcn2okmh8ool" path="res://Assets/Materials/Toon/sm_toon_wood.tres" id="3_cegf7"]
+[ext_resource type="Material" uid="uid://dx1kdlebm467m" path="res://Assets/Materials/Toon/sm_toon_dark_steel.tres" id="4_tut1c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fe13"]
+shading_mode = 0
+albedo_color = Color(4.415934, 1.9563179, 0, 1)
+
+[sub_resource type="Curve" id="Curve_2exb5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2544643, 1), 0.0, 0.0, 0, 0, Vector2(0.4977679, 0.47802198), 0.0, 0.0, 0, 0, Vector2(0.7522322, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_a5w0y"]
+curve = SubResource("Curve_2exb5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2exb5"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.03
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+radial_velocity_min = -0.0100223515
+radial_velocity_max = 0.009977648
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 0.09999776
+tangential_accel_max = 0.09999776
+scale_min = 0.04
+scale_max = 0.04
+alpha_curve = SubResource("CurveTexture_a5w0y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5w0y"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(4.415934, 1.9563179, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_cegf7"]
+material = SubResource("StandardMaterial3D_a5w0y")
+
+[node name="lantern_pole" instance=ExtResource("1_2exb5")]
+
+[node name="pole" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.8005365, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_a5w0y")
+
+[node name="polecap" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7492521, 0)
+surface_material_override/0 = ExtResource("3_cegf7")
+
+[node name="cross" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
+surface_material_override/0 = ExtResource("3_cegf7")
+
+[node name="lanterncase" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
+layers = 8
+surface_material_override/0 = ExtResource("4_tut1c")
+
+[node name="lanternlight" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
+layers = 8
+surface_material_override/0 = SubResource("StandardMaterial3D_3fe13")
+
+[node name="LanternParticles" type="GPUParticles3D" parent="lanternlight" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6215353, 3.0803933, 0)
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_2exb5")
+draw_pass_1 = SubResource("QuadMesh_cegf7")
+
+[node name="lanternchain_002" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50738525, 0)
+layers = 8
+surface_material_override/0 = ExtResource("4_tut1c")

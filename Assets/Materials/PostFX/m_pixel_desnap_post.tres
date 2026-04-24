@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://ct5q54aaaueht"]
+
+[ext_resource type="Shader" uid="uid://3c03y4ec08yb" path="res://Assets/Shaders/PostFX/sh_pixel_desnap_post.gdshader" id="1_q18xs"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hpgqd"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mu1jd"]
+viewport_path = NodePath("SubViewport")
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_q18xs")
+shader_parameter/viewport_texture = SubResource("ViewportTexture_mu1jd")
+shader_parameter/inventory_viewport_texture = SubResource("ViewportTexture_hpgqd")
+shader_parameter/snapDeltaX = 0.0
+shader_parameter/snapDeltaY = 0.0
+shader_parameter/width = 320.0
+shader_parameter/height = 180.0
+shader_parameter/testMult = 0.0

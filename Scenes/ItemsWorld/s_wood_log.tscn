@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1qdxfmogmenf"]
+
+[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_pep2k"]
+[ext_resource type="PackedScene" uid="uid://c50fjp1r550mr" path="res://Scenes/Clutter/s_clutter_wood_log.tscn" id="3_5tbjp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iyu6f"]
+size = Vector3(0.25, 0.25, 0.75)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iyu6f"]
+radius = 0.15
+height = 0.5
+
+[node name="WorldItem" instance=ExtResource("1_pep2k")]
+itemType = 3
+cauldronScale = 0.7
+inventoryScale = 2.5
+
+[node name="CollisionShape3D" parent="RigidBody3D" index="0"]
+shape = SubResource("BoxShape3D_iyu6f")
+
+[node name="CollisionShape3D" parent="RigidBody3D/Area3D" index="0"]
+transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_iyu6f")
+
+[node name="Model" parent="RigidBody3D" index="2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="WoodLog" parent="RigidBody3D/Model" index="0" instance=ExtResource("3_5tbjp")]
+
+[node name="MeshInstance3D" parent="RigidBody3D/Model/WoodLog" index="0"]
+cast_shadow = 0
+
+[node name="MeshInstance3D2" parent="RigidBody3D/Model/WoodLog" index="1"]
+cast_shadow = 0
+
+[editable path="RigidBody3D/Model/WoodLog"]

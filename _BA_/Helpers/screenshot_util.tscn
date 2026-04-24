@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://nnq1o5exa8xr"]
+
+[ext_resource type="Script" uid="uid://dqijqq8tvjlqp" path="res://_BA_/Scripts/ScreenshotUtil.cs" id="1_m6kaq"]
+
+[node name="ScreenshotUtil" type="Node"]
+script = ExtResource("1_m6kaq")
+_viewportSceenshotPath = "res://_BA_/Screenshots/"

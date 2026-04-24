@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqtnikfstlns1"]
+
+[ext_resource type="PackedScene" uid="uid://dap3lhtvaqmm0" path="res://Scenes/ItemsWorld/s_0item_world_base.tscn" id="1_n18my"]
+[ext_resource type="PackedScene" uid="uid://drk3je11rv5ps" path="res://Assets/Packs/KayKit_ResourceBits_1.0_FREE/Assets/fbx/Copper_Nugget_Large.fbx" id="2_fdqvv"]
+[ext_resource type="PackedScene" uid="uid://dx206q1p5l7x2" path="res://Assets/Meshes/mesh_ico_sphere.glb" id="3_y4rvd"]
+[ext_resource type="Material" uid="uid://c0d3ddlp21bic" path="res://Assets/Materials/Toon/sm_toon_copper.tres" id="4_2faxy"]
+
+[node name="WorldItem" instance=ExtResource("1_n18my")]
+itemType = 1
+inventoryScale = 2.5
+
+[node name="CollisionShape3D" parent="RigidBody3D" index="0"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="RigidBody3D/Area3D" index="0"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+
+[node name="Model" parent="RigidBody3D" index="2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="Copper_Nugget_Large" parent="RigidBody3D/Model" index="0" instance=ExtResource("2_fdqvv")]
+visible = false
+
+[node name="IcoSphere" parent="RigidBody3D/Model" index="1" instance=ExtResource("3_y4rvd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Icosphere" parent="RigidBody3D/Model/IcoSphere" index="0"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("4_2faxy")
+
+[editable path="RigidBody3D/Model/IcoSphere"]

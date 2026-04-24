@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceb2yhmkluqi"]
+
+[ext_resource type="PackedScene" uid="uid://cugbm3q356xng" path="res://Assets/Meshes/pier.glb" id="1_a8oa6"]
+[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/Toon/sm_toon_bark.tres" id="2_ncuni"]
+[ext_resource type="Material" uid="uid://ctcn2okmh8ool" path="res://Assets/Materials/Toon/sm_toon_wood.tres" id="3_laujb"]
+
+[node name="pier" instance=ExtResource("1_a8oa6")]
+
+[node name="Cylinder_004" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_ncuni")
+
+[node name="Cylinder_016" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_laujb")
+
+[node name="Cube_002" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.64850295, 0, 0, 0, 1, 0, 0.2971276, 0)
+surface_material_override/0 = ExtResource("3_laujb")
+
+[node name="Cube_010" parent="." index="3"]
+surface_material_override/0 = ExtResource("3_laujb")

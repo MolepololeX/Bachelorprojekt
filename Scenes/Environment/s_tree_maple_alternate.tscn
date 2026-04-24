@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqpbahjgdq2gw"]
+
+[ext_resource type="PackedScene" uid="uid://cy53mu4uc6sbo" path="res://Scenes/Environment/TempTreeLeafClusters/tree_base.tscn" id="1_5n73f"]
+[ext_resource type="Material" uid="uid://dx1c64yv58v7j" path="res://Assets/Materials/Toon/sm_toon_bark.tres" id="2_8hapb"]
+[ext_resource type="PackedScene" uid="uid://dlf5c6vwnwkh8" path="res://Scenes/Environment/TempTreeLeafClusters/tree_leaf_Large.tscn" id="2_cbykc"]
+[ext_resource type="PackedScene" uid="uid://dx1yrc4jods3h" path="res://Scenes/Environment/TempTreeLeafClusters/tree_leaf_Medium.tscn" id="3_jxvxa"]
+[ext_resource type="PackedScene" uid="uid://cu4q3raoq5mq1" path="res://Scenes/Environment/TempTreeLeafClusters/tree_leaf_Small.tscn" id="4_mgubk"]
+
+[node name="TreeMapleAlternate" type="Node3D"]
+
+[node name="tree" parent="." instance=ExtResource("1_5n73f")]
+surface_material_override/0 = ExtResource("2_8hapb")
+
+[node name="Icosphere_005" parent="." instance=ExtResource("2_cbykc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04050523, 9.295027, 0.014183979)
+
+[node name="Icosphere_002" parent="." instance=ExtResource("3_jxvxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2918832, 7.621042, -1.5500382)
+
+[node name="Icosphere_003" parent="." instance=ExtResource("3_jxvxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.270775, 7.0716763, -1.0003184)
+
+[node name="Icosphere_004" parent="." instance=ExtResource("3_jxvxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1373408, 7.435466, 1.9786817)
+
+[node name="Icosphere_006" parent="." instance=ExtResource("4_mgubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8696582, 7.4663143, 0.3772607)
+
+[node name="Icosphere_007" parent="." instance=ExtResource("4_mgubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9575198, 5.3069696, -0.4254201)
+
+[node name="Icosphere_008" parent="." instance=ExtResource("4_mgubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3615005, 9.05296, -0.6346785)
+
+[node name="Icosphere_009" parent="." instance=ExtResource("4_mgubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07219958, 8.4370165, 1.9901482)
+
+[node name="Icosphere_010" parent="." instance=ExtResource("4_mgubk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.640486, 8.329611, -2.0795135)
