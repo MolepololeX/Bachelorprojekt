@@ -37,9 +37,9 @@
 [ext_resource type="Texture2D" uid="uid://bhwom85dweo2k" path="res://_BA_/Palettes/Bistro_HSL.png" id="38_lxdsv"]
 [ext_resource type="Texture2D" uid="uid://c35o3einvuchf" path="res://_BA_/Helpers/digits.png" id="38_py68e"]
 [ext_resource type="Texture2D" uid="uid://dxrn1yutsfh64" path="res://_BA_/Palettes/Bistro_OKHSL.png" id="39_d3byi"]
-[ext_resource type="Texture2D" uid="uid://cqdod5b12edtc" path="res://_BA_/PostImages/FPSDemo/Level_srgb_oklab_d_L_lin.png" id="39_folns"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
+[ext_resource type="Texture2D" uid="uid://dn5cge4sh28yw" path="res://_BA_/PostImages/ControlScene/TonemappingTest0_srgb_oklab_d_L_lin.png" id="40_lxdsv"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
@@ -540,7 +540,7 @@ tonemapper_mode = 2
 capture_frame_delay = 500
 metadata/_custom_type_script = "uid://dj2paefo16n4y"
 
-[sub_resource type="Image" id="Image_lxdsv"]
+[sub_resource type="Image" id="Image_d3byi"]
 data = {
 "data": PackedByteArray("AAAA/wAMDP8AFRz/ABwq/wAcOv8AHEn/ABxY/wAVZ/8MDHX/HAyF/y4Mk/9GDKL/YQyx/38MwP+hFc7/xRXd/+Yc5v/nLtD/6T2+/+tNr//sW6T/7mqc/+95l//xiJX/85eX//Wvpf/2xbT/+NfD//nm0v/78eD//fnv//////8="),
 "format": "RGBA8",
@@ -549,7 +549,7 @@ data = {
 "width": 32
 }
 
-[sub_resource type="Image" id="Image_d3byi"]
+[sub_resource type="Image" id="Image_h6ckk"]
 data = {
 "data": PackedByteArray("AAAA/wAAAP8ADAz/ABUh/wAcLv8AJj//ACpS/wwuaP8hMX7/MS6S/0Yuof9ZMav/bTGz/4Ext/+VNLn/qDS5/7s3tf/NP6//3Ean/+hUn//uZpf/83iT//WJkv/1mJX/9qib//i1of/6wqv/+9C2//vcxP/86NT//fTn//////8="),
 "format": "RGBA8",
@@ -576,8 +576,8 @@ lightness_floor = 0.0
 lightness_ceiling = 1.0
 saturation = 0.8
 auto_create_palette = true
-palette_preview_hsl = SubResource("Image_lxdsv")
-palette_preview_oklch = SubResource("Image_d3byi")
+palette_preview_hsl = SubResource("Image_d3byi")
+palette_preview_oklch = SubResource("Image_h6ckk")
 metadata/_custom_type_script = "uid://bbi8ld0iyo8bg"
 
 [sub_resource type="Compositor" id="Compositor_jqdjy"]
@@ -1514,8 +1514,8 @@ _graphRes = 512
 _pointRadius = 3
 _env = NodePath("../Environment")
 _palettes = Array[Texture2D]([ExtResource("38_lxdsv"), ExtResource("39_d3byi")])
-_path_to_raw_image_linear_data = "res://_BA_/PostImages/FPSDemo/data_raw"
-_delta_texture_linear = ExtResource("39_folns")
+_path_to_raw_image_linear_data = "res://_BA_/PostImages/ControlScene/data_raw"
+_delta_texture_linear = ExtResource("40_lxdsv")
 _tonemapperReferenceExposure = 1.25
 
 [node name="ScreenshotUtil" parent="Main Scene/Main Scene Viewport Container/Main Scene Viewport" instance=ExtResource("38_346y0")]

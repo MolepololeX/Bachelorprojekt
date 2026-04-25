@@ -467,7 +467,10 @@ namespace BA
 					// draw tmo delta as reference
 					float fx = x / (float)M;
 					fx *= 3.0f;
-					float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1) - fx;
+					// float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1);
+					float test = oklab_to_linear_srgb(new Lab{L=fx, a=0, b=0}).r;
+					float tmo_delta = test / (1.0f + test);
+					tmo_delta = linear_srgb_to_oklab(new RGB{r=tmo_delta, g=tmo_delta, b=tmo_delta}).L - fx;
 					DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
 				}
 			}
