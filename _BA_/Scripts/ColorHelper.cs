@@ -271,5 +271,46 @@ namespace BA
 
             return new Lab { L = L, a = a, b = b };
         }
+
+        public static RGB cielab_to_linear_srgb(Lab lab)
+        {
+            Vector3 d65 = new Vector3(95.014f, 100.0f, 108.827f);
+
+            // Step 1: Lab -> XYZ (normalized)
+            float fy = (lab.L + 16.0f) / 116.0f;
+            float fx = fy + (lab.a / 500.0f);
+            float fz = fy - (lab.b / 200.0f);
+
+            float xr = cie_f_inv(fx);
+            float yr = cie_f_inv(fy);
+            float zr = cie_f_inv(fz);
+
+            // Scale back to XYZ (same 100 scaling as forward)
+            Vector3 xyz = new Vector3(
+                xr * d65.X,
+                yr * d65.Y,
+                zr * d65.Z
+            );
+
+            xyz /= 100.0f;
+
+            // Step 2: XYZ -> linear sRGB
+            float r = 3.2406f * xyz.X - 1.5372f * xyz.Y - 0.4986f * xyz.Z;
+            float g = -0.9689f * xyz.X + 1.8758f * xyz.Y + 0.0415f * xyz.Z;
+            float b = 0.0557f * xyz.X - 0.2040f * xyz.Y + 1.0570f * xyz.Z;
+
+            return new RGB { r = r, g = g, b = b };
+        }
+
+        // Inverse of your cie_f
+        private static float cie_f_inv(float t)
+        {
+            float delta = 6.0f / 29.0f;
+
+            if (t > delta)
+                return t * t * t;
+            else
+                return 3.0f * delta * delta * (t - 4.0f / 29.0f);
+        }
     }
 }

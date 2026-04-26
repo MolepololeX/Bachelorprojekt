@@ -315,15 +315,20 @@ namespace BA
 			}
 			string yLabel = measurementName + " " + deltaType;
 
-			if(deltaType.ToLower() == "h")
+			if (deltaType.ToLower() == "h")
 			{
 				yMin = 180.0f;
 				yMax = -180.0f;
 				decimalsY = 0;
 			}
-			if(deltaType.ToLower() == "l")
+			if (deltaType.ToLower() == "l")
 			{
 				plotTMO = true;
+			}
+			bool isSRGB = false;
+			if (maskName.Contains("srgb"))
+			{
+				isSRGB = true;
 			}
 
 
@@ -339,7 +344,8 @@ namespace BA
 				yMin,
 				yMax,
 				plotTMO,
-				plotCieL
+				plotCieL,
+				isSRGB
 				);
 		}
 
@@ -383,7 +389,7 @@ namespace BA
 				);
 		}
 
-		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop, bool drawTonemapperReference = false, bool plotByCieL = false)
+		private void GenDeltaGraph(Image original_raw_image, Texture2D deltaMask, string labelX, int numDecimalsX, float scaleXRangeBottom, float scaleXRangeTop, string labelY, int numDecimalsY, float scaleYRangeBottom, float scaleYRangeTop, bool drawTonemapperReference = false, bool plotByCieL = false, bool isSRGB = false)
 		{
 			if (deltaMask == null)
 			{
@@ -429,10 +435,73 @@ namespace BA
 				labelY
 				);
 
+			if (drawTonemapperReference)
+			{
+				for (int x = 0; x < M; x++)
+				{
+					if (!plotByCieL && !isSRGB)
+					{
+						// draw tmo delta as reference
+						float fx = x / (float)M;
+						fx *= 3.0f;
+						float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1) - fx;
+						// float test = oklab_to_linear_srgb(new Lab { L = fx, a = 0, b = 0 }).r;
+						// float tmo_delta = test / (1.0f + test);
+						// tmo_delta = linear_srgb_to_oklab(new RGB { r = tmo_delta, g = tmo_delta, b = tmo_delta }).L - fx;
+						DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
+					}
+
+					if (plotByCieL && !isSRGB)
+					{
+						// draw tmo delta as reference
+						float fx = x / (float)M;
+						fx *= 3.0f;
+						// float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1) - fx;
+						float test = cielab_to_linear_srgb(new Lab { L = fx * 100.0f, a = 0, b = 0 }).r;
+						test = linear_srgb_to_oklab(new RGB { r = test, g = test, b = test }).L;
+						test = (float)(-Math.Exp(_tonemapperReferenceExposure * -test) + 1);
+						test = oklab_to_linear_srgb(new Lab { L = test, a = 0, b = 0 }).r;
+						test = linear_srgb_to_cielab(new RGB { r = test, g = test, b = test }).L / 100.0f;
+
+						float tmo_delta = test - fx;
+						// float test = oklab_to_linear_srgb(new Lab { L = fx, a = 0, b = 0 }).r;
+						// test = linear_srgb_to_cielab(new RGB { r = test, g = test, b = test }).L / 100.0f;
+						// tmo_delta = 
+						// tmo_delta = linear_srgb_to_cielab(new RGB { r = tmo_delta, g = tmo_delta, b = tmo_delta }).L / 100.0f - fx;
+
+						// float test = oklab_to_linear_srgb(new Lab { L = fx, a = 0, b = 0 }).r;
+						// float tmo_delta = test / (1.0f + test);
+						// tmo_delta = linear_srgb_to_oklab(new RGB { r = tmo_delta, g = tmo_delta, b = tmo_delta }).L - fx;
+						DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
+					}
+
+					if (!plotByCieL && isSRGB)
+					{
+						// draw tmo delta as reference
+						float fx = x / (float)M;
+						fx *= 3.0f;
+						// float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1);
+						float test = oklab_to_linear_srgb(new Lab { L = fx, a = 0, b = 0 }).r;
+						float tmo_delta = test / (1.0f + test);
+						tmo_delta = linear_srgb_to_oklab(new RGB { r = tmo_delta, g = tmo_delta, b = tmo_delta }).L - fx;
+						DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
+					}
+					if (plotByCieL && isSRGB)
+					{
+						// draw tmo delta as reference
+						float fx = x / (float)M;
+						fx *= 3.0f;
+						// float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1);
+						float test = cielab_to_linear_srgb(new Lab { L = fx * 100.0f, a = 0, b = 0 }).r;
+						float tmo_delta = test / (1.0f + test);
+						tmo_delta = linear_srgb_to_cielab(new RGB { r = tmo_delta, g = tmo_delta, b = tmo_delta }).L / 100.0f - fx;
+						DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
+					}
+				}
+			}
 
 			for (int x = 0; x < M; x++)
 			{
-				// can only use x axis since the color palette is one dimensional
 				for (int y = 0; y < N; y++)
 				{
 					Color deltaColor = img.GetPixel(x, y);
@@ -462,17 +531,6 @@ namespace BA
 					DrawColorPointOnGraph(M, graph, (int)(L * M), rawColor, delta, _pointRadius);
 				}
 
-				if (drawTonemapperReference)
-				{
-					// draw tmo delta as reference
-					float fx = x / (float)M;
-					fx *= 3.0f;
-					// float tmo_delta = (float)(-Math.Exp(_tonemapperReferenceExposure * -fx) + 1);
-					float test = oklab_to_linear_srgb(new Lab{L=fx, a=0, b=0}).r;
-					float tmo_delta = test / (1.0f + test);
-					tmo_delta = linear_srgb_to_oklab(new RGB{r=tmo_delta, g=tmo_delta, b=tmo_delta}).L - fx;
-					DrawColorPointOnGraph(M, graph, x, Colors.Black, tmo_delta, _referenceLineWidth);
-				}
 			}
 
 
