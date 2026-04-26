@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://dxrn1yutsfh64" path="res://_BA_/Palettes/Bistro_OKHSL.png" id="39_d3byi"]
 [ext_resource type="Script" uid="uid://dj2paefo16n4y" path="res://_BA_/Scripts/Compositor_Tonemapping.gd" id="39_ko7dv"]
 [ext_resource type="Texture2D" uid="uid://gf07m8bms0om" path="res://_BA_/Helpers/characters.png" id="39_l7jgw"]
-[ext_resource type="Texture2D" uid="uid://lkjq1xf7e5nq" path="res://_BA_/PostImages/Bistro/MainScene_oklab_cie_d_C_lin.png" id="40_lxdsv"]
+[ext_resource type="Texture2D" uid="uid://wy2i2r2rr1no" path="res://_BA_/PostImages/Campfire/TestScene_srgb_oklab_d_C_lin.png" id="40_lxdsv"]
 [ext_resource type="Script" uid="uid://bbi8ld0iyo8bg" path="res://_BA_/Scripts/Compositor_Colormapping.gd" id="40_tn4cv"]
 [ext_resource type="Script" uid="uid://dg1ehev7ibr4k" path="res://_BA_/Scripts/SanityChecker.cs" id="42_804ie"]
 [ext_resource type="Shader" uid="uid://dbuvkeu7otiyn" path="res://Assets/Shaders/sh_oblique_reflections.gdshader" id="42_gncmg"]
@@ -1514,7 +1514,7 @@ _graphRes = 512
 _pointRadius = 3
 _env = NodePath("../Environment")
 _palettes = Array[Texture2D]([ExtResource("38_lxdsv"), ExtResource("39_d3byi")])
-_path_to_raw_image_linear_data = "res://_BA_/PostImages/Bistro/data_raw"
+_path_to_raw_image_linear_data = "res://_BA_/PostImages/Campfire/data_raw"
 _delta_texture_linear = ExtResource("40_lxdsv")
 _tonemapperReferenceExposure = 1.25
 
