@@ -409,6 +409,9 @@ namespace BA
 			int M = img.GetWidth();
 			int N = img.GetHeight();
 
+			GD.Print("Delta Mask Size: " + M + " : " + N);
+			GD.Print("Raw Image Size: " + original_raw_image.GetWidth() + " : " + original_raw_image.GetHeight());
+
 			Image graph = Image.CreateEmpty(_graphRes, _graphRes, false, Image.Format.Rgb8);
 			graph.Fill(_backGroundColor);
 

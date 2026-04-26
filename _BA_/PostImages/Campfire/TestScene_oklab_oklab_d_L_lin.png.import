@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuutegf7h3f08"
-path.s3tc="res://.godot/imported/TestScene_oklab_oklab_d_L_lin.png-fe3b54d7ab7af1110cd59b01531a1201.s3tc.ctex"
+uid="uid://cyh3xnfvm75ot"
+path="res://.godot/imported/TestScene_oklab_oklab_d_L_lin.png-fe3b54d7ab7af1110cd59b01531a1201.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://_BA_/PostImages/Campfire/TestScene_oklab_oklab_d_L_lin.png"
-dest_files=["res://.godot/imported/TestScene_oklab_oklab_d_L_lin.png-fe3b54d7ab7af1110cd59b01531a1201.s3tc.ctex"]
+dest_files=["res://.godot/imported/TestScene_oklab_oklab_d_L_lin.png-fe3b54d7ab7af1110cd59b01531a1201.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

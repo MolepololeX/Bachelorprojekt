@@ -26,7 +26,7 @@ project/assembly_name="AlchemyGame"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/godot-vim/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 
@@ -141,6 +141,7 @@ arrow_down={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/lossless_compression/force_png=true
 lights_and_shadows/directional_shadow/size=8192
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
 reflections/reflection_atlas/reflection_size=1024
